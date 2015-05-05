@@ -49,7 +49,6 @@ Selenium.startServer(options, function(error, child, error_out) {
 
     runtime.start(function() {
         Selenium.stopServer();
-        console.log('done');
     });
 });
 

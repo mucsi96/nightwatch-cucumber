@@ -5,6 +5,7 @@ var fs = require('fs'),
 
 var options = JSON.parse(fs.readFileSync('nightwatch.json', 'utf-8'));
 
+options.silent = true;
 client = new ClientManager();
 client.on('error', function(err) {
     console.error(err.message);
@@ -36,7 +37,7 @@ module.exports = function() {
 
             results.tests.forEach(function(result) {
                 if (result.failure) {
-                    failure = result.failure + result.stacktrace;
+                    failure = result.failure + '\n' + result.stacktrace;
                 }
             });
 
