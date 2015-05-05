@@ -13,29 +13,39 @@ client.init(options);
 browser = client.api();
 
 module.exports = function() {
-    this.When(/^I open Google's fr search page$/, function(cb) {
+    this.Given(/^I open Google's fr search page$/, function(cb) {
         browser
             .url('http://www.google.com')
-            .waitForElementVisible('body', 1000)
-            .end();
+            .waitForElementVisible('body', 1000);
 
-        client.once('complete', function() {
-            cb();
-        }).start();
+        cb();
     });
 
-    this.Then(/^the title is Google$/, function(cb) {
+    this.Then(/^the title is "(.*)"$/, function(title, cb) {
         browser
-            .assert.title("Google")
+            .assert.title(title)
             .end();
 
-        client.once('complete', function() {
-            cb();
-        }).start();
+        cb();
     });
 
     this.Then(/^the search form exists$/, function(cb) {
         //console.log('the search form exists');
-        cb();
+        client.once('complete', function(results, errors) {
+            var failure;
+
+            results.tests.forEach(function(result) {
+                if (result.failure) {
+                    failure = result.failure + result.stacktrace;
+                }
+            });
+
+            if (failure) {
+                cb(failure);
+            } else {
+                cb();
+            }
+
+        }).start();
     });
 };
