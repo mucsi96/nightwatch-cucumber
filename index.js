@@ -2,6 +2,8 @@ var fs = require('fs'),
     path = require('path'),
     glob = require("glob"),
     Cucumber = require('cucumber/lib/cucumber'),
+    options = JSON.parse(fs.readFileSync('nightwatch.json', 'utf-8')),
+    Selenium = require('nightwatch/lib/runner/selenium'),
     runtime;
 
 function getFeatureSources() {
@@ -39,6 +41,15 @@ runtime = Cucumber.Runtime({
 });
 
 runtime.attachListener(Cucumber.Listener.ProgressFormatter({}));
-runtime.start(function() {
-    console.log('done');
+Selenium.startServer(options, function(error, child, error_out) {
+    if (error) {
+        console.error('There was an error while starting the Selenium server:' +error_out);
+        return;
+    }
+
+    runtime.start(function() {
+        Selenium.stopServer();
+        console.log('done');
+    });
 });
+
