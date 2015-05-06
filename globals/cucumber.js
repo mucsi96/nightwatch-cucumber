@@ -1,9 +1,11 @@
 var fs = require('fs'),
     path = require('path'),
+    rimraf = require('rimraf'),
     glob = require("glob"),
     Cucumber = require('cucumber/lib/cucumber'),
     options = JSON.parse(fs.readFileSync('nightwatch.json', 'utf-8')),
     Selenium = require('nightwatch/lib/runner/selenium'),
+    tempTestFolder = path.resolve(process.cwd(), 'temp-tests'),
     runtime;
 
 function getFeatureSources() {
@@ -47,27 +49,53 @@ function getStepExecutor(step) {
     }
 }
 
+var cucumber = {
+    features: {}
+};
+
+function discoverStep(feature, scenario, step) {
+    if (!feature.discovered) {
+        feature.discovered = {};
+        cucumber.features[feature.getName().replace(/\W+/g, '')] = feature.discovered);
+    }
+
+    if (!scenario.discovered) {
+        scenario.discovered = {
+            steps: []
+        };
+        feature.discovered[scenario.getName().replace(/\W+/g, '')] = scenario.discovered;
+    }
+
+    scenario.discovered.steps.push({
+        name: step.getName(),
+        fn: getStepExecutor(step)
+    });
+}
+
+rimraf(tempTestFolder);
+fs.mkdirSync(tempTestFolder);
+
+function createTestFile(feature) {
+    var name = feature.getName().replace(/\W+/g, '');
+
+    fs.writeFileSync(path.resolve(tempTestFolder, name + '.js'), 'var cucumber = require("../globals/cucumber.js"); module.exports = cucumber.features["' + name + '"];')
+}
+
 var features = runtime.getFeatures().getFeatures();
 features.forEach(function(feature, next) {
-    console.log('Feature: ' + feature.getName());
+
     feature.instructVisitorToVisitScenarios({
         visitScenario: function(scenario) {
-            console.log('Scenario: ' + scenario.getName());
             scenario.getSteps().forEach(function(step, next) {
-                console.log('Step: ' + step.getName());
-                getStepExecutor(step)({greet: 'hello'}, function(result) {
-                    if (result.isFailed()) {
-                        console.log(result.getFailureException());
-                    }
-                });
+                discoverStep(feature, scenario, step);
                 next();
             }, next);
         }
     });
-}, function() {
-    console.log('done');
-});
+}, function() {});
 
+
+module.exports = cucumber;
 /*runtime.attachListener(Cucumber.Listener.ProgressFormatter({}));
 Selenium.startServer(options, function(error, child, error_out) {
     if (error) {
