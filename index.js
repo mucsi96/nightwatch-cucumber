@@ -40,7 +40,35 @@ runtime = Cucumber.Runtime({
     }
 });
 
-runtime.attachListener(Cucumber.Listener.ProgressFormatter({}));
+function getStepExecutor(step) {
+    var stepDefinition = runtime.getSupportCodeLibrary().lookupStepDefinitionByName(step.getName());
+    return function (context, callback) {
+        stepDefinition.invoke(step, context, {getAttachments: function(){}}, {id:1}, callback);
+    }
+}
+
+var features = runtime.getFeatures().getFeatures();
+features.forEach(function(feature, next) {
+    console.log('Feature: ' + feature.getName());
+    feature.instructVisitorToVisitScenarios({
+        visitScenario: function(scenario) {
+            console.log('Scenario: ' + scenario.getName());
+            scenario.getSteps().forEach(function(step, next) {
+                console.log('Step: ' + step.getName());
+                getStepExecutor(step)({greet: 'hello'}, function(result) {
+                    if (result.isFailed()) {
+                        console.log(result.getFailureException());
+                    }
+                });
+                next();
+            }, next);
+        }
+    });
+}, function() {
+    console.log('done');
+});
+
+/*runtime.attachListener(Cucumber.Listener.ProgressFormatter({}));
 Selenium.startServer(options, function(error, child, error_out) {
     if (error) {
         console.error('There was an error while starting the Selenium server:' +error_out);
@@ -50,5 +78,4 @@ Selenium.startServer(options, function(error, child, error_out) {
     runtime.start(function() {
         Selenium.stopServer();
     });
-});
-
+});*/
