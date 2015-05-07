@@ -3,6 +3,7 @@ var fs = require('fs'),
     rimraf = require('rimraf'),
     glob = require("glob"),
     Cucumber = require('cucumber/lib/cucumber'),
+    CucumberSummaryFormatter = require('cucumber/lib/cucumber/listener/summary_formatter')({snippets: true}),
     tempTestFolder = path.resolve(process.cwd(), 'temp-tests'),
     runtime,
     cucumber = {
@@ -39,6 +40,13 @@ function getSupportCodeInitializer() {
 
 function getStepExecutor(step) {
     var stepDefinition = runtime.getSupportCodeLibrary().lookupStepDefinitionByName(step.getName());
+
+    if (!stepDefinition) {
+        CucumberSummaryFormatter.storeUndefinedStepResult(step);
+        CucumberSummaryFormatter.log(Cucumber.Util.ConsoleColor.format('pending', 'Undefined steps found!\n'));
+        return;
+    }
+
     return function (context, callback) {
         stepDefinition.invoke(step, context, {getAttachments: function(){}}, {id:1}, callback);
     }
@@ -79,7 +87,11 @@ runtime.getFeatures().getFeatures().forEach(function(feature, next) {
         visitScenario: function(scenario) {
             var steps = [];
             scenario.getSteps().forEach(function(step, next) {
-                steps.push(getStepExecutor(step));
+                var stepExecutor = getStepExecutor(step);
+
+                if (stepExecutor) {
+                    steps.push(stepExecutor);
+                }
                 next();
             }, function() {
                 discoverScenario(feature, scenario, steps);
@@ -87,5 +99,7 @@ runtime.getFeatures().getFeatures().forEach(function(feature, next) {
         }
     });
 }, function() {});
+
+CucumberSummaryFormatter.logUndefinedStepSnippets();
 
 module.exports = cucumber;

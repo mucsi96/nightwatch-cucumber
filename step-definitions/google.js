@@ -1,6 +1,6 @@
 module.exports = function() {
 
-    this.Given(/^I open Google's search page$/, function() {
+    this.Given(/^I open Gooogle's search page$/, function() {
         this
             .url('http://google.com')
             .waitForElementVisible('body', 1000);
