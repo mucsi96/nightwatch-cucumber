@@ -19,29 +19,23 @@ function getFeatureSources() {
     return featureSources;
 }
 
-function getSupportFiles() {
-    var files = [];
+function getSupportCodeInitializer() {
+    return function() {
+        var files = [],
+            supportCodeHelper = this;
 
-    glob.sync("step-definitions/**/*.js").forEach(function(file) {
-        files.push(path.resolve(process.cwd(), file));
-    });
+        glob.sync("step-definitions/**/*.js").forEach(function(file) {
+            files.push(path.resolve(process.cwd(), file));
+        });
 
-    return files;
+        files.forEach(function(file) {
+            var initializer = require(file);
+
+            if (typeof(initializer) === 'function')
+                initializer.call(supportCodeHelper);
+        });
+    };
 }
-
-runtime = Cucumber.Runtime({
-    getFeatureSources: getFeatureSources,
-    getAstFilter: function() {
-        return {
-            isElementEnrolled: function(element) {
-                return true;
-            }
-        }
-    },
-    getSupportCodeLibrary: function() {
-        return Cucumber.Cli.SupportCodeLoader(getSupportFiles()).getSupportCodeLibrary();
-    }
-});
 
 function getStepExecutor(step) {
     var stepDefinition = runtime.getSupportCodeLibrary().lookupStepDefinitionByName(step.getName());
@@ -69,14 +63,17 @@ function discoverScenario(feature, scenario, steps) {
 }
 
 function createTestFile(feature) {
-    fs.writeFileSync(path.resolve(tempTestFolder, feature.getName().replace(/\W+/g, '') + '.js'), 'var cucumber = require("../globals/cucumber.js");\nmodule.exports = cucumber.features["' + feature.getName() + '"];')
+    var testFileSource = 'module.exports = require(process.cwd() + "/globals/cucumber").features["' + feature.getName() + '"];';
+
+    fs.writeFileSync(path.resolve(tempTestFolder, feature.getName().replace(/\W+/g, '') + '.js'), testFileSource);
 }
 
 rimraf.sync(tempTestFolder);
 fs.mkdirSync(tempTestFolder);
 
-var features = runtime.getFeatures().getFeatures();
-features.forEach(function(feature, next) {
+runtime = Cucumber(getFeatureSources(), getSupportCodeInitializer());
+
+runtime.getFeatures().getFeatures().forEach(function(feature, next) {
     createTestFile(feature);
     feature.instructVisitorToVisitScenarios({
         visitScenario: function(scenario) {
