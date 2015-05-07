@@ -1,19 +1,17 @@
 module.exports = function() {
 
-    this.Given(/^I open Google's fr search page$/, function(callback) {
-        console.log('I open Google`s fr search page');
-        console.log(this.greet);
-        callback();
+    this.Given(/^I open Google's search page$/, function() {
+        this
+            .url('http://google.com')
+            .waitForElementVisible('body', 1000);
     });
 
-    this.Then(/^the title is "([^"]*)"$/, function(arg1, callback) {
-        console.log('the title is');
-        callback();
+    this.Then(/^the title is "([^"]*)"$/, function(title) {
+        this.assert.title(title);
     });
 
-    this.Then(/^the search form exists$/, function(callback) {
-        console.log('the search form exists');
-        callback();
+    this.Then(/^the search form exists$/, function() {
+        this.assert.visible('input[name="q"]');
     });
 
 };

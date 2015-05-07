@@ -2,13 +2,14 @@
   "name": "nightwatch-cucumber",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "nightwatch.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node nightwatch.js"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "chromedriver": "mucsi96/node-chromedriver",
     "cucumber": "^0.4.8",
     "glob": "^5.0.5",
     "nightwatch": "^0.6.7",

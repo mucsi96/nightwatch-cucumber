@@ -1,9 +1,9 @@
-Feature: Multilingual Google Search
+Feature: Google Search
 
-Scenario: Searching Google For The First Time
+Scenario: Searching Google
 
-    Given I open Google's fr search page
-    Then the title is "Gooogle"
+    Given I open Google's search page
+    Then the title is "Google"
     And the search form exists
 
 

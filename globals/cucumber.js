@@ -3,10 +3,11 @@ var fs = require('fs'),
     rimraf = require('rimraf'),
     glob = require("glob"),
     Cucumber = require('cucumber/lib/cucumber'),
-    options = JSON.parse(fs.readFileSync('nightwatch.json', 'utf-8')),
-    Selenium = require('nightwatch/lib/runner/selenium'),
     tempTestFolder = path.resolve(process.cwd(), 'temp-tests'),
-    runtime;
+    runtime,
+    cucumber = {
+        features: {}
+    };
 
 function getFeatureSources() {
     var featureSources = [];
@@ -49,61 +50,45 @@ function getStepExecutor(step) {
     }
 }
 
-var cucumber = {
-    features: {}
-};
-
-function discoverStep(feature, scenario, step) {
+function discoverScenario(feature, scenario, steps) {
     if (!feature.discovered) {
         feature.discovered = {};
-        cucumber.features[feature.getName().replace(/\W+/g, '')] = feature.discovered);
+        cucumber.features[feature.getName()] = feature.discovered;
     }
 
-    if (!scenario.discovered) {
-        scenario.discovered = {
-            steps: []
-        };
-        feature.discovered[scenario.getName().replace(/\W+/g, '')] = scenario.discovered;
-    }
-
-    scenario.discovered.steps.push({
-        name: step.getName(),
-        fn: getStepExecutor(step)
-    });
+    feature.discovered[scenario.getName()] = function(browser) {
+        steps.forEach(function(step) {
+            step(browser, function(result) {
+                if (result.isFailed()) {
+                    console.log(result.getFailureException());
+                }
+            })
+        });
+        browser.end();
+    };
 }
-
-rimraf(tempTestFolder);
-fs.mkdirSync(tempTestFolder);
 
 function createTestFile(feature) {
-    var name = feature.getName().replace(/\W+/g, '');
-
-    fs.writeFileSync(path.resolve(tempTestFolder, name + '.js'), 'var cucumber = require("../globals/cucumber.js"); module.exports = cucumber.features["' + name + '"];')
+    fs.writeFileSync(path.resolve(tempTestFolder, feature.getName().replace(/\W+/g, '') + '.js'), 'var cucumber = require("../globals/cucumber.js");\nmodule.exports = cucumber.features["' + feature.getName() + '"];')
 }
+
+rimraf.sync(tempTestFolder);
+fs.mkdirSync(tempTestFolder);
 
 var features = runtime.getFeatures().getFeatures();
 features.forEach(function(feature, next) {
-
+    createTestFile(feature);
     feature.instructVisitorToVisitScenarios({
         visitScenario: function(scenario) {
+            var steps = [];
             scenario.getSteps().forEach(function(step, next) {
-                discoverStep(feature, scenario, step);
+                steps.push(getStepExecutor(step));
                 next();
-            }, next);
+            }, function() {
+                discoverScenario(feature, scenario, steps);
+            });
         }
     });
 }, function() {});
 
-
 module.exports = cucumber;
-/*runtime.attachListener(Cucumber.Listener.ProgressFormatter({}));
-Selenium.startServer(options, function(error, child, error_out) {
-    if (error) {
-        console.error('There was an error while starting the Selenium server:' +error_out);
-        return;
-    }
-
-    runtime.start(function() {
-        Selenium.stopServer();
-    });
-});*/

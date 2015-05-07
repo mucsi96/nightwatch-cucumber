@@ -1,4 +1,5 @@
 node_modules
-selenium-debug.log
+*.log
+temp-tests
 reports
 *.bat
