@@ -1,3 +1,5 @@
+![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber.png)
+
 # nightwatch-cucumber
 
 Demonstartion project for [Cucumber.js](https://github.com/cucumber/cucumber-js) and [Nightwatch.js](http://nightwatchjs.org/) integration. This demonstrates how to use a BDD-style approach for crossbrowser testing:
