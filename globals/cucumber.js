@@ -100,6 +100,8 @@ runtime.getFeatures().getFeatures().forEach(function(feature, next) {
     });
 }, function() {});
 
-CucumberSummaryFormatter.logUndefinedStepSnippets();
+if (CucumberSummaryFormatter.getUndefinedStepLogBuffer()) {
+    CucumberSummaryFormatter.logUndefinedStepSnippets();
+}
 
 module.exports = cucumber;
