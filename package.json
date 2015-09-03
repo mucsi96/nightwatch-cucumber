@@ -9,11 +9,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "chromedriver": "mucsi96/node-chromedriver",
-    "cucumber": "^0.4.8",
-    "glob": "^5.0.5",
-    "nightwatch": "^0.6.7",
-    "rimraf": "^2.3.3",
-    "selenium-server": "^2.45.0"
+    "cucumber": "0.4.8",
+    "glob": "5.0.5",
+    "nightwatch": "0.6.7",
+    "rimraf": "2.3.3",
+    "selenium-server": "2.45.0"
   }
 }

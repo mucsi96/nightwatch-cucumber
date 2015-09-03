@@ -98,6 +98,7 @@ runtime.getFeatures().getFeatures().forEach(function(feature, next) {
             });
         }
     });
+    next();
 }, function() {});
 
 if (CucumberSummaryFormatter.getUndefinedStepLogBuffer()) {

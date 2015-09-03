@@ -10,7 +10,7 @@ module.exports = function() {
         this.assert.title(title);
     });
 
-    this.Then(/^the search form exists$/, function() {
+    this.Then(/^the Google search form exists$/, function() {
         this.assert.visible('input[name="q"]');
     });
 

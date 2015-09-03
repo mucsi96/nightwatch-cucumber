@@ -11,11 +11,7 @@
     "server_path" : "./node_modules/selenium-server/lib/runner/selenium-server-standalone-2.45.0.jar",
     "log_path" : "",
     "host" : "127.0.0.1",
-    "port" : 4444,
-    "cli_args" : {
-      "webdriver.chrome.driver" : "",
-      "webdriver.ie.driver" : ""
-    }
+    "port" : 4444
   },
 
   "test_settings" : {
@@ -29,7 +25,7 @@
         "path" : ""
       },
       "desiredCapabilities": {
-        "browserName": "chrome",
+        "browserName": "firefox",
         "javascriptEnabled": true,
         "acceptSslCerts": true
       }
