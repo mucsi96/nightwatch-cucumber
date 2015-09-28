@@ -5,6 +5,7 @@
   "custom_assertions_path" : "",
   "page_objects_path" : "",
   "globals_path" : "globals/cucumber.js",
+  "tags" : ["@tagGoogle", "@tagYahoo"],
 
   "selenium" : {
     "start_process" : true,

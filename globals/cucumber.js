@@ -8,7 +8,8 @@ var fs = require('fs'),
     runtime,
     cucumber = {
         features: {}
-    };
+    },
+    config = require("../nightwatch.json");
 
 function getFeatureSources() {
     var featureSources = [];
@@ -76,33 +77,55 @@ function createTestFile(feature) {
     fs.writeFileSync(path.resolve(tempTestFolder, feature.getName().replace(/\W+/g, '') + '.js'), testFileSource);
 }
 
+function getTagNames(tags) {
+  var len = tags.length;
+  var result = new Array();
+  for (i = 0; i < len; i++)
+    result[i] = tags[i].getName();
+  return result;
+}
+
+
+function featureHasAtLeastOneTag(feature, desiredTags) {
+  var featureTags = getTagNames(feature.getTags());
+  var desidedTagsLen = desiredTags.length;
+  for (var i = 0; i < desidedTagsLen; i++) {
+    if (featureTags.indexOf(desiredTags[i]) > -1)
+      return true;
+  }
+  return false;
+}
+
 rimraf.sync(tempTestFolder);
 fs.mkdirSync(tempTestFolder);
 
 runtime = Cucumber(getFeatureSources(), getSupportCodeInitializer());
 
 runtime.getFeatures().getFeatures().forEach(function(feature, next) {
+  var featureHasDesidedTags = featureHasAtLeastOneTag(feature, config.tags);
+  if (featureHasDesidedTags) {
     createTestFile(feature);
     feature.instructVisitorToVisitScenarios({
-        visitScenario: function(scenario) {
-            var steps = [];
-            scenario.getSteps().forEach(function(step, next) {
-                var stepExecutor = getStepExecutor(step);
+      visitScenario: function(scenario) {
+        var steps = [];
+        scenario.getSteps().forEach(function(step, next) {
+          var stepExecutor = getStepExecutor(step);
 
-                if (stepExecutor) {
-                    steps.push(stepExecutor);
-                }
-                next();
-            }, function() {
-                discoverScenario(feature, scenario, steps);
-            });
-        }
+          if (stepExecutor) {
+            steps.push(stepExecutor);
+          }
+          next();
+        }, function() {
+          discoverScenario(feature, scenario, steps);
+        });
+      }
     });
-    next();
+  }
+  next();
 }, function() {});
 
 if (CucumberSummaryFormatter.getUndefinedStepLogBuffer()) {
-    CucumberSummaryFormatter.logUndefinedStepSnippets();
+  CucumberSummaryFormatter.logUndefinedStepSnippets();
 }
 
 module.exports = cucumber;
