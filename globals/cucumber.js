@@ -52,10 +52,24 @@ function getStepExecutor(step) {
     }
 }
 
+function getFeatureTags(feature) {
+    return feature.getTags().map(function(tag) {
+        return tag.getName().replace(/^@/, '');
+    });
+}
+
 function discoverScenario(feature, scenario, steps) {
+    var tags;
+
     if (!feature.discovered) {
         feature.discovered = {};
         cucumber.features[feature.getName()] = feature.discovered;
+
+        tags = getFeatureTags(feature);
+
+        if (tags.length) {
+            feature.discovered['@tags'] = tags;
+        }
     }
 
     feature.discovered[scenario.getName()] = function(browser) {
