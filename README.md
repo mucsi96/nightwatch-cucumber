@@ -20,3 +20,27 @@ $ npm install
 ```
 $ node nightwatch.js
 ```
+
+## Features
+
+### Feature Tags
+You can selectively run features based on tags. [More details ](http://nightwatchjs.org/guide#test-tags)
+```
+// google.feature
+
+@google @search
+Feature: Google Search
+
+Scenario: Searching Google
+
+    Given I open Google's search page
+    Then the title is "Google"
+    And the Google search form exists
+```
+```
+$ node nightwatch.js --tag google
+```
+You can also skip features based on tags
+```
+node nightwatch.js --skiptags google
+```
