@@ -39,16 +39,22 @@ function getSupportCodeInitializer() {
 }
 
 function getStepExecutor(step) {
-    var stepDefinition = runtime.getSupportCodeLibrary().lookupStepDefinitionByName(step.getName());
+    var stepDefinitions = runtime.getSupportCodeLibrary().lookupStepDefinitionsByName(step.getName());
 
-    if (!stepDefinition) {
+    if (!stepDefinitions || stepDefinitions.length == 0) {
         CucumberSummaryFormatter.storeUndefinedStepResult(step);
         CucumberSummaryFormatter.log(Cucumber.Util.ConsoleColor.format('pending', 'Undefined steps found!\n'));
         return;
     }
 
+    if (stepDefinitions.length > 1) {
+        CucumberSummaryFormatter.storeUndefinedStepResult(step);
+        CucumberSummaryFormatter.log(Cucumber.Util.ConsoleColor.format('pending', 'Ambiguous steps found!\n'));
+        return;
+    }
+
     return function (context, callback) {
-        stepDefinition.invoke(step, context, {getAttachments: function(){}}, {id:1}, callback);
+        stepDefinitions[0].invoke(step, context, {getAttachments: function(){}}, 60000, callback);
     }
 }
 
@@ -75,7 +81,7 @@ function discoverScenario(feature, scenario, steps) {
     feature.discovered[scenario.getName()] = function(browser) {
         steps.forEach(function(step) {
             step(browser, function(result) {
-                if (result.isFailed()) {
+                if (result.getStatus() === Cucumber.Status.FAILED) {
                     console.log(result.getFailureException());
                 }
             })
@@ -95,25 +101,22 @@ fs.mkdirSync(tempTestFolder);
 
 runtime = Cucumber(getFeatureSources(), getSupportCodeInitializer());
 
-runtime.getFeatures().getFeatures().forEach(function(feature, next) {
+runtime.getFeatures().getFeatures().forEach(function(feature) {
     createTestFile(feature);
     feature.instructVisitorToVisitScenarios({
         visitScenario: function(scenario) {
             var steps = [];
-            scenario.getSteps().forEach(function(step, next) {
+            scenario.getSteps().forEach(function(step) {
                 var stepExecutor = getStepExecutor(step);
 
                 if (stepExecutor) {
                     steps.push(stepExecutor);
                 }
-                next();
-            }, function() {
-                discoverScenario(feature, scenario, steps);
             });
+            discoverScenario(feature, scenario, steps);
         }
     });
-    next();
-}, function() {});
+});
 
 if (CucumberSummaryFormatter.getUndefinedStepLogBuffer()) {
     CucumberSummaryFormatter.logUndefinedStepSnippets();
