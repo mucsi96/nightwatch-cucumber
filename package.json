@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Demonstartion project for Cucumber.js and Nightwatch.js integration",
   "main": "nightwatch.js",
   "scripts": {
