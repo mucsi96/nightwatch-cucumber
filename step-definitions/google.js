@@ -6,7 +6,7 @@ module.exports = function() {
             .waitForElementVisible('body', 1000);
     });
 
-    this.Then(/^the title is "([^"]*)"$/, function(title) {
+    this.Then(/^the title is "([^"]*)"$/, function() {
         this.assert.title(title);
     });
 
