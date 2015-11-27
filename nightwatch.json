@@ -5,6 +5,12 @@
   "custom_assertions_path" : "",
   "page_objects_path" : "",
   "globals_path" : "globals/cucumber.js",
+  "live_output" : false,
+  "disable_colors": false,
+  "test_workers": {
+  "enabled": true,
+  "workers": "auto"
+},   
 
   "selenium" : {
     "start_process" : true,
@@ -21,13 +27,32 @@
       "selenium_host"  : "localhost",
       "silent": true,
       "screenshots" : {
-        "enabled" : false,
-        "path" : ""
+        "enabled" : true,
+        "on_failure" : true,
+        "on_error" : false,
+        "path" : "/Users/user/nightwatch-cucumber-copy/screenshots/default"
       },
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true
+      }
+    },
+
+    "firefox" : {
       "desiredCapabilities": {
         "browserName": "firefox",
         "javascriptEnabled": true,
         "acceptSslCerts": true
+      }
+    },
+
+    "phantomjs" : {
+      "desiredCapabilities": {
+        "browserName": "phantomjs",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true,
+        "phantomjs.binary.path" : "/usr/local/bin/phantomjs"
       }
     }
   }

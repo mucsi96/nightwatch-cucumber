@@ -1,5 +1,7 @@
 node_modules
 *.log
 temp-tests
+screenshots/default/*.png
 reports
 *.bat
+.DS_Store

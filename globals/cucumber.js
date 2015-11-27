@@ -104,18 +104,18 @@ runtime = Cucumber(getFeatureSources(), getSupportCodeInitializer());
 runtime.getFeatures().getFeatures().forEach(function(feature) {
     createTestFile(feature);
     feature.instructVisitorToVisitScenarios({
-        visitScenario: function(scenario) {
+        visitScenario: function(scenario, next) {
             var steps = [];
             scenario.getSteps().forEach(function(step) {
                 var stepExecutor = getStepExecutor(step);
-
                 if (stepExecutor) {
                     steps.push(stepExecutor);
                 }
             });
             discoverScenario(feature, scenario, steps);
+            next();
         }
-    });
+    }, function() {});
 });
 
 if (CucumberSummaryFormatter.getUndefinedStepLogBuffer()) {
