@@ -1,7 +1,7 @@
 node_modules
 *.log
 temp-tests
-screenshots/default/*.png
+screenshots
 reports
 *.bat
 .DS_Store

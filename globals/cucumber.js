@@ -100,11 +100,10 @@ rimraf.sync(tempTestFolder);
 fs.mkdirSync(tempTestFolder);
 
 runtime = Cucumber(getFeatureSources(), getSupportCodeInitializer());
-
-runtime.getFeatures().getFeatures().forEach(function(feature) {
+runtime.getFeatures().getFeatures().asyncForEach(function(feature, nextFeature) {
     createTestFile(feature);
     feature.instructVisitorToVisitScenarios({
-        visitScenario: function(scenario, next) {
+        visitScenario: function(scenario, nextScenario) {
             var steps = [];
             scenario.getSteps().forEach(function(step) {
                 var stepExecutor = getStepExecutor(step);
@@ -113,13 +112,14 @@ runtime.getFeatures().getFeatures().forEach(function(feature) {
                 }
             });
             discoverScenario(feature, scenario, steps);
-            next();
+            nextScenario();
         }
-    }, function() {});
+    }, nextFeature);
+}, function() {
+    if (CucumberSummaryFormatter.getUndefinedStepLogBuffer()) {
+        CucumberSummaryFormatter.logUndefinedStepSnippets();
+    }
 });
 
-if (CucumberSummaryFormatter.getUndefinedStepLogBuffer()) {
-    CucumberSummaryFormatter.logUndefinedStepSnippets();
-}
 
 module.exports = cucumber;

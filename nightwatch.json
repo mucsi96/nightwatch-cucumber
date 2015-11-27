@@ -10,7 +10,7 @@
   "test_workers": {
   "enabled": true,
   "workers": "auto"
-},   
+},
 
   "selenium" : {
     "start_process" : true,
@@ -30,16 +30,8 @@
         "enabled" : true,
         "on_failure" : true,
         "on_error" : false,
-        "path" : "/Users/user/nightwatch-cucumber-copy/screenshots/default"
+        "path" : "screenshots/default"
       },
-      "desiredCapabilities": {
-        "browserName": "chrome",
-        "javascriptEnabled": true,
-        "acceptSslCerts": true
-      }
-    },
-
-    "firefox" : {
       "desiredCapabilities": {
         "browserName": "firefox",
         "javascriptEnabled": true,
