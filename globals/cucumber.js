@@ -3,7 +3,11 @@ var fs = require('fs'),
     rimraf = require('rimraf'),
     glob = require("glob"),
     Cucumber = require('cucumber/lib/cucumber'),
-    CucumberSummaryFormatter = require('cucumber/lib/cucumber/listener/summary_formatter')({snippets: true}),
+    configuration = Cucumber.Cli.Configuration({
+        snippets: true,
+        useColors: true,
+        format: ['summary']
+    }, []),
     tempTestFolder = path.resolve(process.cwd(), 'temp-tests'),
     runtime,
     cucumber = {
@@ -40,16 +44,23 @@ function getSupportCodeInitializer() {
 
 function getStepExecutor(step) {
     var stepDefinitions = runtime.getSupportCodeLibrary().lookupStepDefinitionsByName(step.getName());
+    var getStep = function() { return step; };
+    var formatter = configuration.getFormatters()[0];
+    var colors = Cucumber.Util.Colors(true);
 
     if (!stepDefinitions || stepDefinitions.length == 0) {
-        CucumberSummaryFormatter.storeUndefinedStepResult(step);
-        CucumberSummaryFormatter.log(Cucumber.Util.ConsoleColor.format('pending', 'Undefined steps found!\n'));
+        formatter.storeUndefinedStepResult({getStep: getStep});
+        formatter.log(colors.pending('Undefined steps found!'));
+        formatter.logUndefinedStepSnippets();
         return;
     }
 
     if (stepDefinitions.length > 1) {
-        CucumberSummaryFormatter.storeUndefinedStepResult(step);
-        CucumberSummaryFormatter.log(Cucumber.Util.ConsoleColor.format('pending', 'Ambiguous steps found!\n'));
+        formatter.storeAmbiguousStepResult({getStep: getStep, getAmbiguousStepDefinitions: function() {
+            return stepDefinitions;
+        }});
+        formatter.log(colors.ambiguous('Ambiguous steps found!'));
+        formatter.logAmbiguousSteps();
         return;
     }
 
@@ -115,11 +126,6 @@ runtime.getFeatures().getFeatures().asyncForEach(function(feature, nextFeature) 
             nextScenario();
         }
     }, nextFeature);
-}, function() {
-    if (CucumberSummaryFormatter.getUndefinedStepLogBuffer()) {
-        CucumberSummaryFormatter.logUndefinedStepSnippets();
-    }
-});
-
+}, function() {});
 
 module.exports = cucumber;
