@@ -1,7 +1,9 @@
 var fs = require('fs'),
     path = require('path'),
     rimraf = require('rimraf'),
-    glob = require("glob"),
+    glob = require('glob'),
+    checkSyntaxError = require('syntax-error'),
+    syntaxError = false,
     Cucumber = require('cucumber/lib/cucumber'),
     configuration = Cucumber.Cli.Configuration({
         snippets: true,
@@ -34,7 +36,17 @@ function getSupportCodeInitializer() {
         });
 
         files.forEach(function(file) {
-            var initializer = require(file);
+            var initializer,
+                src = fs.readFileSync(file),
+                err = checkSyntaxError(src, file);
+
+            if (err) {
+                console.error(err);
+                syntaxError = true;
+                return;
+            }
+
+            initializer = require(file);
 
             if (typeof(initializer) === 'function')
                 initializer.call(supportCodeHelper);
@@ -107,25 +119,34 @@ function createTestFile(feature) {
     fs.writeFileSync(path.resolve(tempTestFolder, feature.getName().replace(/\W+/g, '') + '.js'), testFileSource);
 }
 
-rimraf.sync(tempTestFolder);
-fs.mkdirSync(tempTestFolder);
+function init() {
+    rimraf.sync(tempTestFolder);
+    fs.mkdirSync(tempTestFolder);
+    runtime = Cucumber(getFeatureSources(), getSupportCodeInitializer());
 
-runtime = Cucumber(getFeatureSources(), getSupportCodeInitializer());
-runtime.getFeatures().getFeatures().asyncForEach(function(feature, nextFeature) {
-    createTestFile(feature);
-    feature.instructVisitorToVisitScenarios({
-        visitScenario: function(scenario, nextScenario) {
-            var steps = [];
-            scenario.getSteps().forEach(function(step) {
-                var stepExecutor = getStepExecutor(step);
-                if (stepExecutor) {
-                    steps.push(stepExecutor);
-                }
-            });
-            discoverScenario(feature, scenario, steps);
-            nextScenario();
-        }
-    }, nextFeature);
-}, function() {});
+    if (syntaxError) {
+        cucumber = {};
+        return;
+    }
+
+    runtime.getFeatures().getFeatures().asyncForEach(function(feature, nextFeature) {
+        createTestFile(feature);
+        feature.instructVisitorToVisitScenarios({
+            visitScenario: function(scenario, nextScenario) {
+                var steps = [];
+                scenario.getSteps().forEach(function(step) {
+                    var stepExecutor = getStepExecutor(step);
+                    if (stepExecutor) {
+                        steps.push(stepExecutor);
+                    }
+                });
+                discoverScenario(feature, scenario, steps);
+                nextScenario();
+            }
+        }, nextFeature);
+    }, function() {});
+}
+
+init();
 
 module.exports = cucumber;
