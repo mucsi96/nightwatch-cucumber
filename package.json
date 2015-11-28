@@ -12,10 +12,13 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "chromedriver": "^2.20.0",
     "cucumber": "0.9.2",
     "glob": "^5.0.5",
     "nightwatch": "0.8.6",
+    "phantomjs": "^1.9.19",
     "rimraf": "^2.3.3",
-    "selenium-server": "2.45.0"
-  }
+    "selenium-server": "2.48.2"
+  },
+  "dependencies": {}
 }
