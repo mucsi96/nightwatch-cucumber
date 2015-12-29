@@ -21,6 +21,48 @@ $ npm install
 $ node nightwatch.js
 ```
 
+## Sample feature file
+
+```
+Feature: Google Search
+
+Scenario: Searching Google
+
+    Given I open Google's search page
+    Then the title is "Google"
+    And the Google search form exists
+
+Scenario: Searching Google again
+
+    Given I open Google's search page
+    Then the title is "Google"
+    And the Google search form exists
+
+```
+
+## Sample step definition file
+All step definitions will run with this set to Nightwatch.js client or browser object
+
+```
+module.exports = function() {
+
+    this.Given(/^I open Google's search page$/, function() {
+        this
+            .url('http://google.com')
+            .waitForElementVisible('body', 1000);
+    });
+
+    this.Then(/^the title is "([^"]*)"$/, function(title) {
+        this.assert.title(title);
+    });
+
+    this.Then(/^the Google search form exists$/, function() {
+        this.assert.visible('input[name="q"]');
+    });
+
+};
+```
+
 ## Features
 
 ### Feature Tags
