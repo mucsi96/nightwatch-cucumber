@@ -24,6 +24,7 @@ Currently feature files are located in `features` folder.
 
 ```
 # features/google.feature
+
 Feature: Google Search
 
 Scenario: Searching Google
@@ -39,6 +40,7 @@ All step definitions will run with `this` set to Nightwatch.js client or browser
 
 ```
 // step-definitions/google.js
+
 module.exports = function() {
 
     this.Given(/^I open Google's search page$/, function() {
@@ -77,7 +79,7 @@ node_modules/.bin/nightwatch
 ### Feature Tags
 You can selectively run features based on tags. [More details ](http://nightwatchjs.org/guide#test-tags)
 ```
-// google.feature
+# google.feature
 
 @google @search
 Feature: Google Search
