@@ -65,7 +65,7 @@ If you have installed `nightwatch` with `-g` (global) option you can run the tes
 nightwatch
 ```
 
-If other case you can run the tests by executing
+In other case you can run the tests by executing
 ```
 node_modules/.bin/nightwatch
 ```
