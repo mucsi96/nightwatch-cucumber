@@ -1,3 +1,4 @@
+var seleniumServer = require('selenium-server');
 var phantomjs = require('phantomjs');
 var chromedriver = require('chromedriver');
 
@@ -7,7 +8,7 @@ module.exports = {
   custom_commands_path: '',
   custom_assertions_path: '',
   page_objects_path: '',
-  globals_path: 'globals/cucumber.js',
+  globals_path: 'node_modules/nightwatch-cucumber',
   live_output: false,
   disable_colors: false,
   test_workers: {
@@ -17,7 +18,7 @@ module.exports = {
 
   selenium : {
     start_process : true,
-    server_path: './node_modules/selenium-server/lib/runner/selenium-server-standalone-2.48.2.jar',
+    server_path: seleniumServer.path,
     log_path : '',
     host : '127.0.0.1',
     port : 4444

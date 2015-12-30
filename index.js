@@ -4,17 +4,27 @@ var fs = require('fs'),
     glob = require('glob'),
     checkSyntaxError = require('syntax-error'),
     syntaxError = false,
-    Cucumber = require('cucumber/lib/cucumber'),
-    configuration = Cucumber.Cli.Configuration({
-        snippets: true,
-        useColors: true,
-        format: ['summary']
-    }, []),
+    Cucumber,
+    configuration,
     tempTestFolder = path.resolve(process.cwd(), 'temp-tests'),
     runtime,
     cucumber = {
         features: {}
     };
+
+try {
+  Cucumber = require('cucumber/lib/cucumber');
+} catch (_) {
+  // workaround when `npm link`'ed for development
+  var prequire = require('parent-require');
+  Cucumber = prequire('cucumber/lib/cucumber');
+}
+
+configuration = Cucumber.Cli.Configuration({
+   snippets: true,
+   useColors: true,
+   format: ['summary']
+}, []);
 
 function getFeatureSources() {
     var featureSources = [];
@@ -114,7 +124,7 @@ function discoverScenario(feature, scenario, steps) {
 }
 
 function createTestFile(feature) {
-    var testFileSource = 'module.exports = require(process.cwd() + "/globals/cucumber").features["' + feature.getName() + '"];';
+    var testFileSource = 'module.exports = require("nightwatch-cucumber").features["' + feature.getName() + '"];';
 
     fs.writeFileSync(path.resolve(tempTestFolder, feature.getName().replace(/\W+/g, '') + '.js'), testFileSource);
 }
