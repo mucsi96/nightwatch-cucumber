@@ -2,7 +2,7 @@
 
 # nightwatch-cucumber
 
-[Nightwatch.js](http://nightwatchjs.org/) plugin for [Cucumber.js](https://github.com/cucumber/cucumber-js). This enables to use a BDD-style approach for cross-browser testing:
+[Cucumber.js](https://github.com/cucumber/cucumber-js) plugin for [Nightwatch.js](http://nightwatchjs.org/). This enables to use a BDD-style approach for cross-browser testing:
 - Describe user stories in Cucumber
 - Map them to HTML/DOM operations in Nightwatch.js
 - Run using either local Selenium driver or cloud based WebDriver services such as SauceLabs or BrowserStack
