@@ -97,3 +97,49 @@ You can also skip features based on tags
 ```
 node nightwatch.js --skiptags google
 ```
+
+### Page Objects
+
+Add the following line to Nightwatch.js configuration file.
+
+```
+page_objects_path: 'page-objects'
+```
+
+Nightwatch reads the page objects from the folder (or folders) specified in the page_objects_path configuration property. [More details](http://nightwatchjs.org/guide#page-objects)
+
+```
+//page-objects/yahoo.js
+
+module.exports = {
+    url: 'http://yahoo.com',
+    elements: {
+        body: 'body',
+        searchBar: 'input[name="p"]'
+    }
+};
+```
+
+Now we can use page objects from step definitions
+
+```
+//step-definitions/yahoo.js
+
+module.exports = function() {
+
+    this.Given(/^I open Yahoo's search page$/, function() {
+        var yahoo = this.page.yahoo();
+
+        yahoo
+            .navigate()
+            .waitForElementVisible('@body', 1000);
+    });
+
+    this.Then(/^the Yahoo search form exists$/, function() {
+        var yahoo = this.page.yahoo();
+
+        yahoo.assert.visible('@searchBar');
+    });
+
+};
+```
