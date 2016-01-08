@@ -16,6 +16,7 @@ If you are new to Nightwatch.js you can read the [developer guide](http://nightw
 
 Add the following line to Nightwatch.js configuration file.
 ```
+src_folders: ['temp-tests'],
 globals_path: 'node_modules/nightwatch-cucumber'
 ```
 
