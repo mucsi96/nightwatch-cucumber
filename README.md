@@ -60,6 +60,22 @@ module.exports = function() {
 };
 ```
 
+## Associate Nightwatch test with feature
+
+For nightwatch to be able to detect which feature to run, you have to associate the test with the feature. 
+If the location of test files as per your nightwatch configuration is 
+
+```
+src_folders: ['temp-tests']
+```
+
+then, within the `temp-tests` folder you need to create a test file and associate it with your feature as follows
+
+ 
+```javascript 
+module.exports = require("nightwatch-cucumber").features["Google Search"];
+```
+  
 ## Running tests
 
 If you have installed `nightwatch` with `-g` (global) option you can run the tests by executing
