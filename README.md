@@ -2,7 +2,10 @@
 
 # nightwatch-cucumber
 
+[![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Join the chat at https://gitter.im/mucsi96/nightwatch-cucumber](https://badges.gitter.im/mucsi96/nightwatch-cucumber.svg)](https://gitter.im/mucsi96/nightwatch-cucumber?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Issue Stats](http://issuestats.com/github/mucsi96/nightwatch-cucumber/badge/pr)](http://issuestats.com/github/mucsi96/nightwatch-cucumber)
+[![Issue Stats](http://issuestats.com/github/mucsi96/nightwatch-cucumber/badge/issue)](http://issuestats.com/github/mucsi96/nightwatch-cucumber)
 
 [Cucumber.js](https://github.com/cucumber/cucumber-js) plugin for [Nightwatch.js](http://nightwatchjs.org/). This enables to use a BDD-style approach for cross-browser testing:
 - Describe user stories in Cucumber
