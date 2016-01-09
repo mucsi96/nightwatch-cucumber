@@ -1,30 +1,15 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "index.js",
-  "author": {
-    "name": "Igor Muchychka",
-    "email": "mucsi_96@yahoo.com"
-  },
+  "author": "Igor Muchychka <mucsi_96@yahoo.com>",
   "contributors": [
-    {
-      "name": "Igor Zalutski",
-      "email": "izalutski@palantir.com"
-    },
-    {
-      "name": "Daniele Campogiani",
-      "email": "daniele.campogiani@gmail.com"
-    },
-    {
-      "name": "Simranjeet Singh"
-    },
-    {
-      "name": "Alex Murphy"
-    },
-    {
-      "name": "Ben Grabham"
-    }
+    "Igor Zalutski <izalutski@palantir.com>",
+    "Daniele Campogiani <daniele.campogiani@gmail.com>",
+    "Simranjeet Singh",
+    "Alex Murphy",
+    "Ben Grabham"
   ],
   "license": "MIT",
   "dependencies": {
@@ -36,5 +21,31 @@
   "peerDependencies": {
     "cucumber": "0.9.2",
     "nightwatch": "^0.8.6"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mucsi96/nightwatch-cucumber.git"
+  },
+  "keywords": [
+    "nightwatch",
+    "cucumber",
+    "gherkin",
+    "bdd",
+    "selenium",
+    "browser",
+    "automation",
+    "testing",
+    "test"
+  ],
+  "bugs": {
+    "url": "https://github.com/mucsi96/nightwatch-cucumber/issues"
+  },
+  "homepage": "https://github.com/mucsi96/nightwatch-cucumber#readme"
 }
