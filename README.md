@@ -3,6 +3,8 @@
 # nightwatch-cucumber
 
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
+[![Code Climate](https://codeclimate.com/github/mucsi96/nightwatch-cucumber/badges/gpa.svg)](https://codeclimate.com/github/mucsi96/nightwatch-cucumber)
+[![Dependencies](https://david-dm.org/mucsi96/nightwatch-cucumber.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber)
 [![Join the chat at https://gitter.im/mucsi96/nightwatch-cucumber](https://badges.gitter.im/mucsi96/nightwatch-cucumber.svg)](https://gitter.im/mucsi96/nightwatch-cucumber?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Issue Stats](http://issuestats.com/github/mucsi96/nightwatch-cucumber/badge/pr?style=flat)](http://issuestats.com/github/mucsi96/nightwatch-cucumber)
 [![Issue Stats](http://issuestats.com/github/mucsi96/nightwatch-cucumber/badge/issue?style=flat)](http://issuestats.com/github/mucsi96/nightwatch-cucumber)
@@ -14,10 +16,28 @@
 
 ## Installation
 
+### Step 1
+
+First you need to have `Nightwatch.js` and `Cucumber.js` to be installed locally.
+
+```
+$ npm install nightwatch cucumber
+```
+
+If you are new to Nightwatch.js you can read the [developer guide](http://nightwatchjs.org/guide).
+
+### Step 2
+
+Create a Nightwatch.js [configuration file](http://nightwatchjs.org/guide#settings-file)
+
+### Step 3
+
+Install `nightwatch-cucumber`
+
 ```
 $ npm install nightwatch-cucumber
 ```
-If you are new to Nightwatch.js you can read the [developer guide](http://nightwatchjs.org/guide).
+### Step 4
 
 Add the following lines to Nightwatch.js configuration file.
 ```

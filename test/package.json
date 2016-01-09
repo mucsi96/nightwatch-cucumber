@@ -2,7 +2,7 @@
   "name": "nightwatch-cucumber-test",
   "private": true,
   "scripts": {
-    "install": "ln -s ../.. node_modules/nightwatch-cucumber",
+    "install": "rm -rf node_modules/nightwatch-cucumber && ln -s ../.. node_modules/nightwatch-cucumber",
     "start": "node_modules/.bin/nightwatch"
   },
   "devDependencies": {

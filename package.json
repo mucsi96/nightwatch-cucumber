@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "index.js",
   "author": {
@@ -28,7 +28,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "glob": "^5.0.5",
+    "glob": "^6.0.4",
     "parent-require": "^1.0.0",
     "rimraf": "^2.3.3",
     "syntax-error": "^1.1.4"
