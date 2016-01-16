@@ -173,3 +173,10 @@ module.exports = function() {
 
 };
 ```
+# Change Log
+
+## 0.6.2 (January 16, 2016)
+
+Features:
+
+  - added support for grouping features by placing them in same sub-folder
