@@ -9,6 +9,8 @@
 [![Issue Stats](http://issuestats.com/github/mucsi96/nightwatch-cucumber/badge/pr?style=flat)](http://issuestats.com/github/mucsi96/nightwatch-cucumber)
 [![Issue Stats](http://issuestats.com/github/mucsi96/nightwatch-cucumber/badge/issue?style=flat)](http://issuestats.com/github/mucsi96/nightwatch-cucumber)
 
+[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=1&height=3)](https://nodei.co/npm/nightwatch-cucumber/)
+
 [Cucumber.js](https://github.com/cucumber/cucumber-js) plugin for [Nightwatch.js](http://nightwatchjs.org/). This enables to use a BDD-style approach for cross-browser testing:
 - Describe user stories in Cucumber
 - Map them to HTML/DOM operations in Nightwatch.js
@@ -175,7 +177,7 @@ module.exports = function() {
 ```
 # Change Log
 
-## 0.6.2 (January 16, 2016)
+## 0.6.3 (January 16, 2016)
 
 Features:
 
