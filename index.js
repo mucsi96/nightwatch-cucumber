@@ -1,14 +1,15 @@
-var fs = require('fs'),
-    path = require('path'),
-    rimraf = require('rimraf'),
-    glob = require('glob'),
-    checkSyntaxError = require('syntax-error'),
-    syntaxError = false,
-    Cucumber,
-    configuration,
-    tempTestFolder = path.resolve(process.cwd(), 'temp-tests'),
-    runtime,
-    cucumber = {
+var fs = require('fs');
+var path = require('path');
+var rimraf = require('rimraf');
+var glob = require('glob');
+var mkdirp = require('mkdirp');
+var checkSyntaxError = require('syntax-error');
+var syntaxError = false;
+var Cucumber;
+var configuration;
+var tempTestFolder = path.resolve(process.cwd(), 'temp-tests');
+var runtime;
+var cucumber = {
         features: {}
     };
 
@@ -125,8 +126,10 @@ function discoverScenario(feature, scenario, steps) {
 
 function createTestFile(feature) {
     var testFileSource = 'module.exports = require("nightwatch-cucumber").features["' + feature.getName() + '"];';
+    var testFilePath = path.resolve(tempTestFolder, path.relative('features', feature.getUri())).replace(/\.[^/.]+$/, '.js');
 
-    fs.writeFileSync(path.resolve(tempTestFolder, feature.getName().replace(/\W+/g, '') + '.js'), testFileSource);
+    mkdirp.sync(path.dirname(testFilePath));
+    fs.writeFileSync(testFilePath, testFileSource);
 }
 
 function init() {
