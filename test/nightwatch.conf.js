@@ -3,12 +3,11 @@ var phantomjs = require('phantomjs');
 var chromedriver = require('chromedriver');
 
 module.exports = {
-  src_folders: ['temp-tests'],
+  src_folders: [require('nightwatch-cucumber').path],
   output_folder: 'reports',
   custom_commands_path: '',
   custom_assertions_path: '',
   page_objects_path: 'page-objects',
-  globals_path: 'node_modules/nightwatch-cucumber',
   live_output: false,
   disable_colors: false,
   test_workers: {

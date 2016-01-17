@@ -1,6 +1,5 @@
 node_modules
 *.log
-temp-tests
 screenshots
 reports
 *.bat

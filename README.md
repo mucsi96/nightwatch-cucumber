@@ -43,8 +43,7 @@ $ npm install nightwatch-cucumber
 
 Add the following lines to Nightwatch.js configuration file.
 ```
-src_folders: ['temp-tests'],
-globals_path: 'node_modules/nightwatch-cucumber'
+src_folders: [require('nightwatch-cucumber').path]
 ```
 
 ## Demo Test
@@ -176,6 +175,12 @@ module.exports = function() {
 };
 ```
 # Change Log
+
+## 0.6.4 (January 17, 2016)
+
+Features:
+
+  - don't create temp-tests folder
 
 ## 0.6.3 (January 16, 2016)
 

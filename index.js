@@ -1,17 +1,20 @@
 var fs = require('fs');
 var path = require('path');
-var rimraf = require('rimraf');
 var glob = require('glob');
 var mkdirp = require('mkdirp');
+var tmp = require('tmp');
 var checkSyntaxError = require('syntax-error');
 var syntaxError = false;
 var Cucumber;
 var configuration;
-var tempTestFolder = path.resolve(process.cwd(), 'temp-tests');
-var runtime;
+var tempTestFolder = tmp.dirSync({ unsafeCleanup: true });
 var cucumber = {
-        features: {}
-    };
+    path: tempTestFolder.name,
+    features: {}
+};
+var runtime;
+
+tmp.setGracefulCleanup();
 
 try {
   Cucumber = require('cucumber/lib/cucumber');
@@ -125,16 +128,14 @@ function discoverScenario(feature, scenario, steps) {
 }
 
 function createTestFile(feature) {
-    var testFileSource = 'module.exports = require("nightwatch-cucumber").features["' + feature.getName() + '"];';
-    var testFilePath = path.resolve(tempTestFolder, path.relative('features', feature.getUri())).replace(/\.[^/.]+$/, '.js');
+    var testFileSource = 'module.exports = require("' + __filename + '").features["' + feature.getName() + '"];';
+    var testFilePath = path.join(tempTestFolder.name, path.relative('features', feature.getUri())).replace(/\.[^/.]+$/, '.js');
 
     mkdirp.sync(path.dirname(testFilePath));
     fs.writeFileSync(testFilePath, testFileSource);
 }
 
 function init() {
-    rimraf.sync(tempTestFolder);
-    fs.mkdirSync(tempTestFolder);
     runtime = Cucumber(getFeatureSources(), getSupportCodeInitializer());
 
     if (syntaxError) {
