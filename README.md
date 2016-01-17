@@ -30,20 +30,24 @@ If you are new to Nightwatch.js you can read the [developer guide](http://nightw
 
 ### Step 2
 
-Create a Nightwatch.js [configuration file](http://nightwatchjs.org/guide#settings-file)
-
-### Step 3
-
 Install `nightwatch-cucumber`
 
 ```
 $ npm install nightwatch-cucumber
 ```
+
+### Step 3
+
+Create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
+
 ### Step 4
 
-Add the following lines to Nightwatch.js configuration file.
+Add `require('nightwatch-cucumber').path` to `src_folders` in configuration file.
+
 ```
-src_folders: [require('nightwatch-cucumber').path]
+...
+src_folders: [equire('nightwatch-cucumber').path],
+...
 ```
 
 ## Demo Test
@@ -176,7 +180,7 @@ module.exports = function() {
 ```
 # Change Log
 
-## 0.6.4 (January 17, 2016)
+## 0.6.5 (January 17, 2016)
 
 Features:
 
