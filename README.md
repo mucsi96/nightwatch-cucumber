@@ -46,7 +46,7 @@ Add `require('nightwatch-cucumber').path` to `src_folders` in configuration file
 
 ```
 ...
-src_folders: [equire('nightwatch-cucumber').path],
+src_folders: [require('nightwatch-cucumber').path],
 ...
 ```
 
