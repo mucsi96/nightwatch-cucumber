@@ -20,7 +20,7 @@
 
 ### Step 1
 
-First you need to have `Nightwatch.js` and `Cucumber.js` to be installed locally.
+First you need to have Nightwatch.js and Cucumber.js to be installed locally.
 
 ```
 $ npm install nightwatch cucumber
@@ -179,6 +179,12 @@ module.exports = function() {
 };
 ```
 # Change Log
+
+## 0.6.6 (January 17, 2016)
+
+Features:
+
+  - Use require.main.require instead of parent-require for requiring nightwatch
 
 ## 0.6.5 (January 17, 2016)
 

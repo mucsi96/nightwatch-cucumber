@@ -5,8 +5,12 @@ var mkdirp = require('mkdirp');
 var tmp = require('tmp');
 var checkSyntaxError = require('syntax-error');
 var syntaxError = false;
-var Cucumber;
-var configuration;
+var Cucumber = require.main.require('cucumber/lib/cucumber');
+var configuration = Cucumber.Cli.Configuration({
+   snippets: true,
+   useColors: true,
+   format: ['summary']
+}, []);
 var tempTestFolder = tmp.dirSync({ unsafeCleanup: true });
 var cucumber = {
     path: tempTestFolder.name,
@@ -15,20 +19,6 @@ var cucumber = {
 var runtime;
 
 tmp.setGracefulCleanup();
-
-try {
-  Cucumber = require('cucumber/lib/cucumber');
-} catch (_) {
-  // workaround when `npm link`'ed for development
-  var prequire = require('parent-require');
-  Cucumber = prequire('cucumber/lib/cucumber');
-}
-
-configuration = Cucumber.Cli.Configuration({
-   snippets: true,
-   useColors: true,
-   format: ['summary']
-}, []);
 
 function getFeatureSources() {
     var featureSources = [];
