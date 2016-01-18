@@ -180,6 +180,12 @@ module.exports = function() {
 ```
 # Change Log
 
+## 0.6.7 (January 18, 2016)
+
+Bugfixes:
+
+  - Fix path issue on Windows systems
+
 ## 0.6.6 (January 17, 2016)
 
 Features:
