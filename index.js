@@ -118,7 +118,8 @@ function discoverScenario(feature, scenario, steps) {
 }
 
 function createTestFile(feature) {
-    var testFileSource = 'module.exports = require("' + __filename + '").features["' + feature.getName() + '"];';
+    var selfPath = __filename.split(path.sep).join('/');
+    var testFileSource = 'module.exports = require("' + selfPath + '").features["' + feature.getName() + '"];';
     var testFilePath = path.join(tempTestFolder.name, path.relative('features', feature.getUri())).replace(/\.[^/.]+$/, '.js');
 
     mkdirp.sync(path.dirname(testFilePath));
