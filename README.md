@@ -50,7 +50,7 @@ Add `require('nightwatch-cucumber').path` to `src_folders` in configuration file
 
 ```
 ...
-src_folders: [require('nightwatch-cucumber').path],
+src_folders: [require('nightwatch-cucumber')()],
 ...
 ```
 
@@ -253,7 +253,7 @@ require('nightwatch-cucumber')({
 
 # Change Log
 
-## 1.0.1 (January 27, 2016)
+## 1.0.2 (January 27, 2016)
 
 Features:
 
