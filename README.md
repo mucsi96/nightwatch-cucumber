@@ -147,14 +147,14 @@ node_modules/.bin/nightwatch
 
 ## Running tests (Cucumber.js as runner)
 
-If you have installed `cucumber` with `-g` (global) option you can run the tests by executing
+If you have installed `cucumberjs` with `-g` (global) option you can run the tests by executing
 ```
 cucumber
 ```
 
 In other case you can run the tests by executing
 ```
-node_modules/.bin/cucumber
+node_modules/.bin/cucumberjs
 ```
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-output.png)
@@ -163,7 +163,7 @@ node_modules/.bin/cucumber
 
 ### Feature Groups
 You can selectively run features based on groups. To group features together just place them in the same sub-folder. The folder name is the name of the group.
-You can use Nightwatch CLI `--group`, `--skipgroup` flags. [More details ](http://nightwatchjs.org/guide#test-groups)  
+You can use Nightwatch CLI `--group`, `--skipgroup` flags. [More details ](http://nightwatchjs.org/guide#test-groups)
 
 ### Feature Tags
 You can selectively run features based on tags. [More details ](http://nightwatchjs.org/guide#test-tags)
@@ -253,7 +253,7 @@ require('nightwatch-cucumber')({
 
 # Change Log
 
-## 1.0.0 (January 27, 2016)
+## 1.0.1 (January 27, 2016)
 
 Features:
 
