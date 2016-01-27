@@ -105,12 +105,12 @@ Scenario: Searching Google
     And the Google search form exists
 ```
 
-Step definitions files are located in `step-definitions` folder.
+Step definitions files are located in `features/step_definitions` folder by default.
 
 All step definitions will run with `this` set to Nightwatch.js client or browser object
 
 ```
-// step-definitions/google.js
+// features/step_definitions/google.js
 
 module.exports = function() {
 
@@ -232,6 +232,25 @@ module.exports = function() {
 
 };
 ```
+
+# Configuration
+
+The default configuration object is.
+```
+{
+    runner: 'nightwatch',
+    featureFiles: 'features/**/*.feature',
+    stepDefinitions: 'features/step_definitions/**/*.js'
+}
+```
+
+Options could be overwritten in the following way.
+```
+require('nightwatch-cucumber')({
+    runner: 'cucumber'
+})
+```
+
 # Change Log
 
 ## 1.0.0 (January 27, 2016)
