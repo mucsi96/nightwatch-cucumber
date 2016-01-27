@@ -5,7 +5,8 @@
     "install": "rm -rf node_modules/nightwatch-cucumber && ln -s ../.. node_modules/nightwatch-cucumber",
     "test": "node_modules/.bin/nightwatch",
     "tag-test": "node_modules/.bin/nightwatch --tag yahoo",
-    "group-test": "node_modules/.bin/nightwatch --group group"
+    "group-test": "node_modules/.bin/nightwatch --group group",
+    "cc-test": "node_modules/.bin/cucumber.js features/google.feature"
   },
   "devDependencies": {
     "chromedriver": "^2.20.0",
