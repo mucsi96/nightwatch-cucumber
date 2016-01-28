@@ -50,7 +50,7 @@ Add `require('nightwatch-cucumber').path` to `src_folders` in configuration file
 
 ```
 ...
-src_folders: [require('nightwatch-cucumber')()],
+src_folders: [require('nightwatch-cucumber')({/* configuration */})],
 ...
 ```
 
@@ -82,6 +82,7 @@ Create a configuration file for Cucumber.js. [More details](https://github.com/c
 // cucumber.js
 
 var path = require('nightwatch-cucumber')({
+    /* configuration */
     runner: 'cucumber'
 });
 
@@ -233,14 +234,22 @@ module.exports = function() {
 };
 ```
 
+### Closing Selenium session
+
+This plugin provides three ways of closing Selenium sessions. This enables reuse of session and prevents browser restarts. This can be controlled in configuration using `closeSession` property. Possible values are:
+- `afterScenario`
+- `afterFeature`
+- `never`
+
 # Configuration (Nightwatch.js as runner)
 
 The default configuration object is.
 ```
 {
     runner: 'nightwatch',
-    featureFiles: 'features/**/*.feature',
-    stepDefinitions: 'features/step_definitions/**/*.js'
+    featureFiles: 'features',
+    stepDefinitions: 'features/step_definitions',
+    closeSession: 'afterFeature'
 }
 ```
 
@@ -252,6 +261,13 @@ require('nightwatch-cucumber')({
 ```
 
 # Change Log
+
+## 1.1.0 (January 28, 2016)
+
+Features:
+
+  - Keep browser instance open
+  - Add TravisCI tests
 
 ## 1.0.2 (January 27, 2016)
 

@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "install": "rm -rf node_modules/nightwatch-cucumber && ln -s ../.. node_modules/nightwatch-cucumber",
-    "test": "node_modules/.bin/nightwatch",
+    "test": "npm run simple-test && npm run tag-test && npm run group-test && npm run cc-test",
+    "simple-test": "node_modules/.bin/nightwatch",
     "tag-test": "node_modules/.bin/nightwatch --tag yahoo",
     "group-test": "node_modules/.bin/nightwatch --group group",
     "cc-test": "node_modules/.bin/cucumberjs features/google.feature"

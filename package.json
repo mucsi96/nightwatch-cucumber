@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
@@ -29,7 +29,7 @@
     "object-assign": "^4.0.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cd test && npm test"
   },
   "repository": {
     "type": "git",
