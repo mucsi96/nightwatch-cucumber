@@ -238,7 +238,7 @@ module.exports = function() {
 
 This plugin provides three ways of closing Selenium sessions. This enables reuse of session and prevents browser restarts. This can be controlled in configuration using `closeSession` property. Possible values are:
 - `afterScenario`
-- `afterFeature`
+- `afterFeature` default
 - `never`
 
 # Configuration (Nightwatch.js as runner)
