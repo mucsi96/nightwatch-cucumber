@@ -233,7 +233,7 @@ module.exports = function() {
 };
 ```
 
-# Configuration
+# Configuration (Nightwatch.js as runner)
 
 The default configuration object is.
 ```
