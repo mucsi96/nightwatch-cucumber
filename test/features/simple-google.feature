@@ -1,4 +1,3 @@
-@google @search
 Feature: Google Search
 
 Scenario: Searching Google
