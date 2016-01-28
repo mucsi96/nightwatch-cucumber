@@ -3,6 +3,7 @@
 # nightwatch-cucumber
 
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
+[![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
 [![Code Climate](https://codeclimate.com/github/mucsi96/nightwatch-cucumber/badges/gpa.svg)](https://codeclimate.com/github/mucsi96/nightwatch-cucumber)
 [![Dependencies](https://david-dm.org/mucsi96/nightwatch-cucumber.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber)
 [![Join the chat at https://gitter.im/mucsi96/nightwatch-cucumber](https://badges.gitter.im/mucsi96/nightwatch-cucumber.svg)](https://gitter.im/mucsi96/nightwatch-cucumber?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
