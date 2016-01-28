@@ -7,7 +7,7 @@
     "simple-test": "node_modules/.bin/nightwatch --filter simple-google.js",
     "tag-test": "node_modules/.bin/nightwatch --tag yahoo",
     "group-test": "node_modules/.bin/nightwatch --group group",
-    "cc-test": "node_modules/.bin/cucumberjs features/google.feature"
+    "cc-test": "node_modules/.bin/cucumberjs features/simple-google.feature"
   },
   "devDependencies": {
     "chromedriver": "^2.20.0",
