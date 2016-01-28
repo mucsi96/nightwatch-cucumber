@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "install": "rm -rf node_modules/nightwatch-cucumber && ln -s ../.. node_modules/nightwatch-cucumber",
-    "test": "npm run simple-test && npm run tag-test && npm run group-test && npm run cc-test",
+    "test": "npm run simple-test && npm run tag-test && npm run group-test",
     "simple-test": "node_modules/.bin/nightwatch --filter simple-google.js",
     "tag-test": "node_modules/.bin/nightwatch --tag yahoo",
     "group-test": "node_modules/.bin/nightwatch --group group",
