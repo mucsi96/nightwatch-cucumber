@@ -151,7 +151,7 @@ node_modules/.bin/nightwatch
 
 If you have installed `cucumberjs` with `-g` (global) option you can run the tests by executing
 ```
-cucumber
+cucumberjs
 ```
 
 In other case you can run the tests by executing
