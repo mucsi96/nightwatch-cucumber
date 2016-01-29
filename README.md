@@ -149,7 +149,7 @@ node_modules/.bin/nightwatch
 
 ## Running tests (Cucumber.js as runner)
 
-If you have installed `cucumberjs` with `-g` (global) option you can run the tests by executing
+If you have installed `cucumber` with `-g` (global) option you can run the tests by executing
 ```
 cucumberjs
 ```
