@@ -29,7 +29,7 @@
     "object-assign": "^4.0.1"
   },
   "scripts": {
-    "test": "cd test/nightwatch-simple-test && ../node_modules/.bin/nightwatch && cd ../nightwatch-tag-test && ../node_modules/.bin/nightwatch --tag search && cd ../nightwatch-group-test && ../node_modules/.bin/nightwatch --group group && cd ../nightwatch-page-object-test && ../node_modules/.bin/nightwatch && cd ../cucumber-simple-test && ../node_modules/.bin/cucumberjs features/google.feature" 
+    "test": "cd test/nightwatch-simple-test && ../node_modules/.bin/nightwatch && cd ../nightwatch-tag-test && ../node_modules/.bin/nightwatch --tag search && cd ../nightwatch-group-test && ../node_modules/.bin/nightwatch --group group && cd ../nightwatch-page-object-test && ../node_modules/.bin/nightwatch && cd ../cucumber-simple-test && ../node_modules/.bin/cucumberjs"
   },
   "repository": {
     "type": "git",
