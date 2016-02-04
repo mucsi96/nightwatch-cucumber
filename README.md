@@ -91,6 +91,9 @@ module.exports = {
     default: '--require ' + path + ' --require features'
 }
 ```
+### Step 4
+
+Create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
 
 ## Demo Test
 Currently feature files are located in `features` folder.
