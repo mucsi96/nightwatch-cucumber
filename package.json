@@ -29,7 +29,13 @@
     "object-assign": "^4.0.1"
   },
   "scripts": {
-    "test": "cd test/nightwatch-simple-test && ../node_modules/.bin/nightwatch && cd ../nightwatch-tag-test && ../node_modules/.bin/nightwatch --tag search && cd ../nightwatch-group-test && ../node_modules/.bin/nightwatch --group group && cd ../nightwatch-page-object-test && ../node_modules/.bin/nightwatch && cd ../cucumber-simple-test && ../node_modules/.bin/cucumberjs features/google.feature" 
+    "nightwatch-simple-test": "cd test/nightwatch-simple-test && ../node_modules/.bin/nightwatch && cd ../..",
+    "nightwatch-tag-test": "cd test/nightwatch-tag-test && ../node_modules/.bin/nightwatch --tag search && cd ../..",
+    "nightwatch-group-test": "cd test/nightwatch-group-test && ../node_modules/.bin/nightwatch --group group && cd ../..",
+    "nightwatch-page-object-test": "cd test/nightwatch-page-object-test && ../node_modules/.bin/nightwatch && cd ../..",
+    "cucumber-simple-test": "cd test/cucumber-simple-test && ../node_modules/.bin/cucumberjs && cd ../..",
+    "cucumber-multi-test": "cd test/cucumber-multi-test && ../node_modules/.bin/cucumberjs && cd ../..",
+    "test": "npm run nightwatch-simple-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-page-object-test && npm run cucumber-simple-test && npm run cucumber-multi-test"
   },
   "repository": {
     "type": "git",
@@ -49,5 +55,8 @@
   "bugs": {
     "url": "https://github.com/mucsi96/nightwatch-cucumber/issues"
   },
-  "homepage": "https://github.com/mucsi96/nightwatch-cucumber#readme"
+  "homepage": "https://github.com/mucsi96/nightwatch-cucumber#readme",
+  "files": [
+      "lib"
+  ]
 }
