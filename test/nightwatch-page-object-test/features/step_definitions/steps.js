@@ -14,4 +14,8 @@ module.exports = function() {
         yahoo.assert.visible('@searchBar');
     });
 
+    this.Then(/^the title is "([^"]*)"$/, function(title) {
+        this.assert.title(title);
+    });
+
 };
