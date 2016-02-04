@@ -54,5 +54,8 @@
   "bugs": {
     "url": "https://github.com/mucsi96/nightwatch-cucumber/issues"
   },
-  "homepage": "https://github.com/mucsi96/nightwatch-cucumber#readme"
+  "homepage": "https://github.com/mucsi96/nightwatch-cucumber#readme",
+  "files": [
+      "lib"
+  ]
 }
