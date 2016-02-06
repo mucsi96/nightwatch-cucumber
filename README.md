@@ -192,8 +192,22 @@ You can also skip features based on tags
 node nightwatch.js --skiptags google
 ```
 
-### Page Objects
+### Scenario Outlines
+You can use scenario outlines to avoid copying and pasting of scenarios.
 
+```
+Scenario Outline: eating
+  Given there are <start> cucumbers
+  When I eat <eat> cucumbers
+  Then I should have <left> cucumbers
+
+  Examples:
+    | start | eat | left |
+    |  12   |  5  |  7   |
+    |  20   |  5  |  15  |
+```
+
+### Page Objects
 Add the following line to Nightwatch.js configuration file.
 
 ```
@@ -265,6 +279,16 @@ require('nightwatch-cucumber')({
 ```
 
 # Change Log
+
+## 1.2.0 (February 6, 2016)
+
+Features:
+
+  - Scenario outlines support added
+
+Bugfixes:
+
+  - Fix undefined/ambiguous step handling
 
 ## 1.1.0 (January 28, 2016)
 

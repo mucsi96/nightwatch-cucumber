@@ -6,7 +6,7 @@
   },
   "devDependencies": {
     "chromedriver": "^2.20.0",
-    "cucumber": "0.9.2",
+    "cucumber": "^0.9.4",
     "nightwatch": "^0.8.6",
     "phantomjs": "^1.9.19",
     "selenium-server": "^2.48.2"
