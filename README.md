@@ -252,6 +252,26 @@ You can also skip features based on tags
 node nightwatch.js --skiptags google
 ```
 
+### Feature background
+You can use feature background to avoid copying and pasting of steps. The background runs before each scenario after beforeScenario hooks.
+
+```
+Feature: Feature background example
+
+Background:
+    Given there are 10 cucumbers
+
+Scenario: eating
+
+    When I eat 5 cucumbers
+    Then I should have 7 cucumbers
+
+Scenario: adding
+
+    When I add 1 cucumbers
+    Then I should have 11 cucumbers
+```
+
 ### Scenario Outlines
 You can use scenario outlines to avoid copying and pasting of scenarios.
 
@@ -342,6 +362,7 @@ require('nightwatch-cucumber')({
 ## 1.3.0 (February 6, 2016)
 Features:
   - Hooks support added
+  - Feature background support added
 
 ## 1.2.0 (February 6, 2016)
 Features:
