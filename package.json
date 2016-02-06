@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
@@ -30,13 +30,14 @@
   },
   "scripts": {
     "nightwatch-simple-test": "cd test/nightwatch-simple-test && ../node_modules/.bin/nightwatch && cd ../..",
+    "nightwatch-hook-test": "cd test/nightwatch-hook-test && ../node_modules/.bin/nightwatch && cd ../..",
     "nightwatch-tag-test": "cd test/nightwatch-tag-test && ../node_modules/.bin/nightwatch --tag search && cd ../..",
     "nightwatch-group-test": "cd test/nightwatch-group-test && ../node_modules/.bin/nightwatch --group group && cd ../..",
     "nightwatch-page-object-test": "cd test/nightwatch-page-object-test && ../node_modules/.bin/nightwatch && cd ../..",
     "nightwatch-outlines-test": "cd test/nightwatch-outlines-test && ../node_modules/.bin/nightwatch && cd ../..",
     "cucumber-simple-test": "cd test/cucumber-simple-test && ../node_modules/.bin/cucumberjs && cd ../..",
     "cucumber-multi-test": "cd test/cucumber-multi-test && ../node_modules/.bin/cucumberjs && cd ../..",
-    "test": "npm run nightwatch-simple-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-page-object-test && npm run nightwatch-outlines-test"
+    "test": "npm run nightwatch-simple-test && npm run nightwatch-hook-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-page-object-test && npm run nightwatch-outlines-test"
   },
   "repository": {
     "type": "git",
