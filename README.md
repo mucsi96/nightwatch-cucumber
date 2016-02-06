@@ -363,6 +363,7 @@ require('nightwatch-cucumber')({
 Features:
   - Hooks support added
   - Feature background support added
+  - Add feature name to output (Nightwatch.js as runner)
 
 ## 1.2.0 (February 6, 2016)
 Features:
