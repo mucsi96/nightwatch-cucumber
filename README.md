@@ -19,7 +19,7 @@
 
 This plugin allows to run tests in two modes:
 - Nightwatch.js as runner
-- Cucumber.js as runner (experimental)
+- Cucumber.js as runner (not stable yet)
 
 ## Installation (Nightwatch.js as runner)
 
