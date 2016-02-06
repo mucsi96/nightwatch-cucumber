@@ -17,11 +17,11 @@
 - Map them to HTML/DOM operations in Nightwatch.js
 - Run using either local Selenium driver or cloud based WebDriver services such as SauceLabs or BrowserStack
 
-This plugin allows to run tests in two modes:
+<!-- This plugin allows to run tests in two modes:
 - Nightwatch.js as runner
-- Cucumber.js as runner (experimental)
+- Cucumber.js as runner (experimental) -->
 
-## Installation (Nightwatch.js as runner)
+## Installation<!-- (Nightwatch.js as runner) -->
 
 ### Step 1
 
@@ -55,7 +55,7 @@ src_folders: [require('nightwatch-cucumber')({/* configuration */})],
 ...
 ```
 
-## Installation (Cucumber.js as runner)
+<!-- ## Installation (Cucumber.js as runner)
 
 ### Step 1
 
@@ -93,7 +93,7 @@ module.exports = {
 ```
 ### Step 4
 
-Create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
+Create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file) -->
 
 ## Demo Test
 Currently feature files are located in `features` folder.
@@ -136,7 +136,7 @@ module.exports = function() {
 };
 ```
 
-## Running tests (Nightwatch.js as runner)
+## Running tests <!--  (Nightwatch.js as runner) -->
 
 If you have installed `nightwatch` with `-g` (global) option you can run the tests by executing
 ```
@@ -150,7 +150,7 @@ node_modules/.bin/nightwatch
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-output.png)
 
-## Running tests (Cucumber.js as runner)
+<!-- ## Running tests (Cucumber.js as runner)
 
 If you have installed `cucumber` with `-g` (global) option you can run the tests by executing
 ```
@@ -162,9 +162,9 @@ In other case you can run the tests by executing
 node_modules/.bin/cucumberjs
 ```
 
-![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-output.png)
+![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-output.png) -->
 
-## Features (Nightwatch.js as runner)
+## Features <!-- (Nightwatch.js as runner) -->
 
 ### Feature Groups
 You can selectively run features based on groups. To group features together just place them in the same sub-folder. The folder name is the name of the group.
@@ -259,7 +259,7 @@ This plugin provides three ways of closing Selenium sessions. This enables reuse
 - `afterFeature` default
 - `never`
 
-# Configuration (Nightwatch.js as runner)
+# Configuration <!-- (Nightwatch.js as runner) -->
 
 The default configuration object is.
 ```
