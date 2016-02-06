@@ -166,6 +166,66 @@ node_modules/.bin/cucumberjs
 
 ## Features (Nightwatch.js as runner)
 
+### Hooks
+
+#### Before/after all features and before/after each feature
+These hooks can be provided using Nightwatch external globals. External globals file is specified in the `globals_path` property of `nightwatch.conf.js`. [More details](http://nightwatchjs.org/guide#external-globals)
+
+```
+...
+globals_path: 'globals-module.js',
+...
+```
+
+```
+// globals-module.js
+
+module.exports = {
+    before : function(cb) {
+        console.log('Runs before all features');
+        cb();
+    },
+
+    beforeEach : function(browser, cb) {
+        console.log('Runs before feature');
+        cb();
+    },
+
+    after : function(cb) {
+        console.log('Runs after all features');
+        cb();
+    },
+
+    afterEach : function(browser, cb) {
+        console.log('Runs after feature');
+        cb();
+    }
+};
+
+```
+
+#### Before/after each scenario and before/after each step
+These hooks can be provided using configuration object.
+
+```
+require('nightwatch-cucumber')({
+    beforeScenario: function(browser, cb) {
+        console.log('Runs before each scenario');
+        cb();
+    },
+    beforeStep: function(browser) {
+        console.log('Runs before each step');
+    },
+    afterScenario: function(browser, cb) {
+        console.log('Runs after each scenario');
+        cb();
+    },
+    afterStep: function(browser) {
+        console.log('Runs after each step');
+    }
+})
+```
+
 ### Feature Groups
 You can selectively run features based on groups. To group features together just place them in the same sub-folder. The folder name is the name of the group.
 You can use Nightwatch CLI `--group`, `--skipgroup` flags. [More details ](http://nightwatchjs.org/guide#test-groups)
@@ -190,6 +250,26 @@ $ node nightwatch.js --tag google
 You can also skip features based on tags
 ```
 node nightwatch.js --skiptags google
+```
+
+### Feature background
+You can use feature background to avoid copying and pasting of steps. The background runs before each scenario after beforeScenario hooks.
+
+```
+Feature: Feature background example
+
+Background:
+    Given there are 10 cucumbers
+
+Scenario: eating
+
+    When I eat 5 cucumbers
+    Then I should have 7 cucumbers
+
+Scenario: adding
+
+    When I add 1 cucumbers
+    Then I should have 11 cucumbers
 ```
 
 ### Scenario Outlines
@@ -279,51 +359,41 @@ require('nightwatch-cucumber')({
 ```
 
 # Change Log
+## 1.3.0 (February 6, 2016)
+Features:
+  - Hooks support added
+  - Feature background support added
+  - Add feature name to output (Nightwatch.js as runner)
 
 ## 1.2.0 (February 6, 2016)
-
 Features:
-
   - Scenario outlines support added
 
 Bugfixes:
-
   - Fix undefined/ambiguous step handling
 
 ## 1.1.0 (January 28, 2016)
-
 Features:
-
   - Keep browser instance open
   - Add TravisCI tests
 
 ## 1.0.2 (January 27, 2016)
-
 Features:
-
   - Add Cucumber.js as runner support
 
 
 ## 0.6.7 (January 18, 2016)
-
 Bugfixes:
-
   - Fix path issue on Windows systems
 
 ## 0.6.6 (January 17, 2016)
-
 Features:
-
   - Use require.main.require instead of parent-require for requiring nightwatch
 
 ## 0.6.5 (January 17, 2016)
-
 Features:
-
   - don't create temp-tests folder
 
 ## 0.6.3 (January 16, 2016)
-
 Features:
-
   - added support for grouping features by placing them in same sub-folder
