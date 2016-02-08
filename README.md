@@ -47,7 +47,7 @@ In project root create a JavaScript configuration file for Nightwatch.js. Use `n
 
 ### Step 4
 
-Add `require('nightwatch-cucumber').path` to `src_folders` in configuration file.
+Add `require('nightwatch-cucumber').path` to `src_folders` in configuration file. For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
 
 ```
 ...
@@ -93,7 +93,7 @@ module.exports = {
 ```
 ### Step 4
 
-In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
+In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file). For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
 
 ## Demo Test
 Currently feature files are located in `features` folder.
@@ -135,6 +135,8 @@ module.exports = function() {
 
 };
 ```
+
+For more examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
 
 ## Running tests (Nightwatch.js as runner)
 
@@ -288,13 +290,11 @@ Scenario Outline: eating
 ```
 
 ### Page Objects
-Add the following line to Nightwatch.js configuration file.
+For making you tests more readable and maintainable you can use the Page Object pattern. Nightwatch reads the page objects from the folder (or folders) specified in the `page_objects_path` configuration property. [More details](http://nightwatchjs.org/guide#page-objects). Add the following line to Nightwatch.js configuration file.
 
 ```
 page_objects_path: 'page-objects'
 ```
-
-Nightwatch reads the page objects from the folder (or folders) specified in the page_objects_path configuration property. [More details](http://nightwatchjs.org/guide#page-objects)
 
 ```
 //page-objects/yahoo.js
