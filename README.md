@@ -43,12 +43,11 @@ $ npm install nightwatch-cucumber
 
 ### Step 3
 
-In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
+In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`.
 
 ### Step 4
 
-Add `require('nightwatch-cucumber').path` to `src_folders` in configuration file. For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
-
+Add `require('nightwatch-cucumber')({/* configuration */})` to `src_folders` in configuration file.
 ```
 // nightwatch.conf.js
 
@@ -57,6 +56,7 @@ module.exports = {
     ...
 };
 ```
+For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test) [More details](http://nightwatchjs.org/guide#settings-file)
 
 ## Installation (Cucumber.js as runner)
 
@@ -96,8 +96,7 @@ module.exports = {
 ```
 ### Step 4
 
-In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file). For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
-
+In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`.
 ```
 // nightwatch.conf.js
 
@@ -105,6 +104,7 @@ module.exports = {
     ...
 };
 ```
+For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test) [More details](http://nightwatchjs.org/guide#settings-file).
 
 ## Demo Test
 Currently feature files are located in `features` folder.
