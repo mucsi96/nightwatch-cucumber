@@ -384,7 +384,7 @@ The default configuration object is.
 }
 ```
 
-Options could be overwritten in the following way.
+Default configuration could be overwritten in the following way.
 ```
 // nightwatch.conf.js
 
