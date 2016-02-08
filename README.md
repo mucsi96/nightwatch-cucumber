@@ -396,7 +396,12 @@ module.exports = {
 };
 ```
 
-# Change Log## 1.3.2 (February 8, 2016)
+# Change Log
+## 1.3.3 (February 8, 2016)
+Bugfixes:
+  - Fix dependencies
+
+## 1.3.2 (February 8, 2016)
 Features:
   - Readme improved
 
