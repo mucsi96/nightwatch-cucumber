@@ -50,9 +50,12 @@ In project root create a JavaScript configuration file for Nightwatch.js. Use `n
 Add `require('nightwatch-cucumber').path` to `src_folders` in configuration file. For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
 
 ```
-...
-src_folders: [require('nightwatch-cucumber')({/* configuration */})],
-...
+// nightwatch.conf.js
+
+module.exports = {
+    src_folders: [require('nightwatch-cucumber')({/* configuration */})],
+    ...
+};
 ```
 
 ## Installation (Cucumber.js as runner)
@@ -94,6 +97,14 @@ module.exports = {
 ### Step 4
 
 In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file). For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
+
+```
+// nightwatch.conf.js
+
+module.exports = {
+    ...
+};
+```
 
 ## Demo Test
 Currently feature files are located in `features` folder.
@@ -174,9 +185,13 @@ node_modules/.bin/cucumberjs
 These hooks can be provided using Nightwatch external globals. External globals file is specified in the `globals_path` property of `nightwatch.conf.js`. [More details](http://nightwatchjs.org/guide#external-globals)
 
 ```
-...
-globals_path: 'globals-module.js',
-...
+// nightwatch.conf.js
+
+module.exports = {
+    src_folders: [require('nightwatch-cucumber')({/* configuration */})],
+    globals_path: 'globals-module.js',
+    ...
+};
 ```
 
 ```
@@ -210,22 +225,27 @@ module.exports = {
 These hooks can be provided using configuration object.
 
 ```
-require('nightwatch-cucumber')({
-    beforeScenario: function(browser, cb) {
-        console.log('Runs before each scenario');
-        cb();
-    },
-    beforeStep: function(browser) {
-        console.log('Runs before each step');
-    },
-    afterScenario: function(browser, cb) {
-        console.log('Runs after each scenario');
-        cb();
-    },
-    afterStep: function(browser) {
-        console.log('Runs after each step');
-    }
-})
+// nightwatch.conf.js
+
+module.exports = {
+    src_folders: [require('nightwatch-cucumber')({
+        beforeScenario: function(browser, cb) {
+            console.log('Runs before each scenario');
+            cb();
+        },
+        beforeStep: function(browser) {
+            console.log('Runs before each step');
+        },
+        afterScenario: function(browser, cb) {
+            console.log('Runs after each scenario');
+            cb();
+        },
+        afterStep: function(browser) {
+            console.log('Runs after each step');
+        }
+    })],
+    ...
+};
 ```
 
 ### Feature Groups
@@ -293,7 +313,13 @@ Scenario Outline: eating
 For making you tests more readable and maintainable you can use the Page Object pattern. Nightwatch reads the page objects from the folder (or folders) specified in the `page_objects_path` configuration property. [More details](http://nightwatchjs.org/guide#page-objects). Add the following line to Nightwatch.js configuration file.
 
 ```
-page_objects_path: 'page-objects'
+// nightwatch.conf.js
+
+module.exports = {
+    src_folders: [require('nightwatch-cucumber')({/* configuration */})],
+    page_objects_path: 'page-objects',
+    ...
+};
 ```
 
 ```
@@ -353,9 +379,14 @@ The default configuration object is.
 
 Options could be overwritten in the following way.
 ```
-require('nightwatch-cucumber')({
-    runner: 'cucumber'
-})
+// nightwatch.conf.js
+
+module.exports = {
+    src_folders: [require('nightwatch-cucumber')({
+        runner: 'cucumber'
+    })],
+    ...
+};
 ```
 
 # Change Log
