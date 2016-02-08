@@ -63,7 +63,7 @@ module.exports = {
     ...
 };
 ```
-For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test) 
+For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
 
 ## Installation (Cucumber.js as runner)
 
@@ -396,7 +396,10 @@ module.exports = {
 };
 ```
 
-# Change Log
+# Change Log## 1.3.2 (February 8, 2016)
+Features:
+  - Readme improved
+
 ## 1.3.1 (February 8, 2016)
 Features:
   - Readme improved
