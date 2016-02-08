@@ -15,6 +15,7 @@
   "dependencies": {
     "glob": "^6.0.4",
     "mkdirp": "^0.5.1",
+    "object-assign": "^4.0.1",
     "syntax-error": "^1.1.4",
     "tmp": "0.0.28"
   },
@@ -24,9 +25,6 @@
   },
   "directories": {
     "test": "test"
-  },
-  "devDependencies": {
-    "object-assign": "^4.0.1"
   },
   "scripts": {
     "nightwatch-simple-test": "cd test/nightwatch-simple-test && ../node_modules/.bin/nightwatch && cd ../..",
@@ -60,6 +58,6 @@
   },
   "homepage": "https://github.com/mucsi96/nightwatch-cucumber#readme",
   "files": [
-      "lib"
+    "lib"
   ]
 }
