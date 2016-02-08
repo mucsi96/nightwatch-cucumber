@@ -390,6 +390,10 @@ module.exports = {
 ```
 
 # Change Log
+## 1.3.1 (February 8, 2016)
+Features:
+  - Readme improved
+
 ## 1.3.0 (February 6, 2016)
 Features:
   - Hooks support added
