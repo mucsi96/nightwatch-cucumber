@@ -43,7 +43,7 @@ $ npm install nightwatch-cucumber
 
 ### Step 3
 
-In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`.
+In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
 ```
 // nightwatch.conf.js
 
@@ -54,7 +54,7 @@ module.exports = {
 
 ### Step 4
 
-Add `require('nightwatch-cucumber')({/* configuration */})` to `src_folders` in configuration file. [More details](http://nightwatchjs.org/guide#settings-file)
+Add `require('nightwatch-cucumber')({/* configuration */})` to `src_folders` in configuration file.
 ```
 // nightwatch.conf.js
 
