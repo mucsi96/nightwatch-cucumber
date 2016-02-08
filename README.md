@@ -43,7 +43,7 @@ $ npm install nightwatch-cucumber
 
 ### Step 3
 
-Create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
+In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
 
 ### Step 4
 
@@ -77,7 +77,7 @@ $ npm install nightwatch-cucumber
 
 ### Step 3
 
-Create a configuration file for Cucumber.js. [More details](https://github.com/cucumber/cucumber-js#profiles)
+In project root create a configuration file for Cucumber.js. [More details](https://github.com/cucumber/cucumber-js#profiles)
 
 ```
 // cucumber.js
@@ -93,7 +93,7 @@ module.exports = {
 ```
 ### Step 4
 
-Create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
+In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
 
 ## Demo Test
 Currently feature files are located in `features` folder.
@@ -187,7 +187,7 @@ module.exports = {
     },
 
     beforeEach : function(browser, cb) {
-        console.log('Runs before feature');
+        console.log('Runs before each feature');
         cb();
     },
 
@@ -197,7 +197,7 @@ module.exports = {
     },
 
     afterEach : function(browser, cb) {
-        console.log('Runs after feature');
+        console.log('Runs after each feature');
         cb();
     }
 };
@@ -263,7 +263,7 @@ Background:
 
 Scenario: eating
 
-    When I eat 5 cucumbers
+    When I eat 3 cucumbers
     Then I should have 7 cucumbers
 
 Scenario: adding
