@@ -11,9 +11,9 @@
 [![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=1&height=3)](https://nodei.co/npm/nightwatch-cucumber/)
 
 This module enables to use a BDD-style approach for cross-browser testing:
-- Describe user stories in [Cucumber.js](https://github.com/cucumber/cucumber-js)
-- Map them to HTML/DOM operations in [Nightwatch.js](http://nightwatchjs.org/)
-- Run using either local Selenium driver or cloud based WebDriver services such as SauceLabs or BrowserStack
+- Describe user stories in [Cucumber](https://cucumber.io/) using [Gherkin syntax](https://cucumber.io/docs/reference)
+- Map them to browser operations and assertions in [Nightwatch.js](http://nightwatchjs.org/)
+- Run using either real browser, headless browser or cloud based [WebDriver](https://www.w3.org/TR/webdriver/) services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/)
 
 This plugin allows to run tests in two modes:
 - Nightwatch.js as runner
