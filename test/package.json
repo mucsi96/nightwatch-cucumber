@@ -2,8 +2,8 @@
   "name": "nightwatch-cucumber-test",
   "private": true,
   "scripts": {
-    "install-nightwatch-cucumber-with-link": "cd .. && npm link && cd test npm link nightwatch-cucumber",
-    "install-nightwatch-cucumber-with-pack": "cd .. && npm pack && cd test npm install ../nightwatch-cucumber-*.tgz"
+    "install-nightwatch-cucumber-with-link": "cd .. && npm link && cd test && npm link nightwatch-cucumber",
+    "install-nightwatch-cucumber-with-pack": "cd .. && npm pack && cd test && npm install ../nightwatch-cucumber-*.tgz"
   },
   "devDependencies": {
     "chromedriver": "^2.20.0",
