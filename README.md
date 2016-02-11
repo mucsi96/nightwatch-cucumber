@@ -17,7 +17,7 @@ This module enables to use a BDD-style approach for cross-browser testing:
 
 This plugin allows to run tests in two modes:
 - Nightwatch.js as runner
-- Cucumber.js as runner (work in progress)
+- Cucumber.js as runner
 
 ## Installation (Nightwatch.js as runner)
 
@@ -395,6 +395,10 @@ module.exports = {
 ```
 
 # Change Log
+## 1.4.0 (February 11, 2016)
+Bugfixes:
+  - Fix cucumber runner
+
 ## 1.3.3 (February 8, 2016)
 Bugfixes:
   - Fix dependencies
