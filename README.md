@@ -8,7 +8,7 @@
 [![Issue Stats](http://issuestats.com/github/mucsi96/nightwatch-cucumber/badge/pr?style=flat)](http://issuestats.com/github/mucsi96/nightwatch-cucumber)
 [![Issue Stats](http://issuestats.com/github/mucsi96/nightwatch-cucumber/badge/issue?style=flat)](http://issuestats.com/github/mucsi96/nightwatch-cucumber)
 
-[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=1&height=3)](https://nodei.co/npm/nightwatch-cucumber/)
+[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=2&height=3)](https://nodei.co/npm/nightwatch-cucumber/)
 
 This module enables to use a BDD-style approach for cross-browser testing:
 - Describe user stories in [Cucumber](https://cucumber.io/) using [Gherkin syntax](https://cucumber.io/docs/reference)
