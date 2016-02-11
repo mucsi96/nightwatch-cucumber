@@ -1,6 +1,4 @@
-![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber.png)
-
-# nightwatch-cucumber
+# ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-logo.png)nightwatch-cucumber
 
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
@@ -12,14 +10,14 @@
 
 [![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=1&height=3)](https://nodei.co/npm/nightwatch-cucumber/)
 
-[Cucumber.js](https://github.com/cucumber/cucumber-js) plugin for [Nightwatch.js](http://nightwatchjs.org/). This enables to use a BDD-style approach for cross-browser testing:
-- Describe user stories in Cucumber
-- Map them to HTML/DOM operations in Nightwatch.js
-- Run using either local Selenium driver or cloud based WebDriver services such as SauceLabs or BrowserStack
+This module enables to use a BDD-style approach for cross-browser testing:
+- Describe user stories in [Cucumber](https://cucumber.io/) using [Gherkin syntax](https://cucumber.io/docs/reference)
+- Map them to browser operations and assertions in [Nightwatch.js](http://nightwatchjs.org/)
+- Run using either real browser, headless browser or cloud based [WebDriver](https://www.w3.org/TR/webdriver/) services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/)
 
 This plugin allows to run tests in two modes:
 - Nightwatch.js as runner
-- Cucumber.js as runner (not stable yet)
+- Cucumber.js as runner (work in progress)
 
 ## Installation (Nightwatch.js as runner)
 
@@ -43,17 +41,27 @@ $ npm install nightwatch-cucumber
 
 ### Step 3
 
-Create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
+In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
+```
+// nightwatch.conf.js
+
+module.exports = {
+    ...
+};
+```
 
 ### Step 4
 
-Add `require('nightwatch-cucumber').path` to `src_folders` in configuration file.
+Add `require('nightwatch-cucumber')({/* configuration */})` to `src_folders` in configuration file.
+```
+// nightwatch.conf.js
 
+module.exports = {
+    src_folders: [require('nightwatch-cucumber')({/* configuration */})],
+    ...
+};
 ```
-...
-src_folders: [require('nightwatch-cucumber')({/* configuration */})],
-...
-```
+For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
 
 ## Installation (Cucumber.js as runner)
 
@@ -77,7 +85,7 @@ $ npm install nightwatch-cucumber
 
 ### Step 3
 
-Create a configuration file for Cucumber.js. [More details](https://github.com/cucumber/cucumber-js#profiles)
+In project root create a configuration file for Cucumber.js. [More details](https://github.com/cucumber/cucumber-js#profiles)
 
 ```
 // cucumber.js
@@ -93,7 +101,15 @@ module.exports = {
 ```
 ### Step 4
 
-Create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
+In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
+```
+// nightwatch.conf.js
+
+module.exports = {
+    ...
+};
+```
+For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
 
 ## Demo Test
 Currently feature files are located in `features` folder.
@@ -136,6 +152,8 @@ module.exports = function() {
 };
 ```
 
+For more examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
+
 ## Running tests (Nightwatch.js as runner)
 
 If you have installed `nightwatch` with `-g` (global) option you can run the tests by executing
@@ -172,9 +190,13 @@ node_modules/.bin/cucumberjs
 These hooks can be provided using Nightwatch external globals. External globals file is specified in the `globals_path` property of `nightwatch.conf.js`. [More details](http://nightwatchjs.org/guide#external-globals)
 
 ```
-...
-globals_path: 'globals-module.js',
-...
+// nightwatch.conf.js
+
+module.exports = {
+    src_folders: [require('nightwatch-cucumber')({/* configuration */})],
+    globals_path: 'globals-module.js',
+    ...
+};
 ```
 
 ```
@@ -187,7 +209,7 @@ module.exports = {
     },
 
     beforeEach : function(browser, cb) {
-        console.log('Runs before feature');
+        console.log('Runs before each feature');
         cb();
     },
 
@@ -197,7 +219,7 @@ module.exports = {
     },
 
     afterEach : function(browser, cb) {
-        console.log('Runs after feature');
+        console.log('Runs after each feature');
         cb();
     }
 };
@@ -208,22 +230,27 @@ module.exports = {
 These hooks can be provided using configuration object.
 
 ```
-require('nightwatch-cucumber')({
-    beforeScenario: function(browser, cb) {
-        console.log('Runs before each scenario');
-        cb();
-    },
-    beforeStep: function(browser) {
-        console.log('Runs before each step');
-    },
-    afterScenario: function(browser, cb) {
-        console.log('Runs after each scenario');
-        cb();
-    },
-    afterStep: function(browser) {
-        console.log('Runs after each step');
-    }
-})
+// nightwatch.conf.js
+
+module.exports = {
+    src_folders: [require('nightwatch-cucumber')({
+        beforeScenario: function(browser, cb) {
+            console.log('Runs before each scenario');
+            cb();
+        },
+        beforeStep: function(browser) {
+            console.log('Runs before each step');
+        },
+        afterScenario: function(browser, cb) {
+            console.log('Runs after each scenario');
+            cb();
+        },
+        afterStep: function(browser) {
+            console.log('Runs after each step');
+        }
+    })],
+    ...
+};
 ```
 
 ### Feature Groups
@@ -263,7 +290,7 @@ Background:
 
 Scenario: eating
 
-    When I eat 5 cucumbers
+    When I eat 3 cucumbers
     Then I should have 7 cucumbers
 
 Scenario: adding
@@ -288,13 +315,17 @@ Scenario Outline: eating
 ```
 
 ### Page Objects
-Add the following line to Nightwatch.js configuration file.
+For making you tests more readable and maintainable you can use the Page Object pattern. Nightwatch reads the page objects from the folder (or folders) specified in the `page_objects_path` configuration property. [More details](http://nightwatchjs.org/guide#page-objects). Add the following line to Nightwatch.js configuration file.
 
 ```
-page_objects_path: 'page-objects'
-```
+// nightwatch.conf.js
 
-Nightwatch reads the page objects from the folder (or folders) specified in the page_objects_path configuration property. [More details](http://nightwatchjs.org/guide#page-objects)
+module.exports = {
+    src_folders: [require('nightwatch-cucumber')({/* configuration */})],
+    page_objects_path: 'page-objects',
+    ...
+};
+```
 
 ```
 //page-objects/yahoo.js
@@ -351,14 +382,31 @@ The default configuration object is.
 }
 ```
 
-Options could be overwritten in the following way.
+Default configuration could be overwritten in the following way.
 ```
-require('nightwatch-cucumber')({
-    runner: 'cucumber'
-})
+// nightwatch.conf.js
+
+module.exports = {
+    src_folders: [require('nightwatch-cucumber')({
+        runner: 'cucumber'
+    })],
+    ...
+};
 ```
 
 # Change Log
+## 1.3.3 (February 8, 2016)
+Bugfixes:
+  - Fix dependencies
+
+## 1.3.2 (February 8, 2016)
+Features:
+  - Readme improved
+
+## 1.3.1 (February 8, 2016)
+Features:
+  - Readme improved
+
 ## 1.3.0 (February 6, 2016)
 Features:
   - Hooks support added
