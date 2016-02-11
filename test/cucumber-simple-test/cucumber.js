@@ -4,4 +4,4 @@ var path = require('nightwatch-cucumber')({
 
 module.exports = {
     default: '--require ' + path + ' --require features'
-}
+};

@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
@@ -8,26 +8,32 @@
     "Igor Zalutski <izalutski@palantir.com>",
     "Daniele Campogiani <daniele.campogiani@gmail.com>",
     "Simranjeet Singh",
+    "Shashi Shekhar Singh",
     "Alex Murphy",
     "Ben Grabham",
     "Jean-Baptiste Blanchet <jbblanchet@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
-    "glob": "^6.0.4",
+    "glob": "^7.0.0",
     "mkdirp": "^0.5.1",
     "object-assign": "^4.0.1",
+    "resolve": "^1.1.7",
+    "semver": "^5.1.0",
     "syntax-error": "^1.1.4",
-    "tmp": "0.0.28"
+    "tmp": "^0.0.28"
   },
-  "peerDependencies": {
-    "cucumber": "^0.9.4",
-    "nightwatch": "^0.8.6"
-  },
+  "devDependencies": {
+    "chromedriver": "^2.20.0",
+    "phantomjs": "^1.9.19",
+    "selenium-server": "^2.48.2"
+},
   "directories": {
     "test": "test"
   },
   "scripts": {
+    "install-nightwatch-cucumber-with-link": "npm link && cd test && npm link nightwatch-cucumber && cd ..",
+    "install-nightwatch-cucumber-with-pack": "npm pack && cd test && npm install ../nightwatch-cucumber-*.tgz && cd ..",
     "nightwatch-simple-test": "cd test/nightwatch-simple-test && ../node_modules/.bin/nightwatch && cd ../..",
     "nightwatch-hook-test": "cd test/nightwatch-hook-test && ../node_modules/.bin/nightwatch && cd ../..",
     "nightwatch-background-test": "cd test/nightwatch-background-test && ../node_modules/.bin/nightwatch && cd ../..",

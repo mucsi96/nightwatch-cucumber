@@ -53,12 +53,16 @@ module.exports = {
 
 ### Step 4
 
-Add `require('nightwatch-cucumber')({/* configuration */})` to `src_folders` in configuration file.
+Add `nightwatch-cucumber` to `src_folders` in configuration file.
 ```
 // nightwatch.conf.js
 
+var nightwatchCucumber = require('nightwatch-cucumber')({
+    /* configuration */
+});
+
 module.exports = {
-    src_folders: [require('nightwatch-cucumber')({/* configuration */})],
+    src_folders: [nightwatchCucumber],
     ...
 };
 ```
@@ -91,13 +95,13 @@ In project root create a configuration file for Cucumber.js. [More details](http
 ```
 // cucumber.js
 
-var path = require('nightwatch-cucumber')({
+var nightwatchCucumber = require('nightwatch-cucumber')({
     /* configuration */
     runner: 'cucumber'
 });
 
 module.exports = {
-    default: '--require ' + path + ' --require features'
+    default: '--require ' + nightwatchCucumber + ' --require features'
 }
 ```
 ### Step 4
@@ -193,8 +197,12 @@ These hooks can be provided using Nightwatch external globals. External globals 
 ```
 // nightwatch.conf.js
 
+var nightwatchCucumber = require('nightwatch-cucumber')({
+    /* configuration */
+});
+
 module.exports = {
-    src_folders: [require('nightwatch-cucumber')({/* configuration */})],
+    src_folders: [nightwatchCucumber],
     globals_path: 'globals-module.js',
     ...
 };
@@ -233,23 +241,25 @@ These hooks can be provided using configuration object.
 ```
 // nightwatch.conf.js
 
+var nightwatchCucumber = require('nightwatch-cucumber')({
+    beforeScenario: function(browser, cb) {
+        console.log('Runs before each scenario');
+        cb();
+    },
+    beforeStep: function(browser) {
+        console.log('Runs before each step');
+    },
+    afterScenario: function(browser, cb) {
+        console.log('Runs after each scenario');
+        cb();
+    },
+    afterStep: function(browser) {
+        console.log('Runs after each step');
+    }
+});
+
 module.exports = {
-    src_folders: [require('nightwatch-cucumber')({
-        beforeScenario: function(browser, cb) {
-            console.log('Runs before each scenario');
-            cb();
-        },
-        beforeStep: function(browser) {
-            console.log('Runs before each step');
-        },
-        afterScenario: function(browser, cb) {
-            console.log('Runs after each scenario');
-            cb();
-        },
-        afterStep: function(browser) {
-            console.log('Runs after each step');
-        }
-    })],
+    src_folders: [nightwatchCucumber],
     ...
 };
 ```
@@ -321,8 +331,12 @@ For making you tests more readable and maintainable you can use the Page Object 
 ```
 // nightwatch.conf.js
 
+var nightwatchCucumber = require('nightwatch-cucumber')({
+    /* configuration */
+});
+
 module.exports = {
-    src_folders: [require('nightwatch-cucumber')({/* configuration */})],
+    src_folders: [nightwatchCucumber],
     page_objects_path: 'page-objects',
     ...
 };
@@ -387,15 +401,21 @@ Default configuration could be overwritten in the following way.
 ```
 // nightwatch.conf.js
 
+var nightwatchCucumber = require('nightwatch-cucumber')({
+    runner: 'cucumber'
+});
+
 module.exports = {
-    src_folders: [require('nightwatch-cucumber')({
-        runner: 'cucumber'
-    })],
+    src_folders: [nightwatchCucumber],
     ...
 };
 ```
 
 # Change Log
+## 1.5.0 (February 11, 2016)
+Features:
+  - Use runtime dependency check instead of peer package dependencies
+
 ## 1.4.0 (February 11, 2016)
 Bugfixes:
   - Fix cucumber runner
@@ -434,7 +454,6 @@ Features:
 Features:
   - Add Cucumber.js as runner support
 
-
 ## 0.6.7 (January 18, 2016)
 Bugfixes:
   - Fix path issue on Windows systems
@@ -450,3 +469,12 @@ Features:
 ## 0.6.3 (January 16, 2016)
 Features:
   - added support for grouping features by placing them in same sub-folder
+
+# Contributors
+- Igor Zalutski ([@ZIJ](https://github.com/ZIJ))
+- Daniele Campogiani ([@dcampogiani](https://github.com/dcampogiani))
+- Simranjeet Singh ([@RSsimranjeetsingh](https://github.com/RSsimranjeetsingh))
+- Shashi Shekhar Singh ([@singhshashi](https://github.com/singhshashi))
+- Alex Murphy
+- Ben Grabham
+- Jean-Baptiste Blanchet ([@jbblanchet](https://github.com/jbblanchet))
