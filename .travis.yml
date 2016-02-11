@@ -3,7 +3,5 @@ node_js:
   - "4.1"
 install:
   - npm install
-  - cd test
-  - npm install nightwatch cucumber
-  - cd ..
+  - cd test && npm install nightwatch cucumber && cd ..
   - npm run install-nightwatch-cucumber-with-pack
