@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
@@ -8,21 +8,20 @@
     "Igor Zalutski <izalutski@palantir.com>",
     "Daniele Campogiani <daniele.campogiani@gmail.com>",
     "Simranjeet Singh",
+    "Shashi Shekhar Singh",
     "Alex Murphy",
     "Ben Grabham",
     "Jean-Baptiste Blanchet <jbblanchet@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
-    "glob": "^6.0.4",
+    "glob": "^7.0.0",
     "mkdirp": "^0.5.1",
     "object-assign": "^4.0.1",
+    "resolve": "^1.1.7",
+    "semver": "^5.1.0",
     "syntax-error": "^1.1.4",
-    "tmp": "0.0.28"
-  },
-  "peerDependencies": {
-    "cucumber": "^0.9.4",
-    "nightwatch": "^0.8.6"
+    "tmp": "^0.0.28"
   },
   "directories": {
     "test": "test"
