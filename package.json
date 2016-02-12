@@ -23,17 +23,10 @@
     "syntax-error": "^1.1.4",
     "tmp": "^0.0.28"
   },
-  "devDependencies": {
-    "chromedriver": "^2.20.0",
-    "phantomjs": "^1.9.19",
-    "selenium-server": "^2.48.2"
-},
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "install-nightwatch-cucumber-with-link": "npm link && cd test && npm link nightwatch-cucumber && cd ..",
-    "install-nightwatch-cucumber-with-pack": "npm pack && cd test && npm install ../nightwatch-cucumber-*.tgz && cd ..",
     "nightwatch-simple-test": "cd test/nightwatch-simple-test && ../node_modules/.bin/nightwatch && cd ../..",
     "nightwatch-hook-test": "cd test/nightwatch-hook-test && ../node_modules/.bin/nightwatch && cd ../..",
     "nightwatch-background-test": "cd test/nightwatch-background-test && ../node_modules/.bin/nightwatch && cd ../..",
