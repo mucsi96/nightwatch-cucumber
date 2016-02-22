@@ -33,6 +33,7 @@
     "nightwatch-outlines-test": "cd test/nightwatch-outlines-test && ../node_modules/.bin/nightwatch && cd ../..",
     "nightwatch-tag-test": "cd test/nightwatch-tag-test && ../node_modules/.bin/nightwatch --tag search && cd ../..",
     "nightwatch-group-test": "cd test/nightwatch-group-test && ../node_modules/.bin/nightwatch --group group && cd ../..",
+    "nightwatch-custom-folder-test": "cd test/nightwatch-custom-folder-test && ../node_modules/.bin/nightwatch --group group && cd ../..",
     "nightwatch-page-object-test": "cd test/nightwatch-page-object-test && ../node_modules/.bin/nightwatch && cd ../..",
     "cucumber-simple-test": "cd test/cucumber-simple-test && ../node_modules/.bin/cucumberjs && cd ../..",
     "cucumber-multi-test": "cd test/cucumber-multi-test && ../node_modules/.bin/cucumberjs && cd ../..",
