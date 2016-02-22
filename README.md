@@ -413,63 +413,8 @@ module.exports = {
 ```
 
 # Change Log
-## 1.5.0 (February 11, 2016)
-Features:
-  - Use runtime dependency check instead of peer package dependencies
 
-## 1.4.0 (February 11, 2016)
-Bugfixes:
-  - Fix cucumber runner
-
-## 1.3.3 (February 8, 2016)
-Bugfixes:
-  - Fix dependencies
-
-## 1.3.2 (February 8, 2016)
-Features:
-  - Readme improved
-
-## 1.3.1 (February 8, 2016)
-Features:
-  - Readme improved
-
-## 1.3.0 (February 6, 2016)
-Features:
-  - Hooks support added
-  - Feature background support added
-  - Add feature name to output (Nightwatch.js as runner)
-
-## 1.2.0 (February 6, 2016)
-Features:
-  - Scenario outlines support added
-
-Bugfixes:
-  - Fix undefined/ambiguous step handling
-
-## 1.1.0 (January 28, 2016)
-Features:
-  - Keep browser instance open
-  - Add TravisCI tests
-
-## 1.0.2 (January 27, 2016)
-Features:
-  - Add Cucumber.js as runner support
-
-## 0.6.7 (January 18, 2016)
-Bugfixes:
-  - Fix path issue on Windows systems
-
-## 0.6.6 (January 17, 2016)
-Features:
-  - Use require.main.require instead of parent-require for requiring nightwatch
-
-## 0.6.5 (January 17, 2016)
-Features:
-  - don't create temp-tests folder
-
-## 0.6.3 (January 16, 2016)
-Features:
-  - added support for grouping features by placing them in same sub-folder
+See [CHANGELOG.md](https://github.com/mucsi96/nightwatch-cucumber/blob/master/CHANGELOG.md)
 
 # Contributors
 - Igor Zalutski ([@ZIJ](https://github.com/ZIJ))
@@ -479,3 +424,4 @@ Features:
 - Alex Murphy
 - Ben Grabham
 - Jean-Baptiste Blanchet ([@jbblanchet](https://github.com/jbblanchet))
+- Vincent Spiewak ([@vspiewak](https://github.com/vspiewak))
