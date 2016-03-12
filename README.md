@@ -48,8 +48,8 @@ In project root create a JavaScript configuration file for Nightwatch.js. Use `n
 // nightwatch.conf.js
 
 module.exports = {
-    ...
-};
+  ...
+}
 ```
 
 ### Step 4
@@ -59,13 +59,13 @@ Add `nightwatch-cucumber` to `src_folders` in configuration file.
 // nightwatch.conf.js
 
 var nightwatchCucumber = require('nightwatch-cucumber')({
-    /* configuration */
-});
+  /* configuration */
+})
 
 module.exports = {
-    src_folders: [nightwatchCucumber],
-    ...
-};
+  src_folders: [nightwatchCucumber],
+  ...
+}
 ```
 For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
 
@@ -97,12 +97,12 @@ In project root create a configuration file for Cucumber.js. [More details](http
 // cucumber.js
 
 var nightwatchCucumber = require('nightwatch-cucumber')({
-    /* configuration */
-    runner: 'cucumber'
-});
+  /* configuration */
+  runner: 'cucumber'
+})
 
 module.exports = {
-    default: '--require ' + nightwatchCucumber + ' --require features'
+  default: '--require ' + nightwatchCucumber + ' --require features'
 }
 ```
 ### Step 4
@@ -112,8 +112,8 @@ In project root create a JavaScript configuration file for Nightwatch.js. Use `n
 // nightwatch.conf.js
 
 module.exports = {
-    ...
-};
+  ...
+}
 ```
 For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
 
@@ -127,9 +127,9 @@ Feature: Google Search
 
 Scenario: Searching Google
 
-    Given I open Google's search page
-    Then the title is "Google"
-    And the Google search form exists
+  Given I open Google's search page
+  Then the title is "Google"
+  And the Google search form exists
 ```
 
 Step definitions files are located in `features/step_definitions` folder by default.
@@ -141,21 +141,21 @@ All step definitions will run with `this` set to Nightwatch.js client or browser
 
 module.exports = function() {
 
-    this.Given(/^I open Google's search page$/, function() {
-        this
-            .url('http://google.com')
-            .waitForElementVisible('body', 1000);
-    });
+  this.Given(/^I open Google's search page$/, function() {
+    this
+      .url('http://google.com')
+      .waitForElementVisible('body', 1000)
+  })
 
-    this.Then(/^the title is "([^"]*)"$/, function(title) {
-        this.assert.title(title);
-    });
+  this.Then(/^the title is "([^"]*)"$/, function(title) {
+    this.assert.title(title)
+  })
 
-    this.Then(/^the Google search form exists$/, function() {
-        this.assert.visible('input[name="q"]');
-    });
+  this.Then(/^the Google search form exists$/, function() {
+    this.assert.visible('input[name="q"]')
+  })
 
-};
+}
 ```
 
 For more examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
@@ -199,40 +199,40 @@ These hooks can be provided using Nightwatch external globals. External globals 
 // nightwatch.conf.js
 
 var nightwatchCucumber = require('nightwatch-cucumber')({
-    /* configuration */
-});
+  /* configuration */
+})
 
 module.exports = {
-    src_folders: [nightwatchCucumber],
-    globals_path: 'globals-module.js',
-    ...
-};
+  src_folders: [nightwatchCucumber],
+  globals_path: 'globals-module.js',
+  ...
+}
 ```
 
 ```
 // globals-module.js
 
 module.exports = {
-    before : function(cb) {
-        console.log('Runs before all features');
-        cb();
-    },
+  before : function(cb) {
+    console.log('Runs before all features')
+    cb()
+  },
 
-    beforeEach : function(browser, cb) {
-        console.log('Runs before each feature');
-        cb();
-    },
+  beforeEach : function(browser, cb) {
+    console.log('Runs before each feature')
+    cb()
+  },
 
-    after : function(cb) {
-        console.log('Runs after all features');
-        cb();
-    },
+  after : function(cb) {
+    console.log('Runs after all features')
+    cb()
+  },
 
-    afterEach : function(browser, cb) {
-        console.log('Runs after each feature');
-        cb();
-    }
-};
+  afterEach : function(browser, cb) {
+    console.log('Runs after each feature')
+    cb()
+  }
+}
 
 ```
 
@@ -243,26 +243,26 @@ These hooks can be provided using configuration object.
 // nightwatch.conf.js
 
 var nightwatchCucumber = require('nightwatch-cucumber')({
-    beforeScenario: function(browser, cb) {
-        console.log('Runs before each scenario');
-        cb();
-    },
-    beforeStep: function(browser) {
-        console.log('Runs before each step');
-    },
-    afterScenario: function(browser, cb) {
-        console.log('Runs after each scenario');
-        cb();
-    },
-    afterStep: function(browser) {
-        console.log('Runs after each step');
-    }
-});
+  beforeScenario: function(browser, cb) {
+    console.log('Runs before each scenario')
+    cb()
+  },
+  beforeStep: function(browser) {
+    console.log('Runs before each step')
+  },
+  afterScenario: function(browser, cb) {
+    console.log('Runs after each scenario')
+    cb()
+  },
+  afterStep: function(browser) {
+    console.log('Runs after each step')
+  }
+})
 
 module.exports = {
-    src_folders: [nightwatchCucumber],
-    ...
-};
+  src_folders: [nightwatchCucumber],
+  ...
+}
 ```
 
 ### Feature Groups
@@ -279,9 +279,9 @@ Feature: Google Search
 
 Scenario: Searching Google
 
-    Given I open Google's search page
-    Then the title is "Google"
-    And the Google search form exists
+  Given I open Google's search page
+  Then the title is "Google"
+  And the Google search form exists
 ```
 ```
 $ node nightwatch.js --tag google
@@ -298,17 +298,17 @@ You can use feature background to avoid copying and pasting of steps. The backgr
 Feature: Feature background example
 
 Background:
-    Given there are 10 cucumbers
+  Given there are 10 cucumbers
 
 Scenario: eating
 
-    When I eat 3 cucumbers
-    Then I should have 7 cucumbers
+  When I eat 3 cucumbers
+  Then I should have 7 cucumbers
 
 Scenario: adding
 
-    When I add 1 cucumbers
-    Then I should have 11 cucumbers
+  When I add 1 cucumbers
+  Then I should have 11 cucumbers
 ```
 
 ### Scenario Outlines
@@ -321,9 +321,9 @@ Scenario Outline: eating
   Then I should have <left> cucumbers
 
   Examples:
-    | start | eat | left |
-    |  12   |  5  |  7   |
-    |  20   |  5  |  15  |
+  | start | eat | left |
+  |  12   |  5  |  7   |
+  |  20   |  5  |  15  |
 ```
 
 ### Page Objects
@@ -333,26 +333,26 @@ For making you tests more readable and maintainable you can use the Page Object 
 // nightwatch.conf.js
 
 var nightwatchCucumber = require('nightwatch-cucumber')({
-    /* configuration */
-});
+  /* configuration */
+})
 
 module.exports = {
-    src_folders: [nightwatchCucumber],
-    page_objects_path: 'page-objects',
-    ...
-};
+  src_folders: [nightwatchCucumber],
+  page_objects_path: 'page-objects',
+  ...
+}
 ```
 
 ```
 //page-objects/yahoo.js
 
 module.exports = {
-    url: 'http://yahoo.com',
-    elements: {
-        body: 'body',
-        searchBar: 'input[name="p"]'
-    }
-};
+  url: 'http://yahoo.com',
+  elements: {
+    body: 'body',
+    searchBar: 'input[name="p"]'
+  }
+}
 ```
 
 Now we can use page objects from step definitions
@@ -362,21 +362,21 @@ Now we can use page objects from step definitions
 
 module.exports = function() {
 
-    this.Given(/^I open Yahoo's search page$/, function() {
-        var yahoo = this.page.yahoo();
+  this.Given(/^I open Yahoo's search page$/, function() {
+    var yahoo = this.page.yahoo()
 
-        yahoo
-            .navigate()
-            .waitForElementVisible('@body', 1000);
-    });
+    yahoo
+      .navigate()
+      .waitForElementVisible('@body', 1000)
+  })
 
-    this.Then(/^the Yahoo search form exists$/, function() {
-        var yahoo = this.page.yahoo();
+  this.Then(/^the Yahoo search form exists$/, function() {
+    var yahoo = this.page.yahoo()
 
-        yahoo.assert.visible('@searchBar');
-    });
+    yahoo.assert.visible('@searchBar')
+  })
 
-};
+}
 ```
 
 ### Closing Selenium session
@@ -391,10 +391,10 @@ This plugin provides three ways of closing Selenium sessions. This enables reuse
 The default configuration object is.
 ```
 {
-    runner: 'nightwatch',
-    featureFiles: 'features',
-    stepDefinitions: 'features/step_definitions',
-    closeSession: 'afterFeature'
+  runner: 'nightwatch',
+  featureFiles: 'features',
+  stepDefinitions: 'features/step_definitions',
+  closeSession: 'afterFeature'
 }
 ```
 
@@ -403,13 +403,13 @@ Default configuration could be overwritten in the following way.
 // nightwatch.conf.js
 
 var nightwatchCucumber = require('nightwatch-cucumber')({
-    runner: 'cucumber'
-});
+  runner: 'cucumber'
+})
 
 module.exports = {
-    src_folders: [nightwatchCucumber],
-    ...
-};
+  src_folders: [nightwatchCucumber],
+  ...
+}
 ```
 
 # Change Log

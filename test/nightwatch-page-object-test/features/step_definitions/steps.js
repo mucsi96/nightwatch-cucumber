@@ -1,21 +1,19 @@
-module.exports = function() {
+module.exports = function () {
+  this.Given(/^I open Yahoo's search page$/, function () {
+    var yahoo = this.page.yahoo()
 
-    this.Given(/^I open Yahoo's search page$/, function() {
-        var yahoo = this.page.yahoo();
+    yahoo
+      .navigate()
+      .waitForElementVisible('@body', 1000)
+  })
 
-        yahoo
-            .navigate()
-            .waitForElementVisible('@body', 1000);
-    });
+  this.Then(/^the Yahoo search form exists$/, function () {
+    var yahoo = this.page.yahoo()
 
-    this.Then(/^the Yahoo search form exists$/, function() {
-        var yahoo = this.page.yahoo();
+    yahoo.assert.visible('@searchBar')
+  })
 
-        yahoo.assert.visible('@searchBar');
-    });
-
-    this.Then(/^the title is "([^"]*)"$/, function(title) {
-        this.assert.title(title);
-    });
-
-};
+  this.Then(/^the title is "([^"]*)"$/, function (title) {
+    this.assert.title(title)
+  })
+}

@@ -1,7 +1,7 @@
 var path = require('nightwatch-cucumber')({
-    runner: 'cucumber'
-});
+  runner: 'cucumber'
+})
 
 module.exports = {
-    default: '--require ' + path + ' --require features'
-};
+  default: '--require ' + path + ' --require features'
+}
