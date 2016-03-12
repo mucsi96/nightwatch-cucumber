@@ -18,6 +18,7 @@
     "test": "test"
   },
   "scripts": {
+    "lint": "node_modules/.bin/standard",
     "nightwatch-simple-test": "cd test/nightwatch-simple-test && ../node_modules/.bin/nightwatch && cd ../..",
     "nightwatch-hook-test": "cd test/nightwatch-hook-test && ../node_modules/.bin/nightwatch && cd ../..",
     "nightwatch-background-test": "cd test/nightwatch-background-test && ../node_modules/.bin/nightwatch && cd ../..",
@@ -51,5 +52,12 @@
   "homepage": "https://github.com/mucsi96/nightwatch-cucumber#readme",
   "files": [
     "lib"
+  ],
+  "devDependencies": {
+    "pre-commit": "^1.1.2",
+    "standard": "^6.0.8"
+  },
+  "pre-commit": [
+    "lint"
   ]
 }
