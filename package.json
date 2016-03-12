@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "1.5.1",
+  "version": "2.0.0",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
@@ -18,6 +18,7 @@
     "test": "test"
   },
   "scripts": {
+    "lint": "node_modules/.bin/standard",
     "nightwatch-simple-test": "cd test/nightwatch-simple-test && ../node_modules/.bin/nightwatch && cd ../..",
     "nightwatch-hook-test": "cd test/nightwatch-hook-test && ../node_modules/.bin/nightwatch && cd ../..",
     "nightwatch-background-test": "cd test/nightwatch-background-test && ../node_modules/.bin/nightwatch && cd ../..",
@@ -28,7 +29,7 @@
     "nightwatch-page-object-test": "cd test/nightwatch-page-object-test && ../node_modules/.bin/nightwatch && cd ../..",
     "cucumber-simple-test": "cd test/cucumber-simple-test && ../node_modules/.bin/cucumberjs && cd ../..",
     "cucumber-multi-test": "cd test/cucumber-multi-test && ../node_modules/.bin/cucumberjs && cd ../..",
-    "test": "npm run nightwatch-simple-test && npm run nightwatch-hook-test && npm run nightwatch-background-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-custom-folder-test && npm run nightwatch-page-object-test && npm run nightwatch-outlines-test && npm run cucumber-simple-test && npm run cucumber-multi-test"
+    "test": "npm run lint && npm run nightwatch-simple-test && npm run nightwatch-hook-test && npm run nightwatch-background-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-custom-folder-test && npm run nightwatch-page-object-test && npm run nightwatch-outlines-test && npm run cucumber-simple-test && npm run cucumber-multi-test"
   },
   "repository": {
     "type": "git",
@@ -51,5 +52,12 @@
   "homepage": "https://github.com/mucsi96/nightwatch-cucumber#readme",
   "files": [
     "lib"
+  ],
+  "devDependencies": {
+    "pre-commit": "^1.1.2",
+    "standard": "^6.0.8"
+  },
+  "pre-commit": [
+    "lint"
   ]
 }

@@ -1,7 +1,7 @@
 var nightwatchCucumber = require('nightwatch-cucumber')({
-    runner: 'cucumber'
-});
+  runner: 'cucumber'
+})
 
 module.exports = {
-    default: '--require ' + nightwatchCucumber + ' --require features'
-};
+  default: '--require ' + nightwatchCucumber + ' --require features'
+}

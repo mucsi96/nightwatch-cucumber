@@ -1,4 +1,8 @@
 # Change Log
+## 2.0.0 (March 12, 2016)
+Features:
+  - Log improved in Nighwatch runner mode
+
 ## 1.5.1 (February 22, 2016)
 Bugfixes:
   - Fix featureFiles option

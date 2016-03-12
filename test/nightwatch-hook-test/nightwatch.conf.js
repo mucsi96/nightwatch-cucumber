@@ -1,23 +1,23 @@
-var seleniumServer = require('selenium-server');
-var phantomjs = require('phantomjs');
-var chromedriver = require('chromedriver');
+var seleniumServer = require('selenium-server')
+var phantomjs = require('phantomjs')
+var chromedriver = require('chromedriver')
 
 module.exports = {
   src_folders: [require('nightwatch-cucumber')({
-      beforeScenario: function(browser, cb) {
-          console.log('Runs before each scenario');
-          cb();
-      },
-      beforeStep: function(browser) {
-          console.log('Runs before each step');
-      },
-      afterScenario: function(browser, cb) {
-          console.log('Runs after each scenario');
-          cb();
-      },
-      afterStep: function(browser) {
-          console.log('Runs after each step');
-      }
+    beforeScenario: function (browser, cb) {
+      console.log('Runs before each scenario')
+      cb()
+    },
+    beforeStep: function (browser) {
+      console.log('Runs before each step')
+    },
+    afterScenario: function (browser, cb) {
+      console.log('Runs after each scenario')
+      cb()
+    },
+    afterStep: function (browser) {
+      console.log('Runs after each step')
+    }
   })],
   globals_path: 'globals-module.js',
   output_folder: 'reports',
@@ -27,16 +27,16 @@ module.exports = {
   live_output: false,
   disable_colors: false,
   // test_workers: {
-  //   enabled: true,
-  //   workers: 'auto'
+  //  enabled: true,
+  //  workers: 'auto'
   // },
 
-  selenium : {
-    start_process : true,
+  selenium: {
+    start_process: true,
     server_path: seleniumServer.path,
-    log_path : '',
-    host : '127.0.0.1',
-    port : 4444
+    log_path: '',
+    host: '127.0.0.1',
+    port: 4444
   },
 
   test_settings: {
@@ -55,29 +55,29 @@ module.exports = {
         browserName: 'phantomjs',
         javascriptEnabled: true,
         acceptSslCerts: true,
-        'phantomjs.binary.path' : phantomjs.path
+        'phantomjs.binary.path': phantomjs.path
       }
     },
 
     chrome: {
-        desiredCapabilities: {
-            browserName: 'chrome',
-            javascriptEnabled: true,
-            acceptSslCerts: true
-        },
-        selenium : {
-          cli_args : {
-            'webdriver.chrome.driver': chromedriver.path
-          }
+      desiredCapabilities: {
+        browserName: 'chrome',
+        javascriptEnabled: true,
+        acceptSslCerts: true
+      },
+      selenium: {
+        cli_args: {
+          'webdriver.chrome.driver': chromedriver.path
         }
+      }
     },
 
     firefox: {
-        desiredCapabilities: {
-          browserName: 'firefox',
-          javascriptEnabled: true,
-          acceptSslCerts: true
-        }
+      desiredCapabilities: {
+        browserName: 'firefox',
+        javascriptEnabled: true,
+        acceptSslCerts: true
+      }
     }
   }
-};
+}

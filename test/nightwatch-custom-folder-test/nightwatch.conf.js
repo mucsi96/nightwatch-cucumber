@@ -1,14 +1,14 @@
-var seleniumServer = require('selenium-server');
-var phantomjs = require('phantomjs');
-var chromedriver = require('chromedriver');
-var nightwatchCucumber = require('nightwatch-cucumber');
+var seleniumServer = require('selenium-server')
+var phantomjs = require('phantomjs')
+var chromedriver = require('chromedriver')
+var nightwatchCucumber = require('nightwatch-cucumber')
 
 var nightwatchCucumberConf = {
-    runner: 'nightwatch',
-    featureFiles: 'test/features',
-    stepDefinitions: 'test/features/step_definitions',
-    closeSession: 'afterFeature'
-};
+  runner: 'nightwatch',
+  featureFiles: 'test/features',
+  stepDefinitions: 'test/features/step_definitions',
+  closeSession: 'afterFeature'
+}
 
 module.exports = {
   src_folders: [nightwatchCucumber(nightwatchCucumberConf)],
@@ -18,15 +18,15 @@ module.exports = {
   live_output: false,
   disable_colors: false,
   // test_workers: {
-  //   enabled: true,
-  //   workers: 'auto'
+  //  enabled: true,
+  //  workers: 'auto'
   // },
 
-  selenium : {
-    start_process : true,
+  selenium: {
+    start_process: true,
     server_path: seleniumServer.path,
-    host : '127.0.0.1',
-    port : 4444
+    host: '127.0.0.1',
+    port: 4444
   },
 
   test_settings: {
@@ -39,29 +39,29 @@ module.exports = {
         browserName: 'phantomjs',
         javascriptEnabled: true,
         acceptSslCerts: true,
-        'phantomjs.binary.path' : phantomjs.path
+        'phantomjs.binary.path': phantomjs.path
       }
     },
 
     chrome: {
-        desiredCapabilities: {
-            browserName: 'chrome',
-            javascriptEnabled: true,
-            acceptSslCerts: true
-        },
-        selenium : {
-          cli_args : {
-            'webdriver.chrome.driver': chromedriver.path
-          }
+      desiredCapabilities: {
+        browserName: 'chrome',
+        javascriptEnabled: true,
+        acceptSslCerts: true
+      },
+      selenium: {
+        cli_args: {
+          'webdriver.chrome.driver': chromedriver.path
         }
+      }
     },
 
     firefox: {
-        desiredCapabilities: {
-          browserName: 'firefox',
-          javascriptEnabled: true,
-          acceptSslCerts: true
-        }
+      desiredCapabilities: {
+        browserName: 'firefox',
+        javascriptEnabled: true,
+        acceptSslCerts: true
+      }
     }
   }
-};
+}
