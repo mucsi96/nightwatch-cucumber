@@ -6,6 +6,7 @@
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
   "license": "MIT",
   "dependencies": {
+    "co": "^4.6.0",
     "glob": "^7.0.0",
     "mkdirp": "^0.5.1",
     "object-assign": "^4.0.1",
