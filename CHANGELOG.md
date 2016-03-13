@@ -1,4 +1,9 @@
 # Change Log
+## 2.1.1 (March 13, 2016)
+Features:
+  - Log improved in Nighwatch runner mode
+  - Reporter input improved in Nighwatch runner mode
+
 ## 2.0.1 (March 12, 2016)
 Bugfixes:
   - Prevent JS error if there is no client result after command execution
