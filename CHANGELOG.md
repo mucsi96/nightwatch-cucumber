@@ -1,4 +1,8 @@
 # Change Log
+## 2.1.2 (March 16, 2016)
+Bugfixes:
+  - Fix ambiguous and undefined step logging
+
 ## 2.1.1 (March 13, 2016)
 Features:
   - Log improved in Nighwatch runner mode
