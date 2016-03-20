@@ -1,5 +1,5 @@
 var seleniumServer = require('selenium-server')
-var phantomjs = require('phantomjs')
+var phantomjs = require('phantomjs-prebuilt')
 var chromedriver = require('chromedriver')
 
 module.exports = {

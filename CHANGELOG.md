@@ -1,4 +1,9 @@
 # Change Log
+## 2.1.3 (March 20, 2016)
+Features:
+  - Simplify test dependencies
+  - Make use of https://greenkeeper.io/
+
 ## 2.1.2 (March 16, 2016)
 Bugfixes:
   - Fix ambiguous and undefined step logging

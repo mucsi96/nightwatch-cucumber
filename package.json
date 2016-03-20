@@ -1,9 +1,19 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
+  "contributors": [
+    "Igor Zalutski <izalutski@palantir.com>",
+    "Daniele Campogiani <daniele.campogiani@gmail.com>",
+    "Simranjeet Singh",
+    "Shashi Shekhar Singh",
+    "Alex Murphy",
+    "Ben Grabham",
+    "Jean-Baptiste Blanchet <jbblanchet@gmail.com>",
+    "Vincent Spiewak <vspiewak+github@gmail.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "co": "^4.6.0",
@@ -20,19 +30,21 @@
   },
   "scripts": {
     "lint": "node_modules/.bin/standard",
-    "nightwatch-simple-test": "cd test/nightwatch-simple-test && ../node_modules/.bin/nightwatch && cd ../..",
-    "nightwatch-multi-test": "cd test/nightwatch-multi-test && ../node_modules/.bin/nightwatch && cd ../..",
-    "nightwatch-reporter-test": "cd test/nightwatch-reporter-test && ../node_modules/.bin/nightwatch && cd ../..",
-    "nightwatch-hook-test": "cd test/nightwatch-hook-test && ../node_modules/.bin/nightwatch && cd ../..",
-    "nightwatch-background-test": "cd test/nightwatch-background-test && ../node_modules/.bin/nightwatch && cd ../..",
-    "nightwatch-outlines-test": "cd test/nightwatch-outlines-test && ../node_modules/.bin/nightwatch && cd ../..",
-    "nightwatch-tag-test": "cd test/nightwatch-tag-test && ../node_modules/.bin/nightwatch --tag search && cd ../..",
-    "nightwatch-group-test": "cd test/nightwatch-group-test && ../node_modules/.bin/nightwatch --group group && cd ../..",
-    "nightwatch-custom-folder-test": "cd test/nightwatch-custom-folder-test && ../node_modules/.bin/nightwatch --group group && cd ../..",
-    "nightwatch-page-object-test": "cd test/nightwatch-page-object-test && ../node_modules/.bin/nightwatch && cd ../..",
-    "nightwatch-paralell-test": "cd test/nightwatch-paralell-test && ../node_modules/.bin/nightwatch && cd ../..",
-    "cucumber-simple-test": "cd test/cucumber-simple-test && ../node_modules/.bin/cucumberjs && cd ../..",
-    "cucumber-multi-test": "cd test/cucumber-multi-test && ../node_modules/.bin/cucumberjs && cd ../..",
+    "nightwatch-simple-test": "cd test/nightwatch-simple-test && nightwatch && cd ../..",
+    "nightwatch-multi-test": "cd test/nightwatch-multi-test && nightwatch && cd ../..",
+    "nightwatch-reporter-test": "cd test/nightwatch-reporter-test && nightwatch && cd ../..",
+    "nightwatch-hook-test": "cd test/nightwatch-hook-test && nightwatch && cd ../..",
+    "nightwatch-background-test": "cd test/nightwatch-background-test && nightwatch && cd ../..",
+    "nightwatch-outlines-test": "cd test/nightwatch-outlines-test && nightwatch && cd ../..",
+    "nightwatch-tag-test": "cd test/nightwatch-tag-test && nightwatch --tag search && cd ../..",
+    "nightwatch-group-test": "cd test/nightwatch-group-test && nightwatch --group group && cd ../..",
+    "nightwatch-custom-folder-test": "cd test/nightwatch-custom-folder-test && nightwatch --group group && cd ../..",
+    "nightwatch-page-object-test": "cd test/nightwatch-page-object-test && nightwatch && cd ../..",
+    "nightwatch-paralell-test": "cd test/nightwatch-paralell-test && nightwatch && cd ../..",
+    "cucumber-simple-test": "cd test/cucumber-simple-test && cucumberjs && cd ../..",
+    "cucumber-multi-test": "cd test/cucumber-multi-test && cucumberjs && cd ../..",
+    "install-nightwatch-cucumber-with-link": "npm link && cd test && npm link nightwatch-cucumber",
+    "install-nightwatch-cucumber-with-pack": "npm pack && cd test && npm install ../nightwatch-cucumber-*.tgz",
     "test": "npm run lint && npm run nightwatch-simple-test && npm run nightwatch-reporter-test && npm run nightwatch-multi-test && npm run nightwatch-hook-test && npm run nightwatch-background-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-custom-folder-test && npm run nightwatch-page-object-test && npm run nightwatch-outlines-test && npm run nightwatch-paralell-test && npm run cucumber-simple-test && npm run cucumber-multi-test"
   },
   "repository": {
@@ -59,7 +71,12 @@
   ],
   "devDependencies": {
     "pre-commit": "^1.1.2",
-    "standard": "^6.0.8"
+    "standard": "^6.0.8",
+    "chromedriver": "^2.20.0",
+    "cucumber": "^0.9.4",
+    "nightwatch": "^0.8.18",
+    "phantomjs-prebuilt": "^2.1.6",
+    "selenium-server": "^2.48.2"
   },
   "pre-commit": [
     "lint"
