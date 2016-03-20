@@ -74,8 +74,8 @@
     "standard": "^6.0.8",
     "chromedriver": "^2.20.0",
     "cucumber": "^0.9.4",
-    "nightwatch": "^0.8.6",
-    "phantomjs": "^1.9.19",
+    "nightwatch": "^0.8.18",
+    "phantomjs-prebuilt": "^2.1.6",
     "selenium-server": "^2.48.2"
   },
   "pre-commit": [
