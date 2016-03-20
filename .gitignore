@@ -5,3 +5,4 @@ reports
 tests_output
 *.bat
 .DS_Store
+.vscode
