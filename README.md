@@ -7,8 +7,6 @@
 [![Code Climate](https://codeclimate.com/github/mucsi96/nightwatch-cucumber/badges/gpa.svg)](https://codeclimate.com/github/mucsi96/nightwatch-cucumber)
 [![Dependencies](https://david-dm.org/mucsi96/nightwatch-cucumber.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber)
 [![Join the chat at https://gitter.im/mucsi96/nightwatch-cucumber](https://badges.gitter.im/mucsi96/nightwatch-cucumber.svg)](https://gitter.im/mucsi96/nightwatch-cucumber?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Issue Stats](http://issuestats.com/github/mucsi96/nightwatch-cucumber/badge/pr?style=flat)](http://issuestats.com/github/mucsi96/nightwatch-cucumber)
-[![Issue Stats](http://issuestats.com/github/mucsi96/nightwatch-cucumber/badge/issue?style=flat)](http://issuestats.com/github/mucsi96/nightwatch-cucumber)
 
 [![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=3&height=3)](https://nodei.co/npm/nightwatch-cucumber/)
 
