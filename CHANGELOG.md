@@ -1,4 +1,8 @@
 # Change Log
+## 2.1.4 (April 1, 2016)
+Features:
+  - Support for cucumber 0.10.0
+
 ## 2.1.3 (March 20, 2016)
 Features:
   - Simplify test dependencies
