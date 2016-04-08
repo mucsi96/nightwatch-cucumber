@@ -74,7 +74,7 @@
     "pre-commit": "^1.1.2",
     "standard": "^6.0.8",
     "chromedriver": "^2.20.0",
-    "cucumber": "^0.10.0",
+    "cucumber": "^0.10.2",
     "nightwatch": "^0.8.18",
     "phantomjs-prebuilt": "^2.1.6",
     "selenium-server": "^2.48.2"
