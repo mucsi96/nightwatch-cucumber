@@ -1,4 +1,8 @@
 # Change Log
+## 2.1.5 (April 8, 2016)
+Bugfixes:
+  - Prevent json formatter output SyntaxError: Unexpected end of input
+
 ## 2.1.4 (April 1, 2016)
 Features:
   - Support for cucumber 0.10.0
