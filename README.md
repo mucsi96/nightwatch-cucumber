@@ -8,7 +8,7 @@
 [![Dependencies](https://david-dm.org/mucsi96/nightwatch-cucumber.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber)
 [![Join the chat at https://gitter.im/mucsi96/nightwatch-cucumber](https://badges.gitter.im/mucsi96/nightwatch-cucumber.svg)](https://gitter.im/mucsi96/nightwatch-cucumber?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=3&height=3)](https://nodei.co/npm/nightwatch-cucumber/)
+[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=4)](https://nodei.co/npm/nightwatch-cucumber/)
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
