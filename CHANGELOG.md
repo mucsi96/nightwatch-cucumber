@@ -1,4 +1,8 @@
 # Change Log
+## 2.1.6 (April 8, 2016)
+Bugfixes:
+  - Scenario result handling fixed
+
 ## 2.1.5 (April 8, 2016)
 Bugfixes:
   - Prevent json formatter output SyntaxError: Unexpected end of input

@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
@@ -30,7 +30,7 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "node_modules/.bin/standard",
+    "code-style": "standard",
     "nightwatch-simple-test": "cd test/nightwatch-simple-test && nightwatch && cd ../..",
     "nightwatch-multi-test": "cd test/nightwatch-multi-test && nightwatch && cd ../..",
     "nightwatch-reporter-test": "cd test/nightwatch-reporter-test && nightwatch && cd ../..",
@@ -46,7 +46,7 @@
     "cucumber-multi-test": "cd test/cucumber-multi-test && cucumberjs && cd ../..",
     "install-nightwatch-cucumber-with-link": "npm link && cd test && npm link nightwatch-cucumber",
     "install-nightwatch-cucumber-with-pack": "npm pack && cd test && npm install ../nightwatch-cucumber-*.tgz",
-    "test": "npm run lint && npm run nightwatch-simple-test && npm run nightwatch-reporter-test && npm run nightwatch-multi-test && npm run nightwatch-hook-test && npm run nightwatch-background-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-custom-folder-test && npm run nightwatch-page-object-test && npm run nightwatch-outlines-test && npm run nightwatch-paralell-test && npm run cucumber-simple-test && npm run cucumber-multi-test"
+    "test": "npm run code-style && npm run nightwatch-simple-test && npm run nightwatch-reporter-test && npm run nightwatch-multi-test && npm run nightwatch-hook-test && npm run nightwatch-background-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-custom-folder-test && npm run nightwatch-page-object-test && npm run nightwatch-outlines-test && npm run nightwatch-paralell-test && npm run cucumber-simple-test && npm run cucumber-multi-test"
   },
   "repository": {
     "type": "git",
@@ -80,6 +80,6 @@
     "selenium-server": "^2.48.2"
   },
   "pre-commit": [
-    "lint"
+    "code-style"
   ]
 }
