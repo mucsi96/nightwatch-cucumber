@@ -1,4 +1,8 @@
 # Change Log
+## 2.1.7 (April 15, 2016)
+Bugfixes:
+  - Fix session closing after scenario
+
 ## 2.1.6 (April 8, 2016)
 Bugfixes:
   - Scenario result handling fixed
