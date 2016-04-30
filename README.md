@@ -17,10 +17,10 @@ This module enables to use a BDD-style approach for cross-browser testing:
 - Run using either real browser, headless browser or cloud based [WebDriver](https://www.w3.org/TR/webdriver/) services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/)
 
 This plugin allows to run tests in two modes:
-- Nightwatch.js as runner
+- Nightwatch.js as runner (default)
 - Cucumber.js as runner
 
-## Installation (Nightwatch.js as runner)
+## Installation
 
 ### Step 1
 
@@ -68,56 +68,8 @@ module.exports = {
 ```
 For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
 
-## Installation (Cucumber.js as runner)
-
-### Step 1
-
-First you need to have Nightwatch.js and Cucumber.js to be installed locally.
-
-```
-$ npm install nightwatch cucumber
-```
-
-If you are new to Nightwatch.js you can read the [developer guide](http://nightwatchjs.org/guide).
-
-### Step 2
-
-Install `nightwatch-cucumber`
-
-```
-$ npm install nightwatch-cucumber
-```
-
-### Step 3
-
-In project root create a configuration file for Cucumber.js. [More details](https://github.com/cucumber/cucumber-js#profiles)
-
-```
-// cucumber.js
-
-var nightwatchCucumber = require('nightwatch-cucumber')({
-  /* configuration */
-  runner: 'cucumber'
-})
-
-module.exports = {
-  default: '--require ' + nightwatchCucumber + ' --require features'
-}
-```
-### Step 4
-
-In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
-```
-// nightwatch.conf.js
-
-module.exports = {
-  ...
-}
-```
-For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
-
 ## Demo Test
-Currently feature files are located in `features` folder.
+By default feature files are located in `features` folder. You can change this using configuration object.
 
 ```
 # features/google.feature
@@ -159,7 +111,7 @@ module.exports = function() {
 
 For more examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
 
-## Running tests (Nightwatch.js as runner)
+## Running tests
 
 If you have installed `nightwatch` with `-g` (global) option you can run the tests by executing
 ```
@@ -173,21 +125,13 @@ node_modules/.bin/nightwatch
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-output.png)
 
-## Running tests (Cucumber.js as runner)
+## Features
 
-If you have installed `cucumber` with `-g` (global) option you can run the tests by executing
-```
-cucumberjs
-```
+### HTML reports
 
-In other case you can run the tests by executing
-```
-node_modules/.bin/cucumberjs
-```
+HTML report generation is enabled by default. It's default location is `reports/index.html`. You can disable or change this using configuration object.
 
-![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-output.png)
-
-## Features (Nightwatch.js as runner)
+![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-html-report.png)
 
 ### Hooks
 
@@ -385,7 +329,7 @@ This plugin provides three ways of closing Selenium sessions. This enables reuse
 - `afterFeature` default
 - `never`
 
-# Configuration (Nightwatch.js as runner)
+# Configuration
 
 The default configuration object is.
 ```
@@ -393,7 +337,8 @@ The default configuration object is.
   runner: 'nightwatch',
   featureFiles: 'features',
   stepDefinitions: 'features/step_definitions',
-  closeSession: 'afterFeature'
+  closeSession: 'afterFeature',
+  htmlReport: 'reports/index.html'
 }
 ```
 
@@ -410,6 +355,69 @@ module.exports = {
   ...
 }
 ```
+# Cucumber.js as runner
+
+## Installation
+
+### Step 1
+
+First you need to have Nightwatch.js and Cucumber.js to be installed locally.
+
+```
+$ npm install nightwatch cucumber
+```
+
+If you are new to Nightwatch.js you can read the [developer guide](http://nightwatchjs.org/guide).
+
+### Step 2
+
+Install `nightwatch-cucumber`
+
+```
+$ npm install nightwatch-cucumber
+```
+
+### Step 3
+
+In project root create a configuration file for Cucumber.js. [More details](https://github.com/cucumber/cucumber-js#profiles)
+
+```
+// cucumber.js
+
+var nightwatchCucumber = require('nightwatch-cucumber')({
+  /* configuration */
+  runner: 'cucumber'
+})
+
+module.exports = {
+  default: '--require ' + nightwatchCucumber + ' --require features'
+}
+```
+### Step 4
+
+In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
+```
+// nightwatch.conf.js
+
+module.exports = {
+  ...
+}
+```
+For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
+
+## Running tests
+
+If you have installed `cucumber` with `-g` (global) option you can run the tests by executing
+```
+cucumberjs
+```
+
+In other case you can run the tests by executing
+```
+node_modules/.bin/cucumberjs
+```
+
+![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-output.png)
 
 # Change Log
 

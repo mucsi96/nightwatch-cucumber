@@ -7,7 +7,7 @@ module.exports = function () {
 
   this.When(/^I search for (.*)$/, function (expression) {
     this
-      .setValue('input[name=qq]', expression)
+      .setValue('input[name=q]', expression)
       .submitForm('input[name=q]')
   })
 
