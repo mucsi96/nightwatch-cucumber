@@ -1,5 +1,8 @@
 # Change Log
-## 2.1.8 (April 30, 2016)
+## 2.2.0 (April 30, 2016)
+Features:
+  - Cucumber HTML reports
+
 Bugfixes:
   - Fix missing error message in cucumber json
 
