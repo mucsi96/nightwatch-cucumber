@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
@@ -30,7 +30,7 @@
     "test": "test"
   },
   "scripts": {
-    "code-style": "standard",
+    "code-style": "standard --verbose | snazzy",
     "nightwatch-simple-test": "cd test/nightwatch-simple-test && nightwatch && cd ../..",
     "nightwatch-multi-test": "cd test/nightwatch-multi-test && nightwatch && cd ../..",
     "nightwatch-reporter-test": "cd test/nightwatch-reporter-test && nightwatch && cd ../..",
@@ -71,13 +71,14 @@
     "lib"
   ],
   "devDependencies": {
-    "pre-commit": "^1.1.2",
-    "standard": "^6.0.8",
     "chromedriver": "^2.20.0",
     "cucumber": "^0.10.2",
     "nightwatch": "^0.8.18",
     "phantomjs-prebuilt": "^2.1.6",
-    "selenium-server": "^2.48.2"
+    "pre-commit": "^1.1.2",
+    "selenium-server": "^2.48.2",
+    "snazzy": "^3.0.1",
+    "standard": "^6.0.8"
   },
   "pre-commit": [
     "code-style"
