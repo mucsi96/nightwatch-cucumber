@@ -69,7 +69,8 @@
   },
   "homepage": "https://github.com/mucsi96/nightwatch-cucumber#readme",
   "files": [
-    "lib"
+    "lib",
+    "resources"
   ],
   "devDependencies": {
     "chromedriver": "^2.20.0",
