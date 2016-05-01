@@ -66,7 +66,7 @@ module.exports = {
   ...
 }
 ```
-For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
+For more examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
 
 ## Demo Test
 By default feature files are located in `features` folder. You can change this using configuration object.
@@ -132,107 +132,6 @@ node_modules/.bin/nightwatch
 HTML report generation is enabled by default. It's default location is `reports/index.html`. You can disable or change this using configuration object.
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-html-report.png)
-
-### Hooks
-
-#### Before/after all features and before/after each feature
-These hooks can be provided using Nightwatch external globals. External globals file is specified in the `globals_path` property of `nightwatch.conf.js`. [More details](http://nightwatchjs.org/guide#external-globals)
-
-```
-// nightwatch.conf.js
-
-var nightwatchCucumber = require('nightwatch-cucumber')({
-  /* configuration */
-})
-
-module.exports = {
-  src_folders: [nightwatchCucumber],
-  globals_path: 'globals-module.js',
-  ...
-}
-```
-
-```
-// globals-module.js
-
-module.exports = {
-  before : function(cb) {
-    console.log('Runs before all features')
-    cb()
-  },
-
-  beforeEach : function(browser, cb) {
-    console.log('Runs before each feature')
-    cb()
-  },
-
-  after : function(cb) {
-    console.log('Runs after all features')
-    cb()
-  },
-
-  afterEach : function(browser, cb) {
-    console.log('Runs after each feature')
-    cb()
-  }
-}
-
-```
-
-#### Before/after each scenario and before/after each step
-These hooks can be provided using configuration object.
-
-```
-// nightwatch.conf.js
-
-var nightwatchCucumber = require('nightwatch-cucumber')({
-  beforeScenario: function(browser, cb) {
-    console.log('Runs before each scenario')
-    cb()
-  },
-  beforeStep: function(browser) {
-    console.log('Runs before each step')
-  },
-  afterScenario: function(browser, cb) {
-    console.log('Runs after each scenario')
-    cb()
-  },
-  afterStep: function(browser) {
-    console.log('Runs after each step')
-  }
-})
-
-module.exports = {
-  src_folders: [nightwatchCucumber],
-  ...
-}
-```
-
-### Feature Groups
-You can selectively run features based on groups. To group features together just place them in the same sub-folder. The folder name is the name of the group.
-You can use Nightwatch CLI `--group`, `--skipgroup` flags. [More details ](http://nightwatchjs.org/guide#test-groups)
-
-### Feature Tags
-You can selectively run features based on tags. [More details ](http://nightwatchjs.org/guide#test-tags)
-```
-# google.feature
-
-@google @search
-Feature: Google Search
-
-Scenario: Searching Google
-
-  Given I open Google's search page
-  Then the title is "Google"
-  And the Google search form exists
-```
-```
-$ node nightwatch.js --tag google
-```
-You can also skip features based on tags
-```
-node nightwatch.js --skiptags google
-```
 
 ### Feature background
 You can use feature background to avoid copying and pasting of steps. The background runs before each scenario after beforeScenario hooks.
@@ -319,6 +218,107 @@ module.exports = function() {
     yahoo.assert.visible('@searchBar')
   })
 
+}
+```
+
+### Feature Groups
+You can selectively run features based on groups. To group features together just place them in the same sub-folder. The folder name is the name of the group.
+You can use Nightwatch CLI `--group`, `--skipgroup` flags. [More details ](http://nightwatchjs.org/guide#test-groups)
+
+### Feature Tags
+You can selectively run features based on tags. [More details ](http://nightwatchjs.org/guide#test-tags)
+```
+# google.feature
+
+@google @search
+Feature: Google Search
+
+Scenario: Searching Google
+
+  Given I open Google's search page
+  Then the title is "Google"
+  And the Google search form exists
+```
+```
+$ node nightwatch.js --tag google
+```
+You can also skip features based on tags
+```
+node nightwatch.js --skiptags google
+```
+
+### Hooks
+
+#### Before/after all features and before/after each feature
+These hooks can be provided using Nightwatch external globals. External globals file is specified in the `globals_path` property of `nightwatch.conf.js`. [More details](http://nightwatchjs.org/guide#external-globals)
+
+```
+// nightwatch.conf.js
+
+var nightwatchCucumber = require('nightwatch-cucumber')({
+  /* configuration */
+})
+
+module.exports = {
+  src_folders: [nightwatchCucumber],
+  globals_path: 'globals-module.js',
+  ...
+}
+```
+
+```
+// globals-module.js
+
+module.exports = {
+  before : function(cb) {
+    console.log('Runs before all features')
+    cb()
+  },
+
+  beforeEach : function(browser, cb) {
+    console.log('Runs before each feature')
+    cb()
+  },
+
+  after : function(cb) {
+    console.log('Runs after all features')
+    cb()
+  },
+
+  afterEach : function(browser, cb) {
+    console.log('Runs after each feature')
+    cb()
+  }
+}
+
+```
+
+#### Before/after each scenario and before/after each step
+These hooks can be provided using configuration object.
+
+```
+// nightwatch.conf.js
+
+var nightwatchCucumber = require('nightwatch-cucumber')({
+  beforeScenario: function(browser, cb) {
+    console.log('Runs before each scenario')
+    cb()
+  },
+  beforeStep: function(browser) {
+    console.log('Runs before each step')
+  },
+  afterScenario: function(browser, cb) {
+    console.log('Runs after each scenario')
+    cb()
+  },
+  afterStep: function(browser) {
+    console.log('Runs after each step')
+  }
+})
+
+module.exports = {
+  src_folders: [nightwatchCucumber],
+  ...
 }
 ```
 
