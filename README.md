@@ -27,7 +27,7 @@ This plugin allows to run tests in two modes:
 First you need to have Nightwatch.js and Cucumber.js to be installed locally.
 
 ```
-$ npm install nightwatch cucumber
+$ npm install --save-dev nightwatch cucumber
 ```
 
 If you are new to Nightwatch.js you can read the [developer guide](http://nightwatchjs.org/guide).
@@ -37,7 +37,7 @@ If you are new to Nightwatch.js you can read the [developer guide](http://nightw
 Install `nightwatch-cucumber`
 
 ```
-$ npm install nightwatch-cucumber
+$ npm install --save-dev nightwatch-cucumber
 ```
 
 ### Step 3
@@ -364,7 +364,7 @@ module.exports = {
 First you need to have Nightwatch.js and Cucumber.js to be installed locally.
 
 ```
-$ npm install nightwatch cucumber
+$ npm install --save-dev nightwatch cucumber
 ```
 
 If you are new to Nightwatch.js you can read the [developer guide](http://nightwatchjs.org/guide).
@@ -374,7 +374,7 @@ If you are new to Nightwatch.js you can read the [developer guide](http://nightw
 Install `nightwatch-cucumber`
 
 ```
-$ npm install nightwatch-cucumber
+$ npm install --save-dev nightwatch-cucumber
 ```
 
 ### Step 3
