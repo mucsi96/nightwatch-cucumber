@@ -328,7 +328,7 @@ This plugin provides three ways of closing Selenium sessions. This enables reuse
 - `afterFeature` default
 - `never`
 
-# Configuration
+## Configuration
 
 The default configuration object is.
 ```
