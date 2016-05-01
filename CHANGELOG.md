@@ -1,4 +1,11 @@
 # Change Log
+## 2.2.0 (April 30, 2016)
+Features:
+  - Cucumber HTML reports
+
+Bugfixes:
+  - Fix missing error message in cucumber json
+
 ## 2.1.7 (April 15, 2016)
 Bugfixes:
   - Fix session closing after scenario
