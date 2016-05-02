@@ -80,7 +80,7 @@
     "pre-commit": "^1.1.2",
     "selenium-server": "^2.48.2",
     "snazzy": "^3.0.1",
-    "standard": "^6.0.8"
+    "standard": "^7.0.0"
   },
   "pre-commit": [
     "code-style"
