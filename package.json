@@ -79,7 +79,7 @@
     "phantomjs-prebuilt": "^2.1.6",
     "pre-commit": "^1.1.2",
     "selenium-server": "^2.48.2",
-    "snazzy": "^3.0.1",
+    "snazzy": "^4.0.0",
     "standard": "^6.0.8"
   },
   "pre-commit": [
