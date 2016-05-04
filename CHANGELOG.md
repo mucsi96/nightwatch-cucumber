@@ -1,4 +1,14 @@
 # Change Log
+## 2.2.1 (May 4, 2016)
+Features:
+  - Skip remaining steps after client termination
+  - Steps result handling improved
+  - standard updated to version 7.0.0
+  - snazzy updated to version 4.0.0
+
+Bugfixes:
+  - Fix steps printed multiple times for assertions
+
 ## 2.2.0 (April 30, 2016)
 Features:
   - Cucumber HTML reports
