@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
@@ -13,7 +13,8 @@
     "Ben Grabham",
     "Jean-Baptiste Blanchet <jbblanchet@gmail.com>",
     "Vincent Spiewak <vspiewak+github@gmail.com>",
-    "Fabio Quinzi <fabio.quinzi@gmail.com>"
+    "Fabio Quinzi <fabio.quinzi@gmail.com>",
+    "Alfredo Moretta"
   ],
   "license": "MIT",
   "dependencies": {

@@ -432,3 +432,4 @@ See [CHANGELOG.md](https://github.com/mucsi96/nightwatch-cucumber/blob/master/CH
 - Jean-Baptiste Blanchet ([@jbblanchet](https://github.com/jbblanchet))
 - Vincent Spiewak ([@vspiewak](https://github.com/vspiewak))
 - Fabio Quinzi ([@FabioQ](https://github.com/FabioQ))
+- Alfredo Moretta ([@Alfredo81](https://github.com/Alfredo81))
