@@ -1,4 +1,8 @@
 # Change Log
+## 2.2.2 (May 17, 2016)
+Bugfixes:
+  - Fix json/html report generation on Windows
+
 ## 2.2.1 (May 4, 2016)
 Features:
   - Skip remaining steps after client termination
