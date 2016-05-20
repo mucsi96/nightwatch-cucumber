@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
@@ -14,7 +14,8 @@
     "Jean-Baptiste Blanchet <jbblanchet@gmail.com>",
     "Vincent Spiewak <vspiewak+github@gmail.com>",
     "Fabio Quinzi <fabio.quinzi@gmail.com>",
-    "Alfredo Moretta"
+    "Alfredo Moretta",
+    "Jeffrey Effendy <wawa_union.zone@live.com>"
   ],
   "license": "MIT",
   "dependencies": {
@@ -39,7 +40,7 @@
     "nightwatch-hook-test": "cd test/nightwatch-hook-test && nightwatch && cd ../..",
     "nightwatch-background-test": "cd test/nightwatch-background-test && nightwatch && cd ../..",
     "nightwatch-outlines-test": "cd test/nightwatch-outlines-test && nightwatch && cd ../..",
-    "nightwatch-tag-test": "cd test/nightwatch-tag-test && nightwatch --tag search && cd ../..",
+    "nightwatch-tag-test": "cd test/nightwatch-tag-test && nightwatch --tag google-search && nightwatch --skiptags google-search && cd ../..",
     "nightwatch-group-test": "cd test/nightwatch-group-test && nightwatch --group group && cd ../..",
     "nightwatch-custom-folder-test": "cd test/nightwatch-custom-folder-test && nightwatch --group group && cd ../..",
     "nightwatch-page-object-test": "cd test/nightwatch-page-object-test && nightwatch && cd ../..",
@@ -75,13 +76,13 @@
   ],
   "devDependencies": {
     "chromedriver": "^2.20.0",
-    "cucumber": "^0.10.2",
+    "cucumber": "^0.10.3",
     "nightwatch": "^0.8.18",
     "phantomjs-prebuilt": "^2.1.6",
     "pre-commit": "^1.1.2",
     "selenium-server": "^2.48.2",
     "snazzy": "^4.0.0",
-    "standard": "^7.0.0"
+    "standard": "^7.1.0"
   },
   "pre-commit": [
     "code-style"

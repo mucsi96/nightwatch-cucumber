@@ -1,3 +1,4 @@
+@yahoo-search
 Feature: Yahoo Search
 
 Scenario: Searching Yahoo
