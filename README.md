@@ -416,10 +416,6 @@ node_modules/.bin/cucumberjs
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-output.png)
 
-# Change log
-
-See [CHANGELOG.md](https://github.com/mucsi96/nightwatch-cucumber/blob/master/CHANGELOG.md)
-
 # Contribute
 
 Anyone and everyone is welcome to contribute.
@@ -441,6 +437,10 @@ Ben Grabham,
 [Fabio Quinzi (@FabioQ)](https://github.com/FabioQ),
 [Alfredo Moretta (@Alfredo81)](https://github.com/Alfredo81),
 [Jeffrey Effendy (@jeffrey-effendy)](https://github.com/jeffrey-effendy)
+
+# Change log
+
+See [CHANGELOG.md](https://github.com/mucsi96/nightwatch-cucumber/blob/master/CHANGELOG.md)
 
 # License
 
