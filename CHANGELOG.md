@@ -1,4 +1,10 @@
 # Change Log
+## 2.2.3 (May 20, 2016)
+Features:
+  - standard updated to version 7.1.0
+  - Support for cucumber 0.10.3
+  - skiptags testcase added to nightwatch-tag-test
+
 ## 2.2.2 (May 17, 2016)
 Bugfixes:
   - Fix json/html report generation on Windows

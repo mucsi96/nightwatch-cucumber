@@ -1,9 +1,7 @@
-![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-logo.png)
-# nightwatch-cucumber
+# nightwatch-cucumber [![nightwatch-cucumber](img/nightwatch-cucumber-logo.png)](https://github.com/mucsi96/nightwatch-cucumber)
 
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
-[![bitHound Overall Score](https://www.bithound.io/github/mucsi96/nightwatch-cucumber/badges/score.svg)](https://www.bithound.io/github/mucsi96/nightwatch-cucumber)
 [![Dependencies](https://david-dm.org/mucsi96/nightwatch-cucumber.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber)
 [![Join the chat at https://gitter.im/mucsi96/nightwatch-cucumber](https://badges.gitter.im/mucsi96/nightwatch-cucumber.svg)](https://gitter.im/mucsi96/nightwatch-cucumber?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -418,18 +416,37 @@ node_modules/.bin/cucumberjs
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-output.png)
 
-# Change Log
+# Change log
 
 See [CHANGELOG.md](https://github.com/mucsi96/nightwatch-cucumber/blob/master/CHANGELOG.md)
 
-# Contributors
-- Igor Zalutski ([@ZIJ](https://github.com/ZIJ))
-- Daniele Campogiani ([@dcampogiani](https://github.com/dcampogiani))
-- Simranjeet Singh ([@RSsimranjeetsingh](https://github.com/RSsimranjeetsingh))
-- Shashi Shekhar Singh ([@singhshashi](https://github.com/singhshashi))
-- Alex Murphy
-- Ben Grabham
-- Jean-Baptiste Blanchet ([@jbblanchet](https://github.com/jbblanchet))
-- Vincent Spiewak ([@vspiewak](https://github.com/vspiewak))
-- Fabio Quinzi ([@FabioQ](https://github.com/FabioQ))
-- Alfredo Moretta ([@Alfredo81](https://github.com/Alfredo81))
+# Contribute
+
+Anyone and everyone is welcome to contribute.
+
+# Authors
+
+[Igor Muchychka (@mucsi96)](https://github.com/mucsi96)
+
+Thanks for assistance and contributions:
+
+[Igor Zalutski (@ZIJ)](https://github.com/ZIJ),
+[Daniele Campogiani (@dcampogiani)](https://github.com/dcampogiani),
+[Simranjeet Singh (@RSsimranjeetsingh)](https://github.com/RSsimranjeetsingh),
+[Shashi Shekhar Singh (@singhshashi)](https://github.com/singhshashi),
+Alex Murphy,
+Ben Grabham,
+[Jean-Baptiste Blanchet (@jbblanchet)](https://github.com/jbblanchet),
+[Vincent Spiewak (@vspiewak)](https://github.com/vspiewak),
+[Fabio Quinzi (@FabioQ)](https://github.com/FabioQ),
+[Alfredo Moretta (@Alfredo81)](https://github.com/Alfredo81),
+[Jeffrey Effendy (@jeffrey-effendy)](https://github.com/jeffrey-effendy)
+
+# License
+
+This software is released under the terms of the
+[MIT license](https://github.com/mucsi96/nightwatch-cucumber/blob/master/LICENSE).
+
+# Other projects
+* https://github.com/nightwatchjs/nightwatch
+* https://github.com/cucumber/cucumber-js
