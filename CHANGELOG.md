@@ -1,4 +1,8 @@
 # Change Log
+## 2.3.3 (May 25, 2016)
+Features:
+  - Support for nightwatch 0.9.0
+
 ## 2.2.3 (May 20, 2016)
 Features:
   - standard updated to version 7.1.0
