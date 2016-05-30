@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
 [![Dependencies](https://david-dm.org/mucsi96/nightwatch-cucumber.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber)
-[Ask question on Google Groups](https://groups.google.com/forum/#!forum/nightwatch-cucumber)
+[Ask question](https://groups.google.com/forum/#!forum/nightwatch-cucumber)
 
 [![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=5)](https://nodei.co/npm/nightwatch-cucumber/)
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
