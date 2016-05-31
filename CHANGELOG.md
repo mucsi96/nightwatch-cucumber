@@ -1,4 +1,8 @@
 # Change Log
+## 3.0.0 (May 31, 2016)
+Features:
+  - Support for cucumber 1.0.0
+
 ## 2.3.3 (May 25, 2016)
 Features:
   - Support for nightwatch 0.9.0

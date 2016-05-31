@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "2.3.3",
+  "version": "3.0.0",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
@@ -76,8 +76,8 @@
   ],
   "devDependencies": {
     "chromedriver": "^2.20.0",
-    "cucumber": "^0.10.3",
-    "nightwatch": "^0.9.0",
+    "cucumber": "^1.0.0",
+    "nightwatch": "^0.9.1",
     "phantomjs-prebuilt": "^2.1.6",
     "pre-commit": "^1.1.2",
     "selenium-server": "^2.48.2",
