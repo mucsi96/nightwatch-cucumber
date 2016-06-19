@@ -50,7 +50,7 @@
     "install-nightwatch-cucumber-with-link": "npm link && cd test && npm link nightwatch-cucumber",
     "install-nightwatch-cucumber-with-pack": "npm pack && cd test && npm install ../nightwatch-cucumber-*.tgz",
     "test": "npm run code-style && npm run nightwatch-simple-test && npm run nightwatch-reporter-test && npm run nightwatch-multi-test && npm run nightwatch-hook-test && npm run nightwatch-background-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-custom-folder-test && npm run nightwatch-page-object-test && npm run nightwatch-outlines-test && npm run nightwatch-paralell-test && npm run cucumber-simple-test && npm run cucumber-multi-test",
-    "mocha-test": "mocha"
+    "mocha-test": "mocha --timeout 0"
   },
   "repository": {
     "type": "git",

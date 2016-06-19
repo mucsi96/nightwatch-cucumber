@@ -126,7 +126,7 @@ node_modules/.bin/nightwatch
 
 ### HTML reports
 
-HTML report generation is enabled by default. It's default location is `reports/index.html`. You can disable or change this using configuration object.
+HTML report generation is enabled by default. It's default location is `reports/cucumber.html`. You can disable or change this using configuration object.
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-html-report.png)
 
