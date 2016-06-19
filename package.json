@@ -49,7 +49,8 @@
     "cucumber-multi-test": "cd test/cucumber-multi-test && cucumberjs && cd ../..",
     "install-nightwatch-cucumber-with-link": "npm link && cd test && npm link nightwatch-cucumber",
     "install-nightwatch-cucumber-with-pack": "npm pack && cd test && npm install ../nightwatch-cucumber-*.tgz",
-    "test": "npm run code-style && npm run nightwatch-simple-test && npm run nightwatch-reporter-test && npm run nightwatch-multi-test && npm run nightwatch-hook-test && npm run nightwatch-background-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-custom-folder-test && npm run nightwatch-page-object-test && npm run nightwatch-outlines-test && npm run nightwatch-paralell-test && npm run cucumber-simple-test && npm run cucumber-multi-test"
+    "test": "npm run code-style && npm run nightwatch-simple-test && npm run nightwatch-reporter-test && npm run nightwatch-multi-test && npm run nightwatch-hook-test && npm run nightwatch-background-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-custom-folder-test && npm run nightwatch-page-object-test && npm run nightwatch-outlines-test && npm run nightwatch-paralell-test && npm run cucumber-simple-test && npm run cucumber-multi-test",
+    "mocha-test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -75,8 +76,10 @@
     "resources"
   ],
   "devDependencies": {
+    "chai": "^3.5.0",
     "chromedriver": "^2.20.0",
     "cucumber": "^1.0.0",
+    "mocha": "^2.5.3",
     "nightwatch": "^0.9.1",
     "phantomjs-prebuilt": "^2.1.6",
     "pre-commit": "^1.1.2",
