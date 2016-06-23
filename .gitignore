@@ -7,3 +7,4 @@ tests_output
 .DS_Store
 .vscode
 .idea
+tmp

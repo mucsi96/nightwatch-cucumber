@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+</head>
+<body>
+  <h2>Simple calculator</h2>
+  <h3>A: <input type="text" id="a"></h3>
+  <h3>B: <input type="text" id="b"></h3>
+  <h3>
+    Operation:
+    <button id="add">Add</button>
+    <button id="subtract">Subtract</button>
+    <button id="divide">Divide</button>
+    <button id="multiply">Multiply</button>
+  </h3>
+  <h3>Result: <span id="result"></span></h3>
+  <script type="text/javascript">
+    function autorun () {
+      document.querySelector('#add').addEventListener('click', calc(function (a, b) {
+        return a + b;
+      }));
+      document.querySelector('#subtract').addEventListener('click', calc(function (a, b) {
+        return a - b;
+      }));
+      document.querySelector('#divide').addEventListener('click', calc(function (a, b) {
+        return a / b;
+      }));
+      document.querySelector('#multiply').addEventListener('click', calc(function (a, b) {
+        return a * b;
+      }));
+    }
+
+    function calc(op) {
+      return function () {
+        var a = parseInt(document.querySelector('#a').value);
+        var b = parseInt(document.querySelector('#b').value);
+        document.querySelector('#result').innerText = op(a, b)
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", autorun, false)
+  </script>
+</body>
+</html>
