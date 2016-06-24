@@ -76,7 +76,7 @@
   ],
   "devDependencies": {
     "chromedriver": "^2.20.0",
-    "cucumber": "^1.1.0",
+    "cucumber": "^1.2.0",
     "nightwatch": "^0.9.1",
     "phantomjs-prebuilt": "^2.1.6",
     "pre-commit": "^1.1.2",
