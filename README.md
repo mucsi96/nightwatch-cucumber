@@ -437,6 +437,7 @@ Ben Grabham,
 [Fabio Quinzi (@FabioQ)](https://github.com/FabioQ),
 [Alfredo Moretta (@Alfredo81)](https://github.com/Alfredo81),
 [Jeffrey Effendy (@jeffrey-effendy)](https://github.com/jeffrey-effendy)
+[Lawrence (@ldabiralai)](https://github.com/ldabiralai)
 
 # Change log
 
