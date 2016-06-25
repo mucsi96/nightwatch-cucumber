@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
@@ -15,7 +15,8 @@
     "Vincent Spiewak <vspiewak+github@gmail.com>",
     "Fabio Quinzi <fabio.quinzi@gmail.com>",
     "Alfredo Moretta",
-    "Jeffrey Effendy <wawa_union.zone@live.com>"
+    "Jeffrey Effendy <wawa_union.zone@live.com>",
+    "Lawrence"
   ],
   "license": "MIT",
   "dependencies": {
@@ -78,8 +79,8 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chromedriver": "^2.20.0",
-    "cucumber": "^1.0.0",
     "mocha": "^2.5.3",
+    "cucumber": "^1.2.0",
     "nightwatch": "^0.9.1",
     "phantomjs-prebuilt": "^2.1.6",
     "pre-commit": "^1.1.2",

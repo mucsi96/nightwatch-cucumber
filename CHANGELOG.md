@@ -1,4 +1,13 @@
 # Change Log
+## 4.0.0 (June 25, 2016)
+Features:
+  - Support for cucumber 1.2.0
+  - Support for pending steps
+  - Improved step definition error handling
+
+Bugfixes:
+  - Fix before scenario hook
+
 ## 3.0.0 (May 31, 2016)
 Features:
   - Support for cucumber 1.0.0
