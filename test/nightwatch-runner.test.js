@@ -1,12 +1,11 @@
 /* eslint-env mocha */
 const chai = require('chai')
 chai.should()
-const utils = require('./test-utils')
 const testCaseFactory = require('./test-case-factory')
 
 describe('Nightwatch runner', () => {
-  it('should handle simple tests', (done) => {
-    testCaseFactory
+  it('should handle simple tests', () => {
+    return testCaseFactory
       .create('aaaa')
       .feature('adition')
       .scenario('small numbers')
@@ -14,12 +13,10 @@ describe('Nightwatch runner', () => {
       .and('User enter 5 in B field')
       .when('User press Add button')
       .then('The result should contain 9')
-      .build()
-
-    return utils.runTest('aaaa')
-      .then((result) => {
-        result.length.should.equal(1)
+      .run()
+      .then((features) => {
+        console.log(require('util').inspect(features, null, 10))
+        features[0].scenarios[0].result.status.should.equal('passed')
       })
-      .then(done, done)
   })
 })

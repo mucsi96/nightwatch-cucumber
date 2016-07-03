@@ -1,5 +1,6 @@
 'use strict'
 
+const spawn = require('child_process').spawn
 const mkdirp = require('mkdirp')
 const fs = require('fs')
 const path = require('path')
@@ -49,14 +50,14 @@ class TestCaseFactory {
     return this
   }
 
-  build () {
+  _build () {
     rimraf.sync('tmp')
-    const testCasePath = path.join(process.cwd(), 'tmp', this.name)
-    mkdirp.sync(testCasePath)
-    fs.writeFileSync(path.join(testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate)
-    mkdirp.sync(path.join(testCasePath, 'features', 'step_definitions'))
+    this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
+    mkdirp.sync(this.testCasePath)
+    fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate)
+    mkdirp.sync(path.join(this.testCasePath, 'features', 'step_definitions'))
     Object.keys(this.features).forEach((featureName) => {
-      const featureFile = path.join(testCasePath, 'features', `${featureName}.js`)
+      const featureFile = path.join(this.testCasePath, 'features', `${featureName}.feature`)
       fs.writeFileSync(featureFile, `Feature: ${featureName}\n\n`)
       this.features[featureName].scenarios.forEach((scenario) => {
         fs.writeFileSync(featureFile, `Scenario: ${scenario.name}\n\n`, { flag: 'a' })
@@ -65,6 +66,95 @@ class TestCaseFactory {
         })
       })
     })
+  }
+
+  run () {
+    this._build()
+    const nightwatchBin = path.resolve(path.join(__dirname, '..', 'node_modules', '.bin', 'nightwatch'))
+
+    return new Promise((resolve, reject) => {
+      const nightwatch = spawn(nightwatchBin, [], {
+        stdio: 'inherit',
+        cwd: this.testCasePath
+      })
+
+      nightwatch.on('close', () => {
+        try {
+          const jsonReport = path.join(this.testCasePath, 'reports', 'cucumber.json')
+          const json = fs.readFileSync(jsonReport, 'utf8')
+          const result = JSON.parse(json)
+          resolve(this.enhaceResult(result))
+        } catch (err) {
+          reject(err)
+        }
+      })
+    })
+  }
+
+  enhaceResult (result) {
+    result.forEach((feature) => {
+      let featureResult = {
+        scenarioCounts: {}
+      }
+
+      let scenarios = []
+
+      feature.elements.forEach((element) => {
+        if (element.type !== 'scenario') return
+
+        scenarios.push(element)
+
+        let scenarioResult = {
+          status: 'passed',
+          stepCounts: {}
+        }
+
+        element.steps.forEach((step) => {
+          let stepStatus = step.result.status
+          if (this.shouldUpdateStatus(scenarioResult.status, stepStatus)) {
+            scenarioResult.status = stepStatus
+          }
+
+          if (typeof scenarioResult.stepCounts[stepStatus] !== 'number') {
+            scenarioResult.stepCounts[stepStatus] = 1
+          } else {
+            scenarioResult.stepCounts[stepStatus] += 1
+          }
+        })
+
+        Object.assign(element, { result: scenarioResult })
+
+        if (typeof featureResult.scenarioCounts[scenarioResult.status] !== 'number') {
+          featureResult.scenarioCounts[scenarioResult.status] = 1
+        } else {
+          featureResult.scenarioCounts[scenarioResult.status] += 1
+        }
+      })
+
+      if (featureResult.scenarioCounts.failed > 0 || featureResult.scenarioCounts.ambiguous > 0) {
+        featureResult.status = 'failed'
+      } else {
+        featureResult.status = 'passed'
+      }
+
+      Object.assign(feature, { result: featureResult, scenarios })
+    })
+
+    return result
+  }
+
+  shouldUpdateStatus (status, stepStatus) {
+    switch (stepStatus) {
+      case 'failed':
+        return true
+      case 'ambiguous':
+      case 'pending':
+      case 'skipped':
+      case 'undefined':
+        return status === 'passed'
+      default:
+        return false
+    }
   }
 }
 
