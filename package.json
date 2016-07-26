@@ -25,6 +25,7 @@
     "lodash": "^4.11.1",
     "mkdirp": "^0.5.1",
     "object-assign": "^4.0.1",
+    "open": "0.0.5",
     "resolve": "^1.1.7",
     "semver": "^5.1.0",
     "syntax-error": "^1.1.4",
