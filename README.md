@@ -335,7 +335,8 @@ The default configuration object is.
   featureFiles: 'features',
   stepDefinitions: 'features/step_definitions',
   closeSession: 'afterFeature',
-  htmlReport: 'reports/index.html'
+  htmlReport: 'reports/index.html',
+  openReport: false
 }
 ```
 
