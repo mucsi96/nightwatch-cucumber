@@ -130,6 +130,8 @@ HTML report generation is enabled by default. It's default location is `reports/
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-html-report.png)
 
+Using the `openReport` option it is possible to make the report automatically open once test run finished.
+
 ### Feature background
 You can use feature background to avoid copying and pasting of steps. The background runs before each scenario after beforeScenario hooks.
 
@@ -439,6 +441,7 @@ Ben Grabham,
 [Alfredo Moretta (@Alfredo81)](https://github.com/Alfredo81),
 [Jeffrey Effendy (@jeffrey-effendy)](https://github.com/jeffrey-effendy)
 [Lawrence (@ldabiralai)](https://github.com/ldabiralai)
+[Domenico Gemoli (@aberonni)](https://github.com/aberonni)
 
 # Change log
 

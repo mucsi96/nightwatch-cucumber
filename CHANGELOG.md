@@ -1,4 +1,8 @@
 # Change Log
+## 4.1.0 (August 3, 2016)
+Features:
+  - Add openReport option to automatically open report once test has finished running
+
 ## 4.0.0 (June 25, 2016)
 Features:
   - Support for cucumber 1.2.0
