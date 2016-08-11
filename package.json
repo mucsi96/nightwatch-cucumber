@@ -22,6 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "co": "^4.6.0",
+    "debug": "^2.2.0",
     "glob": "^7.0.0",
     "lodash": "^4.11.1",
     "mkdirp": "^0.5.1",
@@ -79,8 +80,8 @@
   ],
   "devDependencies": {
     "chromedriver": "^2.20.0",
-    "cucumber": "^1.2.0",
-    "nightwatch": "^0.9.1",
+    "cucumber": "^1.2.2",
+    "nightwatch": "^0.9.6",
     "phantomjs-prebuilt": "^2.1.6",
     "pre-commit": "^1.1.2",
     "selenium-server": "^2.48.2",
