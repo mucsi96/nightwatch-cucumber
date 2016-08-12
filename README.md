@@ -5,7 +5,7 @@
 [![Dependencies](https://david-dm.org/mucsi96/nightwatch-cucumber.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber)
 [Ask question](https://groups.google.com/d/forum/nightwatch-cucumber)
 
-[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=7)](https://nodei.co/npm/nightwatch-cucumber/)
+[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=8)](https://nodei.co/npm/nightwatch-cucumber/)
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 This module enables to use a BDD-style approach for cross-browser testing:
