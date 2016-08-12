@@ -2,6 +2,10 @@
 ## 4.1.0 (August 12, 2016)
 Bugfixes:
   - Fix Cucumber console summary using Nightwatch runner (#64)
+  - Fix Cucumber HTML report piechart
+
+Features:
+  - Make open by default all feature and scenario collapsable panels in Cucumber HTML report
 
 ## 4.1.0 (August 3, 2016)
 Features:
