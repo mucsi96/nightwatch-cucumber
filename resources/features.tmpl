@@ -19,7 +19,7 @@
           </a>
         </h4>
       </div>
-      <div id="collapseFeature<%= featureIndex %>" class="panel-collapse collapse">
+      <div id="collapseFeature<%= featureIndex %>" class="panel-collapse collapse in">
         <div class="panel-body">
           <% _.each(feature.elements, function(element, scenarioIndex) { %>
             <div class="panel panel-default">
@@ -38,7 +38,7 @@
                   </a>
                 </h4>
               </div>
-              <div id="collapseScenario<%= featureIndex %><%= scenarioIndex %>" class="panel-collapse collapse">
+              <div id="collapseScenario<%= featureIndex %><%= scenarioIndex %>" class="panel-collapse collapse in">
                 <div class="panel-body">
                   <% _.each(element.steps, function(step, stepIndex) { %>
                     <p class="scenario-container">
