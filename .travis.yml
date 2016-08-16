@@ -9,7 +9,7 @@ node_js:
   - '4'
 before_install:
   - npm i -g npm@^2.0.0
-  - npm run install-nightwatch-cucumber-with-pack
+  - npm run install-nightwatch-cucumber-with-link
 before_script:
   - npm prune
 after_success:
