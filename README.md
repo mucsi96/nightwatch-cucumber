@@ -2,7 +2,11 @@
 
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
-[![Dependencies](https://david-dm.org/mucsi96/nightwatch-cucumber.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Dependency Status](https://david-dm.org/mucsi96/nightwatch-cucumber/caribou.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber/caribou)
+[![devDependency Status](https://david-dm.org/mucsi96/nightwatch-cucumber/caribou/dev-status.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber/caribou#info=devDependencies)
 [Ask question](https://groups.google.com/d/forum/nightwatch-cucumber)
 
 [![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=8)](https://nodei.co/npm/nightwatch-cucumber/)
@@ -445,7 +449,7 @@ Ben Grabham,
 
 # Change log
 
-See [CHANGELOG.md](https://github.com/mucsi96/nightwatch-cucumber/blob/master/CHANGELOG.md)
+See [releases](https://github.com/mucsi96/nightwatch-cucumber/releases)
 
 # License
 
