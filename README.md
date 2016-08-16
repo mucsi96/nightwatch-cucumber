@@ -5,12 +5,11 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![Dependency Status](https://david-dm.org/mucsi96/nightwatch-cucumber/caribou.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber/caribou)
-[![devDependency Status](https://david-dm.org/mucsi96/nightwatch-cucumber/caribou/dev-status.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber/caribou#info=devDependencies)
+[![dependencies Status](https://david-dm.org/mucsi96/nightwatch-cucumber/status.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber)
+[![devDependencies Status](https://david-dm.org/mucsi96/nightwatch-cucumber/dev-status.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber?type=dev)
 [Ask question](https://groups.google.com/d/forum/nightwatch-cucumber)
 
 [![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=8)](https://nodei.co/npm/nightwatch-cucumber/)
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 This module enables to use a BDD-style approach for cross-browser testing:
 - Describe user stories in [Cucumber](https://cucumber.io/) using [Gherkin syntax](https://cucumber.io/docs/reference)
