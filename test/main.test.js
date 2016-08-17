@@ -9,6 +9,22 @@ chai.use((_chai, utils) => {
     new Assertion(this._obj).to.equal('passed')
   })
 
+  Assertion.addProperty('undefined', function () {
+    new Assertion(this._obj).to.equal('undefined')
+  })
+
+  Assertion.addProperty('failed', function () {
+    new Assertion(this._obj).to.equal('failed')
+  })
+
+  Assertion.addProperty('ambiguous', function () {
+    new Assertion(this._obj).to.equal('ambiguous')
+  })
+
+  Assertion.addProperty('pending', function () {
+    new Assertion(this._obj).to.equal('pending')
+  })
+
 })
 
 before(() => {
