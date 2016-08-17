@@ -66,7 +66,7 @@ module.exports = {
   ...
 }
 ```
-For more examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
+For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
 ## Demo Test
 By default feature files are located in `features` folder. You can change this using configuration object.
@@ -109,7 +109,7 @@ module.exports = function() {
 }
 ```
 
-For more examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
+For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
 ## Running tests
 
@@ -406,7 +406,7 @@ module.exports = {
   ...
 }
 ```
-For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
+For examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
 ## Running tests
 
