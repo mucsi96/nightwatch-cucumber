@@ -31,6 +31,12 @@ class TestCaseFactory {
     return this
   }
 
+  background () {
+    this.currentScenario = { steps: [] }
+    this.currentFeature.background = this.currentScenario
+    return this
+  }
+
   given (name, stepDefinition) {
     this.currentScenario.steps.push({ type: 'Given', name })
     if (stepDefinition) {
@@ -77,11 +83,17 @@ class TestCaseFactory {
     fs.writeFileSync(path.join(this.testCasePath, 'features', 'step_definitions', 'steps.js'), steps)
     Object.keys(this.features).forEach((featureName) => {
       const featureFile = path.join(this.testCasePath, 'features', `${featureName}.feature`)
-      fs.writeFileSync(featureFile, `Feature: ${featureName}\n\n`)
+      fs.writeFileSync(featureFile, `Feature: ${featureName}\n`)
+      if (this.features[featureName].background) {
+        fs.writeFileSync(featureFile, `\n  Background:\n`, { flag: 'a' })
+        this.features[featureName].background.steps.forEach((step) => {
+          fs.writeFileSync(featureFile, `    ${step.type} ${step.name}\n`, { flag: 'a' })
+        })
+      }
       this.features[featureName].scenarios.forEach((scenario) => {
-        fs.writeFileSync(featureFile, `Scenario: ${scenario.name}\n\n`, { flag: 'a' })
+        fs.writeFileSync(featureFile, `\n  Scenario: ${scenario.name}\n`, { flag: 'a' })
         scenario.steps.forEach((step) => {
-          fs.writeFileSync(featureFile, `${step.type} ${step.name}\n`, { flag: 'a' })
+          fs.writeFileSync(featureFile, `    ${step.type} ${step.name}\n`, { flag: 'a' })
         })
       })
     })
