@@ -16,7 +16,7 @@ describe('Nightwatch runner', () => {
       .run()
       .then((features) => {
         console.log(require('util').inspect(features, null, 10))
-        features[0].scenarios[0].result.status.should.equal('passed')
+        features[0].scenarios[0].result.status.should.be.passed
       })
   })
 })
