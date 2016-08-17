@@ -83,10 +83,11 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chromedriver": "^2.20.0",
-    "mocha": "^2.5.3",
     "cucumber": "^1.2.2",
+    "mocha": "^2.5.3",
     "nightwatch": "^0.9.6",
     "phantomjs-prebuilt": "^2.1.6",
+    "rimraf": "^2.5.4",
     "selenium-server": "^2.48.2",
     "semantic-release": "^4.3.5",
     "snazzy": "^4.0.0",

@@ -5,7 +5,7 @@ const testApp = require('./test-app')
 chai.use((_chai, utils) => {
   const Assertion = _chai.Assertion
 
-  Assertion.addProperty('passed', () => {
+  Assertion.addProperty('passed', function () {
     new Assertion(this._obj).to.equal('passed')
   })
 

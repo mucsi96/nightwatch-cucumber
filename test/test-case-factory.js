@@ -11,6 +11,7 @@ class TestCaseFactory {
   constructor (name) {
     this.name = name
     this.features = {}
+    this.stepDefinitions = []
     return this
   }
 
@@ -30,23 +31,39 @@ class TestCaseFactory {
     return this
   }
 
-  given (name) {
+  given (name, stepDefinition) {
     this.currentScenario.steps.push({ type: 'Given', name })
+    if (stepDefinition) {
+      this.stepDefinitions.push(`\n  this.Given(/^${name}$/, ${stepDefinition.toString()})\n`)
+    }
+    this.context = 'Given'
     return this
   }
 
-  when (name) {
+  when (name, stepDefinition) {
     this.currentScenario.steps.push({ type: 'When', name })
+    if (stepDefinition) {
+      this.stepDefinitions.push(`\n  this.When(/^${name}$/, ${stepDefinition.toString()})\n`)
+    }
+    this.context = 'When'
     return this
   }
 
-  then (name) {
+  then (name, stepDefinition) {
     this.currentScenario.steps.push({ type: 'Then', name })
+    if (stepDefinition) {
+      this.stepDefinitions.push(`\n  this.Then(/^${name}$/, ${stepDefinition.toString()})\n`)
+    }
+    this.context = 'Then'
     return this
   }
 
-  and (name) {
+  and (name, stepDefinition) {
+    if (!this.context) throw new Error('And used without context')
     this.currentScenario.steps.push({ type: 'And', name })
+    if (stepDefinition) {
+      this.stepDefinitions.push(`\n  this.${this.context}(/^${name}$/, ${stepDefinition.toString()})\n`)
+    }
     return this
   }
 
@@ -56,6 +73,8 @@ class TestCaseFactory {
     mkdirp.sync(this.testCasePath)
     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate)
     mkdirp.sync(path.join(this.testCasePath, 'features', 'step_definitions'))
+    const steps = `module.exports = function () {\n${this.stepDefinitions.join('')}\n}`
+    fs.writeFileSync(path.join(this.testCasePath, 'features', 'step_definitions', 'steps.js'), steps)
     Object.keys(this.features).forEach((featureName) => {
       const featureFile = path.join(this.testCasePath, 'features', `${featureName}.feature`)
       fs.writeFileSync(featureFile, `Feature: ${featureName}\n\n`)
@@ -68,12 +87,18 @@ class TestCaseFactory {
     })
   }
 
-  run () {
+  run (environment) {
     this._build()
+    const args = []
     const nightwatchPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'nightwatch', 'bin', 'runner.js'))
 
+    if (environment) {
+      args.push('-e')
+      args.push(environment)
+    }
+
     return new Promise((resolve, reject) => {
-      const nightwatch = fork(nightwatchPath, [], {
+      const nightwatch = fork(nightwatchPath, args, {
         stdio: 'inherit',
         cwd: this.testCasePath
       })

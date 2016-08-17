@@ -12,9 +12,12 @@ const mimeTypes = {
 }
 
 const server = http.createServer((req, res) => {
-  const uri = url.parse(req.url).pathname
-  const filename = path.join(__filename, uri)
-  path.exists(filename, (exists) => {
+  let uri = url.parse(req.url).pathname
+
+  if (uri === '/') uri = '/index.html'
+
+  const filename = path.join(__dirname, uri)
+  fs.exists(filename, (exists) => {
     if (!exists) {
       res.writeHead(404, {'Content-Type': 'text/plain'})
       res.write('404 Not Found\n')
@@ -30,11 +33,16 @@ const server = http.createServer((req, res) => {
 })
 
 function start () {
-  server.listen(1337)
+  server.listen(8087)
 }
 
 function stop () {
   server.close()
+}
+
+if (require.main === module) {
+  console.log('Server listening on port 8087')
+  start()
 }
 
 module.exports = {
