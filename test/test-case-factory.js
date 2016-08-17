@@ -1,6 +1,6 @@
 'use strict'
 
-const spawn = require('child_process').spawn
+const fork = require('child_process').fork
 const mkdirp = require('mkdirp')
 const fs = require('fs')
 const path = require('path')
@@ -70,10 +70,10 @@ class TestCaseFactory {
 
   run () {
     this._build()
-    const nightwatchBin = path.resolve(path.join(__dirname, '..', 'node_modules', '.bin', 'nightwatch'))
+    const nightwatchPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'nightwatch', 'bin', 'runner.js'))
 
     return new Promise((resolve, reject) => {
-      const nightwatch = spawn(nightwatchBin, [], {
+      const nightwatch = fork(nightwatchPath, [], {
         stdio: 'inherit',
         cwd: this.testCasePath
       })
