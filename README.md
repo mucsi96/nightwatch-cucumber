@@ -2,11 +2,14 @@
 
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
-[![Dependencies](https://david-dm.org/mucsi96/nightwatch-cucumber.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![dependencies Status](https://david-dm.org/mucsi96/nightwatch-cucumber/status.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber)
+[![devDependencies Status](https://david-dm.org/mucsi96/nightwatch-cucumber/dev-status.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber?type=dev)
 [Ask question](https://groups.google.com/d/forum/nightwatch-cucumber)
 
-[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=5)](https://nodei.co/npm/nightwatch-cucumber/)
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=8)](https://nodei.co/npm/nightwatch-cucumber/)
 
 This module enables to use a BDD-style approach for cross-browser testing:
 - Describe user stories in [Cucumber](https://cucumber.io/) using [Gherkin syntax](https://cucumber.io/docs/reference)
@@ -129,6 +132,8 @@ node_modules/.bin/nightwatch
 HTML report generation is enabled by default. It's default location is `reports/cucumber.html`. You can disable or change this using configuration object.
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-html-report.png)
+
+Using the `openReport` option it is possible to make the report automatically open once test run finished.
 
 ### Feature background
 You can use feature background to avoid copying and pasting of steps. The background runs before each scenario after beforeScenario hooks.
@@ -335,7 +340,8 @@ The default configuration object is.
   featureFiles: 'features',
   stepDefinitions: 'features/step_definitions',
   closeSession: 'afterFeature',
-  htmlReport: 'reports/index.html'
+  htmlReport: 'reports/index.html',
+  openReport: false
 }
 ```
 
@@ -438,10 +444,11 @@ Ben Grabham,
 [Alfredo Moretta (@Alfredo81)](https://github.com/Alfredo81),
 [Jeffrey Effendy (@jeffrey-effendy)](https://github.com/jeffrey-effendy)
 [Lawrence (@ldabiralai)](https://github.com/ldabiralai)
+[Domenico Gemoli (@aberonni)](https://github.com/aberonni)
 
 # Change log
 
-See [CHANGELOG.md](https://github.com/mucsi96/nightwatch-cucumber/blob/master/CHANGELOG.md)
+See [releases](https://github.com/mucsi96/nightwatch-cucumber/releases)
 
 # License
 

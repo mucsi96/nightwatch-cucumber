@@ -1,12 +1,28 @@
 /* global google */
 window.drawChart = function (chartData) {
-  var data = google.visualization.arrayToDataTable([
-    ['Task', 'Cucumber Results'],
-    ['Passed', chartData.passed],
-    ['Failed', chartData.failed],
-    ['Pending', chartData.notdefined],
-    ['Skipped', chartData.skipped]
-  ])
+  var chartDataArray = [['Task', 'Cucumber Results']]
+  var colors = []
+
+  if (chartData.passed) {
+    chartDataArray.push(['Passed', chartData.passed])
+    colors.push('#5cb85c')
+  }
+
+  if (chartData.failed) {
+    chartDataArray.push(['Failed', chartData.failed])
+    colors.push('#d9534f')
+  }
+
+  if (chartData.notdefined) {
+    chartDataArray.push(['Pending', chartData.notdefined])
+    colors.push('#5bc0de')
+  }
+  if (chartData.skipped) {
+    chartDataArray.push(['Skipped', chartData.skipped])
+    colors.push('#f0ad4e')
+  }
+
+  var data = google.visualization.arrayToDataTable(chartDataArray)
 
   var total = chartData.passed + chartData.failed + (chartData.notdefined || 0) + (chartData.skipped || 0)
   var title
@@ -22,7 +38,7 @@ window.drawChart = function (chartData) {
     height: 240,
     title: title,
     is3D: true,
-    colors: ['#5cb85c', '#d9534f', '#5bc0de', '#f0ad4e'],
+    colors: colors,
     fontSize: '13',
     fontName: '"Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif',
     slices: {

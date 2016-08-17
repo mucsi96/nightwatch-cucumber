@@ -1,6 +1,5 @@
 {
   "name": "nightwatch-cucumber",
-  "version": "4.0.0",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
@@ -16,15 +15,18 @@
     "Fabio Quinzi <fabio.quinzi@gmail.com>",
     "Alfredo Moretta",
     "Jeffrey Effendy <wawa_union.zone@live.com>",
-    "Lawrence"
+    "Lawrence",
+    "Domenico Gemoli <domenicogemoli@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
     "co": "^4.6.0",
+    "debug": "^2.2.0",
     "glob": "^7.0.0",
     "lodash": "^4.11.1",
     "mkdirp": "^0.5.1",
     "object-assign": "^4.0.1",
+    "open": "0.0.5",
     "resolve": "^1.1.7",
     "semver": "^5.1.0",
     "syntax-error": "^1.1.4",
@@ -34,6 +36,7 @@
     "test": "test"
   },
   "scripts": {
+    "commit": "git-cz",
     "code-style": "standard --verbose | snazzy",
     "nightwatch-simple-test": "cd test/nightwatch-simple-test && nightwatch && cd ../..",
     "nightwatch-multi-test": "cd test/nightwatch-multi-test && nightwatch && cd ../..",
@@ -51,11 +54,12 @@
     "install-nightwatch-cucumber-with-link": "npm link && cd test && npm link nightwatch-cucumber",
     "install-nightwatch-cucumber-with-pack": "npm pack && cd test && npm install ../nightwatch-cucumber-*.tgz",
     "test": "npm run code-style && npm run nightwatch-simple-test && npm run nightwatch-reporter-test && npm run nightwatch-multi-test && npm run nightwatch-hook-test && npm run nightwatch-background-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-custom-folder-test && npm run nightwatch-page-object-test && npm run nightwatch-outlines-test && npm run nightwatch-paralell-test && npm run cucumber-simple-test && npm run cucumber-multi-test",
-    "mocha-test": "mocha --timeout 0"
+    "mocha-test": "mocha --timeout 0",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mucsi96/nightwatch-cucumber.git"
+    "url": "https://github.com/mucsi96/nightwatch-cucumber.git"
   },
   "keywords": [
     "nightwatch",
@@ -80,16 +84,12 @@
     "chai": "^3.5.0",
     "chromedriver": "^2.20.0",
     "mocha": "^2.5.3",
-    "cucumber": "^1.2.0",
-    "nightwatch": "^0.9.1",
+    "cucumber": "^1.2.2",
+    "nightwatch": "^0.9.6",
     "phantomjs-prebuilt": "^2.1.6",
-    "pre-commit": "^1.1.2",
-    "rimraf": "^2.5.2",
     "selenium-server": "^2.48.2",
+    "semantic-release": "^4.3.5",
     "snazzy": "^4.0.0",
     "standard": "^7.1.0"
-  },
-  "pre-commit": [
-    "code-style"
-  ]
+  }
 }
