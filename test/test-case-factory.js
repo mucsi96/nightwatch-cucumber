@@ -10,8 +10,12 @@ const nightwatchConfTemplate = fs.readFileSync(path.join(process.cwd(), 'test', 
 class TestCaseFactory {
   constructor (name) {
     this.name = name
-    this.features = {}
+    this.groups = []
     this.stepDefinitions = []
+    this.currentGroup = {
+      features: {}
+    }
+    this.groups.push(this.currentGroup)
     return this
   }
 
@@ -19,9 +23,18 @@ class TestCaseFactory {
     return new TestCaseFactory(name)
   }
 
+  group (name) {
+    this.currentGroup = {
+      name,
+      features: {}
+    }
+    this.groups.push(this.currentGroup)
+    return this
+  }
+
   feature (name) {
     this.currentFeature = { scenarios: [] }
-    this.features[name] = this.currentFeature
+    this.currentGroup.features[name] = this.currentFeature
     return this
   }
 
@@ -78,38 +91,44 @@ class TestCaseFactory {
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate)
+
     mkdirp.sync(path.join(this.testCasePath, 'features', 'step_definitions'))
     const steps = `module.exports = function () {\n${this.stepDefinitions.join('')}\n}`
-    fs.writeFileSync(path.join(this.testCasePath, 'features', 'step_definitions', 'steps.js'), steps)
-    Object.keys(this.features).forEach((featureName) => {
-      const featureFile = path.join(this.testCasePath, 'features', `${featureName}.feature`)
-      fs.writeFileSync(featureFile, `Feature: ${featureName}\n`)
-      if (this.features[featureName].background) {
-        fs.writeFileSync(featureFile, `\n  Background:\n`, { flag: 'a' })
-        this.features[featureName].background.steps.forEach((step) => {
-          fs.writeFileSync(featureFile, `    ${step.type} ${step.name}\n`, { flag: 'a' })
-        })
-      }
-      this.features[featureName].scenarios.forEach((scenario) => {
-        fs.writeFileSync(featureFile, `\n  Scenario: ${scenario.name}\n`, { flag: 'a' })
-        scenario.steps.forEach((step) => {
-          fs.writeFileSync(featureFile, `    ${step.type} ${step.name}\n`, { flag: 'a' })
+    if (this.stepDefinitions.length) {
+      fs.writeFileSync(path.join(this.testCasePath, 'features', 'step_definitions', 'steps.js'), steps)
+    }
+
+    let groupPath
+    this.groups.forEach((group) => {
+      if (group.name) groupPath = path.join(this.testCasePath, 'features', group.name)
+      else groupPath = path.join(this.testCasePath, 'features')
+      mkdirp.sync(groupPath)
+      Object.keys(group.features).forEach((featureName) => {
+        const featureFile = path.join(groupPath, `${featureName}.feature`)
+        fs.writeFileSync(featureFile, `Feature: ${featureName}\n`)
+        if (group.features[featureName].background) {
+          fs.writeFileSync(featureFile, `\n  Background:\n`, { flag: 'a' })
+          group.features[featureName].background.steps.forEach((step) => {
+            fs.writeFileSync(featureFile, `    ${step.type} ${step.name}\n`, { flag: 'a' })
+          })
+        }
+        group.features[featureName].scenarios.forEach((scenario) => {
+          fs.writeFileSync(featureFile, `\n  Scenario: ${scenario.name}\n`, { flag: 'a' })
+          scenario.steps.forEach((step) => {
+            fs.writeFileSync(featureFile, `    ${step.type} ${step.name}\n`, { flag: 'a' })
+          })
         })
       })
     })
   }
 
-  run (environment) {
+  run (runner, args) {
     this._build()
-    const args = []
+    args = args || []
     const nightwatchPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'nightwatch', 'bin', 'runner.js'))
 
-    if (environment) {
-      args.push('-e')
-      args.push(environment)
-    }
-
     return new Promise((resolve, reject) => {
+      console.log('Executing > ', nightwatchPath, args.join(' '));
       const nightwatch = fork(nightwatchPath, args, {
         stdio: 'inherit',
         cwd: this.testCasePath

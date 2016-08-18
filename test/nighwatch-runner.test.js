@@ -66,7 +66,7 @@ describe('Nightwatch runner', () => {
 
   it('should handle pending steps', () => {
     return testCaseFactory
-      .create('ambiguousStepTest')
+      .create('pendingStepTest')
       .feature('adition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', function () {this.init()})
@@ -82,7 +82,7 @@ describe('Nightwatch runner', () => {
 
   it('should handle failed steps', () => {
     return testCaseFactory
-      .create('ambiguousStepTest')
+      .create('failedStepTest')
       .feature('adition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', function () {this.init()})
@@ -101,7 +101,7 @@ describe('Nightwatch runner', () => {
 
   it('should handle skipped steps', () => {
     return testCaseFactory
-      .create('ambiguousStepTest')
+      .create('skippedStepTest')
       .feature('adition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', function () {this.init()})
@@ -121,7 +121,7 @@ describe('Nightwatch runner', () => {
 
   it('should handle background steps', () => {
     return testCaseFactory
-      .create('simpleTest')
+      .create('backgroundStepTest')
       .feature('adition')
       .background()
       .given('User is on the simple calculator page', function () {this.init()})
@@ -142,6 +142,132 @@ describe('Nightwatch runner', () => {
         features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
         features[0].scenarios[1].result.status.should.be.passed
         features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+      })
+  })
+
+  it('should handle test groups', () => {
+    return testCaseFactory
+      .create('testGroupTest')
+      .group('positive')
+      .feature('positive adition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', function () {this.init()})
+      .and('User enter 4 in A field', function () {this.setValue('#a', 4)})
+      .and('User enter 5 in B field', function () {this.setValue('#b', 5)})
+      .when('User press Add button', function () {this.click('#add')})
+      .then('The result should contain 9', function () {this.assert.containsText('#result', 9)})
+      .scenario('big numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter 4 in A field')
+      .and('User enter 5 in B field')
+      .when('User press Add button')
+      .then('The result should contain 9')
+      .group('negative')
+      .feature('negative adition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter -4 in A field', function () {this.setValue('#a', -4)})
+      .and('User enter -5 in B field', function () {this.setValue('#b', -5)})
+      .when('User press Add button')
+      .then('The result should contain -9', function () {this.assert.containsText('#result', -9)})
+      .scenario('big numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter -4 in A field')
+      .and('User enter -5 in B field')
+      .when('User press Add button')
+      .then('The result should contain -9')
+      .run()
+      .then((features) => {
+        features[0].result.status.should.be.passed
+        features[0].result.scenarioCounts.should.deep.equal({passed: 2})
+        features[0].scenarios[0].result.status.should.be.passed
+        features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        features[0].scenarios[1].result.status.should.be.passed
+        features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+        features[1].result.status.should.be.passed
+        features[1].result.scenarioCounts.should.deep.equal({passed: 2})
+        features[1].scenarios[0].result.status.should.be.passed
+        features[1].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        features[1].scenarios[1].result.status.should.be.passed
+        features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+      })
+  })
+
+  it('should handle test group filtering', () => {
+    return testCaseFactory
+      .create('testGroupTest')
+      .group('positive')
+      .feature('positive adition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', function () {this.init()})
+      .and('User enter 4 in A field', function () {this.setValue('#a', 4)})
+      .and('User enter 5 in B field', function () {this.setValue('#b', 5)})
+      .when('User press Add button', function () {this.click('#add')})
+      .then('The result should contain 9', function () {this.assert.containsText('#result', 9)})
+      .scenario('big numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter 4 in A field')
+      .and('User enter 5 in B field')
+      .when('User press Add button')
+      .then('The result should contain 9')
+      .group('negative')
+      .feature('negative adition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter -4 in A field', function () {this.setValue('#a', -4)})
+      .and('User enter -5 in B field', function () {this.setValue('#b', -5)})
+      .when('User press Add button')
+      .then('The result should contain -9', function () {this.assert.containsText('#result', -9)})
+      .scenario('big numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter -4 in A field')
+      .and('User enter -5 in B field')
+      .when('User press Add button')
+      .then('The result should contain -9')
+      .run('nightwatch', ['--group', 'negative'])
+      .then((features) => {
+        features.length.should.equal(1)
+        features[0].name.should.equal('negative adition')
+        features[0].result.status.should.be.passed
+      })
+  })
+
+  it.only('should handle test group skipping', () => {
+    return testCaseFactory
+      .create('testGroupTest')
+      .group('positive')
+      .feature('positive adition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', function () {this.init()})
+      .and('User enter 4 in A field', function () {this.setValue('#a', 4)})
+      .and('User enter 5 in B field', function () {this.setValue('#b', 5)})
+      .when('User press Add button', function () {this.click('#add')})
+      .then('The result should contain 9', function () {this.assert.containsText('#result', 9)})
+      .scenario('big numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter 4 in A field')
+      .and('User enter 5 in B field')
+      .when('User press Add button')
+      .then('The result should contain 9')
+      .group('negative')
+      .feature('negative adition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter -4 in A field', function () {this.setValue('#a', -4)})
+      .and('User enter -5 in B field', function () {this.setValue('#b', -5)})
+      .when('User press Add button')
+      .then('The result should contain -9', function () {this.assert.containsText('#result', -9)})
+      .scenario('big numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter -4 in A field')
+      .and('User enter -5 in B field')
+      .when('User press Add button')
+      .then('The result should contain -9')
+      .run('nightwatch', ['--skipgroup', 'positive'])
+      .then((features) => {
+        features.length.should.equal(1)
+        features[0].name.should.equal('negative adition')
+        features[0].result.status.should.be.passed
       })
   })
 
