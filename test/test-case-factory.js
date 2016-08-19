@@ -174,8 +174,9 @@ class TestCaseFactory {
     const nightwatchPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'nightwatch', 'bin', 'runner.js'))
 
     return new Promise((resolve, reject) => {
-      args.unshift('cover', nightwatchPath, '--config', istanbulConfig, '--root', istanbulRoot, '--dir', istanbulDir)
-      console.log('Executing > ', istanbulPath, args.join(' '))
+      const origArgs = args.slice()
+      args.unshift('cover', nightwatchPath, '--config', istanbulConfig, '--root', istanbulRoot, '--dir', istanbulDir, '--')
+      console.log('Executing > ', nightwatchPath, origArgs.join(' '))
       const nightwatch = fork(istanbulPath, args, {
         stdio: 'inherit',
         cwd: this.testCasePath
