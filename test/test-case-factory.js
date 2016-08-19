@@ -44,6 +44,12 @@ class TestCaseFactory {
     return this
   }
 
+  scenarioOutline (name) {
+    this.currentScenario = { name, steps: [], examples: [] }
+    this.currentFeature.scenarios.push(this.currentScenario)
+    return this
+  }
+
   background () {
     this.currentScenario = { steps: [] }
     this.currentFeature.background = this.currentScenario
@@ -51,39 +57,91 @@ class TestCaseFactory {
   }
 
   given (name, stepDefinition) {
-    this.currentScenario.steps.push({ type: 'Given', name })
-    if (stepDefinition) {
-      this.stepDefinitions.push(`\n  this.Given(/^${name}$/, ${stepDefinition.toString()})\n`)
-    }
     this.context = 'Given'
-    return this
+    return this._step(name, 'Given', 'Given', stepDefinition)
   }
 
   when (name, stepDefinition) {
-    this.currentScenario.steps.push({ type: 'When', name })
-    if (stepDefinition) {
-      this.stepDefinitions.push(`\n  this.When(/^${name}$/, ${stepDefinition.toString()})\n`)
-    }
     this.context = 'When'
-    return this
+    return this._step(name, 'When', 'When', stepDefinition)
   }
 
   then (name, stepDefinition) {
-    this.currentScenario.steps.push({ type: 'Then', name })
-    if (stepDefinition) {
-      this.stepDefinitions.push(`\n  this.Then(/^${name}$/, ${stepDefinition.toString()})\n`)
-    }
     this.context = 'Then'
-    return this
+    return this._step(name, 'Then', 'Then', stepDefinition)
   }
 
   and (name, stepDefinition) {
     if (!this.context) throw new Error('And used without context')
-    this.currentScenario.steps.push({ type: 'And', name })
+    return this._step(name, 'And', this.context, stepDefinition)
+  }
+
+  _step (name, scenarioStepType, definitionType, stepDefinition) {
+    if (!this.context) throw new Error('And used without context')
+    this.currentScenario.steps.push({ type: scenarioStepType, name })
     if (stepDefinition) {
-      this.stepDefinitions.push(`\n  this.${this.context}(/^${name}$/, ${stepDefinition.toString()})\n`)
+      const regex = `/^${name.replace(/<(.*?)>/g, "(.*?)")}$/`
+      this.stepDefinitions.push(`\n  this.${definitionType}(${regex}, ${stepDefinition.toString()})\n`)
     }
     return this
+  }
+
+  example () {
+    this.currentScenario.examples.push(Array.prototype.slice.call(arguments))
+    return this
+  }
+
+  _buildExamples (featureFile, scenario) {
+    const maxColWidths = []
+    fs.writeFileSync(featureFile, `\n  Examples:\n`, { flag: 'a' })
+    scenario.examples.forEach((example) => {
+      example.forEach((col, x) => {
+        if (!maxColWidths[x] || col.length > maxColWidths[x]) {
+          maxColWidths[x] = col.length
+        }
+      })
+    })
+    scenario.examples.forEach((example) => {
+      const row = example.map((col, x) => {
+        return pad(col, maxColWidths[x])
+      })
+      fs.writeFileSync(featureFile, `    | ${row.join(' | ')} |\n`, { flag: 'a' })
+    })
+  }
+
+  _buildScenario (featureFile, scenario) {
+    if (scenario.examples) {
+      fs.writeFileSync(featureFile, `\nScenario Outline: ${scenario.name}\n\n`, { flag: 'a' })
+    } else {
+      fs.writeFileSync(featureFile, `\nScenario: ${scenario.name}\n\n`, { flag: 'a' })
+    }
+    scenario.steps.forEach((step) => {
+      fs.writeFileSync(featureFile, `  ${step.type} ${step.name}\n`, { flag: 'a' })
+    })
+
+    if (scenario.examples) {
+      this._buildExamples(featureFile, scenario)
+    }
+  }
+
+  _buildFeatureFile (featureFile, featureName, feature) {
+    console.log('_buildFeatureFile', featureFile, featureName, feature);
+    fs.writeFileSync(featureFile, `Feature: ${featureName}\n`)
+    if (feature.background) {
+      fs.writeFileSync(featureFile, `\nBackground:\n`, { flag: 'a' })
+      feature.background.steps.forEach((step) => {
+        fs.writeFileSync(featureFile, `    ${step.type} ${step.name}\n`, { flag: 'a' })
+      })
+    }
+    feature.scenarios.forEach((scenario) => this._buildScenario(featureFile, scenario))
+  }
+
+  _buildStepDefinitions () {
+    mkdirp.sync(path.join(this.testCasePath, 'features', 'step_definitions'))
+    const steps = `module.exports = function () {\n${this.stepDefinitions.join('')}\n}`
+    if (this.stepDefinitions.length) {
+      fs.writeFileSync(path.join(this.testCasePath, 'features', 'step_definitions', 'steps.js'), steps)
+    }
   }
 
   _build () {
@@ -92,11 +150,7 @@ class TestCaseFactory {
     mkdirp.sync(this.testCasePath)
     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate)
 
-    mkdirp.sync(path.join(this.testCasePath, 'features', 'step_definitions'))
-    const steps = `module.exports = function () {\n${this.stepDefinitions.join('')}\n}`
-    if (this.stepDefinitions.length) {
-      fs.writeFileSync(path.join(this.testCasePath, 'features', 'step_definitions', 'steps.js'), steps)
-    }
+    this._buildStepDefinitions()
 
     let groupPath
     this.groups.forEach((group) => {
@@ -105,19 +159,7 @@ class TestCaseFactory {
       mkdirp.sync(groupPath)
       Object.keys(group.features).forEach((featureName) => {
         const featureFile = path.join(groupPath, `${featureName}.feature`)
-        fs.writeFileSync(featureFile, `Feature: ${featureName}\n`)
-        if (group.features[featureName].background) {
-          fs.writeFileSync(featureFile, `\n  Background:\n`, { flag: 'a' })
-          group.features[featureName].background.steps.forEach((step) => {
-            fs.writeFileSync(featureFile, `    ${step.type} ${step.name}\n`, { flag: 'a' })
-          })
-        }
-        group.features[featureName].scenarios.forEach((scenario) => {
-          fs.writeFileSync(featureFile, `\n  Scenario: ${scenario.name}\n`, { flag: 'a' })
-          scenario.steps.forEach((step) => {
-            fs.writeFileSync(featureFile, `    ${step.type} ${step.name}\n`, { flag: 'a' })
-          })
-        })
+        this._buildFeatureFile(featureFile, featureName, group.features[featureName])
       })
     })
   }
@@ -212,6 +254,10 @@ class TestCaseFactory {
         return false
     }
   }
+}
+
+function pad (value, length) {
+    return (value.toString().length < length) ? pad(value + ' ', length) : value
 }
 
 module.exports = TestCaseFactory

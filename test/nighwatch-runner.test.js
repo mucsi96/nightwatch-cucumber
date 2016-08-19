@@ -31,7 +31,7 @@ describe('Nightwatch runner', () => {
       })
   })
 
-  it.only('should handle multi feature tests', () => {
+  it('should handle multi feature tests', () => {
     return testCaseFactory
       .create('simpleTest')
       .feature('adition')
@@ -314,6 +314,30 @@ describe('Nightwatch runner', () => {
         features.length.should.equal(1)
         features[0].name.should.equal('negative adition')
         features[0].result.status.should.be.passed
+      })
+  })
+
+  it('should handle scenario outlines', () => {
+    return testCaseFactory
+      .create('backgroundStepTest')
+      .feature('adition')
+      .scenarioOutline('numbers')
+      .given('User is on the simple calculator page', function () {this.init()})
+      .and('User enter <a> in A field', function (a) {this.setValue('#a', a)})
+      .and('User enter <b> in B field', function (b) {this.setValue('#b', b)})
+      .when('User press Add button', function () {this.click('#add')})
+      .then('The result should contain <result>', function (result) {this.assert.containsText('#result', result)})
+      .example('a', 'b', 'result')
+      .example('1', '1', '2')
+      .example('78', '22', '100')
+      .run()
+      .then((features) => {
+        features[0].result.status.should.be.passed
+        features[0].result.scenarioCounts.should.deep.equal({passed: 2})
+        features[0].scenarios[0].result.status.should.be.passed
+        features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        features[0].scenarios[1].result.status.should.be.passed
+        features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
 
