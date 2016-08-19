@@ -175,7 +175,16 @@ class TestCaseFactory {
 
     return new Promise((resolve, reject) => {
       const origArgs = args.slice()
-      args.unshift('cover', nightwatchPath, '--config', istanbulConfig, '--root', istanbulRoot, '--dir', istanbulDir, '--')
+      args.unshift(
+        'cover',
+        nightwatchPath,
+        '--config', istanbulConfig,
+        '--root', istanbulRoot,
+        '--dir', istanbulDir,
+        '--report', 'json',
+        '--print', 'none',
+        '--'
+      )
       console.log('Executing > ', nightwatchPath, origArgs.join(' '))
       const nightwatch = fork(istanbulPath, args, {
         stdio: 'inherit',
