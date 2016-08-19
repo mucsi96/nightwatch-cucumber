@@ -80,7 +80,7 @@ class TestCaseFactory {
     if (!this.context) throw new Error('And used without context')
     this.currentScenario.steps.push({ type: scenarioStepType, name })
     if (stepDefinition) {
-      const regex = `/^${name.replace(/<(.*?)>/g, "(.*?)")}$/`
+      const regex = `/^${name.replace(/<(.*?)>/g, '(.*?)')}$/`
       this.stepDefinitions.push(`\n  this.${definitionType}(${regex}, ${stepDefinition.toString()})\n`)
     }
     return this
@@ -167,7 +167,6 @@ class TestCaseFactory {
     this._build()
     args = args || []
 
-
     const istanbulPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'istanbul', 'lib', 'cli.js'))
     const istanbulConfig = path.resolve(path.join(__dirname, '..', '.istanbul.yml'))
     const istanbulRoot = path.resolve(path.join(__dirname, '..', 'lib'))
@@ -176,7 +175,7 @@ class TestCaseFactory {
 
     return new Promise((resolve, reject) => {
       args.unshift('cover', nightwatchPath, '--config', istanbulConfig, '--root', istanbulRoot, '--dir', istanbulDir)
-      console.log('Executing > ', istanbulPath, args.join(' '));
+      console.log('Executing > ', istanbulPath, args.join(' '))
       const nightwatch = fork(istanbulPath, args, {
         stdio: 'inherit',
         cwd: this.testCasePath
@@ -263,7 +262,6 @@ class TestCaseFactory {
 }
 
 function pad (value, length) {
-    return (value.toString().length < length) ? pad(value + ' ', length) : value
+  return (value.toString().length < length) ? pad(value + ' ', length) : value
 }
-
 module.exports = TestCaseFactory

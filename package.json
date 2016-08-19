@@ -33,11 +33,12 @@
     "tmp": "^0.0.28"
   },
   "scripts": {
-    "code-style": "standard --verbose | snazzy",
     "install-nightwatch-cucumber-with-link": "npm link && cd test && npm link nightwatch-cucumber",
     "install-nightwatch-cucumber-with-pack": "npm pack && cd test && npm install ../nightwatch-cucumber-*.tgz",
+    "code-style": "standard --verbose | snazzy",
     "e2e-test": "mocha --timeout 0 && istanbul report",
     "test": "npm run code-style && npm run e2e-test",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -66,7 +67,9 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chromedriver": "^2.20.0",
+    "coveralls": "^2.11.12",
     "cucumber": "^1.2.2",
+    "ghooks": "^1.3.2",
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
     "nightwatch": "^0.9.6",
@@ -76,5 +79,10 @@
     "semantic-release": "^4.3.5",
     "snazzy": "^4.0.0",
     "standard": "^7.1.0"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run code-style"
+    }
   }
 }

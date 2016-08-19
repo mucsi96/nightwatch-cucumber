@@ -24,7 +24,6 @@ chai.use((_chai, utils) => {
   Assertion.addProperty('pending', function () {
     new Assertion(this._obj).to.equal('pending')
   })
-
 })
 
 before(() => {
