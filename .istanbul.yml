@@ -1,2 +1,2 @@
 instrumentation:
-    excludes: [index.js]
+    excludes: [index.js, peer-test.js]
