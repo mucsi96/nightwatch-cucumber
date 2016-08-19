@@ -8,3 +8,4 @@ tests_output
 .vscode
 .idea
 tmp
+coverage

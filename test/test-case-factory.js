@@ -125,7 +125,6 @@ class TestCaseFactory {
   }
 
   _buildFeatureFile (featureFile, featureName, feature) {
-    console.log('_buildFeatureFile', featureFile, featureName, feature);
     fs.writeFileSync(featureFile, `Feature: ${featureName}\n`)
     if (feature.background) {
       fs.writeFileSync(featureFile, `\nBackground:\n`, { flag: 'a' })
@@ -167,11 +166,18 @@ class TestCaseFactory {
   run (runner, args) {
     this._build()
     args = args || []
+
+
+    const istanbulPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'istanbul', 'lib', 'cli.js'))
+    const istanbulConfig = path.resolve(path.join(__dirname, '..', '.istanbul.yml'))
+    const istanbulRoot = path.resolve(path.join(__dirname, '..', 'lib'))
+    const istanbulDir = path.resolve(path.join(__dirname, '..', 'coverage', this.name))
     const nightwatchPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'nightwatch', 'bin', 'runner.js'))
 
     return new Promise((resolve, reject) => {
-      console.log('Executing > ', nightwatchPath, args.join(' '));
-      const nightwatch = fork(nightwatchPath, args, {
+      args.unshift('cover', nightwatchPath, '--config', istanbulConfig, '--root', istanbulRoot, '--dir', istanbulDir)
+      console.log('Executing > ', istanbulPath, args.join(' '));
+      const nightwatch = fork(istanbulPath, args, {
         stdio: 'inherit',
         cwd: this.testCasePath
       })
