@@ -10,8 +10,9 @@ const nightwatchConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'tes
 const nightwatchConfTemplate = _.template(nightwatchConfTemplatePath)
 
 class TestCaseFactory {
-  constructor (name) {
+  constructor (name, options) {
     this.name = name
+    this.options = options
     this.groups = []
     this.stepDefinitions = []
     this.pageObjects = []
@@ -22,8 +23,8 @@ class TestCaseFactory {
     return this
   }
 
-  static create (name) {
-    return new TestCaseFactory(name)
+  static create (name, options) {
+    return new TestCaseFactory(name, options)
   }
 
   group (name) {
@@ -35,8 +36,8 @@ class TestCaseFactory {
     return this
   }
 
-  feature (name) {
-    this.currentFeature = { scenarios: [] }
+  feature (name, tags) {
+    this.currentFeature = { scenarios: [], tags }
     this.currentGroup.features[name] = this.currentFeature
     return this
   }
@@ -133,7 +134,13 @@ class TestCaseFactory {
   }
 
   _buildFeatureFile (featureFile, featureName, feature) {
-    fs.writeFileSync(featureFile, `Feature: ${featureName}\n`)
+    if (feature.tags) {
+      const tagDecleration = feature.tags.map((tag) => `@${tag}`).join(' ')
+      fs.writeFileSync(featureFile, `${tagDecleration}\n`)
+      fs.writeFileSync(featureFile, `Feature: ${featureName}\n`, { flag: 'a' })
+    } else {
+      fs.writeFileSync(featureFile, `Feature: ${featureName}\n`)
+    }
     if (feature.background) {
       fs.writeFileSync(featureFile, `\nBackground:\n`, { flag: 'a' })
       feature.background.steps.forEach((step) => {
@@ -161,12 +168,14 @@ class TestCaseFactory {
   }
 
   _build () {
+    const options = _.assign({
+      pageObjects: !!this.pageObjects.length,
+      paralell: false
+    }, this.options)
     rimraf.sync('tmp')
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
-    fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate({
-      pageObjects: !!this.pageObjects.length
-    }))
+    fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(options))
 
     this._buildStepDefinitions()
     this._buildPageObjects()
