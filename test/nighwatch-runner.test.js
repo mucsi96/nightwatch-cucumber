@@ -451,7 +451,7 @@ describe('Nightwatch runner', () => {
       })
   })
 
-  it.only('should handle feature tag skipping', () => {
+  it('should handle feature tag skipping', () => {
     return testCaseFactory
       .create('featureTagSkippingTest')
       .feature('positive addition', ['positive', 'addition'])
