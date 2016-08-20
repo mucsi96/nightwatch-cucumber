@@ -12,6 +12,7 @@ class TestCaseFactory {
     this.name = name
     this.groups = []
     this.stepDefinitions = []
+    this.pageObjects = []
     this.currentGroup = {
       features: {}
     }
@@ -91,6 +92,11 @@ class TestCaseFactory {
     return this
   }
 
+  pageObject (name, source) {
+    this.pageObjects.push({name, source})
+    return this
+  }
+
   _buildExamples (featureFile, scenario) {
     const maxColWidths = []
     fs.writeFileSync(featureFile, `\n  Examples:\n`, { flag: 'a' })
@@ -143,6 +149,15 @@ class TestCaseFactory {
     }
   }
 
+  _buildPageObjects () {
+    if (!this.pageObjects.length) return
+
+    mkdirp.sync(path.join(this.testCasePath, 'page_objects'))
+    this.pageObjects.forEach((pageObject) => {
+      fs.writeFileSync(path.join(this.testCasePath, 'page_objects', `${pageObject.name}.js`), pageObject.source)
+    })
+  }
+
   _build () {
     rimraf.sync('tmp')
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
@@ -150,6 +165,7 @@ class TestCaseFactory {
     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate)
 
     this._buildStepDefinitions()
+    this._buildPageObjects()
 
     let groupPath
     this.groups.forEach((group) => {

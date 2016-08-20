@@ -33,7 +33,7 @@ describe('Nightwatch runner', () => {
 
   it('should handle multi feature tests', () => {
     return testCaseFactory
-      .create('simpleTest')
+      .create('multiFeatureTest')
       .feature('adition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', function () { this.init() })
@@ -241,7 +241,7 @@ describe('Nightwatch runner', () => {
 
   it('should handle test group filtering', () => {
     return testCaseFactory
-      .create('testGroupTest')
+      .create('testGroupFilteringTest')
       .group('positive')
       .feature('positive adition')
       .scenario('small numbers')
@@ -280,7 +280,7 @@ describe('Nightwatch runner', () => {
 
   it('should handle test group skipping', () => {
     return testCaseFactory
-      .create('testGroupTest')
+      .create('testGroupSkippingTest')
       .group('positive')
       .feature('positive adition')
       .scenario('small numbers')
@@ -319,7 +319,7 @@ describe('Nightwatch runner', () => {
 
   it('should handle scenario outlines', () => {
     return testCaseFactory
-      .create('backgroundStepTest')
+      .create('scenarioOutlineTest')
       .feature('adition')
       .scenarioOutline('numbers')
       .given('User is on the simple calculator page', function () { this.init() })
@@ -338,6 +338,33 @@ describe('Nightwatch runner', () => {
         features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
         features[0].scenarios[1].result.status.should.be.passed
         features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+      })
+  })
+
+  it('should handle page objects', () => {
+    return testCaseFactory
+      .create('pageObjectTest')
+      .pageObject('calculator', `module.exports = {
+  elements: {
+    numberA: '#a',
+    numberB: '#b',
+    addButton: '#add',
+    result: '#result'
+  }
+}`)
+      .feature('adition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', function () { this.init() })
+      .and('User enter 4 in A field', function () { this.page.calculator().setValue('@numberA', 4) })
+      .and('User enter 5 in B field', function () { this.page.calculator().setValue('@numberB', 5) })
+      .when('User press Add button', function () { this.page.calculator().click('@addButton') })
+      .then('The result should contain 9', function () { this.page.calculator().assert.containsText('@result', 9) })
+      .run()
+      .then((features) => {
+        features[0].result.status.should.be.passed
+        features[0].result.scenarioCounts.should.deep.equal({passed: 1})
+        features[0].scenarios[0].result.status.should.be.passed
+        features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
 })
