@@ -5,7 +5,9 @@ const mkdirp = require('mkdirp')
 const fs = require('fs')
 const path = require('path')
 const rimraf = require('rimraf')
-const nightwatchConfTemplate = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'nightwatch.conf.tmpl.js'))
+const _ = require('lodash')
+const nightwatchConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'nightwatch.conf.js.tmpl'))
+const nightwatchConfTemplate = _.template(nightwatchConfTemplatePath)
 
 class TestCaseFactory {
   constructor (name) {
@@ -162,7 +164,9 @@ class TestCaseFactory {
     rimraf.sync('tmp')
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
-    fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate)
+    fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate({
+      pageObjects: !!this.pageObjects.length
+    }))
 
     this._buildStepDefinitions()
     this._buildPageObjects()
