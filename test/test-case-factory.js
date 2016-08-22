@@ -216,21 +216,34 @@ class TestCaseFactory {
       )
       console.log('Executing > ', nightwatchPath, origArgs.join(' '))
       const nightwatch = fork(istanbulPath, args, {
-        stdio: 'inherit',
+        stdio: [0, 'pipe', 'pipe', 'ipc'],
         cwd: this.testCasePath
       })
 
+      nightwatch.stdout.pipe(process.stdout)
+      nightwatch.stderr.pipe(process.stderr)
+
+      const output = []
+      const addToOutput = (data) => output.push(data)
+
+      nightwatch.stdout.on('data', addToOutput)
+      nightwatch.stderr.on('data', addToOutput)
+
       nightwatch.on('close', () => {
-        try {
-          const jsonReport = path.join(this.testCasePath, 'reports', 'cucumber.json')
-          const json = fs.readFileSync(jsonReport, 'utf8')
-          const result = JSON.parse(json)
-          resolve(this.enhaceResult(result))
-        } catch (err) {
-          reject(err)
-        }
+        resolve({ report: this.getCucumberReport(), output: output.join('') })
       })
     })
+  }
+
+  getCucumberReport () {
+    try {
+      const jsonReport = path.join(this.testCasePath, 'reports', 'cucumber.json')
+      const json = fs.readFileSync(jsonReport, 'utf8')
+      const result = JSON.parse(json)
+      return this.enhaceResult(result)
+    } catch (err) {
+      return
+    }
   }
 
   enhaceResult (result) {

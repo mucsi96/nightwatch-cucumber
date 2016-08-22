@@ -21,13 +21,13 @@ describe('Nightwatch runner', () => {
       .when('User press Add button')
       .then('The result should contain 9')
       .run()
-      .then((features) => {
-        features[0].result.status.should.be.passed
-        features[0].result.scenarioCounts.should.deep.equal({passed: 2})
-        features[0].scenarios[0].result.status.should.be.passed
-        features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
-        features[0].scenarios[1].result.status.should.be.passed
-        features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})
+        result.features[0].scenarios[0].result.status.should.be.passed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[0].scenarios[1].result.status.should.be.passed
+        result.features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
 
@@ -61,19 +61,19 @@ describe('Nightwatch runner', () => {
       .when('User press Subtract button')
       .then('The result should contain -1', function () { this.assert.containsText('#result', -1) })
       .run()
-      .then((features) => {
-        features[0].result.status.should.be.passed
-        features[0].result.scenarioCounts.should.deep.equal({passed: 2})
-        features[0].scenarios[0].result.status.should.be.passed
-        features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
-        features[0].scenarios[1].result.status.should.be.passed
-        features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
-        features[1].result.status.should.be.passed
-        features[1].result.scenarioCounts.should.deep.equal({passed: 2})
-        features[1].scenarios[0].result.status.should.be.passed
-        features[1].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
-        features[1].scenarios[1].result.status.should.be.passed
-        features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})
+        result.features[0].scenarios[0].result.status.should.be.passed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[0].scenarios[1].result.status.should.be.passed
+        result.features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[1].result.status.should.be.passed
+        result.features[1].result.scenarioCounts.should.deep.equal({passed: 2})
+        result.features[1].scenarios[0].result.status.should.be.passed
+        result.features[1].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[1].scenarios[1].result.status.should.be.passed
+        result.features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
 
@@ -85,11 +85,11 @@ describe('Nightwatch runner', () => {
       .given('User is on the simple calculator page', function () { this.init() })
       .and('User enter 4 in A field')
       .run()
-      .then((features) => {
-        features[0].result.status.should.be.passed
-        features[0].result.scenarioCounts.should.deep.equal({undefined: 1})
-        features[0].scenarios[0].result.status.should.be.undefined
-        features[0].scenarios[0].result.stepCounts.should.deep.equal({undefined: 1, passed: 1})
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({undefined: 1})
+        result.features[0].scenarios[0].result.status.should.be.undefined
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({undefined: 1, passed: 1})
       })
   })
 
@@ -102,11 +102,11 @@ describe('Nightwatch runner', () => {
       .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
       .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
       .run()
-      .then((features) => {
-        features[0].result.status.should.be.failed
-        features[0].result.scenarioCounts.should.deep.equal({ambiguous: 1})
-        features[0].scenarios[0].result.status.should.be.ambiguous
-        features[0].scenarios[0].result.stepCounts.should.deep.equal({ambiguous: 2, passed: 1})
+      .then((result) => {
+        result.features[0].result.status.should.be.failed
+        result.features[0].result.scenarioCounts.should.deep.equal({ambiguous: 1})
+        result.features[0].scenarios[0].result.status.should.be.ambiguous
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({ambiguous: 2, passed: 1})
       })
   })
 
@@ -118,11 +118,11 @@ describe('Nightwatch runner', () => {
       .given('User is on the simple calculator page', function () { this.init() })
       .and('User enter 4 in A field', function (callback) { callback(null, 'pending') })
       .run()
-      .then((features) => {
-        features[0].result.status.should.be.passed
-        features[0].result.scenarioCounts.should.deep.equal({pending: 1})
-        features[0].scenarios[0].result.status.should.be.pending
-        features[0].scenarios[0].result.stepCounts.should.deep.equal({pending: 1, passed: 1})
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({pending: 1})
+        result.features[0].scenarios[0].result.status.should.be.pending
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({pending: 1, passed: 1})
       })
   })
 
@@ -137,11 +137,11 @@ describe('Nightwatch runner', () => {
       .when('User press Add button', function () { this.click('#add') })
       .then('The result should contain 9', function () { this.assert.containsText('#result', 8) })
       .run()
-      .then((features) => {
-        features[0].result.status.should.be.failed
-        features[0].result.scenarioCounts.should.deep.equal({failed: 1})
-        features[0].scenarios[0].result.status.should.be.failed
-        features[0].scenarios[0].result.stepCounts.should.deep.equal({failed: 1, passed: 4})
+      .then((result) => {
+        result.features[0].result.status.should.be.failed
+        result.features[0].result.scenarioCounts.should.deep.equal({failed: 1})
+        result.features[0].scenarios[0].result.status.should.be.failed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({failed: 1, passed: 4})
       })
   })
 
@@ -157,11 +157,11 @@ describe('Nightwatch runner', () => {
       .then('The result should contain 9', function () { this.assert.containsText('#result', 8) })
       .and('User enter 4 in A field')
       .run()
-      .then((features) => {
-        features[0].result.status.should.be.failed
-        features[0].result.scenarioCounts.should.deep.equal({failed: 1})
-        features[0].scenarios[0].result.status.should.be.failed
-        features[0].scenarios[0].result.stepCounts.should.deep.equal({skipped: 1, failed: 1, passed: 4})
+      .then((result) => {
+        result.features[0].result.status.should.be.failed
+        result.features[0].result.scenarioCounts.should.deep.equal({failed: 1})
+        result.features[0].scenarios[0].result.status.should.be.failed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({skipped: 1, failed: 1, passed: 4})
       })
   })
 
@@ -181,13 +181,13 @@ describe('Nightwatch runner', () => {
       .when('User press Add button')
       .then('The result should contain 10', function () { this.assert.containsText('#result', 10) })
       .run()
-      .then((features) => {
-        features[0].result.status.should.be.passed
-        features[0].result.scenarioCounts.should.deep.equal({passed: 2})
-        features[0].scenarios[0].result.status.should.be.passed
-        features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
-        features[0].scenarios[1].result.status.should.be.passed
-        features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})
+        result.features[0].scenarios[0].result.status.should.be.passed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[0].scenarios[1].result.status.should.be.passed
+        result.features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
 
@@ -223,19 +223,19 @@ describe('Nightwatch runner', () => {
       .when('User press Add button')
       .then('The result should contain -9')
       .run()
-      .then((features) => {
-        features[0].result.status.should.be.passed
-        features[0].result.scenarioCounts.should.deep.equal({passed: 2})
-        features[0].scenarios[0].result.status.should.be.passed
-        features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
-        features[0].scenarios[1].result.status.should.be.passed
-        features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
-        features[1].result.status.should.be.passed
-        features[1].result.scenarioCounts.should.deep.equal({passed: 2})
-        features[1].scenarios[0].result.status.should.be.passed
-        features[1].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
-        features[1].scenarios[1].result.status.should.be.passed
-        features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})
+        result.features[0].scenarios[0].result.status.should.be.passed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[0].scenarios[1].result.status.should.be.passed
+        result.features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[1].result.status.should.be.passed
+        result.features[1].result.scenarioCounts.should.deep.equal({passed: 2})
+        result.features[1].scenarios[0].result.status.should.be.passed
+        result.features[1].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[1].scenarios[1].result.status.should.be.passed
+        result.features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
 
@@ -271,10 +271,10 @@ describe('Nightwatch runner', () => {
       .when('User press Add button')
       .then('The result should contain -9')
       .run('nightwatch', ['--group', 'negative'])
-      .then((features) => {
-        features.length.should.equal(1)
-        features[0].name.should.equal('negative addition')
-        features[0].result.status.should.be.passed
+      .then((result) => {
+        result.features.length.should.equal(1)
+        result.features[0].name.should.equal('negative addition')
+        result.features[0].result.status.should.be.passed
       })
   })
 
@@ -310,10 +310,10 @@ describe('Nightwatch runner', () => {
       .when('User press Add button')
       .then('The result should contain -9')
       .run('nightwatch', ['--skipgroup', 'positive'])
-      .then((features) => {
-        features.length.should.equal(1)
-        features[0].name.should.equal('negative addition')
-        features[0].result.status.should.be.passed
+      .then((result) => {
+        result.features.length.should.equal(1)
+        result.features[0].name.should.equal('negative addition')
+        result.features[0].result.status.should.be.passed
       })
   })
 
@@ -331,13 +331,13 @@ describe('Nightwatch runner', () => {
       .example('1', '1', '2')
       .example('78', '22', '100')
       .run()
-      .then((features) => {
-        features[0].result.status.should.be.passed
-        features[0].result.scenarioCounts.should.deep.equal({passed: 2})
-        features[0].scenarios[0].result.status.should.be.passed
-        features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
-        features[0].scenarios[1].result.status.should.be.passed
-        features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})
+        result.features[0].scenarios[0].result.status.should.be.passed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[0].scenarios[1].result.status.should.be.passed
+        result.features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
 
@@ -360,15 +360,15 @@ describe('Nightwatch runner', () => {
       .when('User press Add button', function () { this.page.calculator().click('@addButton') })
       .then('The result should contain 9', function () { this.page.calculator().assert.containsText('@result', 9) })
       .run()
-      .then((features) => {
-        features[0].result.status.should.be.passed
-        features[0].result.scenarioCounts.should.deep.equal({passed: 1})
-        features[0].scenarios[0].result.status.should.be.passed
-        features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 1})
+        result.features[0].scenarios[0].result.status.should.be.passed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
 
-  it.skip('should handle paralell tests', () => {
+  it('should handle paralell tests', () => {
     return testCaseFactory
       .create('paralellTest', { paralell: true })
       .feature('addition')
@@ -398,19 +398,8 @@ describe('Nightwatch runner', () => {
       .when('User press Subtract button')
       .then('The result should contain -1', function () { this.assert.containsText('#result', -1) })
       .run()
-      .then((features) => {
-        features[0].result.status.should.be.passed
-        features[0].result.scenarioCounts.should.deep.equal({passed: 2})
-        features[0].scenarios[0].result.status.should.be.passed
-        features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
-        features[0].scenarios[1].result.status.should.be.passed
-        features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
-        features[1].result.status.should.be.passed
-        features[1].result.scenarioCounts.should.deep.equal({passed: 2})
-        features[1].scenarios[0].result.status.should.be.passed
-        features[1].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
-        features[1].scenarios[1].result.status.should.be.passed
-        features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+      .then((result) => {
+        result.output.should.contain('OK. 4  total assertions passed.')
       })
   })
 
@@ -444,10 +433,10 @@ describe('Nightwatch runner', () => {
       .when('User press Add button')
       .then('The result should contain -9')
       .run('nightwatch', ['--tag', 'negative'])
-      .then((features) => {
-        features.length.should.equal(1)
-        features[0].name.should.equal('negative addition')
-        features[0].result.status.should.be.passed
+      .then((result) => {
+        result.features.length.should.equal(1)
+        result.features[0].name.should.equal('negative addition')
+        result.features[0].result.status.should.be.passed
       })
   })
 
@@ -481,10 +470,10 @@ describe('Nightwatch runner', () => {
       .when('User press Add button')
       .then('The result should contain -9')
       .run('nightwatch', ['--skiptags', 'positive'])
-      .then((features) => {
-        features.length.should.equal(1)
-        features[0].name.should.equal('negative addition')
-        features[0].result.status.should.be.passed
+      .then((result) => {
+        result.features.length.should.equal(1)
+        result.features[0].name.should.equal('negative addition')
+        result.features[0].result.status.should.be.passed
       })
   })
 })

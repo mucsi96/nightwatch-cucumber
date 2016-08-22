@@ -36,7 +36,7 @@
     "install-nightwatch-cucumber-with-link": "npm link && cd test && npm link nightwatch-cucumber",
     "install-nightwatch-cucumber-with-pack": "npm pack && cd test && npm install ../nightwatch-cucumber-*.tgz",
     "code-style": "eslint lib resources test",
-    "e2e-test": "mocha --timeout 0 && istanbul report",
+    "e2e-test": "mocha --no-timeouts && istanbul report",
     "test": "npm run code-style && npm run e2e-test",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
