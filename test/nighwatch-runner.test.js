@@ -145,6 +145,25 @@ describe('Nightwatch runner', () => {
       })
   })
 
+  it.skip('should handle JS error in step definition', () => {
+    return testCaseFactory
+      .create('stepDefinitionJSErrorTest')
+      .feature('addition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', function () { this.initte() })
+      .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
+      .and('User enter 5 in B field', function () { this.setValue('#b', 5) })
+      .when('User press Add button', function () { this.click('#add') })
+      .then('The result should contain 9', function () { this.assert.containsText('#result', 8) })
+      .run()
+      .then((result) => {
+        result.features[0].result.status.should.be.failed
+        result.features[0].result.scenarioCounts.should.deep.equal({failed: 1})
+        result.features[0].scenarios[0].result.status.should.be.failed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({failed: 1, passed: 4})
+      })
+  })
+
   it('should handle skipped steps', () => {
     return testCaseFactory
       .create('skippedStepTest')
