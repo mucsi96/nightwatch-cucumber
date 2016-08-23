@@ -542,7 +542,9 @@ describe('Nightwatch runner', () => {
       .then('The result should contain -1', function () { this.assert.containsText('#result', -1) })
       .run()
       .then((result) => {
-        result.output.should.contain('<F<f<S<s<s<s<s<ss>s>s>s>s>S><S<s<s<s<s<ss>s>s>s>s>S>f><f<S<s<s<s<s<ss>s>s>s>s>S><S<s<s<s<s<ss>s>s>s>s>S>f>F>')
+        const ipcMessageFilter = (message) => typeof message === 'string' && message.length === 2
+        const ipcMessages = result.ipcMessages.filter(ipcMessageFilter).join('')
+        ipcMessages.should.equal('<F<f<S<s<s<s<s<ss>s>s>s>s>S><S<s<s<s<s<ss>s>s>s>s>S>f><f<S<s<s<s<s<ss>s>s>s>s>S><S<s<s<s<s<ss>s>s>s>s>S>f>F>')
       })
   })
 })

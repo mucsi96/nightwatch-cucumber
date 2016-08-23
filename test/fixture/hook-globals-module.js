@@ -2,23 +2,22 @@ global.nightwatchCucumberHooks = []
 
 module.exports = {
   before: function (cb) {
-    global.nightwatchCucumberHooks.push('<F')
+    process.send('<F')
     cb()
   },
 
   beforeEach: function (browser, cb) {
-    global.nightwatchCucumberHooks.push('<f')
+    process.send('<f')
     cb()
   },
 
   after: function (cb) {
-    global.nightwatchCucumberHooks.push('F>')
-    console.log(global.nightwatchCucumberHooks.join(''))
+    process.send('F>')
     cb()
   },
 
   afterEach: function (browser, cb) {
-    global.nightwatchCucumberHooks.push('f>')
+    process.send('f>')
     cb()
   }
 }

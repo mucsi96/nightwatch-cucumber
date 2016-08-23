@@ -6,18 +6,18 @@ module.exports = {
   <% if (hooks) { %>
   src_folders: [require('../../lib/index')({
     beforeScenario: function (browser, cb) {
-      global.nightwatchCucumberHooks.push('<S')
+      process.send('<S')
       cb()
     },
     beforeStep: function (browser) {
-      global.nightwatchCucumberHooks.push('<s')
+      process.send('<s')
     },
     afterScenario: function (browser, cb) {
-      global.nightwatchCucumberHooks.push('S>')
+      process.send('S>')
       cb()
     },
     afterStep: function (browser) {
-      global.nightwatchCucumberHooks.push('s>')
+      process.send('s>')
     }
   })],
   globals_path: '../../test/fixture/hook-globals-module.js',

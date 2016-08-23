@@ -192,47 +192,67 @@ class TestCaseFactory {
     })
   }
 
-  run (runner, args) {
-    this._build()
-    args = args || []
-
+  _cover (runnerPath, args) {
     const istanbulPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'istanbul', 'lib', 'cli.js'))
     const istanbulConfig = path.resolve(path.join(__dirname, '..', '.istanbul.yml'))
     const istanbulRoot = path.resolve(path.join(__dirname, '..', 'lib'))
     const istanbulDir = path.resolve(path.join(__dirname, '..', 'coverage', this.name))
-    const nightwatchPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'nightwatch', 'bin', 'runner.js'))
+    args = args.slice()
+    args.unshift(
+      'cover',
+      runnerPath,
+      '--config', istanbulConfig,
+      '--root', istanbulRoot,
+      '--dir', istanbulDir,
+      '--report', 'json',
+      '--print', 'none',
+      '--'
+    )
+    return {
+      path: istanbulPath,
+      args
+    }
+  }
 
+  _forkChild (runnerPath, args) {
     return new Promise((resolve, reject) => {
-      const origArgs = args.slice()
-      args.unshift(
-        'cover',
-        nightwatchPath,
-        '--config', istanbulConfig,
-        '--root', istanbulRoot,
-        '--dir', istanbulDir,
-        '--report', 'json',
-        '--print', 'none',
-        '--'
-      )
-      console.log('Executing > ', nightwatchPath, origArgs.join(' '))
-      const nightwatch = fork(istanbulPath, args, {
+      console.log('Executing > ', runnerPath, args.join(' '))
+      const command = this._cover(runnerPath, args)
+      const child = fork(command.path, command.args, {
         stdio: [0, 'pipe', 'pipe', 'ipc'],
         cwd: this.testCasePath
       })
 
-      nightwatch.stdout.pipe(process.stdout)
-      nightwatch.stderr.pipe(process.stderr)
+      child.stdout.pipe(process.stdout)
+      child.stderr.pipe(process.stderr)
 
       const output = []
-      const addToOutput = (data) => output.push(data)
+      const ipcMessages = []
+      const collectOutput = (data) => output.push(data)
+      const collectIpcMessages = (data) => ipcMessages.push(data)
 
-      nightwatch.stdout.on('data', addToOutput)
-      nightwatch.stderr.on('data', addToOutput)
+      child.stdout.on('data', collectOutput)
+      child.stderr.on('data', collectOutput)
+      child.on('message', collectIpcMessages)
 
-      nightwatch.on('close', () => {
-        resolve({ features: this.getCucumberReport(), output: output.join('') })
+      child.on('close', () => {
+        resolve({ features: this.getCucumberReport(), output: output.join(''), ipcMessages })
       })
     })
+  }
+
+  run (runner, args) {
+    let runnerPath
+    this._build()
+    args = args || []
+
+    if (runner === 'cucumber') {
+      runnerPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'cucumber', 'bin', 'cucumber.js'))
+    } else {
+      runnerPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'nightwatch', 'bin', 'runner.js'))
+    }
+
+    return this._forkChild(runnerPath, args)
   }
 
   getCucumberReport () {
