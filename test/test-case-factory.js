@@ -230,7 +230,7 @@ class TestCaseFactory {
       nightwatch.stderr.on('data', addToOutput)
 
       nightwatch.on('close', () => {
-        resolve({ report: this.getCucumberReport(), output: output.join('') })
+        resolve({ features: this.getCucumberReport(), output: output.join('') })
       })
     })
   }
