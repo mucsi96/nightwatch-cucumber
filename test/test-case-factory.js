@@ -8,6 +8,8 @@ const rimraf = require('rimraf')
 const _ = require('lodash')
 const nightwatchConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'nightwatch.conf.js.tmpl'))
 const nightwatchConfTemplate = _.template(nightwatchConfTemplatePath)
+const cucumberConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'cucumber.js.tmpl'))
+const cucumberConfTemplate = _.template(cucumberConfTemplatePath)
 
 class TestCaseFactory {
   constructor (name, options) {
@@ -167,15 +169,21 @@ class TestCaseFactory {
     })
   }
 
-  _build () {
+  _build (runner) {
     const options = _.assign({
       pageObjects: !!this.pageObjects.length,
-      paralell: false
+      paralell: false,
+      hooks: false,
+      cucumber: runner === 'cucumber'
     }, this.options)
     rimraf.sync('tmp')
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(options))
+
+    if (options.cucumber) {
+      fs.writeFileSync(path.join(this.testCasePath, 'cucumber.js'), cucumberConfTemplate(options))
+    }
 
     this._buildStepDefinitions()
     this._buildPageObjects()
@@ -243,7 +251,7 @@ class TestCaseFactory {
 
   run (runner, args) {
     let runnerPath
-    this._build()
+    this._build(runner)
     args = args || []
 
     if (runner === 'cucumber') {

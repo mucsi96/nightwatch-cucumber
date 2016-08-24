@@ -1,7 +1,10 @@
-var path = require('nightwatch-cucumber')({
+const mkdirp = require('mkdirp')
+const path = require('../../lib/index')({
   runner: 'cucumber'
 })
 
+mkdirp.sync('reports')
+
 module.exports = {
-  default: '--require ' + path + ' --require features'
+  default: '--require ' + path + ' --require features --require ../../test/fixture/cucumber.env.js --format json:reports/cucumber.json'
 }

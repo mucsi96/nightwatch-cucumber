@@ -21,6 +21,7 @@ module.exports = {
     }
   })],
   globals_path: '../../test/fixture/hook-globals-module.js',
+  <% } else if (cucumber) { %>
   <% } else { %>
   src_folders: [require('../../lib/index')()],
   <% } %>
