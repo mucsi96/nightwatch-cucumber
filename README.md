@@ -2,6 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
+[![Coverage Status](https://coveralls.io/repos/github/mucsi96/nightwatch-cucumber/badge.svg?branch=master)](https://coveralls.io/github/mucsi96/nightwatch-cucumber?branch=master)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
@@ -66,7 +67,7 @@ module.exports = {
   ...
 }
 ```
-For more examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
+For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
 ## Demo Test
 By default feature files are located in `features` folder. You can change this using configuration object.
@@ -109,7 +110,7 @@ module.exports = function() {
 }
 ```
 
-For more examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
+For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
 ## Running tests
 
@@ -129,7 +130,7 @@ node_modules/.bin/nightwatch
 
 ### HTML reports
 
-HTML report generation is enabled by default. It's default location is `reports/index.html`. You can disable or change this using configuration object.
+HTML report generation is enabled by default. It's default location is `reports/cucumber.html`. You can disable or change this using configuration object.
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-html-report.png)
 
@@ -406,7 +407,7 @@ module.exports = {
   ...
 }
 ```
-For examples check out the [test folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/test)
+For examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
 ## Running tests
 

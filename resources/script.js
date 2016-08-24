@@ -1,4 +1,4 @@
-/* global moment $*/
+/* global moment $ */
 $(document).ready(function () {
   $('.collapse').on('hide.bs.collapse', function (e) {
     e.stopPropagation()

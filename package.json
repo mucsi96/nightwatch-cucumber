@@ -32,28 +32,11 @@
     "syntax-error": "^1.1.4",
     "tmp": "^0.0.28"
   },
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "commit": "git-cz",
-    "code-style": "standard --verbose | snazzy",
-    "nightwatch-simple-test": "cd test/nightwatch-simple-test && nightwatch && cd ../..",
-    "nightwatch-multi-test": "cd test/nightwatch-multi-test && nightwatch && cd ../..",
-    "nightwatch-reporter-test": "cd test/nightwatch-reporter-test && nightwatch && cd ../..",
-    "nightwatch-hook-test": "cd test/nightwatch-hook-test && nightwatch && cd ../..",
-    "nightwatch-background-test": "cd test/nightwatch-background-test && nightwatch && cd ../..",
-    "nightwatch-outlines-test": "cd test/nightwatch-outlines-test && nightwatch && cd ../..",
-    "nightwatch-tag-test": "cd test/nightwatch-tag-test && nightwatch --tag google-search && nightwatch --skiptags google-search && cd ../..",
-    "nightwatch-group-test": "cd test/nightwatch-group-test && nightwatch --group group && cd ../..",
-    "nightwatch-custom-folder-test": "cd test/nightwatch-custom-folder-test && nightwatch --group group && cd ../..",
-    "nightwatch-page-object-test": "cd test/nightwatch-page-object-test && nightwatch && cd ../..",
-    "nightwatch-paralell-test": "cd test/nightwatch-paralell-test && nightwatch && cd ../..",
-    "cucumber-simple-test": "cd test/cucumber-simple-test && cucumberjs && cd ../..",
-    "cucumber-multi-test": "cd test/cucumber-multi-test && cucumberjs && cd ../..",
-    "install-nightwatch-cucumber-with-link": "npm link && cd test && npm link nightwatch-cucumber",
-    "install-nightwatch-cucumber-with-pack": "npm pack && cd test && npm install ../nightwatch-cucumber-*.tgz",
-    "test": "npm run code-style && npm run nightwatch-simple-test && npm run nightwatch-reporter-test && npm run nightwatch-multi-test && npm run nightwatch-hook-test && npm run nightwatch-background-test && npm run nightwatch-tag-test && npm run nightwatch-group-test && npm run nightwatch-custom-folder-test && npm run nightwatch-page-object-test && npm run nightwatch-outlines-test && npm run nightwatch-paralell-test && npm run cucumber-simple-test && npm run cucumber-multi-test",
+    "code-style": "eslint lib resources test",
+    "e2e-test": "mocha --no-timeouts && istanbul report",
+    "test": "npm run code-style && npm run e2e-test",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -80,13 +63,27 @@
     "resources"
   ],
   "devDependencies": {
+    "chai": "^3.5.0",
     "chromedriver": "^2.20.0",
+    "coveralls": "^2.11.12",
     "cucumber": "^1.2.2",
+    "eslint": "^3.3.1",
+    "eslint-config-standard": "^6.0.0-beta.3",
+    "eslint-plugin-no-only-tests": "^1.1.0",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-standard": "^2.0.0",
+    "ghooks": "^1.3.2",
+    "istanbul": "^0.4.4",
+    "mocha": "^2.5.3",
     "nightwatch": "^0.9.6",
     "phantomjs-prebuilt": "^2.1.6",
+    "rimraf": "^2.5.4",
     "selenium-server": "^2.48.2",
-    "semantic-release": "^4.3.5",
-    "snazzy": "^4.0.0",
-    "standard": "^7.1.0"
+    "semantic-release": "^4.3.5"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run code-style"
+    }
   }
 }
