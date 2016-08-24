@@ -37,7 +37,7 @@ describe('Cucumber runner', () => {
 
   it('should handle multi feature tests', () => {
     return testCaseFactory
-      .create('CucumberMultiFeatureTest')
+      .create('cucumberMultiFeatureTest')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', function () {
