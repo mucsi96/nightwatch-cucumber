@@ -7,8 +7,6 @@ notifications:
   email: false
 node_js:
   - '4'
-before_install:
-  - npm run install-nightwatch-cucumber-with-link
 before_script:
   - npm prune
 after_success:
