@@ -21,6 +21,8 @@ module.exports = {
     }
   })],
   globals_path: '../../test/fixture/hook-globals-module.js',
+  <% } else if (includePlainNightwatchTests) { %>
+  src_folders: [require('../../lib/index')(), '../../test/fixture/plain-nightwatch-test'],
   <% } else if (cucumber) { %>
   <% } else { %>
   src_folders: [require('../../lib/index')()],
