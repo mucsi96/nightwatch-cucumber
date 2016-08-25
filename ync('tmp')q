@@ -1,0 +1,241 @@
+[1mdiff --git a/lib/index.js b/lib/index.js[m
+[1mindex 8958de7..f615620 100644[m
+[1m--- a/lib/index.js[m
+[1m+++ b/lib/index.js[m
+[36m@@ -45,7 +45,8 @@[m [mmodule.exports = function (providedOptions) {[m
+     closeSession: 'afterFeature',[m
+     jsonReport: 'reports/cucumber.json',[m
+     htmlReport: 'reports/cucumber.html',[m
+[31m-    openReport: false[m
+[32m+[m[32m    openReport: false,[m
+[32m+[m[32m    timeout: 60000[m
+   }, providedOptions)[m
+ [m
+   assert(closeSessionOptions.indexOf(options.closeSession) !== -1, 'Bad configuration for nightwatch-cucumber. closeSession should be ' + closeSessionOptions.join(' or '))[m
+[1mdiff --git a/lib/nightwatch-runner.js b/lib/nightwatch-runner.js[m
+[1mindex e86f9cb..04da50e 100644[m
+[1m--- a/lib/nightwatch-runner.js[m
+[1m+++ b/lib/nightwatch-runner.js[m
+[36m@@ -45,8 +45,7 @@[m [mfunction bootstrap (options) {[m
+     feature.getScenarios().forEach((scenario) => {[m
+       var steps = [][m
+       scenario.getSteps().forEach((step) => {[m
+[31m-        step.execute = getStepExecutor(step)[m
+[31m-        if (step.execute) steps.push(step)[m
+[32m+[m[32m        steps.push(step)[m
+       })[m
+       discoverScenario(feature, scenario, backgroundSteps.concat(steps), options)[m
+     })[m
+[36m@@ -211,30 +210,36 @@[m [mfunction getSupportCodeInitializer (options) {[m
+   }[m
+ }[m
+ [m
+[31m-function getStepExecutor (step) {[m
+[31m-  step.stepDefinitions = runtime.getSupportCodeLibrary().lookupStepDefinitionsByName(step.getName())[m
+[32m+[m[32mfunction getStepExecutor (options, browser, step) {[m
+[32m+[m[32m  return function * () {[m
+[32m+[m[32m    if (options.beforeStep) options.beforeStep(browser)[m
+ [m
+[31m-  return function (context) {[m
+[31m-    return co(function * () {[m
+[31m-      if (!step.stepDefinitions || !step.stepDefinitions.length) {[m
+[31m-        return yield * cucumber.logUndefinedStep(step)[m
+[31m-      }[m
+[31m-      if (step.stepDefinitions.length > 1) {[m
+[31m-        return yield * cucumber.logAmbiguousStep(step)[m
+[31m-      }[m
+[32m+[m[32m    if (!step.stepDefinitions || !step.stepDefinitions.length) {[m
+[32m+[m[32m      return yield * cucumber.logUndefinedStep(step)[m
+[32m+[m[32m    }[m
+ [m
+[31m-      const result = yield new Promise((resolve) => {[m
+[31m-        step.stepDefinitions[0].invoke(step, context, {getAttachments: function () {}}, 60000, resolve)[m
+[31m-      })[m
+[32m+[m[32m    if (step.stepDefinitions.length > 1) {[m
+[32m+[m[32m      return yield * cucumber.logAmbiguousStep(step)[m
+[32m+[m[32m    }[m
+ [m
+[31m-      if (result && result.getStatus() === Cucumber.Status.FAILED) {[m
+[31m-        return yield * cucumber.logFailedStep(step, result.getFailureException().stack, false)[m
+[31m-      }[m
+[32m+[m[32m    currentStep = step[m
+ [m
+[31m-      if (result && result.getStatus() === Cucumber.Status.PENDING) {[m
+[31m-        return yield * cucumber.logPendingStep(step)[m
+[31m-      }[m
+[32m+[m[32m    const result = yield new Promise((resolve) => {[m
+[32m+[m[32m      step.stepDefinitions[0].invoke(step, browser, {getAttachments: function () {}}, options.timeout, resolve)[m
+     })[m
+[32m+[m
+[32m+[m[32m    if (result && result.getStatus() === Cucumber.Status.FAILED) {[m
+[32m+[m[32m      const err = result.getFailureException()[m
+[32m+[m[32m      yield * cucumber.logFailedStep(step, err.stack, true)[m
+[32m+[m[32m      client.handleException(err)[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    if (result && result.getStatus() === Cucumber.Status.PENDING) {[m
+[32m+[m[32m      return yield * cucumber.logPendingStep(step)[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    currentStep = null[m
+[32m+[m[32m    if (options.afterStep) options.afterStep(browser)[m
+   }[m
+ }[m
+ [m
+[36m@@ -309,14 +314,10 @@[m [mfunction discoverScenario (feature, scenario, steps, options) {[m
+ [m
+   feature.discovered[scenarioName] = function (browser) {[m
+     steps.forEach(function (step) {[m
+[31m-      currentStep = step[m
+[31m-      if (options.beforeStep) options.beforeStep(browser)[m
+[31m-      return step.execute(browser)[m
+[31m-        .then(() => {[m
+[31m-          currentStep = null[m
+[31m-          if (options.afterStep) options.afterStep(browser)[m
+[31m-        })[m
+[31m-        .catch((e) => console.error(e.stack))[m
+[32m+[m[32m      step.stepDefinitions = runtime.getSupportCodeLibrary().lookupStepDefinitionsByName(step.getName())[m
+[32m+[m[32m      browser.perform((done) => {[m
+[32m+[m[32m        return co(getStepExecutor(options, browser, step)).then(done).catch((err) => done(err))[m
+[32m+[m[32m      })[m
+     })[m
+ [m
+     if (options.closeSession === 'afterScenario') {[m
+[1mdiff --git a/test/fixture/nightwatch.conf.js.tmpl b/test/fixture/nightwatch.conf.js.tmpl[m
+[1mindex aae9712..d96260d 100644[m
+[1m--- a/test/fixture/nightwatch.conf.js.tmpl[m
+[1m+++ b/test/fixture/nightwatch.conf.js.tmpl[m
+[36m@@ -21,6 +21,8 @@[m [mmodule.exports = {[m
+     }[m
+   })],[m
+   globals_path: '../../test/fixture/hook-globals-module.js',[m
+[32m+[m[32m  <% } else if (includePlainNightwatchTests) { %>[m
+[32m+[m[32m  src_folders: [require('../../lib/index')(), '../../test/fixture/plain-nightwatch-test'],[m
+   <% } else if (cucumber) { %>[m
+   <% } else { %>[m
+   src_folders: [require('../../lib/index')()],[m
+[1mdiff --git a/test/main.test.js b/test/main.test.js[m
+[1mindex 9eac4ec..cf99591 100644[m
+[1m--- a/test/main.test.js[m
+[1m+++ b/test/main.test.js[m
+[36m@@ -1,6 +1,7 @@[m
+ /* eslint-env mocha */[m
+ const chai = require('chai')[m
+ const testApp = require('./test-app')[m
+[32m+[m[32mconst rimraf = require('rimraf')[m
+ [m
+ chai.use((_chai, utils) => {[m
+   const Assertion = _chai.Assertion[m
+[1mdiff --git a/test/nighwatch-runner.test.js b/test/nighwatch-runner.test.js[m
+[1mindex 8c2ee56..1190d07 100644[m
+[1m--- a/test/nighwatch-runner.test.js[m
+[1m+++ b/test/nighwatch-runner.test.js[m
+[36m@@ -77,6 +77,52 @@[m [mdescribe('Nightwatch runner', () => {[m
+       })[m
+   })[m
+ [m
+[32m+[m[32m  it('should be able to run together with plain Nightwatch tests', () => {[m
+[32m+[m[32m    return testCaseFactory[m
+[32m+[m[32m      .create('includePlainNightwatchTests', { includePlainNightwatchTests: true })[m
+[32m+[m[32m      .feature('addition')[m
+[32m+[m[32m      .scenario('small numbers')[m
+[32m+[m[32m      .given('User is on the simple calculator page', function () { this.init() })[m
+[32m+[m[32m      .and('User enter 4 in A field', function () { this.setValue('#a', 4) })[m
+[32m+[m[32m      .and('User enter 5 in B field', function () { this.setValue('#b', 5) })[m
+[32m+[m[32m      .when('User press Add button', function () { this.click('#add') })[m
+[32m+[m[32m      .then('The result should contain 9', function () { this.assert.containsText('#result', 9) })[m
+[32m+[m[32m      .scenario('big numbers')[m
+[32m+[m[32m      .given('User is on the simple calculator page')[m
+[32m+[m[32m      .and('User enter 4 in A field')[m
+[32m+[m[32m      .and('User enter 5 in B field')[m
+[32m+[m[32m      .when('User press Add button')[m
+[32m+[m[32m      .then('The result should contain 9')[m
+[32m+[m[32m      .feature('subtraction')[m
+[32m+[m[32m      .scenario('small numbers')[m
+[32m+[m[32m      .given('User is on the simple calculator page')[m
+[32m+[m[32m      .and('User enter 9 in A field', function () { this.setValue('#a', 9) })[m
+[32m+[m[32m      .and('User enter 3 in B field', function () { this.setValue('#b', 3) })[m
+[32m+[m[32m      .when('User press Subtract button', function () { this.click('#subtract') })[m
+[32m+[m[32m      .then('The result should contain 6', function () { this.assert.containsText('#result', 6) })[m
+[32m+[m[32m      .scenario('big numbers')[m
+[32m+[m[32m      .given('User is on the simple calculator page')[m
+[32m+[m[32m      .and('User enter 4 in A field')[m
+[32m+[m[32m      .and('User enter 5 in B field')[m
+[32m+[m[32m      .when('User press Subtract button')[m
+[32m+[m[32m      .then('The result should contain -1', function () { this.assert.containsText('#result', -1) })[m
+[32m+[m[32m      .run()[m
+[32m+[m[32m      .then((result) => {[m
+[32m+[m[32m        result.features[0].result.status.should.be.passed[m
+[32m+[m[32m        result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})[m
+[32m+[m[32m        result.features[0].scenarios[0].result.status.should.be.passed[m
+[32m+[m[32m        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})[m
+[32m+[m[32m        result.features[0].scenarios[1].result.status.should.be.passed[m
+[32m+[m[32m        result.features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})[m
+[32m+[m[32m        result.features[1].result.status.should.be.passed[m
+[32m+[m[32m        result.features[1].result.scenarioCounts.should.deep.equal({passed: 2})[m
+[32m+[m[32m        result.features[1].scenarios[0].result.status.should.be.passed[m
+[32m+[m[32m        result.features[1].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})[m
+[32m+[m[32m        result.features[1].scenarios[1].result.status.should.be.passed[m
+[32m+[m[32m        result.features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})[m
+[32m+[m[32m      })[m
+[32m+[m[32m  })[m
+[32m+[m
+   it('should handle undefined steps', () => {[m
+     return testCaseFactory[m
+       .create('undefinedStepTest')[m
+[36m@@ -160,22 +206,28 @@[m [mdescribe('Nightwatch runner', () => {[m
+       })[m
+   })[m
+ [m
+[31m-  it.skip('should handle JS error in step definition', () => {[m
+[32m+[m[32m  it('should handle JS error in step definition', () => {[m
+     return testCaseFactory[m
+       .create('stepDefinitionJSErrorTest')[m
+       .feature('addition')[m
+       .scenario('small numbers')[m
+[31m-      .given('User is on the simple calculator page', function () { this.initte() })[m
+[32m+[m[32m      .given('User is on the simple calculator page. JS error included', function () { this.initte() })[m
+       .and('User enter 4 in A field', function () { this.setValue('#a', 4) })[m
+       .and('User enter 5 in B field', function () { this.setValue('#b', 5) })[m
+       .when('User press Add button', function () { this.click('#add') })[m
+       .then('The result should contain 9', function () { this.assert.containsText('#result', 8) })[m
+[32m+[m[32m      .scenario('big numbers')[m
+[32m+[m[32m      .given('User is on the simple calculator page', function () { this.init() })[m
+[32m+[m[32m      .and('User enter 4 in A field')[m
+[32m+[m[32m      .and('User enter 5 in B field')[m
+[32m+[m[32m      .when('User press Add button')[m
+[32m+[m[32m      .then('The result should contain 9')[m
+       .run()[m
+       .then((result) => {[m
+         result.features[0].result.status.should.be.failed[m
+         result.features[0].result.scenarioCounts.should.deep.equal({failed: 1})[m
+         result.features[0].scenarios[0].result.status.should.be.failed[m
+[31m-        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({failed: 1, passed: 4})[m
+[32m+[m[32m        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({failed: 1, skipped: 4})[m
+       })[m
+   })[m
+ [m
+[1mdiff --git a/test/test-case-factory.js b/test/test-case-factory.js[m
+[1mindex caa91ce..c951e89 100644[m
+[1m--- a/test/test-case-factory.js[m
+[1m+++ b/test/test-case-factory.js[m
+[36m@@ -4,7 +4,6 @@[m [mconst fork = require('child_process').fork[m
+ const mkdirp = require('mkdirp')[m
+ const fs = require('fs')[m
+ const path = require('path')[m
+[31m-const rimraf = require('rimraf')[m
+ const _ = require('lodash')[m
+ const nightwatchConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'nightwatch.conf.js.tmpl'))[m
+ const nightwatchConfTemplate = _.template(nightwatchConfTemplatePath)[m
+[36m@@ -174,9 +173,9 @@[m [mclass TestCaseFactory {[m
+       pageObjects: !!this.pageObjects.length,[m
+       paralell: false,[m
+       hooks: false,[m
+[31m-      cucumber: runner === 'cucumber'[m
+[32m+[m[32m      cucumber: runner === 'cucumber',[m
+[32m+[m[32m      includePlainNightwatchTests: false[m
+     }, this.options)[m
+[31m-    rimraf.sync('tmp')[m
+     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)[m
+     mkdirp.sync(this.testCasePath)[m
+     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(options))[m
