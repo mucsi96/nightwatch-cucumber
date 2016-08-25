@@ -28,6 +28,7 @@ chai.use((_chai, utils) => {
 })
 
 before(() => {
+  rimraf.sync('coverage')
   rimraf.sync('tmp')
   testApp.start()
 })
