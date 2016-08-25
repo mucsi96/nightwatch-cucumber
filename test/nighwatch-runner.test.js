@@ -596,7 +596,7 @@ describe('Nightwatch runner', () => {
       .then((result) => {
         const ipcMessageFilter = (message) => typeof message === 'string' && message.length === 2
         const ipcMessages = result.ipcMessages.filter(ipcMessageFilter).join('')
-        ipcMessages.should.equal('<F<f<S<s<s<s<s<ss>s>s>s>s>S><S<s<s<s<s<ss>s>s>s>s>S>f><f<S<s<s<s<s<ss>s>s>s>s>S><S<s<s<s<s<ss>s>s>s>s>S>f>F>')
+        ipcMessages.should.equal('<F<f<S<ss><ss><ss><ss><ss>S><S<ss><ss><ss><ss><ss>S>f><f<S<ss><ss><ss><ss><ss>S><S<ss><ss><ss><ss><ss>S>f>F>')
       })
   })
 })
