@@ -2,6 +2,8 @@ var seleniumServer = require('selenium-server')
 var phantomjs = require('phantomjs-prebuilt')
 var chromedriver = require('chromedriver')
 
+require('../../lib/index')()
+
 module.exports = {
   <% if (hooks) { %>
   src_folders: [require('../../lib/index')({
@@ -23,7 +25,7 @@ module.exports = {
   globals_path: '../../test/fixture/hook-globals-module.js',
   <% } else if (cucumber) { %>
   <% } else { %>
-  src_folders: [require('../../lib/index')()],
+  src_folders: [],
   <% } %>
   output_folder: 'reports',
   custom_commands_path: '',
