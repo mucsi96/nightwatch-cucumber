@@ -4,7 +4,6 @@ const fork = require('child_process').fork
 const mkdirp = require('mkdirp')
 const fs = require('fs')
 const path = require('path')
-const rimraf = require('rimraf')
 const _ = require('lodash')
 const nightwatchConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'nightwatch.conf.js.tmpl'))
 const nightwatchConfTemplate = _.template(nightwatchConfTemplatePath)
@@ -176,7 +175,6 @@ class TestCaseFactory {
       hooks: false,
       cucumber: runner === 'cucumber'
     }, this.options)
-    rimraf.sync('tmp')
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(options))

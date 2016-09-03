@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 const chai = require('chai')
+const rimraf = require('rimraf')
 const testApp = require('./test-app')
 
 chai.use((_chai, utils) => {
@@ -27,6 +28,8 @@ chai.use((_chai, utils) => {
 })
 
 before(() => {
+  rimraf.sync('coverage')
+  rimraf.sync('tmp')
   testApp.start()
 })
 

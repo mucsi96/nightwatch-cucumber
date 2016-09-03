@@ -402,7 +402,7 @@ describe('Nightwatch runner', () => {
       })
   })
 
-  it('should handle paralell tests', () => {
+  it.skip('should handle paralell tests', () => {
     return testCaseFactory
       .create('paralellTest', { paralell: true })
       .feature('addition')
