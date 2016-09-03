@@ -33,3 +33,7 @@ before(() => {
 after(() => {
   testApp.stop()
 })
+
+process.on('SIGTERM', () => {
+  testApp.stop()
+})
