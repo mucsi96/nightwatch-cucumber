@@ -34,9 +34,11 @@ before(() => {
 })
 
 after(() => {
+  console.log('shutting down test app')
   testApp.stop()
 })
 
-process.on('SIGTERM', () => {
+process.on('uncaughtException', () => {
+  console.log('shutting down test app')
   testApp.stop()
 })
