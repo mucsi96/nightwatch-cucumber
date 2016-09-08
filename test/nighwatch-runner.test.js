@@ -135,7 +135,7 @@ describe('Nightwatch runner', () => {
       .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
       .and('User enter 5 in B field', function () { this.setValue('#b', 5) })
       .when('User press Add button', function () { this.click('#add') })
-      .then('The result should contain 9', function () { this.assert.containsText('#result', 8) })
+      .then('The result should contain 8', function () { this.assert.containsText('#result', 8) })
       .run()
       .then((result) => {
         result.features[0].result.status.should.be.failed
