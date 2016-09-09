@@ -160,7 +160,7 @@ describe('Nightwatch runner', () => {
       })
   })
 
-  it.skip('should handle JS error in step definition', () => {
+  it('should handle JS error in step definition', () => {
     return testCaseFactory
       .create('stepDefinitionJSErrorTest')
       .feature('addition')
@@ -175,7 +175,7 @@ describe('Nightwatch runner', () => {
         result.features[0].result.status.should.be.failed
         result.features[0].result.scenarioCounts.should.deep.equal({failed: 1})
         result.features[0].scenarios[0].result.status.should.be.failed
-        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({failed: 1, passed: 4})
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({failed: 1, skipped: 4})
       })
   })
 
