@@ -338,8 +338,8 @@ The default configuration object is.
 ```
 {
   runner: 'nightwatch',
-  featureFiles: 'features',
-  stepDefinitions: 'features/step_definitions',
+  featureFiles: ['features'],
+  stepDefinitions: ['features/step_definitions'],
   closeSession: 'afterFeature',
   htmlReport: 'reports/index.html',
   openReport: false
