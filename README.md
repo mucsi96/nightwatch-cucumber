@@ -446,6 +446,7 @@ Ben Grabham,
 [Jeffrey Effendy (@jeffrey-effendy)](https://github.com/jeffrey-effendy)
 [Lawrence (@ldabiralai)](https://github.com/ldabiralai)
 [Domenico Gemoli (@aberonni)](https://github.com/aberonni)
+[Klokov Anton (@klokovas)](https://github.com/klokovas)
 
 # Change log
 
