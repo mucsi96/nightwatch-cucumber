@@ -17,10 +17,6 @@ This module enables to use a BDD-style approach for cross-browser testing:
 - Map them to browser operations and assertions in [Nightwatch.js](http://nightwatchjs.org/)
 - Run using either real browser, headless browser or cloud based [WebDriver](https://www.w3.org/TR/webdriver/) services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/)
 
-This plugin allows to run tests in two modes:
-- Nightwatch.js as runner (default)
-- Cucumber.js as runner
-
 ## Installation
 
 ### Step 1
@@ -54,16 +50,15 @@ module.exports = {
 
 ### Step 4
 
-Add `nightwatch-cucumber` to `src_folders` in configuration file.
+Require `nightwatch-cucumber` at the top of the configuration file.
 ```
 // nightwatch.conf.js
 
-var nightwatchCucumber = require('nightwatch-cucumber')({
+require('nightwatch-cucumber')({
   /* configuration */
 })
 
 module.exports = {
-  src_folders: [nightwatchCucumber],
   ...
 }
 ```
@@ -252,96 +247,42 @@ node nightwatch.js --skiptags google
 
 ### Hooks
 
-#### Before/after all features and before/after each feature
-These hooks can be provided using Nightwatch external globals. External globals file is specified in the `globals_path` property of `nightwatch.conf.js`. [More details](http://nightwatchjs.org/guide#external-globals)
+Hooks can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option. [More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
 
 ```
 // nightwatch.conf.js
 
-var nightwatchCucumber = require('nightwatch-cucumber')({
-  /* configuration */
+require('nightwatch-cucumber')({
+  supportFiles: ['hooks.js']
 })
 
 module.exports = {
-  src_folders: [nightwatchCucumber],
-  globals_path: 'globals-module.js',
   ...
 }
 ```
 
 ```
-// globals-module.js
+// hooks.js
 
-module.exports = {
-  before : function(cb) {
-    console.log('Runs before all features')
-    cb()
-  },
-
-  beforeEach : function(browser, cb) {
-    console.log('Runs before each feature')
-    cb()
-  },
-
-  after : function(cb) {
-    console.log('Runs after all features')
-    cb()
-  },
-
-  afterEach : function(browser, cb) {
-    console.log('Runs after each feature')
-    cb()
-  }
+module.exports = function () {
+  this.registerHandler('AfterFeatures', function (features, callback) {
+    ...
+    callback();
+  });
 }
 
 ```
-
-#### Before/after each scenario and before/after each step
-These hooks can be provided using configuration object.
-
-```
-// nightwatch.conf.js
-
-var nightwatchCucumber = require('nightwatch-cucumber')({
-  beforeScenario: function(browser, cb) {
-    console.log('Runs before each scenario')
-    cb()
-  },
-  beforeStep: function(browser) {
-    console.log('Runs before each step')
-  },
-  afterScenario: function(browser, cb) {
-    console.log('Runs after each scenario')
-    cb()
-  },
-  afterStep: function(browser) {
-    console.log('Runs after each step')
-  }
-})
-
-module.exports = {
-  src_folders: [nightwatchCucumber],
-  ...
-}
-```
-
-### Closing Selenium session
-
-This plugin provides three ways of closing Selenium sessions. This enables reuse of session and prevents browser restarts. This can be controlled in configuration using `closeSession` property. Possible values are:
-- `afterScenario`
-- `afterFeature` default
-- `never`
 
 ## Configuration
 
 The default configuration object is.
 ```
 {
-  runner: 'nightwatch',
   featureFiles: ['features'],
   stepDefinitions: ['features/step_definitions'],
-  closeSession: 'afterFeature',
-  htmlReport: 'reports/index.html',
+  supportFiles: [],
+  jsonReport: 'reports/cucumber.json',
+  htmlReport: 'reports/cucumber.html',
   openReport: false
 }
 ```
@@ -350,78 +291,14 @@ Default configuration could be overwritten in the following way.
 ```
 // nightwatch.conf.js
 
-var nightwatchCucumber = require('nightwatch-cucumber')({
-  runner: 'cucumber'
+require('nightwatch-cucumber')({
+  stepDefinitions: ['step_definitions']
 })
-
-module.exports = {
-  src_folders: [nightwatchCucumber],
-  ...
-}
-```
-# Cucumber.js as runner
-
-## Installation
-
-### Step 1
-
-First you need to have Nightwatch.js and Cucumber.js to be installed locally.
-
-```
-$ npm install --save-dev nightwatch cucumber
-```
-
-If you are new to Nightwatch.js you can read the [developer guide](http://nightwatchjs.org/guide).
-
-### Step 2
-
-Install `nightwatch-cucumber`
-
-```
-$ npm install --save-dev nightwatch-cucumber
-```
-
-### Step 3
-
-In project root create a configuration file for Cucumber.js. [More details](https://github.com/cucumber/cucumber-js#profiles)
-
-```
-// cucumber.js
-
-var nightwatchCucumber = require('nightwatch-cucumber')({
-  /* configuration */
-  runner: 'cucumber'
-})
-
-module.exports = {
-  default: '--require ' + nightwatchCucumber + ' --require features'
-}
-```
-### Step 4
-
-In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file)
-```
-// nightwatch.conf.js
 
 module.exports = {
   ...
 }
 ```
-For examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
-
-## Running tests
-
-If you have installed `cucumber` with `-g` (global) option you can run the tests by executing
-```
-cucumberjs
-```
-
-In other case you can run the tests by executing
-```
-node_modules/.bin/cucumberjs
-```
-
-![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-output.png)
 
 # Contribute
 
