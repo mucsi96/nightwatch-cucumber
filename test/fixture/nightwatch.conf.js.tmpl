@@ -2,13 +2,11 @@ var seleniumServer = require('selenium-server')
 var phantomjs = require('phantomjs-prebuilt')
 var chromedriver = require('chromedriver')
 
-<% if (hooks) { %>
 require('../../lib/index')({
+  <% if (hooks) { %>
   supportFiles: ['../../test/fixture/hooks.js']
+  <% } %>
 })
-<% } else { %>
-require('../../lib/index')()
-<% } %>
 
 module.exports = {
   src_folders: [],
