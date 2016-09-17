@@ -244,7 +244,12 @@ class TestCaseFactory {
       child.on('message', collectIpcMessages)
 
       child.on('close', () => {
-        resolve({ features: this.getCucumberReport(), output: output.join(''), ipcMessages })
+        resolve({
+          features: this.getCucumberReport(),
+          output: output.join(''),
+          ipcMessages,
+          testCasePath: this.testCasePath
+        })
       })
     })
   }

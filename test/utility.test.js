@@ -2,6 +2,9 @@
 const chai = require('chai')
 chai.should()
 const testCaseFactory = require('./test-case-factory')
+const path = require('path')
+const co = require('co')
+const jsdom = require('jsdom')
 
 describe('Utility features', () => {
   it('should be able to run together with plain Nightwatch tests', () => {
@@ -158,5 +161,50 @@ describe('Utility features', () => {
         const ipcMessages = result.ipcMessages.filter(ipcMessageFilter).join('')
         ipcMessages.should.equal('<F<f<S<ss><ss><ss><ss><ss>S><S<ss><ss><ss><ss><ss>S>f><f<S<ss><ss><ss><ss><ss>S><S<ss><ss><ss><ss><ss>S>f>F>')
       })
+  })
+
+  it('should generate cucumber HTML report', () => {
+    return testCaseFactory
+      .create('cucumber-html-report-test')
+      .feature('addition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', function () { this.init() })
+      .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
+      .and('User enter 5 in B field', function () { this.setValue('#b', 5) })
+      .when('User press Add button', function () { this.click('#add') })
+      .then('The result should contain 9', function () { this.assert.containsText('#result', 9) })
+      .scenario('big numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter 4 in A field')
+      .and('User enter 5 in B field')
+      .when('User press Add button')
+      .then('The result should contain 9')
+      .feature('subtraction')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter 9 in A field', function () { this.setValue('#a', 9) })
+      .and('User enter 3 in B field', function () { this.setValue('#b', 3) })
+      .when('User press Subtract button', function () { this.click('#subtract') })
+      .then('The result should contain 6', function () { this.assert.containsText('#result', 6) })
+      .scenario('big numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter 4 in A field')
+      .and('User enter 5 in B field')
+      .when('User press Subtract button')
+      .then('The result should contain -1', function () { this.assert.containsText('#result', -1) })
+      .run()
+      .then(co.wrap(function * (result) {
+        const window = yield new Promise((resolve, reject) => {
+          jsdom.env({
+            file: path.join(result.testCasePath, 'reports', 'cucumber.html'),
+            done: (err, window) => {
+              if (err) reject(err)
+              resolve(window)
+            }
+          })
+        })
+        window.document.querySelector('.navbar-header .label-success').textContent.should.equal('Passed: 2')
+        window.document.querySelector('.navbar-header .label-danger').textContent.should.equal('Failed: 0')
+      }))
   })
 })
