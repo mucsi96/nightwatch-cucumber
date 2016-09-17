@@ -6,6 +6,9 @@ require('../../lib/index')({
   <% if (hooks) { %>
   supportFiles: ['../../test/fixture/hooks.js']
   <% } %>
+  <% if (noTests) {%>
+  featureFiles: ['.']
+  <% } %>
 })
 
 module.exports = {

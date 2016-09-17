@@ -4,6 +4,19 @@ chai.should()
 const testCaseFactory = require('./test-case-factory')
 
 describe('Error handling', () => {
+  it('should handle no test case', () => {
+    return testCaseFactory
+      .create('noTestTest', {
+        noTests: true
+      })
+      .run()
+      .then((result) => {
+        result.should.have.ownProperty('features')
+        result.output.should.contain('No tests defined!')
+        result.output.should.contain('Selenium process finished.')
+      })
+  })
+
   it('should handle undefined steps', () => {
     return testCaseFactory
       .create('undefinedStepTest')

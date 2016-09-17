@@ -173,8 +173,8 @@ class TestCaseFactory {
       pageObjects: !!this.pageObjects.length,
       paralell: false,
       hooks: false,
-      cucumber: runner === 'cucumber',
-      includePlainNightwatchTests: false
+      includePlainNightwatchTests: false,
+      noTests: false
     }, this.options)
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
