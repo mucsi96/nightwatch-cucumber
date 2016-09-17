@@ -108,7 +108,18 @@ describe('Utility features', () => {
       .then('The result should contain -1', function () { this.assert.containsText('#result', -1) })
       .run()
       .then((result) => {
-        result.output.should.contain('OK. 4  total assertions passed.')
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})
+        result.features[0].scenarios[0].result.status.should.be.passed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[0].scenarios[1].result.status.should.be.passed
+        result.features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[1].result.status.should.be.passed
+        result.features[1].result.scenarioCounts.should.deep.equal({passed: 2})
+        result.features[1].scenarios[0].result.status.should.be.passed
+        result.features[1].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[1].scenarios[1].result.status.should.be.passed
+        result.features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
 
