@@ -3,7 +3,6 @@ const chai = require('chai')
 chai.should()
 const testCaseFactory = require('./test-case-factory')
 const path = require('path')
-const co = require('co')
 const jsdom = require('jsdom')
 
 describe('Utility features', () => {
@@ -193,18 +192,40 @@ describe('Utility features', () => {
       .when('User press Subtract button')
       .then('The result should contain -1', function () { this.assert.containsText('#result', -1) })
       .run()
-      .then(co.wrap(function * (result) {
-        const window = yield new Promise((resolve, reject) => {
-          jsdom.env({
-            file: path.join(result.testCasePath, 'reports', 'cucumber.html'),
-            done: (err, window) => {
-              if (err) reject(err)
-              resolve(window)
-            }
-          })
-        })
+      .then((result) => getCucumberHtmlReportWindow(result.testCasePath))
+      .then((window) => {
         window.document.querySelector('.navbar-header .label-success').textContent.should.equal('Passed: 2')
         window.document.querySelector('.navbar-header .label-danger').textContent.should.equal('Failed: 0')
-      }))
+      })
+  })
+
+  it('should create attach screenshots for failing scenarios', () => {
+    return testCaseFactory
+      .create('screenshot-attachement-test')
+      .feature('addition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', function () { this.init() })
+      .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
+      .and('User enter 5 in B field', function () { this.setValue('#b', 5) })
+      .when('User press Add button', function () { this.click('#add') })
+      .then('The result should contain 8', function () { this.assert.containsText('#result', 8) })
+      .run()
+      .then((result) => getCucumberHtmlReportWindow(result.testCasePath))
+      .then((window) => {
+        window.document.querySelector('.navbar-header .label-success').textContent.should.equal('Passed: 2')
+        window.document.querySelector('.navbar-header .label-danger').textContent.should.equal('Failed: 0')
+      })
   })
 })
+
+function getCucumberHtmlReportWindow (testCasePath) {
+  return new Promise((resolve, reject) => {
+    jsdom.env({
+      file: path.join(testCasePath, 'reports', 'cucumber.html'),
+      done: (err, window) => {
+        if (err) reject(err)
+        resolve(window)
+      }
+    })
+  })
+}
