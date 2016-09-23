@@ -465,5 +465,6 @@ This software is released under the terms of the
 [MIT license](https://github.com/mucsi96/nightwatch-cucumber/blob/master/LICENSE).
 
 # Other projects
+
 * https://github.com/nightwatchjs/nightwatch
 * https://github.com/cucumber/cucumber-js
