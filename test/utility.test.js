@@ -212,8 +212,23 @@ describe('Utility features', () => {
       .run()
       .then((result) => getCucumberHtmlReportWindow(result.testCasePath))
       .then((window) => {
-        window.document.querySelector('.navbar-header .label-success').textContent.should.equal('Passed: 2')
-        window.document.querySelector('.navbar-header .label-danger').textContent.should.equal('Failed: 0')
+        const feature = window.document.querySelector('[href$="Feature0"]')
+        const featureMatch = feature.textContent.match(/^\s*(.*?):(.*?)\s*.*\s*$/)
+        featureMatch.should.not.to.be.null
+        featureMatch[1].should.equal('Feature')
+        featureMatch[2].should.equal('addition')
+        feature.querySelector('.label-danger').textContent.should.equal('1')
+
+        const scenario = window.document.querySelector('[href$="Scenario00"]')
+        const scenarioMatch = scenario.textContent.match(/^\s*(.*?):(.*?)\s*.*\s*.*\s*$/)
+        scenarioMatch.should.not.to.be.null
+        scenarioMatch[1].should.equal('Scenario')
+        scenarioMatch[2].should.equal('small numbers')
+        scenario.querySelector('[title="Passed"]').textContent.should.equal('4')
+        scenario.querySelector('[title="Failed"]').textContent.should.equal('1')
+
+        const screenshot = window.document.querySelector('#collapseScenario00 img.screenshot')
+        screenshot.src.startsWith('data:image/png;base64,iVBOR').should.equal(true)
       })
   })
 })
