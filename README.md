@@ -342,7 +342,8 @@ The default configuration object is.
   stepDefinitions: 'features/step_definitions',
   closeSession: 'afterFeature',
   htmlReport: 'reports/index.html',
-  openReport: false
+  openReport: false,
+  timeout: 60000
 }
 ```
 
@@ -422,6 +423,12 @@ node_modules/.bin/cucumberjs
 ```
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/cucumber-output.png)
+
+## Timeouts
+
+You can use `timeout` option to set timeout for asynchronous hooks and steps.
+By default, timeout is 60 000 milliseconds.
+
 
 # Contribute
 
