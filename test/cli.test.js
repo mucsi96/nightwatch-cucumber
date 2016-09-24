@@ -277,4 +277,36 @@ describe('CLI', () => {
         result.features[0].result.status.should.be.passed
       })
   })
+
+  it('should return zero exit code on success', () => {
+    return testCaseFactory
+      .create('zero-exit-code-test')
+      .feature('addition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', function () { this.init() })
+      .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
+      .and('User enter 5 in B field', function () { this.setValue('#b', 5) })
+      .when('User press Add button', function () { this.click('#add') })
+      .then('The result should contain 9', function () { this.assert.containsText('#result', 9) })
+      .run()
+      .then((result) => {
+        result.exitCode.should.equal(0)
+      })
+  })
+
+  it('should return non zero exit code on failure', () => {
+    return testCaseFactory
+      .create('screenshot-attachement-test')
+      .feature('addition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', function () { this.init() })
+      .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
+      .and('User enter 5 in B field', function () { this.setValue('#b', 5) })
+      .when('User press Add button', function () { this.click('#add') })
+      .then('The result should contain 8', function () { this.assert.containsText('#result', 8) })
+      .run()
+      .then((result) => {
+        result.exitCode.should.not.equal(0)
+      })
+  })
 })
