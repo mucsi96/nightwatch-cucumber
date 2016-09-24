@@ -199,7 +199,7 @@ describe('Utility features', () => {
       })
   })
 
-  it('should create attach screenshots for failing scenarios', () => {
+  it('should attach screenshots for failing scenarios', () => {
     return testCaseFactory
       .create('screenshot-attachement-test')
       .feature('addition')
