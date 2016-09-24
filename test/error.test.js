@@ -13,7 +13,7 @@ describe('Error handling', () => {
       .then((result) => {
         result.should.have.ownProperty('features')
         result.output.should.contain('No tests defined!')
-        result.output.should.contain('Selenium process finished.')
+        result.exitCode.should.equal(1)
       })
   })
 
