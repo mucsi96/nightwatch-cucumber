@@ -233,8 +233,7 @@ class TestCaseFactory {
   _forkChild (runnerPath, args) {
     return new Promise((resolve, reject) => {
       console.log('Executing > ', runnerPath, args.join(' '), '\n')
-      // const command = this._cover(runnerPath, args)
-      const command = {path: runnerPath, args}
+      const command = this._cover(runnerPath, args)
       const child = fork(command.path, command.args, {
         silent: true,
         cwd: this.testCasePath
