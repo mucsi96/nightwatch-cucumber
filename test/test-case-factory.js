@@ -143,10 +143,13 @@ class TestCaseFactory {
     if (feature.tags) {
       const tagDecleration = feature.tags.map((tag) => `@${tag}`).join(' ')
       fs.writeFileSync(featureFile, `${tagDecleration}\n`)
-      fs.writeFileSync(featureFile, `Feature: ${featureName}\n`, { flag: 'a' })
     } else {
-      fs.writeFileSync(featureFile, `Feature: ${featureName}\n`)
+      fs.writeFileSync(featureFile, ``)
     }
+
+    const featureWord = !this.options.badFeatureFile ? 'Feature' : 'Featre'
+    fs.writeFileSync(featureFile, `${featureWord}: ${featureName}\n`, { flag: 'a' })
+
     if (feature.background) {
       fs.writeFileSync(featureFile, `\nBackground:\n`, { flag: 'a' })
       feature.background.steps.forEach((step) => {
@@ -179,7 +182,8 @@ class TestCaseFactory {
       paralell: false,
       hooks: false,
       includePlainNightwatchTests: false,
-      noTests: false
+      noTests: false,
+      badFeatureFile: false
     }, this.options)
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
