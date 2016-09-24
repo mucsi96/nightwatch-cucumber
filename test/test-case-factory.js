@@ -43,8 +43,8 @@ class TestCaseFactory {
     return this
   }
 
-  scenario (name) {
-    this.currentScenario = { name, steps: [] }
+  scenario (name, tags) {
+    this.currentScenario = { name, steps: [], tags }
     this.currentFeature.scenarios.push(this.currentScenario)
     return this
   }
@@ -120,6 +120,11 @@ class TestCaseFactory {
   }
 
   _buildScenario (featureFile, scenario) {
+    if (scenario.tags) {
+      const tagDecleration = scenario.tags.map((tag) => `@${tag}`).join(' ')
+      fs.writeFileSync(featureFile, `${tagDecleration}\n`, { flag: 'a' })
+    }
+
     if (scenario.examples) {
       fs.writeFileSync(featureFile, `\nScenario Outline: ${scenario.name}\n\n`, { flag: 'a' })
     } else {

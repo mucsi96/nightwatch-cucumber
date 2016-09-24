@@ -204,6 +204,54 @@ describe('CLI', () => {
       })
   })
 
+  it('should handle scenario tag filtering', () => {
+    return testCaseFactory
+      .create('scenarioTagFilteringTest')
+      .feature('positive addition')
+      .scenario('small numbers', ['small', 'numbers'])
+      .given('User is on the simple calculator page', function () { this.init() })
+      .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
+      .and('User enter 5 in B field', function () { this.setValue('#b', 5) })
+      .when('User press Add button', function () { this.click('#add') })
+      .then('The result should contain 9', function () { this.assert.containsText('#result', 9) })
+      .scenario('big numbers', ['big', 'numbers'])
+      .given('User is on the simple calculator page')
+      .and('User enter 4 in A field')
+      .and('User enter 5 in B field')
+      .when('User press Add button')
+      .then('The result should contain 9')
+      .run('nightwatch', ['--tag', 'big'])
+      .then((result) => {
+        result.features[0].scenarios.length.should.equal(1)
+        result.features[0].scenarios[0].name.should.equal('big numbers')
+        result.features[0].scenarios[0].result.status.should.be.passed
+      })
+  })
+
+  it('should handle scenario tag skipping', () => {
+    return testCaseFactory
+      .create('scenarioTagSkippingTest')
+      .feature('positive addition')
+      .scenario('small numbers', ['small', 'numbers'])
+      .given('User is on the simple calculator page', function () { this.init() })
+      .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
+      .and('User enter 5 in B field', function () { this.setValue('#b', 5) })
+      .when('User press Add button', function () { this.click('#add') })
+      .then('The result should contain 9', function () { this.assert.containsText('#result', 9) })
+      .scenario('big numbers', ['big', 'numbers'])
+      .given('User is on the simple calculator page')
+      .and('User enter 4 in A field')
+      .and('User enter 5 in B field')
+      .when('User press Add button')
+      .then('The result should contain 9')
+      .run('nightwatch', ['--skiptags', 'small'])
+      .then((result) => {
+        result.features[0].scenarios.length.should.equal(1)
+        result.features[0].scenarios[0].name.should.equal('big numbers')
+        result.features[0].scenarios[0].result.status.should.be.passed
+      })
+  })
+
   it('should handle specified features execution', () => {
     return testCaseFactory
       .create('specifiedFeaturesExecutionTest')
