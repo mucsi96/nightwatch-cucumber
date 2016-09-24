@@ -2,18 +2,16 @@ var seleniumServer = require('selenium-server')
 var phantomjs = require('phantomjs-prebuilt')
 var chromedriver = require('chromedriver')
 
+require('nightwatch-cucumber')()
+
 module.exports = {
-  src_folders: [require('nightwatch-cucumber')()],
   output_folder: 'reports',
   custom_commands_path: '',
   custom_assertions_path: '',
+  globals_path: 'globalsModule.js',
   page_objects_path: '',
   live_output: false,
   disable_colors: false,
-  // test_workers: {
-  //  enabled: true,
-  //  workers: 'auto'
-  // },
 
   selenium: {
     start_process: true,
