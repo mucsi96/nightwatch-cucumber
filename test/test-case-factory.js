@@ -14,7 +14,13 @@ const cucumberConfTemplate = _.template(cucumberConfTemplatePath)
 class TestCaseFactory {
   constructor (name, options) {
     this.name = name
-    this.options = options
+    this.options = _.assign({
+      paralell: false,
+      hooks: false,
+      includePlainNightwatchTests: false,
+      noTests: false,
+      badFeatureFile: false
+    }, options)
     this.groups = []
     this.stepDefinitions = []
     this.pageObjects = []
@@ -178,20 +184,13 @@ class TestCaseFactory {
   }
 
   _build (runner) {
-    const options = _.assign({
-      pageObjects: !!this.pageObjects.length,
-      paralell: false,
-      hooks: false,
-      includePlainNightwatchTests: false,
-      noTests: false,
-      badFeatureFile: false
-    }, this.options)
+    this.options.pageObjects = !!this.pageObjects.length
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
-    fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(options))
+    fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(this.options))
 
-    if (options.cucumber) {
-      fs.writeFileSync(path.join(this.testCasePath, 'cucumber.js'), cucumberConfTemplate(options))
+    if (this.options.cucumber) {
+      fs.writeFileSync(path.join(this.testCasePath, 'cucumber.js'), cucumberConfTemplate(this.options))
     }
 
     this._buildStepDefinitions()
