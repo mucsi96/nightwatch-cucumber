@@ -49,6 +49,7 @@ describe('Utility features', () => {
         result.features[1].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
         result.features[1].scenarios[1].result.status.should.be.passed
         result.features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+        result.output.should.contain('OK. 4  total assertions passed.')
       })
   })
 
