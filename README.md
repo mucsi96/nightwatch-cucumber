@@ -39,12 +39,11 @@ $ npm install --save-dev nightwatch-cucumber
 
 ### Step 3
 
-In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file) Leave `src_folders` an empty array.
+In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file) You don't need to specify `src_folders`.
 ```
 // nightwatch.conf.js
 
 module.exports = {
-  src_folders: [],
   ...
 }
 ```
@@ -302,6 +301,12 @@ module.exports = {
 }
 ```
 
+## Timeouts
+
+You can use `stepTimeout` option to set timeout for steps.
+By default, timeout is 30 seconds.
+
+
 # Contribute
 
 Anyone and everyone is welcome to contribute.
@@ -337,5 +342,6 @@ This software is released under the terms of the
 [MIT license](https://github.com/mucsi96/nightwatch-cucumber/blob/master/LICENSE).
 
 # Other projects
+
 * https://github.com/nightwatchjs/nightwatch
 * https://github.com/cucumber/cucumber-js
