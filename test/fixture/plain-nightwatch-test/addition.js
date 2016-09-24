@@ -1,7 +1,7 @@
 module.exports = {
   'small numbers (plain Nightwatch test)': function (client) {
     client
-      .initte()
+      .init()
       .setValue('#a', 4)
       .setValue('#b', 5)
       .click('#add')

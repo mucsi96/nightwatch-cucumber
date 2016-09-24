@@ -2,33 +2,14 @@ var seleniumServer = require('selenium-server')
 var phantomjs = require('phantomjs-prebuilt')
 var chromedriver = require('chromedriver')
 
-require('../../lib/index')({
-  <% if (hooks) { %>
-  supportFiles: ['../../test/fixture/hooks.js']
-  <% } %>
-  <% if (noTests) {%>
-  featureFiles: ['.']
-  <% } %>
-})
+require('nightwatch-cucumber')()
 
 module.exports = {
-  <% if (includePlainNightwatchTests) { %>
-  src_folders: ['../../test/fixture/plain-nightwatch-test'],
-  <% } %>
   output_folder: 'reports',
   custom_commands_path: '',
   custom_assertions_path: '',
-  <% if (pageObjects) { %>
-  page_objects_path: 'page_objects',
-  <% } %>
   live_output: false,
   disable_colors: false,
-  <% if (paralell) { %>
-  test_workers: {
-    enabled: true,
-    workers: 'auto'
-  },
-  <% } %>
 
   selenium: {
     start_process: true,
@@ -40,7 +21,7 @@ module.exports = {
 
   test_settings: {
     default: {
-      launch_url: 'http://localhost:8087',
+      launch_url: 'http://localhost',
       selenium_port: 4444,
       selenium_host: 'localhost',
       silent: true,

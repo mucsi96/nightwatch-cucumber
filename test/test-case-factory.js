@@ -5,6 +5,7 @@ const mkdirp = require('mkdirp')
 const fs = require('fs')
 const path = require('path')
 const _ = require('lodash')
+const PrefixStream = require('../lib/prefix-stream')
 const nightwatchConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'nightwatch.conf.js.tmpl'))
 const nightwatchConfTemplate = _.template(nightwatchConfTemplatePath)
 const cucumberConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'cucumber.js.tmpl'))
@@ -13,7 +14,13 @@ const cucumberConfTemplate = _.template(cucumberConfTemplatePath)
 class TestCaseFactory {
   constructor (name, options) {
     this.name = name
-    this.options = options
+    this.options = _.assign({
+      paralell: false,
+      hooks: false,
+      includePlainNightwatchTests: false,
+      noTests: false,
+      badFeatureFile: false
+    }, options)
     this.groups = []
     this.stepDefinitions = []
     this.pageObjects = []
@@ -43,8 +50,8 @@ class TestCaseFactory {
     return this
   }
 
-  scenario (name) {
-    this.currentScenario = { name, steps: [] }
+  scenario (name, tags) {
+    this.currentScenario = { name, steps: [], tags }
     this.currentFeature.scenarios.push(this.currentScenario)
     return this
   }
@@ -120,6 +127,11 @@ class TestCaseFactory {
   }
 
   _buildScenario (featureFile, scenario) {
+    if (scenario.tags) {
+      const tagDecleration = scenario.tags.map((tag) => `@${tag}`).join(' ')
+      fs.writeFileSync(featureFile, `${tagDecleration}\n`, { flag: 'a' })
+    }
+
     if (scenario.examples) {
       fs.writeFileSync(featureFile, `\nScenario Outline: ${scenario.name}\n\n`, { flag: 'a' })
     } else {
@@ -138,10 +150,13 @@ class TestCaseFactory {
     if (feature.tags) {
       const tagDecleration = feature.tags.map((tag) => `@${tag}`).join(' ')
       fs.writeFileSync(featureFile, `${tagDecleration}\n`)
-      fs.writeFileSync(featureFile, `Feature: ${featureName}\n`, { flag: 'a' })
     } else {
-      fs.writeFileSync(featureFile, `Feature: ${featureName}\n`)
+      fs.writeFileSync(featureFile, ``)
     }
+
+    const featureWord = !this.options.badFeatureFile ? 'Feature' : 'Featre'
+    fs.writeFileSync(featureFile, `${featureWord}: ${featureName}\n`, { flag: 'a' })
+
     if (feature.background) {
       fs.writeFileSync(featureFile, `\nBackground:\n`, { flag: 'a' })
       feature.background.steps.forEach((step) => {
@@ -169,19 +184,13 @@ class TestCaseFactory {
   }
 
   _build (runner) {
-    const options = _.assign({
-      pageObjects: !!this.pageObjects.length,
-      paralell: false,
-      hooks: false,
-      cucumber: runner === 'cucumber',
-      includePlainNightwatchTests: false
-    }, this.options)
+    this.options.pageObjects = !!this.pageObjects.length
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
-    fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(options))
+    fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(this.options))
 
-    if (options.cucumber) {
-      fs.writeFileSync(path.join(this.testCasePath, 'cucumber.js'), cucumberConfTemplate(options))
+    if (this.options.cucumber) {
+      fs.writeFileSync(path.join(this.testCasePath, 'cucumber.js'), cucumberConfTemplate(this.options))
     }
 
     this._buildStepDefinitions()
@@ -223,15 +232,15 @@ class TestCaseFactory {
 
   _forkChild (runnerPath, args) {
     return new Promise((resolve, reject) => {
-      console.log('Executing > ', runnerPath, args.join(' '))
+      console.log('')
       const command = this._cover(runnerPath, args)
       const child = fork(command.path, command.args, {
         silent: true,
         cwd: this.testCasePath
       })
 
-      child.stdout.pipe(process.stdout)
-      child.stderr.pipe(process.stderr)
+      child.stdout.pipe(new PrefixStream('    |  ', 105)).pipe(process.stdout)
+      child.stderr.pipe(new PrefixStream('    |  ', 105)).pipe(process.stderr)
 
       const output = []
       const ipcMessages = []
@@ -242,8 +251,15 @@ class TestCaseFactory {
       child.stderr.on('data', collectOutput)
       child.on('message', collectIpcMessages)
 
-      child.on('close', () => {
-        resolve({ features: this.getCucumberReport(), output: output.join(''), ipcMessages })
+      child.on('close', (exitCode) => {
+        console.log('')
+        resolve({
+          features: this.getCucumberReport(),
+          output: output.join(''),
+          ipcMessages,
+          testCasePath: this.testCasePath,
+          exitCode
+        })
       })
     })
   }

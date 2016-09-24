@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 const chai = require('chai')
-const testApp = require('./test-app')
 const rimraf = require('rimraf')
+const testApp = require('./test-app')
 
 chai.use((_chai, utils) => {
   const Assertion = _chai.Assertion
@@ -34,5 +34,11 @@ before(() => {
 })
 
 after(() => {
+  console.log('shutting down test app')
+  testApp.stop()
+})
+
+process.on('uncaughtException', () => {
+  console.log('shutting down test app')
   testApp.stop()
 })
