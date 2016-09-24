@@ -5,6 +5,7 @@ const mkdirp = require('mkdirp')
 const fs = require('fs')
 const path = require('path')
 const _ = require('lodash')
+const PrefixStream = require('../lib/prefix-stream')
 const nightwatchConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'nightwatch.conf.js.tmpl'))
 const nightwatchConfTemplate = _.template(nightwatchConfTemplatePath)
 const cucumberConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'cucumber.js.tmpl'))
@@ -232,7 +233,7 @@ class TestCaseFactory {
 
   _forkChild (runnerPath, args) {
     return new Promise((resolve, reject) => {
-      console.log('Executing > ', runnerPath, args.join(' '))
+      console.log('Executing > ', runnerPath, args.join(' '), '\n')
       // const command = this._cover(runnerPath, args)
       const command = {path: runnerPath, args}
       const child = fork(command.path, command.args, {
@@ -240,8 +241,8 @@ class TestCaseFactory {
         cwd: this.testCasePath
       })
 
-      child.stdout.pipe(process.stdout)
-      child.stderr.pipe(process.stderr)
+      child.stdout.pipe(new PrefixStream('    |  ', 105)).pipe(process.stdout)
+      child.stderr.pipe(new PrefixStream('    |  ', 105)).pipe(process.stderr)
 
       const output = []
       const ipcMessages = []
@@ -253,6 +254,7 @@ class TestCaseFactory {
       child.on('message', collectIpcMessages)
 
       child.on('close', (exitCode) => {
+        console.log('')
         resolve({
           features: this.getCucumberReport(),
           output: output.join(''),
