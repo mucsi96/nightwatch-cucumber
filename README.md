@@ -284,7 +284,8 @@ The default configuration object is.
   supportFiles: [],
   jsonReport: 'reports/cucumber.json',
   htmlReport: 'reports/cucumber.html',
-  openReport: false
+  openReport: false,
+  stepTimeout: 30000
 }
 ```
 
