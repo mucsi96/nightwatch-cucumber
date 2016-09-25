@@ -177,7 +177,6 @@ var nightwatchCucumber = require('nightwatch-cucumber')({
 })
 
 module.exports = {
-  src_folders: [nightwatchCucumber],
   page_objects_path: 'page-objects',
   ...
 }
