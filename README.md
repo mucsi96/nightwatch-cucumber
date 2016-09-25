@@ -65,6 +65,7 @@ module.exports = {
 For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
 ## Demo Test
+
 By default feature files are located in `features` folder. You can change this using configuration object.
 
 ```
@@ -152,6 +153,7 @@ Scenario: adding
 ```
 
 ### Scenario Outlines
+
 You can use scenario outlines to avoid copying and pasting of scenarios.
 
 ```
@@ -219,10 +221,12 @@ module.exports = function() {
 ```
 
 ### Feature Groups
+
 You can selectively run features based on groups. To group features together just place them in the same sub-folder. The folder name is the name of the group.
 You can use Nightwatch CLI `--group`, `--skipgroup` flags. [More details ](http://nightwatchjs.org/guide#test-groups)
 
 ### Feature Tags
+
 You can selectively run features based on tags. [More details ](http://nightwatchjs.org/guide#test-tags)
 ```
 # google.feature
@@ -242,6 +246,47 @@ $ node nightwatch.js --tag google
 You can also skip features based on tags
 ```
 node nightwatch.js --skiptags google
+```
+
+### Scenario Tags
+
+You can selectively run scenarios based on tags.
+```
+# google.feature
+
+Feature: Google Search
+
+@google @search
+Scenario: Searching Google
+
+  Given I open Google's search page
+  Then the title is "Google"
+  And the Google search form exists
+```
+```
+$ node nightwatch.js --tag google
+```
+You can also skip features based on tags
+```
+node nightwatch.js --skiptags google
+```
+
+### Parallel execution
+
+For speeding up the execution of tests you can run them parallely. [More details](http://nightwatchjs.org/guide#via-workers)
+Here is an example Nightwatch configuration file.
+
+```
+// nightwatch.conf.js
+
+require('nightwatch-cucumber')({
+  ...
+})
+
+module.exports = {
+  "test_workers": true,
+  ...
+}
 ```
 
 ### Hooks
@@ -273,7 +318,6 @@ module.exports = function () {
 ```
 
 ## Configuration
-
 The default configuration object is.
 ```
 {
