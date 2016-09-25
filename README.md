@@ -279,8 +279,6 @@ node nightwatch.js --skiptags google
 
 For speeding up the execution of tests you can run them parallely. Here is an example Nightwatch configuration file. [More details](http://nightwatchjs.org/guide#via-workers).
 
-![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-parallel-test-output.png)
-
 ```
 // nightwatch.conf.js
 
@@ -293,6 +291,8 @@ module.exports = {
   ...
 }
 ```
+
+![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-parallel-test-output.png)
 
 ### Hooks
 
