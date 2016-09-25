@@ -273,8 +273,7 @@ node nightwatch.js --skiptags google
 
 ### Parallel execution
 
-For speeding up the execution of tests you can run them parallely. [More details](http://nightwatchjs.org/guide#via-workers)
-Here is an example Nightwatch configuration file.
+For speeding up the execution of tests you can run them parallely. Here is an example Nightwatch configuration file. [More details](http://nightwatchjs.org/guide#via-workers).
 
 ```
 // nightwatch.conf.js
