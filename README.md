@@ -120,9 +120,13 @@ In other case you can run the tests by executing
 node_modules/.bin/nightwatch
 ```
 
-![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-output.png)
+![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-output.png)
 
 ## Features
+
+### Error handling
+
+![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-error-handling-output.png)
 
 ### HTML reports
 
@@ -274,6 +278,8 @@ node nightwatch.js --skiptags google
 ### Parallel execution
 
 For speeding up the execution of tests you can run them parallely. Here is an example Nightwatch configuration file. [More details](http://nightwatchjs.org/guide#via-workers).
+
+![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-parallel-test-output.png)
 
 ```
 // nightwatch.conf.js
