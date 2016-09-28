@@ -2,6 +2,9 @@
   "name": "nightwatch-cucumber",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
+  "engines": {
+    "node": ">= 4.0.0"
+  },
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
   "contributors": [
     "Igor Zalutski <izalutski@palantir.com>",
