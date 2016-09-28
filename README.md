@@ -27,6 +27,12 @@ First you need to have Nightwatch.js and Cucumber.js to be installed locally.
 $ npm install --save-dev nightwatch cucumber
 ```
 
+or shorter
+
+```
+$ npm i -D nightwatch cucumber
+```
+
 If you are new to Nightwatch.js you can read the [developer guide](http://nightwatchjs.org/guide).
 
 ### Step 2
@@ -35,6 +41,12 @@ Install `nightwatch-cucumber`
 
 ```
 $ npm install --save-dev nightwatch-cucumber
+```
+
+or shorter
+
+```
+$ npm i -D nightwatch-cucumber
 ```
 
 ### Step 3
@@ -110,15 +122,13 @@ For more examples check out the [examples folder](https://github.com/mucsi96/nig
 
 ## Running tests
 
-If you have installed `nightwatch` with `-g` (global) option you can run the tests by executing
-```
-nightwatch
-```
+You can run the test by executing
 
-In other case you can run the tests by executing
 ```
 node_modules/.bin/nightwatch
 ```
+
+Currently you can't run tests with globally installed Nightwatch.
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-output.png)
 
@@ -270,7 +280,7 @@ Scenario: Searching Google
 ```
 $ node nightwatch.js --tag google
 ```
-You can also skip features based on tags
+You can also skip scenarios based on tags
 ```
 node nightwatch.js --skiptags google
 ```
