@@ -33,6 +33,12 @@ or shorter
 $ npm i -D nightwatch cucumber
 ```
 
+you can also install nightwatch globally
+
+```
+$ npm i -g nightwatch
+```
+
 If you are new to Nightwatch.js you can read the [developer guide](http://nightwatchjs.org/guide).
 
 ### Step 2
@@ -128,7 +134,11 @@ You can run the test by executing
 node_modules/.bin/nightwatch
 ```
 
-Currently you can't run tests with globally installed Nightwatch.
+or if you installed Nightwatch globally you can run test by executing
+
+```
+nightwatch
+```
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-output.png)
 
