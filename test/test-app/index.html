@@ -16,7 +16,19 @@
     <button id="multiply">Multiply</button>
   </h3>
   <h3>Result: <span id="result"></span></h3>
-  <script type="text/javascript">
+  <h2>Hook test</h2>
+  <button id="before-features">BeforeFeatures</button>
+  <button id="before-feature">BeforeFeature</button>
+  <button id="before">Before</button>
+  <button id="before-scenario">BeforeScenario</button>
+  <button id="before-step">BeforeStep</button>
+  <button id="after-step">AfterStep</button>
+  <button id="after-scenario">AfterScenario</button>
+  <button id="after">After</button>
+  <button id="after-feature">AfterFeature</button>
+  <button id="after-features">AfterFeatures</button>
+  <h3>Result: <span id="hook-result"></span></h3>
+  <script>
     function autorun () {
       document.querySelector('#add').addEventListener('click', calc(function (a, b) {
         return a + b;
@@ -30,6 +42,16 @@
       document.querySelector('#multiply').addEventListener('click', calc(function (a, b) {
         return a * b;
       }));
+      document.querySelector('#before-features').addEventListener('click', addToHookResult('<F'));
+      document.querySelector('#before-feature').addEventListener('click', addToHookResult('<f'));
+      document.querySelector('#before').addEventListener('click', addToHookResult('<'));
+      document.querySelector('#before-scenario').addEventListener('click', addToHookResult('<S'));
+      document.querySelector('#before-step').addEventListener('click', addToHookResult('<s'));
+      document.querySelector('#after-step').addEventListener('click', addToHookResult('s>'));
+      document.querySelector('#after-scenario').addEventListener('click', addToHookResult('S>'));
+      document.querySelector('#after').addEventListener('click', addToHookResult('>'));
+      document.querySelector('#after-feature').addEventListener('click', addToHookResult('f>'));
+      document.querySelector('#after-features').addEventListener('click', addToHookResult('F>'));
     }
 
     function calc(op) {
@@ -37,6 +59,12 @@
         var a = parseInt(document.querySelector('#a').value);
         var b = parseInt(document.querySelector('#b').value);
         document.querySelector('#result').innerText = op(a, b)
+      }
+    }
+
+    function addToHookResult(text) {
+      return function () {
+        document.querySelector('#hook-result').innerText += text;
       }
     }
 

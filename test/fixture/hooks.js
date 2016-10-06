@@ -3,51 +3,41 @@ const chai = require('chai')
 chai.should()
 
 module.exports = function () {
-  this.registerHandler('BeforeFeatures', function (features, cb) {
-    this.should.have.ownProperty('click')
-    if (process.send) process.send('<F')
-    cb()
+  this.registerHandler('BeforeFeatures', function () {
+    this.init()
+    this.click('#before-features')
   })
 
-  this.registerHandler('BeforeFeature', function (feature, cb) {
-    this.should.have.ownProperty('click')
-    if (process.send) process.send('<f')
-    cb()
+  this.registerHandler('BeforeFeature', function () {
+    this.click('#before-feature')
   })
 
-  this.registerHandler('BeforeScenario', function (scenario, cb) {
-    this.should.have.ownProperty('click')
-    if (process.send) process.send('<S')
-    cb()
+  this.registerHandler('BeforeScenario', function () {
+    this.click('#before-scenario')
   })
 
-  this.registerHandler('BeforeStep', function (step, cb) {
-    this.should.have.ownProperty('click')
-    if (process.send) process.send('<s')
-    cb()
+  this.registerHandler('BeforeStep', function () {
+    this.click('#before-step')
   })
 
-  this.registerHandler('AfterStep', function (step, cb) {
-    this.should.have.ownProperty('click')
-    if (process.send) process.send('s>')
-    cb()
+  this.registerHandler('AfterStep', function () {
+    this.click('#after-step')
   })
 
-  this.registerHandler('AfterScenario', function (scenario, cb) {
-    this.should.have.ownProperty('click')
-    if (process.send) process.send('S>')
-    cb()
+  this.registerHandler('AfterScenario', function () {
+    this.click('#after-scenario')
   })
 
-  this.registerHandler('AfterFeature', function (feature, cb) {
-    this.should.have.ownProperty('click')
-    if (process.send) process.send('f>')
-    cb()
+  this.registerHandler('AfterFeature', function () {
+    this.click('#after-feature')
   })
 
-  this.registerHandler('AfterFeatures', function (features, cb) {
-    this.should.have.ownProperty('click')
-    if (process.send) process.send('F>')
-    cb()
+  this.registerHandler('AfterFeatures', function () {
+    this.click('#after-features')
+    this.getText('#hook-result', function (hookResult) {
+      if (process.send) {
+        process.send(hookResult.value)
+      }
+    })
   })
 }
