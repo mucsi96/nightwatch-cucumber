@@ -8,8 +8,8 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![dependencies Status](https://david-dm.org/mucsi96/nightwatch-cucumber/status.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber)
 [![devDependencies Status](https://david-dm.org/mucsi96/nightwatch-cucumber/dev-status.svg)](https://david-dm.org/mucsi96/nightwatch-cucumber?type=dev)
-[Ask question](https://groups.google.com/d/forum/nightwatch-cucumber)
 [![Twitter Follow](https://img.shields.io/twitter/follow/mucsi96.svg?style=social&label=Follow&maxAge=2592000)](https://twitter.com/mucsi96)
+[Ask question](https://groups.google.com/d/forum/nightwatch-cucumber)
 
 [![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=8)](https://nodei.co/npm/nightwatch-cucumber/)
 
