@@ -399,6 +399,7 @@ Ben Grabham,
 [Lawrence (@ldabiralai)](https://github.com/ldabiralai)
 [Domenico Gemoli (@aberonni)](https://github.com/aberonni)
 [Klokov Anton (@klokovas)](https://github.com/klokovas)
+[Arnaud gueras (@arnogues)](https://github.com/arnogues)
 
 # Change log
 
