@@ -1,6 +1,6 @@
 const nightwatch = require('nightwatch')
 
-module.exports = function (grunt) {
+module.exports = (grunt) => {
   grunt.initConfig({
     nightwatch: {
       'default': {
