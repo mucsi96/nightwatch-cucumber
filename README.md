@@ -196,6 +196,23 @@ module.exports = {
 }
 ```
 
+### Gulp support
+
+For running test as part of you [Gulp](http://gulpjs.com/) build process you can use the following `gulpfile.js` as template. [More details](https://github.com/tatsuyafw/gulp-nightwatch)
+
+```
+// gulpfile.js
+const gulp = require('gulp')
+const nightwatch = require('gulp-nightwatch')
+
+gulp.task('default', () => {
+  return gulp.src('')
+    .pipe(nightwatch({
+      configFile: 'nightwatch.conf.js'
+    }))
+})
+```
+
 ### Feature background
 You can use feature background to avoid copying and pasting of steps. The background runs before each scenario after beforeScenario hooks.
 

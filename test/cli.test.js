@@ -83,7 +83,7 @@ describe('CLI', () => {
       .and('User enter -5 in B field')
       .when('User press Add button')
       .then('The result should contain -9')
-      .run('nightwatch', ['--group', 'negative'])
+      .run(['--group', 'negative'])
       .then((result) => {
         result.features.length.should.equal(1)
         result.features[0].name.should.equal('negative addition')
@@ -122,7 +122,7 @@ describe('CLI', () => {
       .and('User enter -5 in B field')
       .when('User press Add button')
       .then('The result should contain -9')
-      .run('nightwatch', ['--skipgroup', 'positive'])
+      .run(['--skipgroup', 'positive'])
       .then((result) => {
         result.features.length.should.equal(1)
         result.features[0].name.should.equal('negative addition')
@@ -159,7 +159,7 @@ describe('CLI', () => {
       .and('User enter -5 in B field')
       .when('User press Add button')
       .then('The result should contain -9')
-      .run('nightwatch', ['--tag', 'negative'])
+      .run(['--tag', 'negative'])
       .then((result) => {
         result.features.length.should.equal(1)
         result.features[0].name.should.equal('negative addition')
@@ -196,7 +196,7 @@ describe('CLI', () => {
       .and('User enter -5 in B field')
       .when('User press Add button')
       .then('The result should contain -9')
-      .run('nightwatch', ['--skiptags', 'positive'])
+      .run(['--skiptags', 'positive'])
       .then((result) => {
         result.features.length.should.equal(1)
         result.features[0].name.should.equal('negative addition')
@@ -220,7 +220,7 @@ describe('CLI', () => {
       .and('User enter 5 in B field')
       .when('User press Add button')
       .then('The result should contain 9')
-      .run('nightwatch', ['--tag', 'big'])
+      .run(['--tag', 'big'])
       .then((result) => {
         result.features[0].scenarios.length.should.equal(1)
         result.features[0].scenarios[0].name.should.equal('big numbers')
@@ -244,7 +244,7 @@ describe('CLI', () => {
       .and('User enter 5 in B field')
       .when('User press Add button')
       .then('The result should contain 9')
-      .run('nightwatch', ['--skiptags', 'small'])
+      .run(['--skiptags', 'small'])
       .then((result) => {
         result.features[0].scenarios.length.should.equal(1)
         result.features[0].scenarios[0].name.should.equal('big numbers')
@@ -281,7 +281,7 @@ describe('CLI', () => {
       .and('User enter -5 in B field')
       .when('User press Add button')
       .then('The result should contain -9')
-      .run('nightwatch', ['--test', 'features/negative-addition.feature'])
+      .run(['--test', 'features/negative-addition.feature'])
       .then((result) => {
         result.features.length.should.equal(1)
         result.features[0].name.should.equal('negative-addition')
