@@ -8,8 +8,6 @@ const _ = require('lodash')
 const PrefixStream = require('../lib/prefix-stream')
 const nightwatchConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'nightwatch.conf.js.tmpl'))
 const nightwatchConfTemplate = _.template(nightwatchConfTemplatePath)
-const cucumberConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'cucumber.js.tmpl'))
-const cucumberConfTemplate = _.template(cucumberConfTemplatePath)
 
 class TestCaseFactory {
   constructor (name, options) {
@@ -21,7 +19,9 @@ class TestCaseFactory {
       noTests: false,
       badFeatureFile: false,
       junitReport: false,
-      screenshots: false
+      screenshots: false,
+      gulp: false,
+      grunt: false
     }, options)
     this.groups = []
     this.stepDefinitions = []
@@ -185,14 +185,16 @@ class TestCaseFactory {
     })
   }
 
-  _build (runner) {
+  _build () {
     this.options.pageObjects = !!this.pageObjects.length
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(this.options))
 
-    if (this.options.cucumber) {
-      fs.writeFileSync(path.join(this.testCasePath, 'cucumber.js'), cucumberConfTemplate(this.options))
+    if (this.options.gulp) {
+      copyFixture('gulpfile.js', this.testCasePath)
+    } else if (this.options.grunt) {
+      copyFixture('Gruntfile.js', this.testCasePath)
     }
 
     this._buildStepDefinitions()
@@ -266,13 +268,15 @@ class TestCaseFactory {
     })
   }
 
-  run (runner, args) {
+  run (args) {
     let runnerPath
-    this._build(runner)
+    this._build()
     args = args || []
 
-    if (runner === 'cucumber') {
-      runnerPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'cucumber', 'bin', 'cucumber.js'))
+    if (this.options.gulp) {
+      runnerPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'gulp', 'bin', 'gulp.js'))
+    } else if (this.options.grunt) {
+      runnerPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'grunt', 'bin', 'grunt'))
     } else {
       runnerPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'nightwatch', 'bin', 'runner.js'))
     }
@@ -361,4 +365,10 @@ class TestCaseFactory {
 function pad (value, length) {
   return (value.toString().length < length) ? pad(value + ' ', length) : value
 }
+
+function copyFixture (name, dest) {
+  fs.createReadStream(path.join(process.cwd(), 'test', 'fixture', name))
+        .pipe(fs.createWriteStream(path.join(dest, name)))
+}
+
 module.exports = TestCaseFactory

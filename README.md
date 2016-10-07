@@ -196,6 +196,46 @@ module.exports = {
 }
 ```
 
+### Grunt support
+
+For running test using [Grunt](http://gruntjs.com/) task runner you can use the following `Gruntfile.js` as template. [More details](http://nightwatchjs.org/guide#using-grunt)
+
+```
+// Gruntfile.js
+const nightwatch = require('nightwatch')
+
+module.exports = (grunt) => {
+  grunt.initConfig({
+    nightwatch: {
+      'default': {
+        argv: {}
+      }
+    }
+  })
+
+  nightwatch.initGrunt(grunt)
+
+  grunt.registerTask('default', ['nightwatch'])
+}
+```
+
+### Gulp support
+
+For running test using [Gulp](http://gulpjs.com/) task runner you can use the following `gulpfile.js` as template. [More details](https://github.com/tatsuyafw/gulp-nightwatch)
+
+```
+// gulpfile.js
+const gulp = require('gulp')
+const nightwatch = require('gulp-nightwatch')
+
+gulp.task('default', () => {
+  return gulp.src('')
+    .pipe(nightwatch({
+      configFile: 'nightwatch.conf.js'
+    }))
+})
+```
+
 ### Feature background
 You can use feature background to avoid copying and pasting of steps. The background runs before each scenario after beforeScenario hooks.
 
