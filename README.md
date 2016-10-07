@@ -198,7 +198,7 @@ module.exports = {
 
 ### Grunt support
 
-For running test as part of you [Grunt](http://gruntjs.com/) task runner you can use the following `Gruntfile.js` as template. [More details](http://nightwatchjs.org/guide#using-grunt)
+For running test using [Grunt](http://gruntjs.com/) task runner you can use the following `Gruntfile.js` as template. [More details](http://nightwatchjs.org/guide#using-grunt)
 
 ```
 // Gruntfile.js
@@ -222,7 +222,7 @@ module.exports = function(grunt) {
 
 ### Gulp support
 
-For running test as part of you [Gulp](http://gulpjs.com/) task runner you can use the following `gulpfile.js` as template. [More details](https://github.com/tatsuyafw/gulp-nightwatch)
+For running test using [Gulp](http://gulpjs.com/) task runner you can use the following `gulpfile.js` as template. [More details](https://github.com/tatsuyafw/gulp-nightwatch)
 
 ```
 // gulpfile.js
