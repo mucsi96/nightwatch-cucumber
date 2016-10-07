@@ -19,7 +19,9 @@ class TestCaseFactory {
       hooks: false,
       includePlainNightwatchTests: false,
       noTests: false,
-      badFeatureFile: false
+      badFeatureFile: false,
+      junitReport: false,
+      screenshots: false
     }, options)
     this.groups = []
     this.stepDefinitions = []

@@ -2,8 +2,6 @@
 const chai = require('chai')
 chai.should()
 const testCaseFactory = require('./test-case-factory')
-const path = require('path')
-const jsdom = require('jsdom')
 
 describe('Utility features', () => {
   it('should be able to run together with plain Nightwatch tests', () => {

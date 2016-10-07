@@ -44,7 +44,7 @@ describe('Reporting features', () => {
       })
   })
 
-   it('should generate JUnit XML report for Continuous Integration (CI) servers', () => {
+  it('should generate JUnit XML report for Continuous Integration (CI) servers', () => {
     return testCaseFactory
       .create('cucumber-junit-report-test', { junitReport: true })
       .feature('addition')
@@ -83,7 +83,7 @@ describe('Reporting features', () => {
 
   it('should attach screenshots for failing scenarios', () => {
     return testCaseFactory
-      .create('screenshot-attachement-test')
+      .create('screenshot-attachement-test', { screenshots: true })
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', function () { this.init() })

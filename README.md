@@ -149,6 +149,26 @@ nightwatch
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-error-handling-output.png)
 
+### Screenshots
+
+You can enable screenshot generation on step failure using following Nightwatch configuration
+
+```
+module.exports = {
+  test_settings: {
+    default: {
+      screenshots : {
+        enabled : true,
+        on_failure : true,
+        path: 'screenshots/default'
+      },
+      ...
+    }
+  },
+  ...
+}
+```
+
 ### HTML reports
 
 HTML report generation is enabled by default. It's default location is `reports/cucumber.html`. You can disable or change this using configuration object.
