@@ -204,8 +204,7 @@ For running test using [Grunt](http://gruntjs.com/) task runner you can use the 
 // Gruntfile.js
 const nightwatch = require('nightwatch')
 
-module.exports = function(grunt) {
-
+module.exports = (grunt) => {
   grunt.initConfig({
     nightwatch: {
       'default': {
