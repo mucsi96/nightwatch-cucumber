@@ -27,6 +27,7 @@
   "dependencies": {
     "co": "^4.6.0",
     "glob": "^7.1.0",
+    "junit-report-builder": "^1.1.1",
     "lodash": "^4.16.3",
     "mkdirp": "^0.5.1",
     "open": "^0.0.5",
