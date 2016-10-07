@@ -20,7 +20,8 @@ class TestCaseFactory {
       badFeatureFile: false,
       junitReport: false,
       screenshots: false,
-      gulp: false
+      gulp: false,
+      grunt: false
     }, options)
     this.groups = []
     this.stepDefinitions = []
@@ -191,8 +192,9 @@ class TestCaseFactory {
     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(this.options))
 
     if (this.options.gulp) {
-      fs.createReadStream(path.join(process.cwd(), 'test', 'fixture', 'gulpfile.js'))
-        .pipe(fs.createWriteStream(path.join(this.testCasePath, 'gulpfile.js')))
+      copyFixture('gulpfile.js', this.testCasePath)
+    } else if (this.options.grunt) {
+      copyFixture('Gruntfile.js', this.testCasePath)
     }
 
     this._buildStepDefinitions()
@@ -273,6 +275,8 @@ class TestCaseFactory {
 
     if (this.options.gulp) {
       runnerPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'gulp', 'bin', 'gulp.js'))
+    } else if (this.options.grunt) {
+      runnerPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'grunt', 'bin', 'grunt'))
     } else {
       runnerPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'nightwatch', 'bin', 'runner.js'))
     }
@@ -361,4 +365,10 @@ class TestCaseFactory {
 function pad (value, length) {
   return (value.toString().length < length) ? pad(value + ' ', length) : value
 }
+
+function copyFixture (name, dest) {
+  fs.createReadStream(path.join(process.cwd(), 'test', 'fixture', name))
+        .pipe(fs.createWriteStream(path.join(dest, name)))
+}
+
 module.exports = TestCaseFactory

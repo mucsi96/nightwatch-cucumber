@@ -196,9 +196,33 @@ module.exports = {
 }
 ```
 
+### Grunt support
+
+For running test as part of you [Grunt](http://gruntjs.com/) task runner you can use the following `Gruntfile.js` as template. [More details](http://nightwatchjs.org/guide#using-grunt)
+
+```
+// Gruntfile.js
+const nightwatch = require('nightwatch')
+
+module.exports = function(grunt) {
+
+  grunt.initConfig({
+    nightwatch: {
+      'default': {
+        argv: {}
+      }
+    }
+  })
+
+  nightwatch.initGrunt(grunt)
+
+  grunt.registerTask('default', ['nightwatch'])
+}
+```
+
 ### Gulp support
 
-For running test as part of you [Gulp](http://gulpjs.com/) build process you can use the following `gulpfile.js` as template. [More details](https://github.com/tatsuyafw/gulp-nightwatch)
+For running test as part of you [Gulp](http://gulpjs.com/) task runner you can use the following `gulpfile.js` as template. [More details](https://github.com/tatsuyafw/gulp-nightwatch)
 
 ```
 // gulpfile.js
