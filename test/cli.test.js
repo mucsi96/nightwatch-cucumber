@@ -344,7 +344,7 @@ describe('CLI', () => {
 
   it('should return non zero exit code on failure', () => {
     return testCaseFactory
-      .create('screenshot-attachement-test')
+      .create('non-zero-exit-code-test')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', function () { this.init() })
