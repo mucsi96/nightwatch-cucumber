@@ -318,7 +318,7 @@ describe('CLI', () => {
       .and('User enter -5 in B field')
       .when('User press Add button')
       .then('The result should contain -9')
-      .run('nightwatch', ['features/negative-addition.feature'])
+      .run(['features/negative-addition.feature'])
       .then((result) => {
         result.features.length.should.equal(1)
         result.features[0].name.should.equal('negative-addition')
