@@ -157,6 +157,25 @@ HTML report generation is enabled by default. It's default location is `reports/
 
 Using the `openReport` option it is possible to make the report automatically open once test run finished.
 
+### JUnit XML reports / Continuous Integration (CI)
+
+JUnit XML report format is a standard offering across testing frameworks and Continuous Integration (CI) servers.
+Using these reports the CI server can offer trend data over time to help determine the stability of your test suite.
+Below you can see an example configuration for enabling JUnit XML report generation.
+
+```
+require('nightwatch-cucumber')({
+  junitReport: {
+    output: 'reports/junit.xml'
+  },
+  ...
+})
+
+module.exports = {
+  ...
+}
+```
+
 ### Feature background
 You can use feature background to avoid copying and pasting of steps. The background runs before each scenario after beforeScenario hooks.
 
@@ -199,7 +218,7 @@ For making you tests more readable and maintainable you can use the Page Object 
 ```
 // nightwatch.conf.js
 
-var nightwatchCucumber = require('nightwatch-cucumber')({
+require('nightwatch-cucumber')({
   /* configuration */
 })
 
@@ -401,6 +420,8 @@ Ben Grabham,
 [Domenico Gemoli (@aberonni)](https://github.com/aberonni)
 [Klokov Anton (@klokovas)](https://github.com/klokovas)
 [Arnaud gueras (@arnogues)](https://github.com/arnogues)
+[Lukas Eipert (@leipert)](https://github.com/leipert)
+
 
 # Change log
 

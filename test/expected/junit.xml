@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Feature: addition" tests="2" failures="0" errors="0" skipped="0">
+    <testcase classname="Feature: addition" name="Scenario: small numbers"/>
+    <testcase classname="Feature: addition" name="Scenario: big numbers"/>
+  </testsuite>
+  <testsuite name="Feature: subtraction" tests="2" failures="0" errors="0" skipped="0">
+    <testcase classname="Feature: subtraction" name="Scenario: small numbers"/>
+    <testcase classname="Feature: subtraction" name="Scenario: big numbers"/>
+  </testsuite>
+</testsuites>

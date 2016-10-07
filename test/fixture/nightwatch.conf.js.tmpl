@@ -9,6 +9,11 @@ require('../../lib/index')({
   <% if (noTests) {%>
   featureFiles: ['.']
   <% } %>
+  <% if (junitReport) {%>
+  junitReport: {
+    output: 'reports/junit.xml'
+  }
+  <% } %>
 })
 
 module.exports = {

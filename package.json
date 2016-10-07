@@ -21,7 +21,8 @@
     "Lawrence",
     "Domenico Gemoli <domenicogemoli@gmail.com>",
     "Klokov Anton",
-    "Arnaud gueras"
+    "Arnaud gueras",
+    "Lukas Eipert <git@leipert.io>"
   ],
   "license": "MIT",
   "dependencies": {
