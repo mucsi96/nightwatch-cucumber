@@ -440,6 +440,40 @@ Currently you cannot access Nightwatch API from hooks.
 [More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
 For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
+```
+// nightwatch.conf.js
+
+require('nightwatch-cucumber')({
+  supportFiles: ['hooks.js']
+})
+
+module.exports = {
+  ...
+}
+```
+
+```
+// hooks.js
+
+module.exports = function () {
+  this.Before(function (scenario, callback) {
+    console.log('Before start');
+    setTimeout(function() {
+      console.log('Before end');
+      callback();
+    }, 1000);
+  });
+
+  this.After(function (scenario, callback) {
+    console.log('After start');
+    setTimeout(function() {
+      console.log('After end');
+      callback();
+    }, 1000);
+  });
+}
+```
+
 ## Configuration
 The default configuration object is.
 ```
