@@ -1,4 +1,6 @@
 /* eslint-env mocha */
+'use strict'
+
 const chai = require('chai')
 chai.should()
 
