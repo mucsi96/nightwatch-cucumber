@@ -175,7 +175,6 @@ describe('Utility features', () => {
       .run()
       .then((result) => {
         result.ipcMessages.should.contain('2additionsmall numbersNothingNothingNothingNothingNothingNothingsmall numbersbig numbersNothingNothingNothingNothingNothingNothingbig numbersadditionsubtractionsmall numbersNothingNothingNothingNothingNothingNothingsmall numbersbig numbersNothingNothingNothingNothingNothingNothingbig numberssubtraction2')
-        result.output.should.contain('Nightwatch API is disabled as you provided a callback function. You cannot use both!')
       })
   })
 
