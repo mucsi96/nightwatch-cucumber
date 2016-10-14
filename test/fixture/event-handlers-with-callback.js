@@ -23,7 +23,6 @@ module.exports = function () {
   })
 
   this.registerHandler('BeforeStep', function (step, cb) {
-    this.click('#before-step')
     result += step.getName()
     cb()
   })
