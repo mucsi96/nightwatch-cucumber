@@ -394,15 +394,18 @@ module.exports = {
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-parallel-test-output.png)
 
-### Hooks
+### Event Handlers
 
-Hooks can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option. [More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
+Event handlers can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option.
+Event handlers can be defined without callback. In that case Nightwatch api will be available using `this`. Or can be defined without callback
+it that case Nightwatch API will be disabled.
+[More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
 
 ```
 // nightwatch.conf.js
 
 require('nightwatch-cucumber')({
-  supportFiles: ['hooks.js']
+  supportFiles: ['event-handlers.js']
 })
 
 module.exports = {
@@ -411,16 +414,29 @@ module.exports = {
 ```
 
 ```
-// hooks.js
+// event-handlers.js
 
 module.exports = function () {
-  this.registerHandler('AfterFeatures', function (features, callback) {
-    ...
-    callback();
+  this.registerHandler('BeforeFeatures', function (features) {
+    // No callback provided. Nightwatch API is available here!
+    this.click('.my-button');
+  });
+
+  this.registerHandler('BeforeFeatures', function (features, callback) {
+    // Callback provided. Nightwatch API is disabled here!
+    setTimeout(function() {
+      callback();
+    }, 1000);
   });
 }
 
 ```
+
+### Hooks
+
+Hooks can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option.
+Currently you cannot access Nightwatch API from hooks.
+[More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
 
 ## Configuration
 The default configuration object is.
