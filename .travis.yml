@@ -12,6 +12,7 @@ notifications:
 node_js:
   - '4'
 before_script:
+  - java -version
   - npm prune
 after_success:
   - npm run coveralls
