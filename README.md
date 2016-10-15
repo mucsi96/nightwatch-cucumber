@@ -412,9 +412,51 @@ module.exports = {
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-parallel-test-output.png)
 
+### Event Handlers
+
+Event handlers can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option.
+Event handlers can be defined without callback. In that case Nightwatch api will be available using `this`. Or can be defined with callback.
+In that case Nightwatch API will be disabled.
+[More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
+For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
+
+```
+// nightwatch.conf.js
+
+require('nightwatch-cucumber')({
+  supportFiles: ['event-handlers.js']
+})
+
+module.exports = {
+  ...
+}
+```
+
+```
+// event-handlers.js
+
+module.exports = function () {
+  this.registerHandler('BeforeFeatures', function (features) {
+    // No callback provided. Nightwatch API is available here!
+    this.click('.my-button');
+  });
+
+  this.registerHandler('BeforeFeatures', function (features, callback) {
+    // Callback provided. Nightwatch API is disabled here!
+    setTimeout(function() {
+      callback();
+    }, 1000);
+  });
+}
+
+```
+
 ### Hooks
 
-Hooks can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option. [More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
+Hooks can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option.
+Currently you cannot access Nightwatch API from hooks.
+[More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
+For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
 ```
 // nightwatch.conf.js
@@ -432,12 +474,22 @@ module.exports = {
 // hooks.js
 
 module.exports = function () {
-  this.registerHandler('AfterFeatures', function (features, callback) {
-    ...
-    callback();
+  this.Before(function (scenario, callback) {
+    console.log('Before start');
+    setTimeout(function() {
+      console.log('Before end');
+      callback();
+    }, 1000);
+  });
+
+  this.After(function (scenario, callback) {
+    console.log('After start');
+    setTimeout(function() {
+      console.log('After end');
+      callback();
+    }, 1000);
   });
 }
-
 ```
 
 ## Configuration
@@ -472,6 +524,21 @@ module.exports = {
 You can use `stepTimeout` option to set timeout for steps.
 By default, timeout is 30 seconds.
 
+## Language
+
+You can use different language in feature files. For setting the language you need to add language comment at the top of the feature file.
+
+```
+#language: pt
+
+Funcionalidade: Pesquisa Google
+
+Cenário: Pesquisando no Google
+
+   Dado que eu abrir a página de pesquisa do Google
+   Em seguida, o título é "Google"
+   E o formulário de busca Google existe
+```
 
 # Contribute
 

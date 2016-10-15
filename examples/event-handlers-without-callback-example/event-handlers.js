@@ -1,7 +1,3 @@
-/* eslint-env mocha */
-const chai = require('chai')
-chai.should()
-
 module.exports = function () {
   this.registerHandler('BeforeFeatures', function () {
     this.init()
@@ -34,10 +30,5 @@ module.exports = function () {
 
   this.registerHandler('AfterFeatures', function () {
     this.click('#after-features')
-    this.getText('#hook-result', function (hookResult) {
-      if (process.send) {
-        process.send(hookResult.value)
-      }
-    })
   })
 }

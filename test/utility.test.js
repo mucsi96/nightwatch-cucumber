@@ -124,9 +124,9 @@ describe('Utility features', () => {
       })
   })
 
-  it('should handle hooks', () => {
+  it('should handle event handlers without callback', () => {
     return testCaseFactory
-      .create('hookTest', { hooks: true })
+      .create('event-handlers-without-callback-test', { eventHandlersWithoutCallback: true })
       .feature('addition')
       .scenario('small numbers')
       .given('Nothing', function () {})
@@ -148,6 +148,33 @@ describe('Utility features', () => {
       .run()
       .then((result) => {
         result.ipcMessages.should.contain('<F<f<S<ss><ss><ss>S><S<ss><ss><ss>S>f><f<S<ss><ss><ss>S><S<ss><ss><ss>S>f>F>')
+      })
+  })
+
+  it('should handle event handlers with callback', () => {
+    return testCaseFactory
+      .create('event-handlers-with-callback-test', { eventHandlersWithCallback: true })
+      .feature('addition')
+      .scenario('small numbers')
+      .given('Nothing', function () {})
+      .when('Nothing')
+      .then('Nothing')
+      .scenario('big numbers')
+      .given('Nothing')
+      .when('Nothing')
+      .then('Nothing')
+      .feature('subtraction')
+      .scenario('small numbers')
+      .given('Nothing')
+      .when('Nothing')
+      .then('Nothing')
+      .scenario('big numbers')
+      .given('Nothing')
+      .when('Nothing')
+      .then('Nothing')
+      .run()
+      .then((result) => {
+        result.ipcMessages.should.contain('2additionsmall numbersNothingNothingNothingNothingNothingNothingsmall numbersbig numbersNothingNothingNothingNothingNothingNothingbig numbersadditionsubtractionsmall numbersNothingNothingNothingNothingNothingNothingsmall numbersbig numbersNothingNothingNothingNothingNothingNothingbig numberssubtraction2')
       })
   })
 
