@@ -454,8 +454,9 @@ module.exports = function () {
 ### Hooks
 
 Hooks can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option.
-Currently you cannot access Nightwatch API from hooks.
-[More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
+Hooks can be defined without callback. In that case Nightwatch api will be available using `this`. Or can be defined with callback.
+In that case Nightwatch API will be disabled.
+[More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/hooks.md)
 For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
 ```

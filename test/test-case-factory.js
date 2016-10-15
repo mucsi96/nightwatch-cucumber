@@ -14,6 +14,7 @@ class TestCaseFactory {
     this.name = name
     this.options = _.assign({
       paralell: false,
+      hooks: false,
       eventHandlersWithoutCallback: false,
       eventHandlersWithCallback: false,
       includePlainNightwatchTests: false,

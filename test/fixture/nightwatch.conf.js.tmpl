@@ -3,6 +3,9 @@ var phantomjs = require('phantomjs-prebuilt')
 var chromedriver = require('chromedriver')
 
 require('../../lib/index')({
+  <% if (hooks) { %>
+  supportFiles: ['../../test/fixture/hooks.js']
+  <% } %>
   <% if (eventHandlersWithoutCallback) { %>
   supportFiles: ['../../test/fixture/event-handlers-without-callback.js']
   <% } %>

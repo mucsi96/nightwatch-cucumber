@@ -178,6 +178,46 @@ describe('Utility features', () => {
       })
   })
 
+  it('should handle hooks', () => {
+    return testCaseFactory
+      .create('hooks-test', { hooks: true })
+      .feature('addition')
+      .scenario('small numbers')
+      .given('Nothing', function () {})
+      .when('Nothing')
+      .then('Nothing')
+      .scenario('big numbers')
+      .given('Nothing')
+      .when('Nothing')
+      .then('Nothing')
+      .feature('subtraction')
+      .scenario('small numbers', ['a'])
+      .given('Nothing')
+      .when('Nothing')
+      .then('Nothing')
+      .scenario('big numbers', ['b'])
+      .given('Nothing')
+      .when('Nothing')
+      .then('Nothing')
+      .run()
+      .then((result) => {
+        result.ipcMessages.should.contain('<SS><SS><SS><SS>')
+        result.ipcMessages.should.contain([
+          'before-small numbers',
+          'after-small numbers',
+          'before-big numbers',
+          'after-big numbers',
+          'before-small numbers',
+          'before-a-b-small numbers',
+          'after-small numbers',
+          'before-big numbers',
+          'before-a-b-big numbers',
+          'after-b-big numbers',
+          'after-big numbers'
+        ].join(''))
+      })
+  })
+
   it('should be able to run using Gulp build tool', () => {
     return testCaseFactory
       .create('gulp-build-test', { gulp: true })
