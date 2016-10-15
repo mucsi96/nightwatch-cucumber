@@ -236,6 +236,24 @@ gulp.task('default', () => {
 })
 ```
 
+### Programmatical execution
+
+You can execute tests using the following programmatical API
+
+```
+const nightwatch = require('nightwatch')
+
+nightwatch.runner({
+  _: [], // Run single feature file
+  config: 'nightwatch.conf.js',
+  env: 'default',
+  filter: '',
+  tag: ''
+}, () => {
+  console.log('done');
+})
+```
+
 ### Feature background
 You can use feature background to avoid copying and pasting of steps. The background runs before each scenario after beforeScenario hooks.
 
