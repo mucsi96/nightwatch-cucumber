@@ -3,43 +3,20 @@ var phantomjs = require('phantomjs-prebuilt')
 var chromedriver = require('chromedriver')
 
 require('../../lib/index')({
-  <% if (hooks) { %>
-  supportFiles: ['../../test/fixture/hooks.js']
-  <% } %>
-  <% if (eventHandlersWithoutCallback) { %>
-  supportFiles: ['../../test/fixture/event-handlers-without-callback.js']
-  <% } %>
-  <% if (eventHandlersWithCallback) { %>
-  supportFiles: ['../../test/fixture/event-handlers-with-callback.js']
-  <% } %>
-  <% if (noTests) {%>
-  featureFiles: ['.']
-  <% } %>
-  <% if (junitReport) {%>
-  junitReport: {
-    output: 'reports/junit.xml'
-  }
-  <% } %>
+  
+  
+  
 })
 
 module.exports = {
-  <% if (includePlainNightwatchTests) { %>
-  src_folders: ['../../test/fixture/plain-nightwatch-test'],
-  <% } %>
+  
   output_folder: 'reports',
   custom_commands_path: '',
   custom_assertions_path: '',
-  <% if (pageObjects) { %>
-  page_objects_path: 'page_objects',
-  <% } %>
+  
   live_output: false,
   disable_colors: false,
-  <% if (paralell) { %>
-  test_workers: {
-    enabled: true,
-    workers: 'auto'
-  },
-  <% } %>
+  
 
   selenium: {
     start_process: true,
@@ -54,14 +31,7 @@ module.exports = {
       launch_url: 'http://localhost:8087',
       selenium_port: 4444,
       selenium_host: '127.0.0.1',
-      <% if (screenshots) { %>
-      screenshots: {
-        enabled: true,
-        on_failure: true,
-        on_error: false,
-        path: 'screenshots/default'
-      },
-      <% } %>
+      
       desiredCapabilities: {
         browserName: 'phantomjs',
         javascriptEnabled: true,

@@ -1,9 +1,6 @@
 /* eslint-env mocha */
 'use strict'
 
-const chai = require('chai')
-chai.should()
-
 module.exports = function () {
   this.registerHandler('BeforeFeatures', function () {
     this.init()

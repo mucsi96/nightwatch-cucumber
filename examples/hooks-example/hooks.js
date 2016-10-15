@@ -14,4 +14,16 @@ module.exports = function () {
       callback();
     }, 1000);
   });
+
+  this.Before(function (scenario) {
+    this.init();
+  });
+
+  this.After(function (scenario) {
+    this.click('input[name="q"]');
+  });
+
+  this.After('@sometag', function (scenario) {
+    this.click('buttons');
+  });
 }

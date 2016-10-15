@@ -14,6 +14,7 @@ class TestCaseFactory {
     this.name = name
     this.options = _.assign({
       paralell: false,
+      hooks: false,
       eventHandlersWithoutCallback: false,
       eventHandlersWithCallback: false,
       includePlainNightwatchTests: false,
@@ -22,7 +23,8 @@ class TestCaseFactory {
       junitReport: false,
       screenshots: false,
       gulp: false,
-      grunt: false
+      grunt: false,
+      programmatical: false
     }, options)
     this.groups = []
     this.stepDefinitions = []
@@ -196,6 +198,8 @@ class TestCaseFactory {
       copyFixture('gulpfile.js', this.testCasePath)
     } else if (this.options.grunt) {
       copyFixture('Gruntfile.js', this.testCasePath)
+    } else if (this.options.programmatical) {
+      copyFixture('programmatical-run.js', this.testCasePath)
     }
 
     this._buildStepDefinitions()
@@ -278,6 +282,8 @@ class TestCaseFactory {
       runnerPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'gulp', 'bin', 'gulp.js'))
     } else if (this.options.grunt) {
       runnerPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'grunt', 'bin', 'grunt'))
+    } else if (this.options.programmatical) {
+      runnerPath = path.resolve(path.join(this.testCasePath, 'programmatical-run.js'))
     } else {
       runnerPath = path.resolve(path.join(__dirname, '..', 'node_modules', 'nightwatch', 'bin', 'runner.js'))
     }

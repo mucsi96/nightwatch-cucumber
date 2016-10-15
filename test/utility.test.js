@@ -178,6 +178,46 @@ describe('Utility features', () => {
       })
   })
 
+  it('should handle hooks', () => {
+    return testCaseFactory
+      .create('hooks-test', { hooks: true })
+      .feature('addition')
+      .scenario('small numbers')
+      .given('Nothing', function () {})
+      .when('Nothing')
+      .then('Nothing')
+      .scenario('big numbers')
+      .given('Nothing')
+      .when('Nothing')
+      .then('Nothing')
+      .feature('subtraction')
+      .scenario('small numbers', ['a'])
+      .given('Nothing')
+      .when('Nothing')
+      .then('Nothing')
+      .scenario('big numbers', ['b'])
+      .given('Nothing')
+      .when('Nothing')
+      .then('Nothing')
+      .run()
+      .then((result) => {
+        result.ipcMessages.should.contain('<SS><SS><SS><SS>')
+        result.ipcMessages.should.contain([
+          'before-small numbers',
+          'after-small numbers',
+          'before-big numbers',
+          'after-big numbers',
+          'before-small numbers',
+          'before-a-b-small numbers',
+          'after-small numbers',
+          'before-big numbers',
+          'before-a-b-big numbers',
+          'after-b-big numbers',
+          'after-big numbers'
+        ].join(''))
+      })
+  })
+
   it('should be able to run using Gulp build tool', () => {
     return testCaseFactory
       .create('gulp-build-test', { gulp: true })
@@ -270,6 +310,52 @@ describe('Utility features', () => {
         result.features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
         result.output.should.contain('Running "nightwatch:default" (nightwatch) task')
         result.output.should.contain('Done.')
+      })
+  })
+
+  it('should be able to run using programmatical API', () => {
+    return testCaseFactory
+      .create('run-programmatical-test', { programmatical: true })
+      .feature('addition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', function () { this.init() })
+      .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
+      .and('User enter 5 in B field', function () { this.setValue('#b', 5) })
+      .when('User press Add button', function () { this.click('#add') })
+      .then('The result should contain 9', function () { this.assert.containsText('#result', 9) })
+      .scenario('big numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter 4 in A field')
+      .and('User enter 5 in B field')
+      .when('User press Add button')
+      .then('The result should contain 9')
+      .feature('subtraction')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter 9 in A field', function () { this.setValue('#a', 9) })
+      .and('User enter 3 in B field', function () { this.setValue('#b', 3) })
+      .when('User press Subtract button', function () { this.click('#subtract') })
+      .then('The result should contain 6', function () { this.assert.containsText('#result', 6) })
+      .scenario('big numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter 4 in A field')
+      .and('User enter 5 in B field')
+      .when('User press Subtract button')
+      .then('The result should contain -1', function () { this.assert.containsText('#result', -1) })
+      .run()
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})
+        result.features[0].scenarios[0].result.status.should.be.passed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[0].scenarios[1].result.status.should.be.passed
+        result.features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[1].result.status.should.be.passed
+        result.features[1].result.scenarioCounts.should.deep.equal({passed: 2})
+        result.features[1].scenarios[0].result.status.should.be.passed
+        result.features[1].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[1].scenarios[1].result.status.should.be.passed
+        result.features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
 })

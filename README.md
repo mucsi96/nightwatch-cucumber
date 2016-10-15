@@ -236,6 +236,24 @@ gulp.task('default', () => {
 })
 ```
 
+### Programmatical execution
+
+You can execute tests using the following programmatical API
+
+```
+const nightwatch = require('nightwatch')
+
+nightwatch.runner({
+  _: [], // Run single feature file
+  config: 'nightwatch.conf.js',
+  env: 'default',
+  filter: '',
+  tag: ''
+}, () => {
+  console.log('done');
+})
+```
+
 ### Feature background
 You can use feature background to avoid copying and pasting of steps. The background runs before each scenario after beforeScenario hooks.
 
@@ -436,8 +454,9 @@ module.exports = function () {
 ### Hooks
 
 Hooks can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option.
-Currently you cannot access Nightwatch API from hooks.
-[More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
+Hooks can be defined without callback. In that case Nightwatch api will be available using `this`. Or can be defined with callback.
+In that case Nightwatch API will be disabled.
+[More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/hooks.md)
 For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
 ```
