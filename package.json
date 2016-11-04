@@ -88,7 +88,7 @@
     "nightwatch": "^0.9.8",
     "phantomjs-prebuilt": "^2.1.13",
     "rimraf": "^2.5.4",
-    "selenium-server": "^2.53.1",
+    "selenium-server": "^3.0.1",
     "semantic-release": "^4.3.5"
   },
   "config": {
