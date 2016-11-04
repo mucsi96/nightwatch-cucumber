@@ -5,17 +5,6 @@ let loaded = false
 let result = ''
 
 module.exports = function () {
-  this.Before(function (scenario, cb) {
-    result += 'before-' + scenario.getName()
-    cb()
-  })
-
-  this.After(function (scenario, cb) {
-    result += 'after-' + scenario.getName()
-    if (process.send) process.send(result)
-    cb()
-  })
-
   this.Before(function (scenario) {
     if (!loaded) {
       this.init()
@@ -40,5 +29,58 @@ module.exports = function () {
     result += 'after-b-' + scenario.getName()
     if (process.send) process.send(result)
     cb()
+  })
+
+  this.Before('@b', function (scenario, cb) {
+    setTimeout(function () {
+      result += 'before-b-cb-' + scenario.getName()
+      cb()
+    }, 500)
+  })
+
+  this.After('@b', function (scenario, cb) {
+    setTimeout(function () {
+      result += 'after-b-cb-' + scenario.getName()
+      if (process.send) process.send(result)
+      cb()
+    }, 400)
+  })
+
+  this.Before('@b', function (scenario) {
+    return new Promise((resolve) => {
+      setTimeout(function () {
+        result += 'before-b-promise-' + scenario.getName()
+        resolve()
+      }, 500)
+    })
+  })
+
+  this.After('@b', function (scenario) {
+    return new Promise((resolve) => {
+      setTimeout(function () {
+        result += 'after-b-promise-' + scenario.getName()
+        if (process.send) process.send(result)
+        resolve()
+      }, 400)
+    })
+  })
+
+  this.Before('@b', function * (scenario) {
+    yield new Promise((resolve) => {
+      setTimeout(function () {
+        result += 'before-b-generator-' + scenario.getName()
+        resolve()
+      }, 500)
+    })
+  })
+
+  this.After('@b', function * (scenario) {
+    yield new Promise((resolve) => {
+      setTimeout(function () {
+        result += 'after-b-generator-' + scenario.getName()
+        if (process.send) process.send(result)
+        resolve()
+      }, 400)
+    })
   })
 }

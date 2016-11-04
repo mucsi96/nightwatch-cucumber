@@ -28,6 +28,7 @@
   "dependencies": {
     "co": "^4.6.0",
     "glob": "^7.1.1",
+    "is-generator": "^1.0.3",
     "junit-report-builder": "^1.1.1",
     "lodash.assign": "^4.2.0",
     "lodash.clonedeep": "^4.5.0",

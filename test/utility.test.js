@@ -203,17 +203,15 @@ describe('Utility features', () => {
       .then((result) => {
         result.ipcMessages.should.contain('<SS><SS><SS><SS>')
         result.ipcMessages.should.contain([
-          'before-small numbers',
-          'after-small numbers',
-          'before-big numbers',
-          'after-big numbers',
-          'before-small numbers',
           'before-a-b-small numbers',
-          'after-small numbers',
-          'before-big numbers',
           'before-a-b-big numbers',
-          'after-b-big numbers',
-          'after-big numbers'
+          'before-b-cb-big numbers',
+          'before-b-promise-big numbers',
+          'before-b-generator-big numbers',
+          'after-b-generator-big numbers',
+          'after-b-promise-big numbers',
+          'after-b-cb-big numbers',
+          'after-b-big numbers'
         ].join(''))
       })
   })

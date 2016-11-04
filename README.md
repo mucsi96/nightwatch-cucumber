@@ -145,6 +145,9 @@ nightwatch
 
 ## Features
 
+### Step definition handling
+In step definitions the Nightwatch api will be available as `this`. Step definitons which uses Nightwatch api should be synchronous! Please avoid using asynchronous (callback based, returning Promise, generators or async functions) steps or hooks with Nightwatch API as this will cause errors.
+
 ### Error handling
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-error-handling-output.png)
@@ -415,7 +418,6 @@ module.exports = {
 ### Event Handlers
 
 Event handlers can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option.
-Event handlers can be defined without callback. In that case Nightwatch api will be available using `this`. Or can be defined with callback.
 In that case Nightwatch API will be disabled.
 [More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
 For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
