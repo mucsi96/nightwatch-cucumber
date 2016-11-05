@@ -1,4 +1,4 @@
-<% _.each(suite.features, function(feature, featureIndex) { %>
+<% features.forEach(function(feature, featureIndex) { %>
 <% if (featureIndex === 0 || featureIndex % 2 === 0) { %>
 <div class="row">
 <% } %>
@@ -21,7 +21,7 @@
       </div>
       <div id="collapseFeature<%= featureIndex %>" class="panel-collapse collapse">
         <div class="panel-body">
-          <% _.each(feature.elements, function(element, scenarioIndex) { %>
+          <% feature.elements.forEach(function(element, scenarioIndex) { %>
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
@@ -40,7 +40,7 @@
               </div>
               <div id="collapseScenario<%= featureIndex %><%= scenarioIndex %>" class="panel-collapse collapse">
                 <div class="panel-body">
-                  <% _.each(element.steps, function(step, stepIndex) { %>
+                  <% element.steps.forEach(function(step, stepIndex) { %>
                     <p class="scenario-container">
                     <% if(step.result) { %>
                       <% if(step.result.status === 'passed') { %>
@@ -97,7 +97,7 @@ this.Then(/^<%= step.name.replace(/"[^"]*"/g, '"\(\[\^\"\]\*\)"') %>$/, function
       </div>
     </div>
   </div>
-  <% if ((featureIndex != 0 && ((featureIndex + 1) % 2 == 0)) || (featureIndex === (suite.features.length -1))) { %>
+  <% if ((featureIndex != 0 && ((featureIndex + 1) % 2 == 0)) || (featureIndex === (features.length -1))) { %>
 </div>
   <% } %>
 <% }); %>

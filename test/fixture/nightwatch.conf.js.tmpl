@@ -20,6 +20,9 @@ require('../../lib/index')({
     output: 'reports/junit.xml'
   }
   <% } %>
+  <% if (nightwatchClientAsParameter) {%>
+  nightwatchClientAsParameter: true
+  <% } %>
 })
 
 module.exports = {

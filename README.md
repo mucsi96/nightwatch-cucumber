@@ -74,7 +74,8 @@ Require `nightwatch-cucumber` at the top of the configuration file.
 // nightwatch.conf.js
 
 require('nightwatch-cucumber')({
-  /* configuration */
+  nightwatchClientAsParameter: true,
+  /* other configuration options */
 })
 
 module.exports = {
@@ -108,18 +109,18 @@ All step definitions will run with `this` set to Nightwatch.js client or browser
 
 module.exports = function() {
 
-  this.Given(/^I open Google's search page$/, function() {
-    this
+  this.Given(/^I open Google's search page$/, (client) => {
+    client
       .url('http://google.com')
       .waitForElementVisible('body', 1000)
   })
 
-  this.Then(/^the title is "([^"]*)"$/, function(title) {
-    this.assert.title(title)
+  this.Then(/^the title is "([^"]*)"$/, (client, title) => {
+    client.assert.title(title)
   })
 
-  this.Then(/^the Google search form exists$/, function() {
-    this.assert.visible('input[name="q"]')
+  this.Then(/^the Google search form exists$/, (client) => {
+    client.assert.visible('input[name="q"]')
   })
 
 }
@@ -144,6 +145,9 @@ nightwatch
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-output.png)
 
 ## Features
+
+### Step definition handling
+In step definitions the Nightwatch api will be available as `this`. Step definitons which uses Nightwatch api should be synchronous! Please avoid using asynchronous (callback based, returning Promise, generators or async functions) steps or hooks with Nightwatch API as this will cause errors.
 
 ### Error handling
 
@@ -415,7 +419,6 @@ module.exports = {
 ### Event Handlers
 
 Event handlers can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option.
-Event handlers can be defined without callback. In that case Nightwatch api will be available using `this`. Or can be defined with callback.
 In that case Nightwatch API will be disabled.
 [More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
 For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
@@ -503,7 +506,8 @@ The default configuration object is.
   jsonReport: 'reports/cucumber.json',
   htmlReport: 'reports/cucumber.html',
   openReport: false,
-  stepTimeout: 30000
+  stepTimeout: 30000,
+  nightwatchClientAsParameter: false
 }
 ```
 
@@ -518,6 +522,23 @@ require('nightwatch-cucumber')({
 module.exports = {
   ...
 }
+```
+
+## Nightwatch client as parameter
+
+Providing Nightwatch client as scope for step definitions is deprecated. The support could be removed in next version.
+Please set `nightwatchClientAsParameter` configuration option to `true`. And use `client` as first argument of step definition functions.
+
+```
+this.Given(/^I open Google's search page$/, (client) => {
+  client
+    .url('http://google.com')
+    .waitForElementVisible('body', 1000)
+})
+
+this.Then(/^the title is "([^"]*)"$/, (client, title) => {
+  client.assert.title(title)
+})
 ```
 
 ## Timeouts

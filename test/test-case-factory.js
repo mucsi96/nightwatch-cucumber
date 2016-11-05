@@ -24,7 +24,8 @@ class TestCaseFactory {
       screenshots: false,
       gulp: false,
       grunt: false,
-      programmatical: false
+      programmatical: false,
+      nightwatchClientAsParameter: false
     }, options)
     this.groups = []
     this.stepDefinitions = []
@@ -97,7 +98,10 @@ class TestCaseFactory {
     if (!this.context) throw new Error('And used without context')
     this.currentScenario.steps.push({ type: scenarioStepType, name })
     if (stepDefinition) {
-      const regex = `/^${name.replace(/<(.*?)>/g, '(.*?)')}$/`
+      const namePattern = name
+        .replace(/<(.*?)>/g, '(.*?)')
+        .replace(/"(.*?)"/g, '"(.*?)"')
+      const regex = `/^${namePattern}$/`
       this.stepDefinitions.push(`\n  this.${definitionType}(${regex}, ${stepDefinition.toString()})\n`)
     }
     return this
