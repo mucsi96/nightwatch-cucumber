@@ -356,4 +356,31 @@ describe('Utility features', () => {
         result.features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
+
+  it('should be able to provide Nightwatch client as step definition first parameter', () => {
+    return testCaseFactory
+      .create('test-nightwatch-client-as-parameter', { nightwatchClientAsParameter: true })
+      .feature('addition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', (client) => { client.init() })
+      .and('User enter "4" in A field', (client, a) => { client.setValue('#a', a) })
+      .and('User enter "5" in B field', (client, b) => { client.setValue('#b', b) })
+      .when('User press Add button', (client) => { client.click('#add') })
+      .then('The result should contain "9"', (client, result) => { client.assert.containsText('#result', result) })
+      .scenario('big numbers')
+      .given('User is on the simple calculator page')
+      .and('User enter "44" in A field')
+      .and('User enter "55" in B field')
+      .when('User press Add button')
+      .then('The result should contain "99"')
+      .run()
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})
+        result.features[0].scenarios[0].result.status.should.be.passed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[0].scenarios[1].result.status.should.be.passed
+        result.features[0].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
+      })
+  })
 })

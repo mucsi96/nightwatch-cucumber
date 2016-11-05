@@ -74,7 +74,8 @@ Require `nightwatch-cucumber` at the top of the configuration file.
 // nightwatch.conf.js
 
 require('nightwatch-cucumber')({
-  /* configuration */
+  nightwatchClientAsParameter: true,
+  /* other configuration options */
 })
 
 module.exports = {
@@ -108,18 +109,18 @@ All step definitions will run with `this` set to Nightwatch.js client or browser
 
 module.exports = function() {
 
-  this.Given(/^I open Google's search page$/, function() {
-    this
+  this.Given(/^I open Google's search page$/, (client) => {
+    client
       .url('http://google.com')
       .waitForElementVisible('body', 1000)
   })
 
-  this.Then(/^the title is "([^"]*)"$/, function(title) {
-    this.assert.title(title)
+  this.Then(/^the title is "([^"]*)"$/, (client, title) => {
+    client.assert.title(title)
   })
 
-  this.Then(/^the Google search form exists$/, function() {
-    this.assert.visible('input[name="q"]')
+  this.Then(/^the Google search form exists$/, (client) => {
+    client.assert.visible('input[name="q"]')
   })
 
 }
@@ -505,7 +506,8 @@ The default configuration object is.
   jsonReport: 'reports/cucumber.json',
   htmlReport: 'reports/cucumber.html',
   openReport: false,
-  stepTimeout: 30000
+  stepTimeout: 30000,
+  nightwatchClientAsParameter: false
 }
 ```
 
@@ -520,6 +522,23 @@ require('nightwatch-cucumber')({
 module.exports = {
   ...
 }
+```
+
+## Nightwatch client as parameter
+
+Providing Nightwatch client as scope for step definitions is deprecated. The support could be removed in next version.
+Please set `nightwatchClientAsParameter` configuration option to `true`. And use `client` as first argument of step definition functions.
+
+```
+this.Given(/^I open Google's search page$/, (client) => {
+  client
+    .url('http://google.com')
+    .waitForElementVisible('body', 1000)
+})
+
+this.Then(/^the title is "([^"]*)"$/, (client, title) => {
+  client.assert.title(title)
+})
 ```
 
 ## Timeouts
