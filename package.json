@@ -92,7 +92,7 @@
     "phantomjs-prebuilt": "^2.1.13",
     "rimraf": "^2.5.4",
     "selenium-server": "^2.53.1",
-    "semantic-release": "^4.3.5"
+    "semantic-release": "^6.3.2"
   },
   "config": {
     "ghooks": {
