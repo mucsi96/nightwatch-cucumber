@@ -169,4 +169,28 @@ describe('Error handling', () => {
         result.exitCode.should.equal(1)
       })
   })
+
+  it('should handle errors in custom commands', () => {
+    return testCaseFactory
+      .create('customCommandsTest')
+      .customCommand('testCommand', `module.exports.command = function () {
+    var test = undefinedVar;
+    return this;
+}`)
+      .feature('addition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', function () { this.init() })
+      .and('User enter 4 in A field', function () { this.testCommand() })
+      .and('User enter 5 in B field', function () { this.page.calculator().setValue('@numberB', 5) })
+      .when('User press Add button', function () { this.page.calculator().click('@addButton') })
+      .then('The result should contain 9', function () { this.page.calculator().assert.containsText('@result', 9) })
+      .run()
+      .then((result) => {
+        result.features[0].result.status.should.be.failed
+        result.features[0].result.scenarioCounts.should.deep.equal({failed: 1})
+        result.features[0].scenarios[0].result.status.should.be.failed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({skipped: 3, failed: 1, passed: 1})
+        result.output.should.contain('Error while running testCommand command: undefinedVar is not defined')
+      })
+  })
 })
