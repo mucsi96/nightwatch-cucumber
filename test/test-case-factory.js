@@ -30,6 +30,7 @@ class TestCaseFactory {
     this.groups = []
     this.stepDefinitions = []
     this.pageObjects = []
+    this.customCommands = []
     this.currentGroup = {
       features: {}
     }
@@ -117,6 +118,11 @@ class TestCaseFactory {
     return this
   }
 
+  customCommand (name, source) {
+    this.customCommands.push({name, source})
+    return this
+  }
+
   _buildExamples (featureFile, scenario) {
     const maxColWidths = []
     fs.writeFileSync(featureFile, `\n  Examples:\n`, { flag: 'a' })
@@ -192,8 +198,18 @@ class TestCaseFactory {
     })
   }
 
+  _buildCustomCommands () {
+    if (!this.customCommands.length) return
+
+    mkdirp.sync(path.join(this.testCasePath, 'custom_commands'))
+    this.customCommands.forEach((customCommand) => {
+      fs.writeFileSync(path.join(this.testCasePath, 'custom_commands', `${customCommand.name}.js`), customCommand.source)
+    })
+  }
+
   _build () {
     this.options.pageObjects = !!this.pageObjects.length
+    this.options.customCommands = !!this.customCommands.length
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(this.options))
@@ -208,6 +224,7 @@ class TestCaseFactory {
 
     this._buildStepDefinitions()
     this._buildPageObjects()
+    this._buildCustomCommands()
 
     let groupPath
     this.groups.forEach((group) => {
