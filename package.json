@@ -38,7 +38,7 @@
     "pify": "^2.3.0",
     "resolve": "^1.1.7",
     "semver": "^5.3.0",
-    "tmp": "^0.0.30"
+    "tmp": "^0.0.31"
   },
   "scripts": {
     "code-style": "eslint lib resources test",
@@ -92,7 +92,7 @@
     "phantomjs-prebuilt": "^2.1.13",
     "rimraf": "^2.5.4",
     "selenium-server": "^2.53.1",
-    "semantic-release": "^4.3.5"
+    "semantic-release": "^6.3.2"
   },
   "config": {
     "ghooks": {
