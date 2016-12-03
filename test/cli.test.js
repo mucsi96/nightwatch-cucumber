@@ -346,14 +346,14 @@ describe('CLI', () => {
 
   it('should return non zero exit code on failure', () => {
     return testCaseFactory
-      .create('non-zero-exit-code-test')
+      .create('non-zero-exit-code-test', { nightwatchClientAsParameter: true })
       .feature('addition')
       .scenario('small numbers')
-      .given('User is on the simple calculator page', function () { this.init() })
-      .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
-      .and('User enter 5 in B field', function () { this.setValue('#b', 5) })
-      .when('User press Add button', function () { this.click('#add') })
-      .then('The result should contain 8', function () { this.assert.containsText('#result', 8) })
+      .given('User is on the simple calculator page', (client) => { client.init() })
+      .and('User enter 4 in A field', (client) => { client.setValue('#a', 4) })
+      .and('User enter 5 in B field', (client) => { client.setValue('#b', 5) })
+      .when('User press Add button', (client) => { client.click('#add') })
+      .then('The result should contain 8', (client) => { client.assert.containsText('#result', 8) })
       .run()
       .then((result) => {
         result.exitCode.should.not.equal(0)
