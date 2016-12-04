@@ -21,26 +21,26 @@ module.exports = function () {
   })
 
   this.Before({ tags: ['@a, @b'] }, function (scenario, cb) {
-    result += 'before-a-b-' + scenario.getName()
+    result += 'before-a-b-' + scenario.name
     cb()
   })
 
   this.After('@b', function (scenario, cb) {
-    result += 'after-b-' + scenario.getName()
+    result += 'after-b-' + scenario.name
     if (process.send) process.send(result)
     cb()
   })
 
   this.Before('@b', function (scenario, cb) {
     setTimeout(function () {
-      result += 'before-b-cb-' + scenario.getName()
+      result += 'before-b-cb-' + scenario.name
       cb()
     }, 500)
   })
 
   this.After('@b', function (scenario, cb) {
     setTimeout(function () {
-      result += 'after-b-cb-' + scenario.getName()
+      result += 'after-b-cb-' + scenario.name
       if (process.send) process.send(result)
       cb()
     }, 400)
@@ -49,7 +49,7 @@ module.exports = function () {
   this.Before('@b', function (scenario) {
     return new Promise((resolve) => {
       setTimeout(function () {
-        result += 'before-b-promise-' + scenario.getName()
+        result += 'before-b-promise-' + scenario.name
         resolve()
       }, 500)
     })
@@ -58,7 +58,7 @@ module.exports = function () {
   this.After('@b', function (scenario) {
     return new Promise((resolve) => {
       setTimeout(function () {
-        result += 'after-b-promise-' + scenario.getName()
+        result += 'after-b-promise-' + scenario.name
         if (process.send) process.send(result)
         resolve()
       }, 400)
@@ -68,7 +68,7 @@ module.exports = function () {
   this.Before('@b', function * (scenario) {
     yield new Promise((resolve) => {
       setTimeout(function () {
-        result += 'before-b-generator-' + scenario.getName()
+        result += 'before-b-generator-' + scenario.name
         resolve()
       }, 500)
     })
@@ -77,7 +77,7 @@ module.exports = function () {
   this.After('@b', function * (scenario) {
     yield new Promise((resolve) => {
       setTimeout(function () {
-        result += 'after-b-generator-' + scenario.getName()
+        result += 'after-b-generator-' + scenario.name
         if (process.send) process.send(result)
         resolve()
       }, 400)
