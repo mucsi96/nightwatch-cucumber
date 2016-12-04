@@ -5,7 +5,7 @@ let loaded = false
 let result = ''
 
 module.exports = function () {
-  this.Before(function (scenario) {
+  this.Before(function (scenarioResult) {
     if (!loaded) {
       this.init()
       loaded = true
@@ -13,71 +13,52 @@ module.exports = function () {
     this.click('#before-scenario')
   })
 
-  this.After(function (scenario) {
+  this.After(function (scenarioResult) {
     this.click('#after-scenario')
     this.getText('#hook-result', function (hookResult) {
       if (process.send) process.send(hookResult.value)
     })
   })
 
-  this.Before({ tags: ['@a, @b'] }, function (scenario, cb) {
-    result += 'before-a-b-' + scenario.name
+  this.Before({ tags: '@a or @b' }, function (scenarioResult, cb) {
+    result += 'before-a-b-' + scenarioResult.scenario.name
     cb()
   })
 
-  this.After('@b', function (scenario, cb) {
-    result += 'after-b-' + scenario.name
+  this.After('@b', function (scenarioResult, cb) {
+    result += 'after-b-' + scenarioResult.scenario.name
     if (process.send) process.send(result)
     cb()
   })
 
-  this.Before('@b', function (scenario, cb) {
+  this.Before('@b', function (scenarioResult, cb) {
     setTimeout(function () {
-      result += 'before-b-cb-' + scenario.name
+      result += 'before-b-cb-' + scenarioResult.scenario.name
       cb()
     }, 500)
   })
 
-  this.After('@b', function (scenario, cb) {
+  this.After('@b', function (scenarioResult, cb) {
     setTimeout(function () {
-      result += 'after-b-cb-' + scenario.name
+      result += 'after-b-cb-' + scenarioResult.scenario.name
       if (process.send) process.send(result)
       cb()
     }, 400)
   })
 
-  this.Before('@b', function (scenario) {
+  this.Before('@b', function (scenarioResult) {
     return new Promise((resolve) => {
       setTimeout(function () {
-        result += 'before-b-promise-' + scenario.name
+        result += 'before-b-promise-' + scenarioResult.scenario.name
         resolve()
       }, 500)
     })
   })
 
-  this.After('@b', function (scenario) {
+  this.After('@b', function (scenarioResult) {
     return new Promise((resolve) => {
       setTimeout(function () {
-        result += 'after-b-promise-' + scenario.name
-        if (process.send) process.send(result)
-        resolve()
-      }, 400)
-    })
-  })
-
-  this.Before('@b', function * (scenario) {
-    yield new Promise((resolve) => {
-      setTimeout(function () {
-        result += 'before-b-generator-' + scenario.name
-        resolve()
-      }, 500)
-    })
-  })
-
-  this.After('@b', function * (scenario) {
-    yield new Promise((resolve) => {
-      setTimeout(function () {
-        result += 'after-b-generator-' + scenario.name
+        result += 'after-b-promise-' + scenarioResult.scenario.name
         if (process.send) process.send(result)
         resolve()
       }, 400)

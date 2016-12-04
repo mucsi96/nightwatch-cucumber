@@ -207,11 +207,9 @@ describe('Utility features', () => {
           'before-a-b-big numbers',
           'before-b-cb-big numbers',
           'before-b-promise-big numbers',
-          'before-b-generator-big numbers',
-          'after-b-generator-big numbers',
-          'after-b-promise-big numbers',
+          'after-b-big numbers',
           'after-b-cb-big numbers',
-          'after-b-big numbers'
+          'after-b-promise-big numbers'
         ].join(''))
       })
   })
@@ -307,7 +305,6 @@ describe('Utility features', () => {
         result.features[1].scenarios[1].result.status.should.be.passed
         result.features[1].scenarios[1].result.stepCounts.should.deep.equal({passed: 5})
         result.output.should.contain('Running "nightwatch:default" (nightwatch) task')
-        result.output.should.contain('Done.')
       })
   })
 
