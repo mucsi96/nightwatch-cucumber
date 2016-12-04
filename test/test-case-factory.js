@@ -332,7 +332,7 @@ class TestCaseFactory {
       let scenarios = []
 
       feature.elements.forEach((element) => {
-        if (element.type !== 'scenario') return
+        if (element.keyword !== 'Scenario') return
 
         scenarios.push(element)
 

@@ -10,32 +10,32 @@ module.exports = function () {
   })
 
   this.registerHandler('BeforeFeature', function (feature, cb) {
-    result += feature.getName()
+    result += feature.name
     cb()
   })
 
   this.registerHandler('BeforeScenario', function (scenario, cb) {
-    result += scenario.getName()
+    result += scenario.name
     cb()
   })
 
   this.registerHandler('BeforeStep', function (step, cb) {
-    result += step.getName()
+    result += step.name
     cb()
   })
 
   this.registerHandler('AfterStep', function (step, cb) {
-    result += step.getName()
+    result += step.name
     cb()
   })
 
   this.registerHandler('AfterScenario', function (scenario, cb) {
-    result += scenario.getName()
+    result += scenario.name
     cb()
   })
 
   this.registerHandler('AfterFeature', function (feature, cb) {
-    result += feature.getName()
+    result += feature.name
     cb()
   })
 

@@ -132,14 +132,14 @@ describe('CLI', () => {
 
   it('should handle feature tag filtering', () => {
     return testCaseFactory
-      .create('featureTagFilteringTest')
+      .create('feature-tag-filtering-test', { nightwatchClientAsParameter: true })
       .feature('positive addition', ['positive', 'addition'])
       .scenario('small numbers')
-      .given('User is on the simple calculator page', function () { this.init() })
-      .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
-      .and('User enter 5 in B field', function () { this.setValue('#b', 5) })
-      .when('User press Add button', function () { this.click('#add') })
-      .then('The result should contain 9', function () { this.assert.containsText('#result', 9) })
+      .given('User is on the simple calculator page', (client) => { client.init() })
+      .and('User enter 4 in A field', (client) => { client.setValue('#a', 4) })
+      .and('User enter 5 in B field', (client) => { client.setValue('#b', 5) })
+      .when('User press Add button', (client) => { client.click('#add') })
+      .then('The result should contain 9', (client) => { client.assert.containsText('#result', 9) })
       .scenario('big numbers')
       .given('User is on the simple calculator page')
       .and('User enter 4 in A field')
@@ -149,10 +149,10 @@ describe('CLI', () => {
       .feature('negative addition', ['negative', 'addition'])
       .scenario('small numbers')
       .given('User is on the simple calculator page')
-      .and('User enter -4 in A field', function () { this.setValue('#a', -4) })
-      .and('User enter -5 in B field', function () { this.setValue('#b', -5) })
+      .and('User enter -4 in A field', (client) => { client.setValue('#a', -4) })
+      .and('User enter -5 in B field', (client) => { client.setValue('#b', -5) })
       .when('User press Add button')
-      .then('The result should contain -9', function () { this.assert.containsText('#result', -9) })
+      .then('The result should contain -9', (client) => { client.assert.containsText('#result', -9) })
       .scenario('big numbers')
       .given('User is on the simple calculator page')
       .and('User enter -4 in A field')
@@ -161,9 +161,10 @@ describe('CLI', () => {
       .then('The result should contain -9')
       .run(['--tag', 'negative'])
       .then((result) => {
-        result.features.length.should.equal(1)
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})
         result.features[0].name.should.equal('negative addition')
-        result.features[0].result.status.should.be.passed
+        result.features[1].result.scenarioCounts.should.deep.equal({})
+        result.features[1].name.should.equal('positive addition')
       })
   })
 
@@ -198,9 +199,10 @@ describe('CLI', () => {
       .then('The result should contain -9')
       .run(['--skiptags', 'positive'])
       .then((result) => {
-        result.features.length.should.equal(1)
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})
         result.features[0].name.should.equal('negative addition')
-        result.features[0].result.status.should.be.passed
+        result.features[1].result.scenarioCounts.should.deep.equal({})
+        result.features[1].name.should.equal('positive addition')
       })
   })
 
@@ -344,14 +346,14 @@ describe('CLI', () => {
 
   it('should return non zero exit code on failure', () => {
     return testCaseFactory
-      .create('non-zero-exit-code-test')
+      .create('non-zero-exit-code-test', { nightwatchClientAsParameter: true })
       .feature('addition')
       .scenario('small numbers')
-      .given('User is on the simple calculator page', function () { this.init() })
-      .and('User enter 4 in A field', function () { this.setValue('#a', 4) })
-      .and('User enter 5 in B field', function () { this.setValue('#b', 5) })
-      .when('User press Add button', function () { this.click('#add') })
-      .then('The result should contain 8', function () { this.assert.containsText('#result', 8) })
+      .given('User is on the simple calculator page', (client) => { client.init() })
+      .and('User enter 4 in A field', (client) => { client.setValue('#a', 4) })
+      .and('User enter 5 in B field', (client) => { client.setValue('#b', 5) })
+      .when('User press Add button', (client) => { client.click('#add') })
+      .then('The result should contain 8', (client) => { client.assert.containsText('#result', 8) })
       .run()
       .then((result) => {
         result.exitCode.should.not.equal(0)

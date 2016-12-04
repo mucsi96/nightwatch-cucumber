@@ -26,6 +26,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "btoa": "^1.1.2",
     "co": "^4.6.0",
     "glob": "^7.1.1",
     "is-generator": "^1.0.3",
@@ -74,7 +75,7 @@
     "chai": "^3.5.0",
     "chromedriver": "^2.25.1",
     "coveralls": "^2.11.14",
-    "cucumber": "^1.3.1",
+    "cucumber": "^2.0.0-rc.1",
     "cz-conventional-changelog": "^1.2.0",
     "eslint": "^3.9.1",
     "eslint-config-standard": "^6.2.1",
