@@ -15,3 +15,7 @@ after_success:
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
