@@ -26,7 +26,8 @@ class TestCaseFactory {
       gulp: false,
       grunt: false,
       programmatical: false,
-      nightwatchClientAsParameter: false
+      nightwatchClientAsParameter: false,
+      cucumberArgs: false
     }, options)
     this.groups = []
     this.stepDefinitions = []
