@@ -146,6 +146,23 @@ nightwatch
 
 ## Features
 
+### Passing additional CLI options for Cucumber.js.
+
+For that you can use the `cucumberArgs` configuration property. For available Cucumber.js CLI options see the [Cucumber.js docs](https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md)
+
+```
+// nightwatch.conf.js
+
+require('nightwatch-cucumber')({
+  nightwatchClientAsParameter: true,
+  cucumberArgs: '--format progress --format-options {"colorsEnabled":false}'
+})
+
+module.exports = {
+  ...
+}
+```
+
 ### Step definition handling
 In step definitions the Nightwatch api will be available as `this`. Step definitons which uses Nightwatch api should be synchronous! Please avoid using asynchronous (callback based, returning Promise, generators or async functions) steps or hooks with Nightwatch API as this will cause errors.
 
@@ -507,7 +524,8 @@ The default configuration object is.
   htmlReport: 'reports/cucumber.html',
   openReport: false,
   stepTimeout: 30000,
-  nightwatchClientAsParameter: false
+  nightwatchClientAsParameter: false,
+  cucumberArgs: ''
 }
 ```
 
