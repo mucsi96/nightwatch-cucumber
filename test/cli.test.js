@@ -161,10 +161,9 @@ describe('CLI', () => {
       .then('The result should contain -9')
       .run(['--tag', 'negative'])
       .then((result) => {
+        result.features.length.should.equal(1)
         result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})
         result.features[0].name.should.equal('negative addition')
-        result.features[1].result.scenarioCounts.should.deep.equal({})
-        result.features[1].name.should.equal('positive addition')
       })
   })
 
@@ -199,10 +198,9 @@ describe('CLI', () => {
       .then('The result should contain -9')
       .run(['--skiptags', 'positive'])
       .then((result) => {
+        result.features.length.should.equal(1)
         result.features[0].result.scenarioCounts.should.deep.equal({passed: 2})
         result.features[0].name.should.equal('negative addition')
-        result.features[1].result.scenarioCounts.should.deep.equal({})
-        result.features[1].name.should.equal('positive addition')
       })
   })
 
