@@ -21,7 +21,10 @@ require('../../lib/index')({
   }
   <% } %>
   <% if (nightwatchClientAsParameter) {%>
-  nightwatchClientAsParameter: true
+  nightwatchClientAsParameter: true,
+  <% } %>
+  <% if (cucumberArgs) {%>
+  cucumberArgs: '<%=cucumberArgs%>'
   <% } %>
 })
 
