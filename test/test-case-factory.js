@@ -27,8 +27,9 @@ class TestCaseFactory {
       grunt: false,
       programmatical: false,
       nightwatchClientAsParameter: false,
-      cucumberArgs: false
+      cucumberArgs: []
     }, options)
+    this.options.cucumberArgs = ['--include', 'timeout.js'].concat(this.options.cucumberArgs)
     this.groups = []
     this.stepDefinitions = []
     this.pageObjects = []
@@ -212,10 +213,12 @@ class TestCaseFactory {
   _build () {
     this.options.pageObjects = !!this.pageObjects.length
     this.options.customCommands = !!this.customCommands.length
+    this.options.cucumberArgs = this.options.cucumberArgs.join(' ')
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(this.options))
 
+    copyFixture('timeout.js', this.testCasePath)
     if (this.options.gulp) {
       copyFixture('gulpfile.js', this.testCasePath)
     } else if (this.options.grunt) {

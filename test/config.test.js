@@ -8,7 +8,7 @@ describe('Config', () => {
     return testCaseFactory
       .create('config-cucumber-args-test', {
         nightwatchClientAsParameter: true,
-        cucumberArgs: '--format progress --format-options {"colorsEnabled":false}'
+        cucumberArgs: ['--format', 'progress', '--format-options', '{"colorsEnabled":false}']
       })
       .feature('addition')
       .scenario('small numbers')
