@@ -523,7 +523,6 @@ The default configuration object is.
   jsonReport: 'reports/cucumber.json',
   htmlReport: 'reports/cucumber.html',
   openReport: false,
-  stepTimeout: 30000,
   nightwatchClientAsParameter: false,
   cucumberArgs: ''
 }
@@ -561,8 +560,16 @@ this.Then(/^the title is "([^"]*)"$/, (client, title) => {
 
 ## Timeouts
 
-You can use `stepTimeout` option to set timeout for steps.
-By default, timeout is 30 seconds.
+You can use `setDefaultTimeout` function in support code to set default timeout for steps.
+By default, timeout is 5 seconds. You can find more details in Cucumber.js [docs](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/timeouts.md)
+
+```
+var configure = function () {
+  this.setDefaultTimeout(60 * 1000);
+};
+
+module.exports = configure;
+```
 
 ## Language
 
