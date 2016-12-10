@@ -132,7 +132,7 @@ describe('CLI', () => {
 
   it('should handle feature tag filtering', () => {
     return testCaseFactory
-      .create('feature-tag-filtering-test', { nightwatchClientAsParameter: true })
+      .create('feature-tag-filtering-test')
       .feature('positive addition', ['positive', 'addition'])
       .scenario('small numbers')
       .given('User is on the simple calculator page', (client) => { client.init() })
@@ -344,7 +344,7 @@ describe('CLI', () => {
 
   it('should return non zero exit code on failure', () => {
     return testCaseFactory
-      .create('non-zero-exit-code-test', { nightwatchClientAsParameter: true })
+      .create('non-zero-exit-code-test')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', (client) => { client.init() })

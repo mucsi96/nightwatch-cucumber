@@ -10,7 +10,7 @@ const cucumberHtmlReporter = require('cucumber-html-reporter')
 describe('Reporting features', () => {
   it('should work together with cucumber-html-reporter', () => {
     return testCaseFactory
-      .create('cucumber-html-report-test', { nightwatchClientAsParameter: true })
+      .create('cucumber-html-report-test')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', (client) => { client.init() })
@@ -50,7 +50,7 @@ describe('Reporting features', () => {
 
   it('should generate JUnit XML report for Continuous Integration (CI) servers', () => {
     return testCaseFactory
-      .create('cucumber-junit-report-test', { junitReport: true, nightwatchClientAsParameter: true })
+      .create('cucumber-junit-report-test', { junitReport: true })
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', (client) => { client.init() })
@@ -87,7 +87,7 @@ describe('Reporting features', () => {
 
   it('should attach screenshots for failing scenarios', () => {
     return testCaseFactory
-      .create('screenshot-attachement-test', { screenshots: true, nightwatchClientAsParameter: true })
+      .create('screenshot-attachement-test', { screenshots: true })
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', (client) => { client.init() })

@@ -356,7 +356,7 @@ describe('Utility features', () => {
 
   it('should be able to provide Nightwatch client as step definition first parameter', () => {
     return testCaseFactory
-      .create('test-nightwatch-client-as-parameter', { nightwatchClientAsParameter: true })
+      .create('test-nightwatch-client-as-parameter')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', (client) => { client.init() })

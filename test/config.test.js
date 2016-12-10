@@ -7,7 +7,6 @@ describe('Config', () => {
   it('should pass cucumberArgs as additional CLI parameters to cucumber', () => {
     return testCaseFactory
       .create('config-cucumber-args-test', {
-        nightwatchClientAsParameter: true,
         cucumberArgs: ['--format', 'progress', '--format-options', '{"colorsEnabled":false}']
       })
       .feature('addition')

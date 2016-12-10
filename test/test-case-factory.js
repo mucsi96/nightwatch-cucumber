@@ -26,7 +26,6 @@ class TestCaseFactory {
       gulp: false,
       grunt: false,
       programmatical: false,
-      nightwatchClientAsParameter: false,
       cucumberArgs: []
     }, options)
     this.options.cucumberArgs = ['--include', 'timeout.js'].concat(this.options.cucumberArgs)

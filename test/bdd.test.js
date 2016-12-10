@@ -6,7 +6,7 @@ const testCaseFactory = require('./test-case-factory')
 describe('BDD handling', () => {
   it('should handle simple tests', () => {
     return testCaseFactory
-      .create('simple-test', { nightwatchClientAsParameter: true })
+      .create('simple-test')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', (client) => { client.init() })
