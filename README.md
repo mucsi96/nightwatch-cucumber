@@ -518,7 +518,7 @@ The default configuration object is.
 {
   featureFiles: ['features'],
   stepDefinitions: ['features/step_definitions'],
-  supportFiles: [],
+  supportFiles: ['support'],
   jsonReport: 'reports/cucumber.json',
   nightwatchClientAsParameter: false,
   cucumberArgs: ''

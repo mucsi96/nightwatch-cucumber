@@ -56,7 +56,7 @@ describe('Error handling', () => {
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', (client) => { client.init() })
-      .and('User enter 4 in A field', function (callback) { callback(null, 'pending') })
+      .and('User enter 4 in A field', (client, callback) => { callback(null, 'pending') })
       .run()
       .then((result) => {
         result.features[0].result.status.should.be.passed
