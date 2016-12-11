@@ -4,42 +4,42 @@
 let result = ''
 
 module.exports = function () {
-  this.registerHandler('BeforeFeatures', function (features, cb) {
+  this.registerHandler('BeforeFeatures', (client, features, cb) => {
     result += features.length
     cb()
   })
 
-  this.registerHandler('BeforeFeature', function (feature, cb) {
+  this.registerHandler('BeforeFeature', (client, feature, cb) => {
     result += feature.name
     cb()
   })
 
-  this.registerHandler('BeforeScenario', function (scenario, cb) {
+  this.registerHandler('BeforeScenario', (client, scenario, cb) => {
     result += scenario.name
     cb()
   })
 
-  this.registerHandler('BeforeStep', function (step, cb) {
+  this.registerHandler('BeforeStep', (client, step, cb) => {
     result += step.name
     cb()
   })
 
-  this.registerHandler('AfterStep', function (step, cb) {
+  this.registerHandler('AfterStep', (client, step, cb) => {
     result += step.name
     cb()
   })
 
-  this.registerHandler('AfterScenario', function (scenario, cb) {
+  this.registerHandler('AfterScenario', (client, scenario, cb) => {
     result += scenario.name
     cb()
   })
 
-  this.registerHandler('AfterFeature', function (feature, cb) {
+  this.registerHandler('AfterFeature', (client, feature, cb) => {
     result += feature.name
     cb()
   })
 
-  this.registerHandler('AfterFeatures', function (features, cb) {
+  this.registerHandler('AfterFeatures', (client, features, cb) => {
     result += features.length
     if (process.send) process.send(result)
     cb()

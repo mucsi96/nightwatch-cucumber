@@ -2,38 +2,38 @@
 'use strict'
 
 module.exports = function () {
-  this.registerHandler('BeforeFeatures', function () {
-    this.init()
-    this.click('#before-features')
+  this.registerHandler('BeforeFeatures', (client) => {
+    client.init()
+    client.click('#before-features')
   })
 
-  this.registerHandler('BeforeFeature', function () {
-    this.click('#before-feature')
+  this.registerHandler('BeforeFeature', (client) => {
+    client.click('#before-feature')
   })
 
-  this.registerHandler('BeforeScenario', function () {
-    this.click('#before-scenario')
+  this.registerHandler('BeforeScenario', (client) => {
+    client.click('#before-scenario')
   })
 
-  this.registerHandler('BeforeStep', function () {
-    this.click('#before-step')
+  this.registerHandler('BeforeStep', (client) => {
+    client.click('#before-step')
   })
 
-  this.registerHandler('AfterStep', function () {
-    this.click('#after-step')
+  this.registerHandler('AfterStep', (client) => {
+    client.click('#after-step')
   })
 
-  this.registerHandler('AfterScenario', function () {
-    this.click('#after-scenario')
+  this.registerHandler('AfterScenario', (client) => {
+    client.click('#after-scenario')
   })
 
-  this.registerHandler('AfterFeature', function () {
-    this.click('#after-feature')
+  this.registerHandler('AfterFeature', (client) => {
+    client.click('#after-feature')
   })
 
-  this.registerHandler('AfterFeatures', function () {
-    this.click('#after-features')
-    this.getText('#hook-result', function (hookResult) {
+  this.registerHandler('AfterFeatures', (client) => {
+    client.click('#after-features')
+    client.getText('#hook-result', (hookResult) => {
       if (process.send) {
         process.send(hookResult.value)
       }
