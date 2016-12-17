@@ -2,7 +2,7 @@
   "name": "nightwatch-cucumber",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
-  "version": 6.1.2,
+  "version": "6.1.2",
   "engines": {
     "node": ">= 4.0.0"
   },
