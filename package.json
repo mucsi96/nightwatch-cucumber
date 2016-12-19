@@ -87,7 +87,7 @@
     "gulp": "^3.9.1",
     "gulp-nightwatch": "^0.3.2",
     "istanbul": "^0.4.5",
-    "jsdom": "^9.8.3",
+    "jsdom": "^9.9.0",
     "mocha": "^3.2.0",
     "nightwatch": "^0.9.9",
     "phantomjs-prebuilt": "^2.1.13",
