@@ -3,7 +3,6 @@
     "env": {
         "node": true,
         "es6": true,
-        "mocha": true,
         "browser": true
     },
     "rules": {
@@ -177,7 +176,7 @@
             "never"
         ],
         "brace-style": [
-            2,
+            1,
             "stroustrup",
             {
                 "allowSingleLine": false
@@ -206,7 +205,8 @@
         ],
         "consistent-this": [
             2,
-            "self"
+            "self",
+            "innerSelf"
         ],
         "eol-last": 2,
         "func-call-spacing": 2,
@@ -253,7 +253,7 @@
             "unix"
         ],
         "max-nested-callbacks": 0,
-        "new-cap": 2,
+        "new-cap": 1,
         "new-parens": 2,
         "newline-after-var": [
             2,
@@ -302,7 +302,11 @@
         ],
         "quotes": [
             2,
-            "double"
+            "double",
+            {
+                "avoidEscape": true,
+                "allowTemplateLiterals": true
+            }
         ],
         "id-match": 0,
         "semi-spacing": [
