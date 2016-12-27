@@ -1,15 +1,15 @@
-const nightwatch = require('nightwatch')
+const nightwatch = require("nightwatch");
 
 module.exports = (grunt) => {
-  grunt.initConfig({
-    nightwatch: {
-      'default': {
-        argv: {}
-      }
-    }
-  })
+    grunt.initConfig({
+        nightwatch: {
+            default: {
+                argv: {}
+            }
+        }
+    });
 
-  nightwatch.initGrunt(grunt)
+    nightwatch.initGrunt(grunt);
 
-  grunt.registerTask('default', ['nightwatch'])
-}
+    grunt.registerTask("default", ["nightwatch"]);
+};
