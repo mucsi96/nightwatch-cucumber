@@ -5,8 +5,9 @@ const client = require('../../lib/index').client
 
 defineSupportCode(({registerHandler}) => {
   registerHandler('BeforeFeatures', () => {
-    client.init()
-    client.click('#before-features')
+    return client
+      .init()
+      .click('#before-features')
   })
 
   registerHandler('BeforeFeature', () => {
@@ -34,11 +35,12 @@ defineSupportCode(({registerHandler}) => {
   })
 
   registerHandler('AfterFeatures', () => {
-    client.click('#after-features')
-    client.getText('#hook-result', (hookResult) => {
-      if (process.send) {
-        process.send(hookResult.value)
-      }
-    })
+    return client
+      .click('#after-features')
+      .getText('#hook-result', (hookResult) => {
+        if (process.send) {
+          process.send(hookResult.value)
+        }
+      })
   })
 })

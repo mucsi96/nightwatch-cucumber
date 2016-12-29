@@ -11,12 +11,12 @@ defineSupportCode(({Before, After}) => {
       client.init()
       loaded = true
     }
-    client.click('#before-scenario')
+    return client.click('#before-scenario')
   })
 
   After((scenarioResult) => {
     client.click('#after-scenario')
-    client.getText('#hook-result', function (hookResult) {
+    return client.getText('#hook-result', function (hookResult) {
       if (process.send) process.send(hookResult.value)
     })
   })
