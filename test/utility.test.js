@@ -7,7 +7,7 @@ const testCaseFactory = require('./test-case-factory')
 describe('Utility features', () => {
   it('should be able to run together with plain Nightwatch tests', () => {
     return testCaseFactory
-      .create('includePlainNightwatchTests', { includePlainNightwatchTests: true })
+      .create('include-plain-nightwatch-tests', { includePlainNightwatchTests: true })
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => { client.init() })
@@ -54,7 +54,7 @@ describe('Utility features', () => {
 
   it('should handle page objects', () => {
     return testCaseFactory
-      .create('pageObjectTest')
+      .create('page-object-test')
       .pageObject('calculator', `module.exports = {
   elements: {
     numberA: '#a',
@@ -81,7 +81,7 @@ describe('Utility features', () => {
 
   it('should handle paralell tests', () => {
     return testCaseFactory
-      .create('paralellTest', { paralell: true })
+      .create('paralell-test', { paralell: true })
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => { client.init() })

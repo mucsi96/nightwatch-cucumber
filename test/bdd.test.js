@@ -34,7 +34,7 @@ describe('BDD handling', () => {
 
   it('should handle multi feature tests', () => {
     return testCaseFactory
-      .create('multiFeatureTest')
+      .create('multi-feature-test')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => { client.init() })
@@ -80,7 +80,7 @@ describe('BDD handling', () => {
 
   it('should handle background steps', () => {
     return testCaseFactory
-      .create('backgroundStepTest')
+      .create('background-step-test')
       .feature('addition')
       .background()
       .given('User is on the simple calculator page', () => { client.init() })
@@ -106,7 +106,7 @@ describe('BDD handling', () => {
 
   it('should handle scenario outlines', () => {
     return testCaseFactory
-      .create('scenarioOutlineTest')
+      .create('scenario-outline-test')
       .feature('addition')
       .scenarioOutline('numbers')
       .given('User is on the simple calculator page', () => { client.init() })

@@ -7,7 +7,7 @@ const testCaseFactory = require('./test-case-factory')
 describe('Error handling', () => {
   it('should handle no test case', () => {
     return testCaseFactory
-      .create('noTestTest', {
+      .create('no-test-test', {
         noTests: true
       })
       .run()
@@ -20,7 +20,7 @@ describe('Error handling', () => {
 
   it('should handle undefined steps', () => {
     return testCaseFactory
-      .create('undefinedStepTest')
+      .create('undefined-step-test')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => { client.init() })
@@ -36,7 +36,7 @@ describe('Error handling', () => {
 
   it('should handle ambiguous steps', () => {
     return testCaseFactory
-      .create('ambiguousStepTest')
+      .create('ambiguous-step-test')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => { client.init() })
@@ -53,7 +53,7 @@ describe('Error handling', () => {
 
   it('should handle pending steps', () => {
     return testCaseFactory
-      .create('pendingStepTest')
+      .create('pending-step-test')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => { client.init() })
@@ -69,7 +69,7 @@ describe('Error handling', () => {
 
   it('should handle failed steps', () => {
     return testCaseFactory
-      .create('failedStepTest')
+      .create('failed-step-test')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => { client.init() })
@@ -94,7 +94,7 @@ describe('Error handling', () => {
 
   it('should handle JS error in step definition in a one step case', () => {
     return testCaseFactory
-      .create('stepDefinitionJSErrorSimpleTest')
+      .create('step-definition-js-error-simple-test')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => { client.initte() })
@@ -109,7 +109,7 @@ describe('Error handling', () => {
 
   it('should handle JS error in step definition', () => {
     return testCaseFactory
-      .create('stepDefinitionJSErrorTest')
+      .create('step-definition-js-error-test')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page. JS error included', () => { client.initte() })
@@ -134,7 +134,7 @@ describe('Error handling', () => {
 
   it('should handle skipped steps', () => {
     return testCaseFactory
-      .create('skippedStepTest')
+      .create('skipped-step-test')
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => { client.init() })
@@ -154,7 +154,7 @@ describe('Error handling', () => {
 
   it('should handle bad feature file format', () => {
     return testCaseFactory
-      .create('badFeatureFileFormatTest', {
+      .create('bad-feature-file-format-test', {
         badFeatureFile: true
       })
       .feature('addition')
@@ -173,7 +173,7 @@ describe('Error handling', () => {
 
   it('should handle errors in custom commands', () => {
     return testCaseFactory
-      .create('customCommandsTest', {
+      .create('custom-commands-test', {
         cucumberArgs: ['--format-options', '{"colorsEnabled":false}']
       })
       .customCommand('testCommand', `module.exports.command = function () {

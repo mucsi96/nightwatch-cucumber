@@ -7,7 +7,7 @@ const testCaseFactory = require('./test-case-factory')
 describe('CLI', () => {
   it('should handle test groups', () => {
     return testCaseFactory
-      .create('testGroupTest')
+      .create('test-group-test')
       .group('positive')
       .feature('positive addition')
       .scenario('small numbers')
@@ -55,7 +55,7 @@ describe('CLI', () => {
 
   it('should handle test group filtering', () => {
     return testCaseFactory
-      .create('testGroupFilteringTest')
+      .create('test-group-filtering-test')
       .group('positive')
       .feature('positive addition')
       .scenario('small numbers')
@@ -94,7 +94,7 @@ describe('CLI', () => {
 
   it('should handle test group skipping', () => {
     return testCaseFactory
-      .create('testGroupSkippingTest')
+      .create('test-group-skipping-test')
       .group('positive')
       .feature('positive addition')
       .scenario('small numbers')
@@ -170,7 +170,7 @@ describe('CLI', () => {
 
   it('should handle feature tag skipping', () => {
     return testCaseFactory
-      .create('featureTagSkippingTest')
+      .create('feature-tag-skipping-test')
       .feature('positive addition', ['positive', 'addition'])
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => { client.init() })
@@ -207,7 +207,7 @@ describe('CLI', () => {
 
   it('should handle scenario tag filtering', () => {
     return testCaseFactory
-      .create('scenarioTagFilteringTest')
+      .create('scenario-tag-filtering-test')
       .feature('positive addition')
       .scenario('small numbers', ['small', 'numbers'])
       .given('User is on the simple calculator page', () => { client.init() })
@@ -231,7 +231,7 @@ describe('CLI', () => {
 
   it('should handle scenario tag skipping', () => {
     return testCaseFactory
-      .create('scenarioTagSkippingTest')
+      .create('scenario-tag-skipping-test')
       .feature('positive addition')
       .scenario('small numbers', ['small', 'numbers'])
       .given('User is on the simple calculator page', () => { client.init() })
@@ -255,7 +255,7 @@ describe('CLI', () => {
 
   it('should handle specified features execution', () => {
     return testCaseFactory
-      .create('specifiedFeaturesExecutionTest')
+      .create('specified-features-execution-test')
       .feature('positive-addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => { client.init() })
@@ -292,7 +292,7 @@ describe('CLI', () => {
 
   it('should handle single feature execution', () => {
     return testCaseFactory
-      .create('singleFeatureExecutionTest')
+      .create('single-feature-execution-test')
       .feature('positive-addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => { client.init() })
