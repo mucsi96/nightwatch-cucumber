@@ -60,7 +60,7 @@ describe('Error handling', () => {
       .and('User enter 4 in A field', () => 'pending')
       .run()
       .then((result) => {
-        result.features[0].result.status.should.be.failed
+        result.features[0].result.status.should.be.passed
         result.features[0].result.scenarioCounts.should.deep.equal({pending: 1})
         result.features[0].scenarios[0].result.status.should.be.pending
         result.features[0].scenarios[0].result.stepCounts.should.deep.equal({pending: 1, passed: 1})
