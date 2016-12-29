@@ -1,3 +1,5 @@
-module.exports = function () {
-  this.setDefaultTimeout(30 * 1000)
-}
+const {defineSupportCode} = require('cucumber')
+
+defineSupportCode(({setDefaultTimeout}) => {
+  setDefaultTimeout(30 * 1000)
+})

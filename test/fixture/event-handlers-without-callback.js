@@ -1,37 +1,39 @@
 /* eslint-env mocha */
 'use strict'
+const {defineSupportCode} = require('cucumber')
+const client = require('../../lib/index').client
 
-module.exports = function () {
-  this.registerHandler('BeforeFeatures', (client) => {
+defineSupportCode(({registerHandler}) => {
+  registerHandler('BeforeFeatures', () => {
     client.init()
     client.click('#before-features')
   })
 
-  this.registerHandler('BeforeFeature', (client) => {
+  registerHandler('BeforeFeature', () => {
     client.click('#before-feature')
   })
 
-  this.registerHandler('BeforeScenario', (client) => {
+  registerHandler('BeforeScenario', () => {
     client.click('#before-scenario')
   })
 
-  this.registerHandler('BeforeStep', (client) => {
+  registerHandler('BeforeStep', () => {
     client.click('#before-step')
   })
 
-  this.registerHandler('AfterStep', (client) => {
+  registerHandler('AfterStep', () => {
     client.click('#after-step')
   })
 
-  this.registerHandler('AfterScenario', (client) => {
+  registerHandler('AfterScenario', () => {
     client.click('#after-scenario')
   })
 
-  this.registerHandler('AfterFeature', (client) => {
+  registerHandler('AfterFeature', () => {
     client.click('#after-feature')
   })
 
-  this.registerHandler('AfterFeatures', (client) => {
+  registerHandler('AfterFeatures', () => {
     client.click('#after-features')
     client.getText('#hook-result', (hookResult) => {
       if (process.send) {
@@ -39,4 +41,4 @@ module.exports = function () {
       }
     })
   })
-}
+})

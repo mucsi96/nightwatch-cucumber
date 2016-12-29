@@ -1,47 +1,48 @@
 /* eslint-env mocha */
 'use strict'
+const {defineSupportCode} = require('cucumber')
 
 let result = ''
 
-module.exports = function () {
-  this.registerHandler('BeforeFeatures', (client, features, cb) => {
+defineSupportCode(({registerHandler}) => {
+  registerHandler('BeforeFeatures', (features, cb) => {
     result += features.length
     cb()
   })
 
-  this.registerHandler('BeforeFeature', (client, feature, cb) => {
+  registerHandler('BeforeFeature', (feature, cb) => {
     result += feature.name
     cb()
   })
 
-  this.registerHandler('BeforeScenario', (client, scenario, cb) => {
+  registerHandler('BeforeScenario', (scenario, cb) => {
     result += scenario.name
     cb()
   })
 
-  this.registerHandler('BeforeStep', (client, step, cb) => {
+  registerHandler('BeforeStep', (step, cb) => {
     result += step.name
     cb()
   })
 
-  this.registerHandler('AfterStep', (client, step, cb) => {
+  registerHandler('AfterStep', (step, cb) => {
     result += step.name
     cb()
   })
 
-  this.registerHandler('AfterScenario', (client, scenario, cb) => {
+  registerHandler('AfterScenario', (scenario, cb) => {
     result += scenario.name
     cb()
   })
 
-  this.registerHandler('AfterFeature', (client, feature, cb) => {
+  registerHandler('AfterFeature', (feature, cb) => {
     result += feature.name
     cb()
   })
 
-  this.registerHandler('AfterFeatures', (client, features, cb) => {
+  registerHandler('AfterFeatures', (features, cb) => {
     result += features.length
     if (process.send) process.send(result)
     cb()
   })
-}
+})

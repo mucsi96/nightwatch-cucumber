@@ -28,7 +28,7 @@ class TestCaseFactory {
       programmatical: false,
       cucumberArgs: []
     }, options)
-    this.options.cucumberArgs = ['--include', 'timeout.js'].concat(this.options.cucumberArgs)
+    this.options.cucumberArgs = ['--require', 'timeout.js'].concat(this.options.cucumberArgs)
     this.groups = []
     this.stepDefinitions = []
     this.pageObjects = []
@@ -105,7 +105,7 @@ class TestCaseFactory {
         .replace(/<(.*?)>/g, '(.*?)')
         .replace(/"(.*?)"/g, '"(.*?)"')
       const regex = `/^${namePattern}$/`
-      this.stepDefinitions.push(`\n  this.${definitionType}(${regex}, ${stepDefinition.toString()})\n`)
+      this.stepDefinitions.push(`\n  ${definitionType}(${regex}, ${stepDefinition.toString()})\n`)
     }
     return this
   }
@@ -185,7 +185,9 @@ class TestCaseFactory {
 
   _buildStepDefinitions () {
     mkdirp.sync(path.join(this.testCasePath, 'features', 'step_definitions'))
-    const steps = `module.exports = function () {\n${this.stepDefinitions.join('')}\n}`
+    const steps = `const client = require('../../../../lib/index').client;
+    const {defineSupportCode} = require('cucumber');
+    defineSupportCode(({Given, Then, When}) => {\n${this.stepDefinitions.join('')}\n})`
     if (this.stepDefinitions.length) {
       fs.writeFileSync(path.join(this.testCasePath, 'features', 'step_definitions', 'steps.js'), steps)
     }

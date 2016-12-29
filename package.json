@@ -3,7 +3,7 @@
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "engines": {
-    "node": ">= 4.0.0"
+    "node": ">= 6.0.0"
   },
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
   "contributors": [
@@ -74,7 +74,7 @@
     "chai": "^3.5.0",
     "chromedriver": "^2.25.1",
     "coveralls": "^2.11.15",
-    "cucumber": "^2.0.0-rc.2",
+    "cucumber": "^2.0.0-rc.5",
     "cucumber-html-reporter": "^0.3.7",
     "cz-conventional-changelog": "^1.2.0",
     "eslint": "^3.11.1",

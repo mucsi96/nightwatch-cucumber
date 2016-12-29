@@ -1,3 +1,4 @@
+/* global client */
 /* eslint-env mocha */
 const chai = require('chai')
 chai.should()
@@ -22,7 +23,7 @@ describe('Error handling', () => {
       .create('undefinedStepTest')
       .feature('addition')
       .scenario('small numbers')
-      .given('User is on the simple calculator page', (client) => { client.init() })
+      .given('User is on the simple calculator page', () => { client.init() })
       .and('User enter 4 in A field')
       .run()
       .then((result) => {
@@ -38,9 +39,9 @@ describe('Error handling', () => {
       .create('ambiguousStepTest')
       .feature('addition')
       .scenario('small numbers')
-      .given('User is on the simple calculator page', (client) => { client.init() })
-      .and('User enter 4 in A field', (client) => { client.setValue('#a', 4) })
-      .and('User enter 4 in A field', (client) => { client.setValue('#a', 4) })
+      .given('User is on the simple calculator page', () => { client.init() })
+      .and('User enter 4 in A field', () => { client.setValue('#a', 4) })
+      .and('User enter 4 in A field', () => { client.setValue('#a', 4) })
       .run()
       .then((result) => {
         result.features[0].result.status.should.be.failed
@@ -55,11 +56,11 @@ describe('Error handling', () => {
       .create('pendingStepTest')
       .feature('addition')
       .scenario('small numbers')
-      .given('User is on the simple calculator page', (client) => { client.init() })
-      .and('User enter 4 in A field', (client, callback) => { callback(null, 'pending') })
+      .given('User is on the simple calculator page', () => { client.init() })
+      .and('User enter 4 in A field', () => 'pending')
       .run()
       .then((result) => {
-        result.features[0].result.status.should.be.passed
+        result.features[0].result.status.should.be.failed
         result.features[0].result.scenarioCounts.should.deep.equal({pending: 1})
         result.features[0].scenarios[0].result.status.should.be.pending
         result.features[0].scenarios[0].result.stepCounts.should.deep.equal({pending: 1, passed: 1})
@@ -71,17 +72,17 @@ describe('Error handling', () => {
       .create('failedStepTest')
       .feature('addition')
       .scenario('small numbers')
-      .given('User is on the simple calculator page', (client) => { client.init() })
-      .and('User enter 4 in A field', (client) => { client.setValue('#a', 4) })
-      .and('User enter 5 in B field', (client) => { client.setValue('#b', 5) })
-      .when('User press Add button', (client) => { client.click('#add') })
-      .then('The result should contain 8', (client) => { client.assert.containsText('#result', 8) })
+      .given('User is on the simple calculator page', () => { client.init() })
+      .and('User enter 4 in A field', () => { client.setValue('#a', 4) })
+      .and('User enter 5 in B field', () => { client.setValue('#b', 5) })
+      .when('User press Add button', () => { client.click('#add') })
+      .then('The result should contain 8', () => { client.assert.containsText('#result', 8) })
       .scenario('big numbers')
       .given('User is on the simple calculator page')
-      .and('User enter 82 in A field', (client) => { client.setValue('#a', 82) })
-      .and('User enter 11 in B field', (client) => { client.setValue('#b', 11) })
+      .and('User enter 82 in A field', () => { client.setValue('#a', 82) })
+      .and('User enter 11 in B field', () => { client.setValue('#b', 11) })
       .when('User press Add button')
-      .then('The result should contain 93', (client) => { client.assert.containsText('#result', 93) })
+      .then('The result should contain 93', () => { client.assert.containsText('#result', 93) })
       .run()
       .then((result) => {
         result.features[0].result.status.should.be.failed
@@ -96,7 +97,7 @@ describe('Error handling', () => {
       .create('stepDefinitionJSErrorSimpleTest')
       .feature('addition')
       .scenario('small numbers')
-      .given('User is on the simple calculator page', (client) => { client.initte() })
+      .given('User is on the simple calculator page', () => { client.initte() })
       .run()
       .then((result) => {
         result.features[0].result.status.should.be.failed
@@ -111,17 +112,17 @@ describe('Error handling', () => {
       .create('stepDefinitionJSErrorTest')
       .feature('addition')
       .scenario('small numbers')
-      .given('User is on the simple calculator page. JS error included', (client) => { client.initte() })
-      .and('User enter 4 in A field', (client) => { client.setValue('#a', 4) })
-      .and('User enter 5 in B field', (client) => { client.setValue('#b', 5) })
-      .when('User press Add button', (client) => { client.click('#add') })
-      .then('The result should contain 9', (client) => { client.assert.containsText('#result', 9) })
+      .given('User is on the simple calculator page. JS error included', () => { client.initte() })
+      .and('User enter 4 in A field', () => { client.setValue('#a', 4) })
+      .and('User enter 5 in B field', () => { client.setValue('#b', 5) })
+      .when('User press Add button', () => { client.click('#add') })
+      .then('The result should contain 9', () => { client.assert.containsText('#result', 9) })
       .scenario('big numbers')
-      .given('User is on the simple calculator page', (client) => { client.init() })
-      .and('User enter 82 in A field', (client) => { client.setValue('#a', 82) })
-      .and('User enter 11 in B field', (client) => { client.setValue('#b', 11) })
+      .given('User is on the simple calculator page', () => { client.init() })
+      .and('User enter 82 in A field', () => { client.setValue('#a', 82) })
+      .and('User enter 11 in B field', () => { client.setValue('#b', 11) })
       .when('User press Add button')
-      .then('The result should contain 93', (client) => { client.assert.containsText('#result', 93) })
+      .then('The result should contain 93', () => { client.assert.containsText('#result', 93) })
       .run()
       .then((result) => {
         result.features[0].result.status.should.be.failed
@@ -136,11 +137,11 @@ describe('Error handling', () => {
       .create('skippedStepTest')
       .feature('addition')
       .scenario('small numbers')
-      .given('User is on the simple calculator page', (client) => { client.init() })
-      .and('User enter 4 in A field', (client) => { client.setValue('#a', 4) })
-      .and('User enter 5 in B field', (client) => { client.setValue('#b', 5) })
-      .when('User press Add button', (client) => { client.click('#add') })
-      .then('The result should contain 9', (client) => { client.assert.containsText('#result', 8) })
+      .given('User is on the simple calculator page', () => { client.init() })
+      .and('User enter 4 in A field', () => { client.setValue('#a', 4) })
+      .and('User enter 5 in B field', () => { client.setValue('#b', 5) })
+      .when('User press Add button', () => { client.click('#add') })
+      .then('The result should contain 9', () => { client.assert.containsText('#result', 8) })
       .and('User enter 4 in A field')
       .run()
       .then((result) => {
@@ -158,11 +159,11 @@ describe('Error handling', () => {
       })
       .feature('addition')
       .scenario('small numbers')
-      .given('User is on the simple calculator page', (client) => { client.init() })
-      .and('User enter 4 in A field', (client) => { client.setValue('#a', 4) })
-      .and('User enter 5 in B field', (client) => { client.setValue('#b', 5) })
-      .when('User press Add button', (client) => { client.click('#add') })
-      .then('The result should contain 9', (client) => { client.assert.containsText('#result', 9) })
+      .given('User is on the simple calculator page', () => { client.init() })
+      .and('User enter 4 in A field', () => { client.setValue('#a', 4) })
+      .and('User enter 5 in B field', () => { client.setValue('#b', 5) })
+      .when('User press Add button', () => { client.click('#add') })
+      .then('The result should contain 9', () => { client.assert.containsText('#result', 9) })
       .run()
       .then((result) => {
         result.output.should.contain('Parser errors:')
@@ -172,18 +173,20 @@ describe('Error handling', () => {
 
   it('should handle errors in custom commands', () => {
     return testCaseFactory
-      .create('customCommandsTest')
+      .create('customCommandsTest', {
+        cucumberArgs: ['--format-options', '{"colorsEnabled":false}']
+      })
       .customCommand('testCommand', `module.exports.command = function () {
     var test = undefinedVar;
     return this;
 }`)
       .feature('addition')
       .scenario('small numbers')
-      .given('User is on the simple calculator page', (client) => { client.init() })
-      .and('User enter 4 in A field', (client) => { client.testCommand() })
-      .and('User enter 5 in B field', (client) => { client.page.calculator().setValue('@numberB', 5) })
-      .when('User press Add button', (client) => { client.page.calculator().click('@addButton') })
-      .then('The result should contain 9', (client) => { client.page.calculator().assert.containsText('@result', 9) })
+      .given('User is on the simple calculator page', () => { client.init() })
+      .and('User enter 4 in A field', () => { client.testCommand() })
+      .and('User enter 5 in B field', () => { client.page.calculator().setValue('@numberB', 5) })
+      .when('User press Add button', () => { client.page.calculator().click('@addButton') })
+      .then('The result should contain 9', () => { client.page.calculator().assert.containsText('@result', 9) })
       .run()
       .then((result) => {
         result.features[0].result.status.should.be.failed
