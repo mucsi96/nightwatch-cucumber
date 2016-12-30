@@ -42,8 +42,8 @@
   },
   "scripts": {
     "code-style": "eslint lib resources test",
-    "e2e-test": "mocha --no-timeouts && istanbul report",
-    "test": "npm run code-style && npm run e2e-test",
+    "e2e-test": "mocha --no-timeouts",
+    "test": "npm run code-style && npm run e2e-test && istanbul report",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "precommit": "npm run code-style"
