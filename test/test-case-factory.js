@@ -28,7 +28,6 @@ class TestCaseFactory {
       programmatical: false,
       cucumberArgs: []
     }, options)
-    this.options.cucumberArgs = ['--require', 'timeout.js'].concat(this.options.cucumberArgs)
     this.groups = []
     this.stepDefinitions = []
     this.pageObjects = []
@@ -214,7 +213,34 @@ class TestCaseFactory {
   _build () {
     this.options.pageObjects = !!this.pageObjects.length
     this.options.customCommands = !!this.customCommands.length
-    this.options.cucumberArgs = this.options.cucumberArgs.join(' ')
+    let args = ['--require', 'timeout.js', '--require', 'features/step_definitions']
+
+    if (this.options.hooks) {
+      args = ['--require', '../../test/fixture/hooks.js'].concat(args)
+    }
+
+    if (this.options.eventHandlersWithoutCallback) {
+      args = ['--require', '../../test/fixture/event-handlers-without-callback.js'].concat(args)
+    }
+
+    if (this.options.eventHandlersWithCallback) {
+      args = ['--require', '../../test/fixture/event-handlers-with-callback.js'].concat(args)
+    }
+
+    if (this.options.cucumberArgs.length) {
+      args = args.concat(this.options.cucumberArgs)
+    } else {
+      args = args.concat(['--format', 'pretty',
+        '--format', 'json:reports/cucumber.json'])
+    }
+
+    if (this.options.noTests) {
+      args = args.concat(['.'])
+    } else {
+      args = args.concat(['features'])
+    }
+
+    this.options.cucumberArgs = JSON.stringify(args)
     this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
     mkdirp.sync(this.testCasePath)
     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(this.options))
