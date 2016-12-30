@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 'use strict'
 const {defineSupportCode} = require('cucumber')
-const client = require('../../lib/index').client
+const {client} = require('../../lib/index')
 let loaded = false
 let result = ''
 

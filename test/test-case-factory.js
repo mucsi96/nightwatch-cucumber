@@ -216,18 +216,19 @@ defineSupportCode(({Given, Then, When}) => {${this.stepDefinitions.join('')}})`
   build ({examples}) {
     this.options.pageObjects = !!this.pageObjects.length
     this.options.customCommands = !!this.customCommands.length
+    const fixtures = !examples ? '../../test/fixture/' : ''
     let args = ['--require', 'timeout.js', '--require', 'features/step_definitions']
 
     if (this.options.hooks) {
-      args = ['--require', '../../test/fixture/hooks.js'].concat(args)
+      args = ['--require', `${fixtures}hooks.js`].concat(args)
     }
 
     if (this.options.eventHandlersWithoutCallback) {
-      args = ['--require', '../../test/fixture/event-handlers-without-callback.js'].concat(args)
+      args = ['--require', `${fixtures}event-handlers-without-callback.js`].concat(args)
     }
 
     if (this.options.eventHandlersWithCallback) {
-      args = ['--require', '../../test/fixture/event-handlers-with-callback.js'].concat(args)
+      args = ['--require', `${fixtures}event-handlers-with-callback.js`].concat(args)
     }
 
     if (this.options.cucumberArgs.length) {

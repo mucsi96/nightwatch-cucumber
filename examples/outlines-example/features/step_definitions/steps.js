@@ -1,17 +1,20 @@
-module.exports = function () {
-  this.Given(/^I open Google's search page$/, function () {
-    this
+const {client} = require('nightwatch-cucumber')
+const {defineSupportCode} = require('cucumber')
+
+defineSupportCode(({Given, Then, When}) => {
+  Given(/^I open Google`s search page$/, () => {
+    return client
       .url('http://google.com')
       .waitForElementVisible('body', 1000)
   })
 
-  this.When(/^I search for (.*)$/, function (expression) {
-    this
+  When(/^I search for (.*?)$/, (expression) => {
+    return client
       .setValue('input[name=q]', expression)
       .submitForm('input[name=q]')
   })
 
-  this.Then(/^the search result should contain (.*)$/, function (result) {
-    this.assert.containsText('body', result)
+  Then(/^the search result should contain (.*?)$/, (result) => {
+    return client.assert.containsText('body', result)
   })
-}
+})

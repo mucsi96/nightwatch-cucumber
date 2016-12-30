@@ -1,29 +1,29 @@
-var seleniumServer = require('selenium-server')
-var phantomjs = require('phantomjs-prebuilt')
-var chromedriver = require('chromedriver')
+const seleniumServer = require('selenium-server')
+const phantomjs = require('phantomjs-prebuilt')
+const chromedriver = require('chromedriver')
 
-require('nightwatch-cucumber')()
+require('nightwatch-cucumber')({
+  cucumberArgs: ['--require', 'timeout.js', '--require', 'features/step_definitions', '--format', 'pretty', '--format', 'json:reports/cucumber.json', 'features']
+})
 
 module.exports = {
-  custom_commands_path: '',
+  output_folder: 'reports',
   custom_assertions_path: '',
-  page_objects_path: 'page-objects',
+  page_objects_path: 'page_objects',
   live_output: false,
   disable_colors: false,
-
   selenium: {
     start_process: true,
     server_path: seleniumServer.path,
+    log_path: '',
     host: '127.0.0.1',
     port: 4444
   },
-
   test_settings: {
     default: {
-      launch_url: 'http://localhost',
+      launch_url: 'http://localhost:8087',
       selenium_port: 4444,
-      selenium_host: 'localhost',
-      silent: true,
+      selenium_host: '127.0.0.1',
       desiredCapabilities: {
         browserName: 'phantomjs',
         javascriptEnabled: true,
@@ -31,7 +31,6 @@ module.exports = {
         'phantomjs.binary.path': phantomjs.path
       }
     },
-
     chrome: {
       desiredCapabilities: {
         browserName: 'chrome',
@@ -44,7 +43,6 @@ module.exports = {
         }
       }
     },
-
     firefox: {
       desiredCapabilities: {
         browserName: 'firefox',

@@ -15,4 +15,14 @@ defineSupportCode(({Given, Then, When}) => {
   Then(/^the Google search form exists$/, () => {
     return client.assert.visible('input[name="q"]')
   })
+
+  Given(/^I open Yahoo`s search page$/, () => {
+    return client
+      .url('http://yahoo.com')
+      .waitForElementVisible('body', 1000)
+  })
+
+  Then(/^the Yahoo search form exists$/, () => {
+    return client.assert.visible('input[name="p"]')
+  })
 })

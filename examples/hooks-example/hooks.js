@@ -1,5 +1,8 @@
-module.exports = function () {
-  this.Before(function (scenario, callback) {
+const {defineSupportCode} = require('cucumber')
+const {client} = require('nightwatch-cucumber')
+
+defineSupportCode(({Before, After}) => {
+  Before(function (scenario, callback) {
     console.log('Before start');
     setTimeout(function() {
       console.log('Before end');
@@ -7,7 +10,7 @@ module.exports = function () {
     }, 1000);
   });
 
-  this.After(function (scenario, callback) {
+  After(function (scenario, callback) {
     console.log('After start');
     setTimeout(function() {
       console.log('After end');
@@ -15,15 +18,15 @@ module.exports = function () {
     }, 1000);
   });
 
-  this.Before(function (scenario) {
-    this.init();
+  Before(function (scenario) {
+    return client.init();
   });
 
-  this.After(function (scenario) {
-    this.click('input[name="q"]');
+  After(function (scenario) {
+    return client.click('input[name="q"]');
   });
 
-  this.After('@sometag', function (scenario) {
-    this.click('buttons');
+  After('@sometag', function (scenario) {
+    return client.click('buttons');
   });
 }
