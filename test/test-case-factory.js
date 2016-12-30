@@ -334,7 +334,7 @@ defineSupportCode(({Given, Then, When}) => {${this.stepDefinitions.join('')}})`
 
   run (args) {
     let runnerPath
-    this.build()
+    this.build({examples: false})
     args = args || []
 
     if (this.options.gulp) {
