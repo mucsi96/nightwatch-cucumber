@@ -1,8 +1,8 @@
-var seleniumServer = require('selenium-server')
-var phantomjs = require('phantomjs-prebuilt')
-var chromedriver = require('chromedriver')
+const seleniumServer = require('selenium-server')
+const phantomjs = require('phantomjs-prebuilt')
+const chromedriver = require('chromedriver')
 
-require('../../lib/index')({
+require('<%=main%>')({
   cucumberArgs: <%=cucumberArgs%>
 })
 

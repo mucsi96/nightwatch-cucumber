@@ -104,7 +104,8 @@ class TestCaseFactory {
         .replace(/<(.*?)>/g, '(.*?)')
         .replace(/"(.*?)"/g, '"(.*?)"')
       const regex = `/^${namePattern}$/`
-      this.stepDefinitions.push(`\n  ${definitionType}(${regex}, ${stepDefinition.toString()})\n`)
+      stepDefinition = setIdentation(stepDefinition.toString(), 2)
+      this.stepDefinitions.push(`\n  ${definitionType}(${regex}, ${stepDefinition})\n`)
     }
     return this
   }
@@ -182,11 +183,13 @@ class TestCaseFactory {
     feature.scenarios.forEach((scenario) => this._buildScenario(featureFile, scenario))
   }
 
-  _buildStepDefinitions () {
+  _buildStepDefinitions ({examples}) {
     mkdirp.sync(path.join(this.testCasePath, 'features', 'step_definitions'))
-    const steps = `const client = require('../../../../lib/index').client;
-    const {defineSupportCode} = require('cucumber');
-    defineSupportCode(({Given, Then, When}) => {\n${this.stepDefinitions.join('')}\n})`
+    const main = !examples ? '../../../../lib/index' : 'nightwatch-cucumber'
+    const steps = `const {client} = require('${main}')
+const {defineSupportCode} = require('cucumber')
+
+defineSupportCode(({Given, Then, When}) => {${this.stepDefinitions.join('')}})`
     if (this.stepDefinitions.length) {
       fs.writeFileSync(path.join(this.testCasePath, 'features', 'step_definitions', 'steps.js'), steps)
     }
@@ -210,7 +213,7 @@ class TestCaseFactory {
     })
   }
 
-  _build () {
+  build ({examples}) {
     this.options.pageObjects = !!this.pageObjects.length
     this.options.customCommands = !!this.customCommands.length
     let args = ['--require', 'timeout.js', '--require', 'features/step_definitions']
@@ -240,10 +243,12 @@ class TestCaseFactory {
       args = args.concat(['features'])
     }
 
-    this.options.cucumberArgs = JSON.stringify(args)
-    this.testCasePath = path.join(process.cwd(), 'tmp', this.name)
+    this.options.cucumberArgs = JSON.stringify(args).replace(/,/g, ', ').replace(/"/g, '\'')
+    this.testCasePath = path.join(process.cwd(), !examples ? 'tmp' : 'examples2', this.name)
     mkdirp.sync(this.testCasePath)
-    fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConfTemplate(this.options))
+    this.options.main = !examples ? '../../lib/index' : 'nightwatch-cucumber'
+    const nightwatchConf = nightwatchConfTemplate(this.options).replace(/([,{])\n( *\n)+/g, '$1\n')
+    fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConf)
 
     copyFixture('timeout.js', this.testCasePath)
     if (this.options.gulp) {
@@ -254,7 +259,7 @@ class TestCaseFactory {
       copyFixture('programmatical-run.js', this.testCasePath)
     }
 
-    this._buildStepDefinitions()
+    this._buildStepDefinitions({examples})
     this._buildPageObjects()
     this._buildCustomCommands()
 
@@ -264,7 +269,7 @@ class TestCaseFactory {
       else groupPath = path.join(this.testCasePath, 'features')
       mkdirp.sync(groupPath)
       Object.keys(group.features).forEach((featureName) => {
-        const featureFile = path.join(groupPath, `${featureName}.feature`)
+        const featureFile = path.join(groupPath, `${getFileName(featureName)}.feature`)
         this._buildFeatureFile(featureFile, featureName, group.features[featureName])
       })
     })
@@ -328,7 +333,7 @@ class TestCaseFactory {
 
   run (args) {
     let runnerPath
-    this._build()
+    this.build()
     args = args || []
 
     if (this.options.gulp) {
@@ -426,9 +431,25 @@ function pad (value, length) {
   return (value.toString().length < length) ? pad(value + ' ', length) : value
 }
 
+function setIdentation (text, identation) {
+  const lines = text.split('\n')
+  const lastLine = lines[lines.length - 1]
+  let currentIdentation = 0
+
+  while (currentIdentation < lastLine.length && lastLine[currentIdentation] === ' ') {
+    currentIdentation++
+  }
+  const regex = new RegExp('^' + ' '.repeat(currentIdentation), 'mg')
+  return text.replace(regex, ' '.repeat(identation))
+}
+
 function copyFixture (name, dest) {
   fs.createReadStream(path.join(process.cwd(), 'test', 'fixture', name))
         .pipe(fs.createWriteStream(path.join(dest, name)))
+}
+
+function getFileName (text) {
+  return text.replace(/ (\w)/g, '-$1').toLowerCase()
 }
 
 module.exports = TestCaseFactory

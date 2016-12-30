@@ -46,7 +46,8 @@
     "test": "npm run code-style && npm run e2e-test && istanbul report",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "precommit": "npm run code-style"
+    "precommit": "npm run code-style",
+    "create-examples": "node examples/create-examples.js"
   },
   "repository": {
     "type": "git",
