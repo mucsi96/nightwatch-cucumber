@@ -244,7 +244,14 @@ defineSupportCode(({Given, Then, When}) => {${this.stepDefinitions.join('')}})`
       args = args.concat(['features'])
     }
 
-    this.options.cucumberArgs = JSON.stringify(args).replace(/,/g, ', ').replace(/"/g, '\'')
+    this.options.cucumberArgs = JSON.stringify(args)
+      .split(',')
+      .map((arg) => arg
+        .replace(/\["/, '[\'')
+        .replace(/"]/, '\']')
+        .replace(/^"|"$/g, '\'')
+        .replace(/\\"/g, '"'))
+      .join(', ')
     this.testCasePath = path.join(process.cwd(), !examples ? 'tmp' : 'examples', this.name)
     mkdirp.sync(this.testCasePath)
     this.options.main = !examples ? '../../lib/index' : 'nightwatch-cucumber'
