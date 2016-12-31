@@ -18,9 +18,9 @@ This module enables to use a BDD-style approach for cross-browser testing:
 - Map them to browser operations and assertions in [Nightwatch.js](http://nightwatchjs.org/)
 - Run using either real browser, headless browser or cloud based [WebDriver](https://www.w3.org/TR/webdriver/) services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/)
 
-## New Release 7.0.0 (2016-12-31)
+## New Release 7.0.0
 
-Please note that a lot of new syntax changes are inroduced. For all changes please read the ([readme diff](https://github.com/mucsi96/nightwatch-cucumber/compare/v6.1.1...v7.0.1#diff-04c6e90faac2675aa89e2176d2eec7d8 )). 
+Please note that a lot of new syntax changes are inroduced. For all changes please read the ([readme diff](https://github.com/mucsi96/nightwatch-cucumber/compare/v6.1.1...v7.0.2#diff-04c6e90faac2675aa89e2176d2eec7d8 )).
 
 #### Breaking Changes
 
@@ -29,7 +29,7 @@ Please note that a lot of new syntax changes are inroduced. For all changes plea
 * html report generation now can be done using external package ([cucumber-html-reporter](https://github.com/gkushang/cucumber-html-reporter))
 * junit reporting generation now can be done using external package ([cucumber-junit](https://github.com/stjohnjohnson/cucumber-junit))
 * almost all configuration options removed in favour of `cucumberArgs` which brings the package closes to Cucumber.js
-* Node.js version < 6 is dropped. A lot of syntax changes are introduced
+* Node.js version < 6 is dropped.
 
 ## Installation
 
@@ -123,17 +123,17 @@ const {client} = require('nightwatch-cucumber');
 const {defineSupportCode} = require('cucumber');
 
 defineSupportCode(({Given, Then, When}) => {
-  Given(/^I open Google's search page$/, (client) => {
+  Given(/^I open Google's search page$/, () => {
     return client
       .url('http://google.com')
       .waitForElementVisible('body', 1000);
   });
 
-  Then(/^the title is "([^"]*)"$/, (client, title) => {
+  Then(/^the title is "([^"]*)"$/, (title) => {
     return client.assert.title(title);
   });
 
-  Then(/^the Google search form exists$/, (client) => {
+  Then(/^the Google search form exists$/, () => {
     return client.assert.visible('input[name="q"]');
   });
 
@@ -561,23 +561,6 @@ module.exports = {
 }
 ```
 
-## Nightwatch client as parameter
-
-Providing Nightwatch client as scope for step definitions is deprecated. The support could be removed in next version.
-Please set `nightwatchClientAsParameter` configuration option to `true`. And use `client` as first argument of step definition functions.
-
-```
-this.Given(/^I open Google's search page$/, (client) => {
-  client
-    .url('http://google.com')
-    .waitForElementVisible('body', 1000)
-})
-
-this.Then(/^the title is "([^"]*)"$/, (client, title) => {
-  client.assert.title(title)
-})
-```
-
 ## Timeouts
 
 You can use `setDefaultTimeout` function in support code to set default timeout for steps.
@@ -648,3 +631,5 @@ This software is released under the terms of the
 
 * https://github.com/nightwatchjs/nightwatch
 * https://github.com/cucumber/cucumber-js
+* https://github.com/gkushang/cucumber-html-reporter
+* https://github.com/stjohnjohnson/cucumber-junit
