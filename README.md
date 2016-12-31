@@ -16,7 +16,7 @@
 <a name"7.0.0"></a>
 ## New Release 7.0.0 (2016-12-31)
 
-Please note that a lot of new syntax changes are inroduced. For all changes please read the ([readme](https://github.com/mucsi96/nightwatch-cucumber/compare/v6.1.1...v7.0.1#diff-04c6e90faac2675aa89e2176d2eec7d8 )). 
+Please note that a lot of new syntax changes are inroduced. For all changes please read the ([readme diff](https://github.com/mucsi96/nightwatch-cucumber/compare/v6.1.1...v7.0.1#diff-04c6e90faac2675aa89e2176d2eec7d8 )). 
 
 
 #### Breaking Changes
