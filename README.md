@@ -571,11 +571,11 @@ You can use `setDefaultTimeout` function in support code to set default timeout 
 By default, timeout is 5 seconds. You can find more details in Cucumber.js [docs](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/timeouts.md)
 
 ```
-var configure = function () {
-  this.setDefaultTimeout(60 * 1000);
-};
+const {defineSupportCode} = require('cucumber')
 
-module.exports = configure;
+defineSupportCode(({setDefaultTimeout}) => {
+  setDefaultTimeout(30 * 1000)
+})
 ```
 
 ## Language
