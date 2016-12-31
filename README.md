@@ -28,7 +28,7 @@ Please note that a lot of new syntax changes are inroduced. For all changes plea
 * promised based external nightwatch client
 * html report generation now can be done using external package ([cucumber-html-reporter](https://github.com/gkushang/cucumber-html-reporter))
 * junit reporting generation now can be done using external package ([cucumber-junit](https://github.com/stjohnjohnson/cucumber-junit))
-* almaoust all configuration options removed in favour of `cucumberArgs` which brings the package closes to Cucumber.js
+* almost all configuration options removed in favour of `cucumberArgs` which brings the package closes to Cucumber.js
 * Node.js version < 6 is dropped. A lot of syntax changes are introduced
 
 ## Installation
