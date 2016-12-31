@@ -38,7 +38,8 @@ after(() => {
   testApp.stop()
 })
 
-process.on('uncaughtException', () => {
+process.on('uncaughtException', (err) => {
+  console.log(err)
   console.log('shutting down test app')
   testApp.stop()
 })

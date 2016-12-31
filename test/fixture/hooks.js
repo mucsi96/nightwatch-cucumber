@@ -1,67 +1,68 @@
 /* eslint-env mocha */
 'use strict'
-
+const {defineSupportCode} = require('cucumber')
+const {client} = require('../../lib/index')
 let loaded = false
 let result = ''
 
-module.exports = function () {
-  this.Before(function (scenarioResult) {
+defineSupportCode(({Before, After}) => {
+  Before((scenarioResult) => {
     if (!loaded) {
-      this.init()
+      client.init()
       loaded = true
     }
-    this.click('#before-scenario')
+    return client.click('#before-scenario')
   })
 
-  this.After(function (scenarioResult) {
-    this.click('#after-scenario')
-    this.getText('#hook-result', function (hookResult) {
+  After((scenarioResult) => {
+    client.click('#after-scenario')
+    return client.getText('#hook-result', function (hookResult) {
       if (process.send) process.send(hookResult.value)
     })
   })
 
-  this.Before({ tags: '@a or @b' }, function (scenarioResult, cb) {
+  Before({ tags: '@a or @b' }, (scenarioResult, cb) => {
     result += 'before-a-b-' + scenarioResult.scenario.name
     cb()
   })
 
-  this.After('@b', function (scenarioResult, cb) {
+  After('@b', (scenarioResult, cb) => {
     result += 'after-b-' + scenarioResult.scenario.name
     if (process.send) process.send(result)
     cb()
   })
 
-  this.Before('@b', function (scenarioResult, cb) {
-    setTimeout(function () {
+  Before('@b', (scenarioResult, cb) => {
+    setTimeout(() => {
       result += 'before-b-cb-' + scenarioResult.scenario.name
       cb()
     }, 500)
   })
 
-  this.After('@b', function (scenarioResult, cb) {
-    setTimeout(function () {
+  After('@b', (scenarioResult, cb) => {
+    setTimeout(() => {
       result += 'after-b-cb-' + scenarioResult.scenario.name
       if (process.send) process.send(result)
       cb()
     }, 400)
   })
 
-  this.Before('@b', function (scenarioResult) {
+  Before('@b', (scenarioResult) => {
     return new Promise((resolve) => {
-      setTimeout(function () {
+      setTimeout(() => {
         result += 'before-b-promise-' + scenarioResult.scenario.name
         resolve()
       }, 500)
     })
   })
 
-  this.After('@b', function (scenarioResult) {
+  After('@b', (scenarioResult) => {
     return new Promise((resolve) => {
-      setTimeout(function () {
+      setTimeout(() => {
         result += 'after-b-promise-' + scenarioResult.scenario.name
         if (process.send) process.send(result)
         resolve()
       }, 400)
     })
   })
-}
+})

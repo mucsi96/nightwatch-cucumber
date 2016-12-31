@@ -1,19 +1,22 @@
-module.exports = function () {
-  this.Given(/^I open Yahoo's search page$/, function () {
-    var yahoo = this.page.yahoo()
+const {client} = require('nightwatch-cucumber')
+const {defineSupportCode} = require('cucumber')
 
-    yahoo
+defineSupportCode(({Given, Then, When}) => {
+  Given(/^I open Yahoo`s search page$/, () => {
+    const yahoo = client.page.yahoo()
+
+    return yahoo
       .navigate()
       .waitForElementVisible('@body', 1000)
   })
 
-  this.Then(/^the Yahoo search form exists$/, function () {
-    var yahoo = this.page.yahoo()
-
-    yahoo.assert.visible('@searchBar')
+  Then(/^the title is "(.*?)"$/, (text) => {
+    return client.assert.title(text)
   })
 
-  this.Then(/^the title is "([^"]*)"$/, function (title) {
-    this.assert.title(title)
+  Then(/^the Yahoo search form exists$/, () => {
+    const yahoo = client.page.yahoo()
+
+    return yahoo.assert.visible('@searchBar')
   })
-}
+})

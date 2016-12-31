@@ -1,31 +1,9 @@
-var seleniumServer = require('selenium-server')
-var phantomjs = require('phantomjs-prebuilt')
-var chromedriver = require('chromedriver')
+const seleniumServer = require('selenium-server')
+const phantomjs = require('phantomjs-prebuilt')
+const chromedriver = require('chromedriver')
 
-require('../../lib/index')({
-  <% if (hooks) { %>
-  supportFiles: ['../../test/fixture/hooks.js']
-  <% } %>
-  <% if (eventHandlersWithoutCallback) { %>
-  supportFiles: ['../../test/fixture/event-handlers-without-callback.js']
-  <% } %>
-  <% if (eventHandlersWithCallback) { %>
-  supportFiles: ['../../test/fixture/event-handlers-with-callback.js']
-  <% } %>
-  <% if (noTests) {%>
-  featureFiles: ['.']
-  <% } %>
-  <% if (junitReport) {%>
-  junitReport: {
-    output: 'reports/junit.xml'
-  }
-  <% } %>
-  <% if (nightwatchClientAsParameter) {%>
-  nightwatchClientAsParameter: true,
-  <% } %>
-  <% if (cucumberArgs) {%>
-  cucumberArgs: '<%=cucumberArgs%>'
-  <% } %>
+require('<%=main%>')({
+  cucumberArgs: <%=cucumberArgs%>
 })
 
 module.exports = {

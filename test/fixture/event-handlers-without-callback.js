@@ -1,42 +1,46 @@
 /* eslint-env mocha */
 'use strict'
+const {defineSupportCode} = require('cucumber')
+const client = require('../../lib/index').client
 
-module.exports = function () {
-  this.registerHandler('BeforeFeatures', function () {
-    this.init()
-    this.click('#before-features')
+defineSupportCode(({registerHandler}) => {
+  registerHandler('BeforeFeatures', () => {
+    return client
+      .init()
+      .click('#before-features')
   })
 
-  this.registerHandler('BeforeFeature', function () {
-    this.click('#before-feature')
+  registerHandler('BeforeFeature', () => {
+    client.click('#before-feature')
   })
 
-  this.registerHandler('BeforeScenario', function () {
-    this.click('#before-scenario')
+  registerHandler('BeforeScenario', () => {
+    client.click('#before-scenario')
   })
 
-  this.registerHandler('BeforeStep', function () {
-    this.click('#before-step')
+  registerHandler('BeforeStep', () => {
+    client.click('#before-step')
   })
 
-  this.registerHandler('AfterStep', function () {
-    this.click('#after-step')
+  registerHandler('AfterStep', () => {
+    client.click('#after-step')
   })
 
-  this.registerHandler('AfterScenario', function () {
-    this.click('#after-scenario')
+  registerHandler('AfterScenario', () => {
+    client.click('#after-scenario')
   })
 
-  this.registerHandler('AfterFeature', function () {
-    this.click('#after-feature')
+  registerHandler('AfterFeature', () => {
+    client.click('#after-feature')
   })
 
-  this.registerHandler('AfterFeatures', function () {
-    this.click('#after-features')
-    this.getText('#hook-result', function (hookResult) {
-      if (process.send) {
-        process.send(hookResult.value)
-      }
-    })
+  registerHandler('AfterFeatures', () => {
+    return client
+      .click('#after-features')
+      .getText('#hook-result', (hookResult) => {
+        if (process.send) {
+          process.send(hookResult.value)
+        }
+      })
   })
-}
+})
