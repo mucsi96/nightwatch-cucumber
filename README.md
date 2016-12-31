@@ -13,11 +13,14 @@
 
 [![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=8)](https://nodei.co/npm/nightwatch-cucumber/)
 
-<a name"7.0.0"></a>
+This module enables to use a BDD-style approach for cross-browser testing:
+- Describe user stories in [Cucumber](https://cucumber.io/) using [Gherkin syntax](https://cucumber.io/docs/reference)
+- Map them to browser operations and assertions in [Nightwatch.js](http://nightwatchjs.org/)
+- Run using either real browser, headless browser or cloud based [WebDriver](https://www.w3.org/TR/webdriver/) services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/)
+
 ## New Release 7.0.0 (2016-12-31)
 
 Please note that a lot of new syntax changes are inroduced. For all changes please read the ([readme diff](https://github.com/mucsi96/nightwatch-cucumber/compare/v6.1.1...v7.0.1#diff-04c6e90faac2675aa89e2176d2eec7d8 )). 
-
 
 #### Breaking Changes
 
@@ -27,11 +30,6 @@ Please note that a lot of new syntax changes are inroduced. For all changes plea
 * junit reporting generation now can be done using external package ([cucumber-junit](https://github.com/stjohnjohnson/cucumber-junit))
 * almaoust all configuration options removed in favour of `cucumberArgs` which brings the package closes to Cucumber.js
 * Node.js version < 6 is dropped. A lot of syntax changes are introduced
-
-This module enables to use a BDD-style approach for cross-browser testing:
-- Describe user stories in [Cucumber](https://cucumber.io/) using [Gherkin syntax](https://cucumber.io/docs/reference)
-- Map them to browser operations and assertions in [Nightwatch.js](http://nightwatchjs.org/)
-- Run using either real browser, headless browser or cloud based [WebDriver](https://www.w3.org/TR/webdriver/) services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/)
 
 ## Installation
 
