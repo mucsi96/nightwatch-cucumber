@@ -174,7 +174,11 @@ describe('Error handling', () => {
   it('should handle errors in custom commands', () => {
     return testCaseFactory
       .create('custom-commands-test', {
-        cucumberArgs: ['--format-options', '{"colorsEnabled":false}']
+        cucumberArgs: [
+          '--format', 'pretty',
+          '--format', 'json:reports/cucumber.json',
+          '--format-options', '{"colorsEnabled":false}'
+        ]
       })
       .customCommand('testCommand', `module.exports.command = function () {
     var test = undefinedVar;
