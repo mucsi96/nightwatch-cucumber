@@ -114,8 +114,6 @@ Scenario: Searching Google
 
 Step definitions files are located in `features/step_definitions` folder by default.
 
-All step definitions will run with `this` set to Nightwatch.js client or browser object
-
 ```
 // features/step_definitions/google.js
 
