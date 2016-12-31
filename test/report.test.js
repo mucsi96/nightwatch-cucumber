@@ -3,7 +3,6 @@
 const chai = require('chai')
 chai.should()
 const testCaseFactory = require('./test-case-factory')
-const fs = require('fs')
 const path = require('path')
 const jsdom = require('jsdom')
 const cucumberHtmlReporter = require('cucumber-html-reporter')
@@ -46,43 +45,6 @@ describe('Reporting features', () => {
       .then((window) => {
         window.document.querySelector('.navbar-header .label-success').textContent.should.equal('Passed: 2')
         window.document.querySelector('.navbar-header .label-danger').textContent.should.equal('Failed: 0')
-      })
-  })
-
-  it('should generate JUnit XML report for Continuous Integration (CI) servers', () => {
-    return testCaseFactory
-      .create('cucumber-junit-report-test', { junitReport: true })
-      .feature('addition')
-      .scenario('small numbers')
-      .given('User is on the simple calculator page', () => client.init())
-      .and('User enter 4 in A field', () => client.setValue('#a', 4))
-      .and('User enter 5 in B field', () => client.setValue('#b', 5))
-      .when('User press Add button', () => client.click('#add'))
-      .then('The result should contain 9', () => client.assert.containsText('#result', 9))
-      .scenario('big numbers')
-      .given('User is on the simple calculator page')
-      .and('User enter 4 in A field')
-      .and('User enter 5 in B field')
-      .when('User press Add button')
-      .then('The result should contain 9')
-      .feature('subtraction')
-      .scenario('small numbers')
-      .given('User is on the simple calculator page')
-      .and('User enter 9 in A field', () => client.setValue('#a', 9))
-      .and('User enter 3 in B field', () => client.setValue('#b', 3))
-      .when('User press Subtract button', () => client.click('#subtract'))
-      .then('The result should contain 6', () => client.assert.containsText('#result', 6))
-      .scenario('big numbers')
-      .given('User is on the simple calculator page')
-      .and('User enter 4 in A field')
-      .and('User enter 5 in B field')
-      .when('User press Subtract button')
-      .then('The result should contain -1', () => client.assert.containsText('#result', -1))
-      .run()
-      .then((result) => getJUnitXmlReport(result.testCasePath))
-      .then((report) => {
-        const expectedReport = fs.readFileSync('test/expected/junit.xml', 'utf8')
-        report.should.equal(expectedReport)
       })
   })
 
@@ -141,8 +103,4 @@ function getCucumberHtmlReportWindow (testCasePath) {
       }
     })
   })
-}
-
-function getJUnitXmlReport (testCasePath) {
-  return fs.readFileSync(path.join(testCasePath, 'reports', 'junit.xml'), 'utf8')
 }
