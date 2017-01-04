@@ -52,9 +52,9 @@ describe('Utility features', () => {
       })
   })
 
-  it('should handle page objects', () => {
+  it('should handle page objects failure', () => {
     return testCaseFactory
-      .create('page-object-test')
+      .create('page-object-failure-test')
       .pageObject('calculator', `module.exports = {
   elements: {
     numberA: '#a',
@@ -66,16 +66,28 @@ describe('Utility features', () => {
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => client.init())
-      .and('User enter 4 in A field', () => client.page.calculator().setValue('@numberA', 4))
-      .and('User enter 5 in B field', () => client.page.calculator().setValue('@numberB', 5))
-      .when('User press Add button', () => client.page.calculator().click('@addButton'))
-      .then('The result should contain 9', () => client.page.calculator().assert.containsText('@result', 9))
+      .and('User enter 4 in A field', () => {
+        const calculator = client.page.calculator()
+        return calculator.setValue('@numberA', 4)
+      })
+      .and('User enter 5 in B field', () => {
+        const calculator = client.page.calculator()
+        return calculator.setValue('@numberB', 5)
+      })
+      .when('User press Add button', () => {
+        const calculator = client.page.calculator()
+        return calculator.click('@addButton')
+      })
+      .then('The result should contain 10', () => {
+        const calculator = client.page.calculator()
+        return calculator.assert.containsText('@result', 10)
+      })
       .run()
       .then((result) => {
-        result.features[0].result.status.should.be.passed
-        result.features[0].result.scenarioCounts.should.deep.equal({passed: 1})
-        result.features[0].scenarios[0].result.status.should.be.passed
-        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
+        result.features[0].result.status.should.be.failed
+        result.features[0].result.scenarioCounts.should.deep.equal({failed: 1})
+        result.features[0].scenarios[0].result.status.should.be.failed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 4, failed: 1})
       })
   })
 
