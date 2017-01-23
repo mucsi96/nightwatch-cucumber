@@ -87,7 +87,7 @@
     "grunt": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-nightwatch": "^0.3.2",
-    "husky": "^0.12.0",
+    "husky": "^0.13.1",
     "istanbul": "^0.4.5",
     "jsdom": "^9.9.1",
     "mocha": "^3.2.0",
