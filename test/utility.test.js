@@ -220,9 +220,9 @@ describe('Utility features', () => {
           'before-a-b-big numbers',
           'before-b-cb-big numbers',
           'before-b-promise-big numbers',
-          'after-b-big numbers',
+          'after-b-promise-big numbers',
           'after-b-cb-big numbers',
-          'after-b-promise-big numbers'
+          'after-b-big numbers'
         ].join(''))
       })
   })

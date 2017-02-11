@@ -30,6 +30,7 @@ class TestCaseFactory {
     }, options)
     this.groups = []
     this.stepDefinitions = []
+    this.prependStepDefinitions = []
     this.pageObjects = []
     this.customCommands = []
     this.currentGroup = {
@@ -94,6 +95,11 @@ class TestCaseFactory {
   and (name, stepDefinition) {
     if (!this.context) throw new Error('And used without context')
     return this._step(name, 'And', this.context, stepDefinition)
+  }
+
+  prependStepDefinition (code) {
+    this.prependStepDefinitions.push(`${code}\n`)
+    return this
   }
 
   _step (name, scenarioStepType, definitionType, stepDefinition) {
@@ -188,7 +194,7 @@ class TestCaseFactory {
     const main = !examples ? '../../../../lib/index' : 'nightwatch-cucumber'
     const steps = `const {client} = require('${main}')
 const {defineSupportCode} = require('cucumber')
-
+${this.prependStepDefinitions.join('')}
 defineSupportCode(({Given, Then, When}) => {${this.stepDefinitions.join('')}})`
     if (this.stepDefinitions.length) {
       fs.writeFileSync(path.join(this.testCasePath, 'features', 'step_definitions', 'steps.js'), steps)
