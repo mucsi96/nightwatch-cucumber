@@ -1,0 +1,20 @@
+{
+  "projectName": "nightwatch-cucumber",
+  "projectOwner": "mucsi96",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "ZIJ",
+      "name": "Igor Zalutski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1280498?v=3",
+      "profile": "izalutski.consulting",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
+}
