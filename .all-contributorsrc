@@ -8,6 +8,19 @@
   "commit": true,
   "contributors": [
     {
+      "login": "mucsi96",
+      "name": "Igor Muchychka",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3163392?v=3",
+      "profile": "https://twitter.com/mucsi96",
+      "contributions": [
+        "question",
+        "code",
+        "doc",
+        "tool",
+        "design"
+      ]
+    },
+    {
       "login": "ZIJ",
       "name": "Igor Zalutski",
       "avatar_url": "https://avatars.githubusercontent.com/u/1280498?v=3",
