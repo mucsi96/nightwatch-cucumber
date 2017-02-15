@@ -1,8 +1,8 @@
 # nightwatch-cucumber [![nightwatch-cucumber](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-logo.png)](https://github.com/mucsi96/nightwatch-cucumber)
-[![All Contributors](https://img.shields.io/badge/all_contributors-19-orange.svg?style=flat-square)](#contributors)
 
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
+[![All Contributors](https://img.shields.io/badge/all_contributors-19-orange.svg)](#contributors)
 [![Coverage Status](https://coveralls.io/repos/github/mucsi96/nightwatch-cucumber/badge.svg?branch=master)](https://coveralls.io/github/mucsi96/nightwatch-cucumber?branch=master)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
@@ -589,44 +589,16 @@ Cenário: Pesquisando no Google
    E o formulário de busca Google existe
 ```
 
-# Contribute
-
-Anyone and everyone is welcome to contribute.
-
-# Authors
-
-[Igor Muchychka (@mucsi96)](https://github.com/mucsi96)
-
-Thanks for assistance and contributions:
-
-[Igor Zalutski (@ZIJ)](https://github.com/ZIJ),
-[Daniele Campogiani (@dcampogiani)](https://github.com/dcampogiani),
-[Simranjeet Singh (@RSsimranjeetsingh)](https://github.com/RSsimranjeetsingh),
-[Shashi Shekhar Singh (@singhshashi)](https://github.com/singhshashi),
-Alex Murphy,
-Ben Grabham,
-[Jean-Baptiste Blanchet (@jbblanchet)](https://github.com/jbblanchet),
-[Vincent Spiewak (@vspiewak)](https://github.com/vspiewak),
-[Fabio Quinzi (@FabioQ)](https://github.com/FabioQ),
-[Alfredo Moretta (@Alfredo81)](https://github.com/Alfredo81),
-[Jeffrey Effendy (@jeffrey-effendy)](https://github.com/jeffrey-effendy)
-[Lawrence (@ldabiralai)](https://github.com/ldabiralai)
-[Domenico Gemoli (@aberonni)](https://github.com/aberonni)
-[Klokov Anton (@klokovas)](https://github.com/klokovas)
-[Arnaud gueras (@arnogues)](https://github.com/arnogues)
-[Lukas Eipert (@leipert)](https://github.com/leipert)
-
-
-# Change log
+## Change log
 
 See [releases](https://github.com/mucsi96/nightwatch-cucumber/releases)
 
-# License
+## License
 
 This software is released under the terms of the
 [MIT license](https://github.com/mucsi96/nightwatch-cucumber/blob/master/LICENSE).
 
-# Other projects
+## Other projects
 
 * https://github.com/nightwatchjs/nightwatch
 * https://github.com/cucumber/cucumber-js
