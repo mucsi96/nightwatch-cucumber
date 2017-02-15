@@ -204,9 +204,13 @@ defineSupportCode(({Given, Then, When}) => {${this.stepDefinitions.join('')}})`
   _buildPageObjects () {
     if (!this.pageObjects.length) return
 
-    mkdirp.sync(path.join(this.testCasePath, 'page_objects'))
     this.pageObjects.forEach((pageObject) => {
-      fs.writeFileSync(path.join(this.testCasePath, 'page_objects', `${pageObject.name}.js`), pageObject.source)
+      let pageObjectPathParts = pageObject.name.split('/')
+      const fileName = pageObjectPathParts.pop()
+      pageObjectPathParts = [this.testCasePath, 'page_objects'].concat(pageObjectPathParts)
+      const pageObjectPath = path.join.apply(null, pageObjectPathParts)
+      mkdirp.sync(pageObjectPath)
+      fs.writeFileSync(path.join(pageObjectPath, `${fileName}.js`), pageObject.source)
     })
   }
 

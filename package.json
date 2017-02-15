@@ -6,24 +6,6 @@
     "node": ">= 6.0.0"
   },
   "author": "Igor Muchychka <mucsi_96@yahoo.com>",
-  "contributors": [
-    "Igor Zalutski <izalutski@palantir.com>",
-    "Daniele Campogiani <daniele.campogiani@gmail.com>",
-    "Simranjeet Singh",
-    "Shashi Shekhar Singh",
-    "Alex Murphy",
-    "Ben Grabham",
-    "Jean-Baptiste Blanchet <jbblanchet@gmail.com>",
-    "Vincent Spiewak <vspiewak+github@gmail.com>",
-    "Fabio Quinzi <fabio.quinzi@gmail.com>",
-    "Alfredo Moretta",
-    "Jeffrey Effendy <wawa_union.zone@live.com>",
-    "Lawrence",
-    "Domenico Gemoli <domenicogemoli@gmail.com>",
-    "Klokov Anton",
-    "Arnaud gueras",
-    "Lukas Eipert <git@leipert.io>"
-  ],
   "license": "MIT",
   "dependencies": {
     "btoa": "^1.1.2",
@@ -41,6 +23,8 @@
     "tmp": "^0.0.31"
   },
   "scripts": {
+    "add-contributor": "all-contributors add",
+    "generate-contributors": "all-contributors generate",
     "code-style": "eslint lib resources test",
     "e2e-test": "mocha --no-timeouts",
     "test": "npm run code-style && npm run e2e-test && istanbul report",

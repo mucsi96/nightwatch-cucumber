@@ -2,6 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
+[![All Contributors](https://img.shields.io/badge/all_contributors-19-orange.svg)](#contributors)
 [![Coverage Status](https://coveralls.io/repos/github/mucsi96/nightwatch-cucumber/badge.svg?branch=master)](https://coveralls.io/github/mucsi96/nightwatch-cucumber?branch=master)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
@@ -588,44 +589,29 @@ Cenário: Pesquisando no Google
    E o formulário de busca Google existe
 ```
 
-# Contribute
+## Contributors
 
-Anyone and everyone is welcome to contribute.
+Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
-# Authors
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+| [<img src="https://avatars.githubusercontent.com/u/3163392?v=3" width="100px;"/><br /><sub>Igor Muchychka</sub>](https://twitter.com/mucsi96)<br />💬 [💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=mucsi96) [📖](https://github.com/mucsi96/nightwatch-cucumber/commits?author=mucsi96) 🔧 🎨 | [<img src="https://avatars.githubusercontent.com/u/1280498?v=3" width="100px;"/><br /><sub>Igor Zalutski</sub>](izalutski.consulting)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=ZIJ) | [<img src="https://avatars.githubusercontent.com/u/1054526?v=3" width="100px;"/><br /><sub>Daniele Campogiani</sub>](http://danielecampogiani.com)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=dcampogiani) | [<img src="https://avatars.githubusercontent.com/u/15341713?v=3" width="100px;"/><br /><sub>Simranjeet Singh</sub>](https://github.com/RSsimranjeetsingh)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=RSsimranjeetsingh) | [<img src="https://avatars.githubusercontent.com/u/371601?v=3" width="100px;"/><br /><sub>Shashi Shekhar Singh</sub>](http://blog.singhshashi.in)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=singhshashi) | [<img src="https://avatars.githubusercontent.com/u/2847338?v=3" width="100px;"/><br /><sub>jbblanchet</sub>](https://github.com/jbblanchet)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=jbblanchet) | [<img src="https://avatars.githubusercontent.com/u/2108652?v=3" width="100px;"/><br /><sub>Vincent Spiewak</sub>](https://github.com/vspiewak)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=vspiewak) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| [<img src="https://avatars.githubusercontent.com/u/7160445?v=3" width="100px;"/><br /><sub>Fabio Quinzi</sub>](http://fabioquinzi.com)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=FabioQ) | [<img src="https://avatars.githubusercontent.com/u/7831710?v=3" width="100px;"/><br /><sub>Jeffrey Effendy</sub>](https://github.com/jeffrey-effendy)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=jeffrey-effendy) | [<img src="https://avatars.githubusercontent.com/u/1711610?v=3" width="100px;"/><br /><sub>Lawrence</sub>](http://ldabiralai.me)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=ldabiralai) | [<img src="https://avatars.githubusercontent.com/u/1260402?v=3" width="100px;"/><br /><sub>Domenico Gemoli</sub>](http://domenicogemoli.com)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=aberonni) | [<img src="https://avatars.githubusercontent.com/u/8973021?v=3" width="100px;"/><br /><sub>Klokov Anton</sub>](https://github.com/klokovas)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=klokovas) | [<img src="https://avatars.githubusercontent.com/u/2287663?v=3" width="100px;"/><br /><sub>Arnaud gueras</sub>](https://github.com/arnogues)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=arnogues) | [<img src="https://avatars.githubusercontent.com/u/2906107?v=3" width="100px;"/><br /><sub>Lukas Eipert</sub>](http://leipert.io)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=leipert) |
+| [<img src="https://avatars.githubusercontent.com/u/4364107?v=3" width="100px;"/><br /><sub>Paulo</sub>](http://madrov.com)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=madroneropaulo) | [<img src="https://avatars.githubusercontent.com/u/6282473?v=3" width="100px;"/><br /><sub>Tylor Steinberger</sub>](https://github.com/TylorS)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=TylorS) | [<img src="https://avatars.githubusercontent.com/u/1476974?v=3" width="100px;"/><br /><sub>Eric Chan</sub>](https://github.com/kinyat)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=kinyat) | [<img src="https://avatars.githubusercontent.com/u/1476502?v=3" width="100px;"/><br /><sub>Mykolas</sub>](http://www.myk.lt)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=myklt) | [<img src="https://avatars.githubusercontent.com/u/5993909?v=3" width="100px;"/><br /><sub>Jon Wallsten</sub>](https://github.com/JonWallsten)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=JonWallsten) |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
-[Igor Muchychka (@mucsi96)](https://github.com/mucsi96)
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
 
-Thanks for assistance and contributions:
-
-[Igor Zalutski (@ZIJ)](https://github.com/ZIJ),
-[Daniele Campogiani (@dcampogiani)](https://github.com/dcampogiani),
-[Simranjeet Singh (@RSsimranjeetsingh)](https://github.com/RSsimranjeetsingh),
-[Shashi Shekhar Singh (@singhshashi)](https://github.com/singhshashi),
-Alex Murphy,
-Ben Grabham,
-[Jean-Baptiste Blanchet (@jbblanchet)](https://github.com/jbblanchet),
-[Vincent Spiewak (@vspiewak)](https://github.com/vspiewak),
-[Fabio Quinzi (@FabioQ)](https://github.com/FabioQ),
-[Alfredo Moretta (@Alfredo81)](https://github.com/Alfredo81),
-[Jeffrey Effendy (@jeffrey-effendy)](https://github.com/jeffrey-effendy)
-[Lawrence (@ldabiralai)](https://github.com/ldabiralai)
-[Domenico Gemoli (@aberonni)](https://github.com/aberonni)
-[Klokov Anton (@klokovas)](https://github.com/klokovas)
-[Arnaud gueras (@arnogues)](https://github.com/arnogues)
-[Lukas Eipert (@leipert)](https://github.com/leipert)
-
-
-# Change log
+## Change log
 
 See [releases](https://github.com/mucsi96/nightwatch-cucumber/releases)
 
-# License
+## License
 
 This software is released under the terms of the
 [MIT license](https://github.com/mucsi96/nightwatch-cucumber/blob/master/LICENSE).
 
-# Other projects
+## Other projects
 
 * https://github.com/nightwatchjs/nightwatch
 * https://github.com/cucumber/cucumber-js
