@@ -1,5 +1,5 @@
 # nightwatch-cucumber [![nightwatch-cucumber](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-logo.png)](https://github.com/mucsi96/nightwatch-cucumber)
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
@@ -638,8 +638,8 @@ This software is released under the terms of the
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://avatars.githubusercontent.com/u/1280498?v=3" width="100px;"/><br /><sub>Igor Zalutski</sub>](izalutski.consulting)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=ZIJ) |
-| :---: |
+| [<img src="https://avatars.githubusercontent.com/u/1280498?v=3" width="100px;"/><br /><sub>Igor Zalutski</sub>](izalutski.consulting)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=ZIJ) | [<img src="https://avatars.githubusercontent.com/u/1054526?v=3" width="100px;"/><br /><sub>Daniele Campogiani</sub>](http://danielecampogiani.com)<br />[💻](https://github.com/mucsi96/nightwatch-cucumber/commits?author=dcampogiani) |
+| :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
