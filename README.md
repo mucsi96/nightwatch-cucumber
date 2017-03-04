@@ -12,7 +12,7 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/mucsi96.svg?style=social&label=Follow&maxAge=2592000)](https://twitter.com/mucsi96)
 [Ask question](https://groups.google.com/d/forum/nightwatch-cucumber)
 
-[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png?months=8)](https://nodei.co/npm/nightwatch-cucumber/)
+[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png)](https://nodei.co/npm/nightwatch-cucumber/)
 
 This module enables to use a BDD-style approach for cross-browser testing:
 - Describe user stories in [Cucumber](https://cucumber.io/) using [Gherkin syntax](https://cucumber.io/docs/reference)
