@@ -192,10 +192,17 @@ class TestCaseFactory {
   _buildStepDefinitions ({examples}) {
     mkdirp.sync(path.join(this.testCasePath, 'features', 'step_definitions'))
     const main = !examples ? '../../../../lib/index' : 'nightwatch-cucumber'
-    const steps = `const {client} = require('${main}')
-const {defineSupportCode} = require('cucumber')
+    let importCode
+    if (this.options.babel) {
+      importCode = `import { client } from '${main}'
+import { defineSupportCode } from 'cucumber'`
+    } else {
+      importCode = `const { client } = require('${main}')
+const { defineSupportCode } = require('cucumber')`
+    }
+    const steps = `${importCode}
 ${this.prependStepDefinitions.join('')}
-defineSupportCode(({Given, Then, When}) => {${this.stepDefinitions.join('')}})`
+defineSupportCode(({ Given, Then, When }) => {${this.stepDefinitions.join('')}})`
     if (this.stepDefinitions.length) {
       fs.writeFileSync(path.join(this.testCasePath, 'features', 'step_definitions', 'steps.js'), steps)
     }
@@ -241,6 +248,10 @@ defineSupportCode(({Given, Then, When}) => {${this.stepDefinitions.join('')}})`
       args = ['--require', `${fixtures}event-handlers-with-callback.js`].concat(args)
     }
 
+    if (this.options.babel) {
+      args = ['--compiler', `js:babel-core/register`].concat(args)
+    }
+
     if (this.options.cucumberArgs.length) {
       args = args.concat(this.options.cucumberArgs)
     } else {
@@ -275,6 +286,8 @@ defineSupportCode(({Given, Then, When}) => {${this.stepDefinitions.join('')}})`
       copyFixture('Gruntfile.js', this.testCasePath)
     } else if (this.options.programmatical) {
       copyFixture('programmatical-run.js', this.testCasePath)
+    } else if (this.options.babel) {
+      copyFixture('.babelrc', this.testCasePath)
     }
 
     this._buildStepDefinitions({examples})

@@ -159,6 +159,46 @@ nightwatch
 
 ## Features
 
+### Babel support
+
+You can write test using latest ECMAScript feature using Babel. Using `async` function is especially useful.
+For that you need install `babel-core`, setup `.babelrc` to add Babel as compiler
+```
+// nightwatch.conf.js
+
+require('nightwatch-cucumber')({
+  cucumberArgs: ['--compiler', 'js:babel-core/register', '--require', 'features/step_definitions', 'features']
+})
+...
+```
+
+```
+// features/step_definitions/google.js
+
+import { client } from 'nightwatch-cucumber';
+import { defineSupportCode } from 'cucumber';
+
+defineSupportCode(({ Given, Then, When }) => {
+  Given(/^I open Google's search page$/, async () => {
+    await client.url('http://google.com')
+    await client.waitForElementVisible('body', 1000);
+  });
+
+  Then(/^the title is "([^"]*)"$/, async (title) => {
+    await client.assert.title(title);
+  });
+
+  Then(/^the Google search form exists$/, async () => {
+    await client.assert.visible('input[name="q"]');
+  });
+
+});
+```
+
+For complete working example check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples/babel-example)
+
+
+
 ### Passing additional CLI options for Cucumber.js.
 
 For that you can use the `cucumberArgs` configuration property. For available Cucumber.js CLI options see the [Cucumber.js docs](https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md)

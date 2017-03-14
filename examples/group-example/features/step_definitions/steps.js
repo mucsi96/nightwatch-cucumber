@@ -1,7 +1,7 @@
-const {client} = require('nightwatch-cucumber')
-const {defineSupportCode} = require('cucumber')
+const { client } = require('nightwatch-cucumber')
+const { defineSupportCode } = require('cucumber')
 
-defineSupportCode(({Given, Then, When}) => {
+defineSupportCode(({ Given, Then, When }) => {
   Given(/^I open Google`s search page$/, () => {
     return client
       .url('http://google.com')

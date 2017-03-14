@@ -12,7 +12,8 @@ const examples = {
   paralell,
   programmatical,
   simple,
-  tag
+  tag,
+  babel
 }
 
 function background () {
@@ -371,6 +372,37 @@ function tag () {
     .and('the Yahoo search form exists', () => {
       return client.assert.visible('input[name="p"]')
     })
+}
+
+function babel () {
+  return testCaseFactory
+    .create('babel-example', { babel: true })
+    .feature('Google Search')
+    .scenario('Searching Google')
+    .given('I open Google`s search page', `async () => {
+      await client.url('http://google.com')
+      await client.waitForElementVisible('body', 1000)
+    }`)
+    .then('the title is "Google"', `async (text) => {
+      await client.assert.title(text)
+    }`)
+    .and('the Google search form exists', `async () => {
+      await client.assert.visible('input[name="q"]')
+    }`)
+    .scenario('Searching Google again')
+    .given('I open Google`s search page')
+    .then('the title is "Google"')
+    .and('the Google search form exists')
+    .feature('Yahoo Search')
+    .scenario('Searching Yahoo')
+    .given('I open Yahoo`s search page', `async () => {
+      await client.url('http://yahoo.com')
+      await client.waitForElementVisible('body', 1000)
+    }`)
+    .then('the title is "Yahoo"')
+    .and('the Yahoo search form exists', `async () => {
+      await client.assert.visible('input[name="p"]')
+    }`)
 }
 
 Object.keys(examples).forEach((name) => {
