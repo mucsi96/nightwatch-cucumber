@@ -373,9 +373,7 @@ defineSupportCode(({Given, Then, When}) => {${this.stepDefinitions.join('')}})`
       const json = fs.readFileSync(jsonReport, 'utf8')
       const result = JSON.parse(json)
       return this.enhaceResult(result)
-    } catch (err) {
-      return
-    }
+    } catch (err) {}
   }
 
   enhaceResult (result) {
