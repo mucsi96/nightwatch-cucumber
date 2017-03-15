@@ -161,7 +161,7 @@ nightwatch
 
 ### Babel support
 
-You can write tests using latest ECMAScript feature using [Babel](https://babeljs.io/). Using `async` function is especially useful.
+You can write tests using latest ECMAScript features using [Babel](https://babeljs.io/). Using `async` function is especially useful.
 For that you need install `babel-core`, setup `.babelrc` and add Babel as compiler
 ```js
 // nightwatch.conf.js
