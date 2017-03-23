@@ -4,7 +4,6 @@
     "no-only-tests"
   ],
   "rules": {
-    "no-only-tests/no-only-tests": 2,
-    "no-unused-expressions": 0
+    "no-only-tests/no-only-tests": 2
   }
 }
