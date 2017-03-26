@@ -13,7 +13,8 @@ const examples = {
   programmatical,
   simple,
   tag,
-  babel
+  babel,
+  pendingWithNoStrict
 }
 
 function background () {
@@ -403,6 +404,28 @@ function babel () {
     .and('the Yahoo search form exists', `async () => {
       await client.assert.visible('input[name="p"]')
     }`)
+}
+
+function pendingWithNoStrict () {
+  return testCaseFactory
+    .create('pending-with-no-strict-example', { cucumberArgs: ['--no-strict'] })
+    .feature('Google Search')
+    .scenario('Searching Google')
+    .given('I open Google`s search page', () => {
+      return client
+        .url('http://google.com')
+        .waitForElementVisible('body', 1000)
+    })
+    .then('the title is "Google"', (text) => {
+      return 'pending'
+    })
+    .and('the Google search form exists', () => {
+      return client.assert.visible('input[name="q"]')
+    })
+    .scenario('Searching Google again')
+    .given('I open Google`s search page')
+    .then('the title is "Google"')
+    .and('the Google search form exists')
 }
 
 Object.keys(examples).forEach((name) => {

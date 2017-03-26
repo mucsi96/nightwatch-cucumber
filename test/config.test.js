@@ -28,4 +28,19 @@ describe('Config', () => {
         result.output.should.contain('..........')
       })
   })
+
+  it('should exit with success status if pending step exists and --no-strict is passed as cucumber CLI argument', () => {
+    return testCaseFactory
+      .create('config-cucumber-no-strict-arg-test', {
+        cucumberArgs: ['--no-strict']
+      })
+      .feature('addition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', () => client.init())
+      .and('User enter 4 in A field', () => 'pending')
+      .run()
+      .then((result) => {
+        result.exitCode.should.equal(0)
+      })
+  })
 })
