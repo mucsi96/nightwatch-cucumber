@@ -44,7 +44,7 @@ $ npm install --save-dev nightwatch cucumber
 or shorter
 
 ```
-$ npm i -D nightwatch cucumber
+$ npm i -D nightwatch cucumber@2.0.0-rc.9
 ```
 
 you can also install nightwatch globally

@@ -19,8 +19,8 @@ const server = http.createServer((req, res) => {
   if (uri === '/') uri = '/index.html'
 
   const filename = path.join(__dirname, uri)
-  fs.exists(filename, (exists) => {
-    if (!exists) {
+  fs.access(filename, fs.constants.R_OK, err => {
+    if (err) {
       res.writeHead(404, {'Content-Type': 'text/plain'})
       res.write('404 Not Found\n')
       res.end()
