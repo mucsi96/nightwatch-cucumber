@@ -38,7 +38,7 @@ Please note that a lot of new syntax changes are inroduced. For all changes plea
 First you need to have Nightwatch.js and Cucumber.js to be installed locally.
 
 ```
-$ npm install --save-dev nightwatch cucumber
+$ npm install --save-dev nightwatch cucumber@2.0.0-rc.9
 ```
 
 or shorter
