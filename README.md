@@ -1,5 +1,7 @@
 # nightwatch-cucumber [![nightwatch-cucumber](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-logo.png)](https://github.com/mucsi96/nightwatch-cucumber)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mucsi96/nightwatch-cucumber.svg)](https://greenkeeper.io/)
+
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
 [![All Contributors](https://img.shields.io/badge/all_contributors-19-orange.svg?style=flat-square)](#contributors)
