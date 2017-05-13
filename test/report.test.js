@@ -79,7 +79,7 @@ describe('Reporting features', () => {
         scenario.querySelector('[title="Passed"]').textContent.should.equal('4')
         scenario.querySelector('[title="Failed"]').textContent.should.equal('1')
 
-        const screenshot = window.document.querySelector('#collapseScenario0_0 img.screenshot')
+        const screenshot = dom.window.document.querySelector('#collapseScenario0_0 img.screenshot')
         screenshot.src.startsWith('data:image/png;base64,iVBOR').should.equal(true)
       })
   })
