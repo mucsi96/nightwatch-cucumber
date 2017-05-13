@@ -11,7 +11,6 @@
     "btoa": "^1.1.2",
     "co": "^4.6.0",
     "glob": "^7.1.1",
-    "lodash.assign": "^4.2.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.template": "^4.4.0",
     "mkdirp": "^0.5.1",
@@ -55,6 +54,10 @@
     "lib",
     "resources"
   ],
+  "peerDependencies": {
+    "cucumber": "2.x",
+    "nightwatch": "0.9.x"
+  },
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
