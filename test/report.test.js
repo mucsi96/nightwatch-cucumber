@@ -4,7 +4,7 @@ const chai = require('chai')
 chai.should()
 const testCaseFactory = require('./test-case-factory')
 const path = require('path')
-const jsdom = require('jsdom')
+const { JSDOM } = require('jsdom')
 const cucumberHtmlReporter = require('cucumber-html-reporter')
 
 describe('Reporting features', () => {
@@ -42,9 +42,9 @@ describe('Reporting features', () => {
         createHTMLReport(result.testCasePath)
         return getCucumberHtmlReportWindow(result.testCasePath)
       })
-      .then((window) => {
-        window.document.querySelector('.navbar-header .label-success').textContent.should.equal('Passed: 2')
-        window.document.querySelector('.navbar-header .label-danger').textContent.should.equal('Failed: 0')
+      .then((dom) => {
+        dom.window.document.querySelector('.navbar-header .label-success').textContent.should.equal('Passed: 2')
+        dom.window.document.querySelector('.navbar-header .label-danger').textContent.should.equal('Failed: 0')
       })
   })
 
@@ -63,15 +63,15 @@ describe('Reporting features', () => {
         createHTMLReport(result.testCasePath)
         return getCucumberHtmlReportWindow(result.testCasePath)
       })
-      .then((window) => {
-        const feature = window.document.querySelector('[href$="#collapseFeature0"]')
+      .then((dom) => {
+        const feature = dom.window.document.querySelector('[href$="#collapseFeature0"]')
         const featureMatch = feature.textContent.match(/^\s*(.*?):(.*?)\s*.*\s*$/)
         featureMatch.should.not.to.be.null
         featureMatch[1].should.equal('Feature')
         featureMatch[2].should.equal('addition')
         feature.querySelector('.label-danger').textContent.should.equal('1')
 
-        const scenario = window.document.querySelector('[href$="#collapseScenario0_0"]')
+        const scenario = dom.window.document.querySelector('[href$="#collapseScenario0_0"]')
         const scenarioMatch = scenario.textContent.match(/^\s*(.*?):(.*?)\s*.*\s*.*\s*$/)
         scenarioMatch.should.not.to.be.null
         scenarioMatch[1].should.equal('Scenario')
@@ -79,7 +79,7 @@ describe('Reporting features', () => {
         scenario.querySelector('[title="Passed"]').textContent.should.equal('4')
         scenario.querySelector('[title="Failed"]').textContent.should.equal('1')
 
-        const screenshot = window.document.querySelector('#collapseScenario0_0 img.screenshot')
+        const screenshot = dom.window.document.querySelector('#collapseScenario0_0 img.screenshot')
         screenshot.src.startsWith('data:image/png;base64,iVBOR').should.equal(true)
       })
   })
@@ -94,13 +94,5 @@ function createHTMLReport (testCasePath) {
 }
 
 function getCucumberHtmlReportWindow (testCasePath) {
-  return new Promise((resolve, reject) => {
-    jsdom.env({
-      file: path.join(testCasePath, 'reports', 'cucumber.html'),
-      done: (err, window) => {
-        if (err) reject(err)
-        resolve(window)
-      }
-    })
-  })
+  return JSDOM.fromFile(path.join(testCasePath, 'reports', 'cucumber.html'))
 }

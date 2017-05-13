@@ -5,6 +5,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-19-orange.svg?style=flat-square)](#contributors)
 [![Coverage Status](https://coveralls.io/repos/github/mucsi96/nightwatch-cucumber/badge.svg?branch=master)](https://coveralls.io/github/mucsi96/nightwatch-cucumber?branch=master)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![Greenkeeper badge](https://badges.greenkeeper.io/mucsi96/nightwatch-cucumber.svg)](https://greenkeeper.io/)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Dependency Status](https://dependencyci.com/github/mucsi96/nightwatch-cucumber/badge)](https://dependencyci.com/github/mucsi96/nightwatch-cucumber)
