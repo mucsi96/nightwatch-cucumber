@@ -5,7 +5,6 @@ const mkdirp = require('mkdirp')
 const fs = require('fs')
 const path = require('path')
 const template = require('lodash.template')
-const assign = require('lodash.assign')
 const PrefixStream = require('../lib/prefix-stream')
 const nightwatchConfTemplatePath = fs.readFileSync(path.join(process.cwd(), 'test', 'fixture', 'nightwatch.conf.js.tmpl'))
 const nightwatchConfTemplate = template(nightwatchConfTemplatePath)
@@ -13,7 +12,7 @@ const nightwatchConfTemplate = template(nightwatchConfTemplatePath)
 class TestCaseFactory {
   constructor (name, options) {
     this.name = name
-    this.options = assign({
+    this.options = Object.assign({
       paralell: false,
       hooks: false,
       eventHandlersWithoutCallback: false,

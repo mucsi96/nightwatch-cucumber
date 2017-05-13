@@ -39,19 +39,13 @@ Please note that a lot of new syntax changes are inroduced. For all changes plea
 First you need to have Nightwatch.js and Cucumber.js to be installed locally.
 
 ```
-$ npm install --save-dev nightwatch cucumber@2.0.0-rc.9
+$ npm install --save-dev nightwatch cucumber
 ```
 
 or shorter
 
 ```
-$ npm i -D nightwatch cucumber@2.0.0-rc.9
-```
-
-you can also install nightwatch globally
-
-```
-$ npm i -g nightwatch
+$ npm i -D nightwatch cucumber
 ```
 
 If you are new to Nightwatch.js you can read the [developer guide](http://nightwatchjs.org/guide).
@@ -147,12 +141,6 @@ You can run the test by executing
 
 ```
 node_modules/.bin/nightwatch
-```
-
-or if you installed Nightwatch globally you can run test by executing
-
-```
-nightwatch
 ```
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-output.png)
