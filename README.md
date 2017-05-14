@@ -21,7 +21,7 @@ This module enables to use a BDD-style approach for cross-browser testing:
 
 ## New Release 7.0.0
 
-Please note that a lot of new syntax changes are inroduced. For all changes please read the ([readme diff](https://github.com/mucsi96/nightwatch-cucumber/compare/v6.1.1...v7.0.2#diff-04c6e90faac2675aa89e2176d2eec7d8 )).
+Please note that a lot of new syntax changes are introduced. For all changes please read the ([readme diff](https://github.com/mucsi96/nightwatch-cucumber/compare/v6.1.1...v7.0.2#diff-04c6e90faac2675aa89e2176d2eec7d8 )).
 
 #### Breaking Changes
 
