@@ -55,7 +55,7 @@
     "resources"
   ],
   "peerDependencies": {
-    "cucumber": "2.x",
+    "cucumber": "^2.2.0",
     "nightwatch": "0.9.x"
   },
   "devDependencies": {
