@@ -26,4 +26,4 @@ If the current behavior is a bug or you can illustrate your feature request bett
 
 **Please tell us about your environment:**
 
-* output of the following command `npm ls nightwatch cucumber nightwatch-cucumber && node --version`
+* output of the following command from your project root `npm ls nightwatch cucumber nightwatch-cucumber && node --version`
