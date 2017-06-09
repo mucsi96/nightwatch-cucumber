@@ -64,22 +64,22 @@ describe('Reporting features', () => {
         return getCucumberHtmlReportWindow(result.testCasePath)
       })
       .then((dom) => {
-        const feature = dom.window.document.querySelector('[href$="#collapseFeature0"]')
+        const feature = dom.window.document.querySelector('[href$="#collapseFeaturenightwatch-cucumber0"]')
         const featureMatch = feature.textContent.match(/^\s*(.*?):(.*?)\s*.*\s*$/)
         featureMatch.should.not.to.be.null
         featureMatch[1].should.equal('Feature')
         featureMatch[2].should.equal('addition')
         feature.querySelector('.label-danger').textContent.should.equal('1')
 
-        const scenario = dom.window.document.querySelector('[href$="#collapseScenario0_0"]')
+        const scenario = dom.window.document.querySelector('[href$="#collapseScenarionightwatch-cucumber0_0"]')
         const scenarioMatch = scenario.textContent.match(/^\s*(.*?):(.*?)\s*.*\s*.*\s*$/)
         scenarioMatch.should.not.to.be.null
         scenarioMatch[1].should.equal('Scenario')
         scenarioMatch[2].should.equal('small numbers')
-        scenario.querySelector('[title="Passed"]').textContent.should.equal('4')
-        scenario.querySelector('[title="Failed"]').textContent.should.equal('1')
+        scenario.querySelector('.label-success').textContent.should.equal('4')
+        scenario.querySelector('.label-danger').textContent.should.equal('1')
 
-        const screenshot = dom.window.document.querySelector('#collapseScenario0_0 img.screenshot')
+        const screenshot = dom.window.document.querySelector('#collapseScenarionightwatch-cucumber0_0 img.screenshot')
         screenshot.src.startsWith('data:image/png;base64,iVBOR').should.equal(true)
       })
   })
