@@ -1,5 +1,6 @@
 {
   "name": "nightwatch-cucumber",
+  "version": "0.0.0-development",
   "description": "Nightwatch.js plugin for Cucumber.js",
   "main": "lib/index.js",
   "engines": {
