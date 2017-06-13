@@ -10,7 +10,7 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Dependency Status](https://dependencyci.com/github/mucsi96/nightwatch-cucumber/badge)](https://dependencyci.com/github/mucsi96/nightwatch-cucumber)
 [![Twitter Follow](https://img.shields.io/twitter/follow/mucsi96.svg?style=social&label=Follow&maxAge=2592000)](https://twitter.com/mucsi96)
-[Ask question](https://groups.google.com/d/forum/nightwatch-cucumber)
+[Ask question](https://stackoverflow.com/questions/tagged/nightwatch.js+cucumber)
 
 [![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png)](https://nodei.co/npm/nightwatch-cucumber/)
 
