@@ -69,7 +69,7 @@
     "cucumber": "^2.2.0",
     "cucumber-html-reporter": "^0.5.2",
     "cz-conventional-changelog": "^2.0.0",
-    "eslint": "^3.19.0",
+    "eslint": "^4.1.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-no-only-tests": "^1.1.0",
