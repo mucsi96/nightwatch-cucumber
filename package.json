@@ -67,7 +67,7 @@
     "chromedriver": "^2.29.0",
     "coveralls": "^2.13.1",
     "cucumber": "^2.2.0",
-    "cucumber-html-reporter": "^0.5.2",
+    "cucumber-html-reporter": "^2.0.1",
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
