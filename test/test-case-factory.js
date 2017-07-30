@@ -473,7 +473,7 @@ function setIdentation (text, identation) {
 
 function copyFixture (name, dest) {
   fs.createReadStream(path.join(process.cwd(), 'test', 'fixture', name))
-        .pipe(fs.createWriteStream(path.join(dest, name)))
+    .pipe(fs.createWriteStream(path.join(dest, name)))
 }
 
 function getFileName (text) {
