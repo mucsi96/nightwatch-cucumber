@@ -166,7 +166,7 @@ describe('Error handling', () => {
       .then('The result should contain 9', () => client.assert.containsText('#result', 9))
       .run()
       .then((result) => {
-        result.output.should.contain('Parser errors:')
+        result.output.should.contain('Error: (1:1):')
         result.exitCode.should.equal(1)
       })
   })
@@ -175,7 +175,7 @@ describe('Error handling', () => {
     return testCaseFactory
       .create('custom-commands-test', {
         cucumberArgs: [
-          '--format', 'pretty',
+          '--format', 'summary',
           '--format', 'json:reports/cucumber.json',
           '--format-options', '{"colorsEnabled":false}'
         ]
