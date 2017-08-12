@@ -12,8 +12,6 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/mucsi96.svg?style=social&label=Follow&maxAge=2592000)](https://twitter.com/mucsi96)
 [Ask question](https://stackoverflow.com/questions/tagged/nightwatch.js+cucumber)
 
-[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png)](https://nodei.co/npm/nightwatch-cucumber/)
-
 This module enables to use a BDD-style approach for cross-browser testing:
 - Describe user stories in [Cucumber](https://cucumber.io/) using [Gherkin syntax](https://cucumber.io/docs/reference)
 - Map them to browser operations and assertions in [Nightwatch.js](http://nightwatchjs.org/)
@@ -440,12 +438,25 @@ Scenario: Searching Google
   Then the title is "Google"
   And the Google search form exists
 ```
+
 ```
 $ node nightwatch.js --tag google
+```
+or for more matches
+```
+$ node nightwatch.js --tag google --tag yahoo
 ```
 You can also skip scenarios based on tags
 ```
 node nightwatch.js --skiptags google
+```
+or for skipping multiple tags
+```
+node nightwatch.js --skiptags google,yahoo
+```
+and all together :)
+```
+node nightwatch.js --tag google --tag yahoo --skiptags search,login
 ```
 
 ### Parallel execution
