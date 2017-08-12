@@ -400,45 +400,22 @@ defineSupportCode(({Given, Then, When}) => {
 You can selectively run features based on groups. To group features together just place them in the same sub-folder. The folder name is the name of the group.
 You can use Nightwatch CLI `--group`, `--skipgroup` flags. [More details ](http://nightwatchjs.org/guide#test-groups)
 
-### Feature Tags
+### Feature and Scenario Tags
 
-You can selectively run features based on tags. [More details ](http://nightwatchjs.org/guide#test-tags)
+You can selectively run features and scenarios based on tags. [More details ](http://nightwatchjs.org/guide#test-tags)
 ```gherkin
 # google.feature
 
-@google @search
+@google
 Feature: Google Search
 
+@search
 Scenario: Searching Google
 
   Given I open Google's search page
   Then the title is "Google"
   And the Google search form exists
 ```
-```
-$ node nightwatch.js --tag google
-```
-You can also skip features based on tags
-```
-node nightwatch.js --skiptags google
-```
-
-### Scenario Tags
-
-You can selectively run scenarios based on tags.
-```gherkin
-# google.feature
-
-Feature: Google Search
-
-@google @search
-Scenario: Searching Google
-
-  Given I open Google's search page
-  Then the title is "Google"
-  And the Google search form exists
-```
-
 ```
 $ node nightwatch.js --tag google
 ```
@@ -446,7 +423,7 @@ or for more matches
 ```
 $ node nightwatch.js --tag google --tag yahoo
 ```
-You can also skip scenarios based on tags
+You can also skip features based on tags
 ```
 node nightwatch.js --skiptags google
 ```
