@@ -15,7 +15,7 @@
     "lodash.template": "^4.4.0",
     "mkdirp": "^0.5.1",
     "pify": "^3.0.0",
-    "tmp": "^0.0.31"
+    "tmp": "^0.0.33"
   },
   "scripts": {
     "add-contributor": "all-contributors add",
