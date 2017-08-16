@@ -82,7 +82,7 @@
     "phantomjs-prebuilt": "^2.1.14",
     "rimraf": "^2.6.1",
     "selenium-server": "^3.4.0",
-    "semantic-release": "^6.3.6"
+    "semantic-release": "^7.0.1"
   },
   "config": {
     "commitizen": {
