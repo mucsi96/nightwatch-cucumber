@@ -151,7 +151,7 @@ class TestCaseFactory {
   _buildScenario (featureFile, scenario) {
     if (scenario.tags) {
       const tagDecleration = scenario.tags.map((tag) => `@${tag}`).join(' ')
-      fs.writeFileSync(featureFile, `${tagDecleration}\n`, { flag: 'a' })
+      fs.writeFileSync(featureFile, `\n${tagDecleration}`, { flag: 'a' })
     }
 
     if (scenario.examples) {
