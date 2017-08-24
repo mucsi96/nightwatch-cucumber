@@ -17,18 +17,11 @@ This module enables to use a BDD-style approach for cross-browser testing:
 - Map them to browser operations and assertions in [Nightwatch.js](http://nightwatchjs.org/)
 - Run using either real browser, headless browser or cloud based [WebDriver](https://www.w3.org/TR/webdriver/) services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/)
 
-## New Release 7.0.0
-
-Please note that a lot of new syntax changes are introduced. For all changes please read the ([readme diff](https://github.com/mucsi96/nightwatch-cucumber/compare/v6.1.1...v7.0.2#diff-04c6e90faac2675aa89e2176d2eec7d8 )).
+## New Release 8.0.0
 
 #### Breaking Changes
 
-* latest cucumber 2 support
-* promised based external nightwatch client
-* html report generation now can be done using external package ([cucumber-html-reporter](https://github.com/gkushang/cucumber-html-reporter))
-* junit reporting generation now can be done using external package ([cucumber-junit](https://github.com/stjohnjohnson/cucumber-junit))
-* almost all configuration options removed in favour of `cucumberArgs` which brings the package closes to Cucumber.js
-* Node.js version < 6 is dropped.
+* cucumber 3 (latest) support
 
 ## Installation
 
