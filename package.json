@@ -15,7 +15,7 @@
     "lodash.template": "^4.4.0",
     "mkdirp": "^0.5.1",
     "pify": "^3.0.0",
-    "tmp": "^0.0.31"
+    "tmp": "^0.0.33"
   },
   "scripts": {
     "add-contributor": "all-contributors add",
@@ -56,16 +56,16 @@
     "nightwatch": "^0.9.0"
   },
   "devDependencies": {
-    "babel-core": "^6.25.0",
+    "babel-core": "^6.26.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "chai": "^4.1.1",
     "chromedriver": "^2.31.0",
     "coveralls": "^2.13.1",
     "cucumber": "^3.0.0",
-    "cucumber-html-reporter": "mucsi96/cucumber-html-reporter#cucumber-3-support",
+    "cucumber-html-reporter": "^3.0.1",
     "cz-conventional-changelog": "^2.0.0",
-    "eslint": "^4.4.1",
+    "eslint": "^4.5.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-no-only-tests": "^2.0.0",
@@ -76,13 +76,13 @@
     "gulp": "^3.9.1",
     "gulp-nightwatch": "^0.3.2",
     "istanbul": "^0.4.5",
-    "jsdom": "^11.1.0",
+    "jsdom": "^11.2.0",
     "mocha": "^3.5.0",
     "nightwatch": "^0.9.16",
-    "phantomjs-prebuilt": "^2.1.14",
+    "phantomjs-prebuilt": "^2.1.15",
     "rimraf": "^2.6.1",
-    "selenium-server": "^3.4.0",
-    "semantic-release": "^6.3.6"
+    "selenium-server": "^3.5.0",
+    "semantic-release": "^7.0.2"
   },
   "config": {
     "commitizen": {
