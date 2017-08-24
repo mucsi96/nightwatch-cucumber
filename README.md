@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
-[![All Contributors](https://img.shields.io/badge/all_contributors-21-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-22-orange.svg?style=flat-square)](#contributors)
 [![Coverage Status](https://coveralls.io/repos/github/mucsi96/nightwatch-cucumber/badge.svg?branch=master)](https://coveralls.io/github/mucsi96/nightwatch-cucumber?branch=master)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Greenkeeper badge](https://badges.greenkeeper.io/mucsi96/nightwatch-cucumber.svg)](https://greenkeeper.io/)
@@ -11,8 +11,6 @@
 [![Dependency Status](https://dependencyci.com/github/mucsi96/nightwatch-cucumber/badge)](https://dependencyci.com/github/mucsi96/nightwatch-cucumber)
 [![Twitter Follow](https://img.shields.io/twitter/follow/mucsi96.svg?style=social&label=Follow&maxAge=2592000)](https://twitter.com/mucsi96)
 [Ask question](https://stackoverflow.com/questions/tagged/nightwatch.js+cucumber)
-
-[![NPM](https://nodei.co/npm-dl/nightwatch-cucumber.png)](https://nodei.co/npm/nightwatch-cucumber/)
 
 This module enables to use a BDD-style approach for cross-browser testing:
 - Describe user stories in [Cucumber](https://cucumber.io/) using [Gherkin syntax](https://cucumber.io/docs/reference)
@@ -402,15 +400,16 @@ defineSupportCode(({Given, Then, When}) => {
 You can selectively run features based on groups. To group features together just place them in the same sub-folder. The folder name is the name of the group.
 You can use Nightwatch CLI `--group`, `--skipgroup` flags. [More details ](http://nightwatchjs.org/guide#test-groups)
 
-### Feature Tags
+### Feature and Scenario Tags
 
-You can selectively run features based on tags. [More details ](http://nightwatchjs.org/guide#test-tags)
+You can selectively run features and scenarios based on tags. [More details ](http://nightwatchjs.org/guide#test-tags)
 ```gherkin
 # google.feature
 
-@google @search
+@google
 Feature: Google Search
 
+@search
 Scenario: Searching Google
 
   Given I open Google's search page
@@ -419,33 +418,22 @@ Scenario: Searching Google
 ```
 ```
 $ node nightwatch.js --tag google
+```
+or for more matches
+```
+$ node nightwatch.js --tag google --tag yahoo
 ```
 You can also skip features based on tags
 ```
 node nightwatch.js --skiptags google
 ```
-
-### Scenario Tags
-
-You can selectively run scenarios based on tags.
-```gherkin
-# google.feature
-
-Feature: Google Search
-
-@google @search
-Scenario: Searching Google
-
-  Given I open Google's search page
-  Then the title is "Google"
-  And the Google search form exists
+or for skipping multiple tags
 ```
+node nightwatch.js --skiptags google,yahoo
 ```
-$ node nightwatch.js --tag google
+and all together :)
 ```
-You can also skip scenarios based on tags
-```
-node nightwatch.js --skiptags google
+node nightwatch.js --tag google --tag yahoo --skiptags search,login
 ```
 
 ### Parallel execution
@@ -626,6 +614,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | [<img src="https://avatars.githubusercontent.com/u/7160445?v=3" width="100px;"/><br /><sub>Fabio Quinzi</sub>](http://fabioquinzi.com)<br /> | [<img src="https://avatars.githubusercontent.com/u/7831710?v=3" width="100px;"/><br /><sub>Jeffrey Effendy</sub>](https://github.com/jeffrey-effendy)<br /> | [<img src="https://avatars.githubusercontent.com/u/1711610?v=3" width="100px;"/><br /><sub>Lawrence</sub>](http://ldabiralai.me)<br /> | [<img src="https://avatars.githubusercontent.com/u/1260402?v=3" width="100px;"/><br /><sub>Domenico Gemoli</sub>](http://domenicogemoli.com)<br /> | [<img src="https://avatars.githubusercontent.com/u/8973021?v=3" width="100px;"/><br /><sub>Klokov Anton</sub>](https://github.com/klokovas)<br /> | [<img src="https://avatars.githubusercontent.com/u/2287663?v=3" width="100px;"/><br /><sub>Arnaud gueras</sub>](https://github.com/arnogues)<br /> | [<img src="https://avatars.githubusercontent.com/u/2906107?v=3" width="100px;"/><br /><sub>Lukas Eipert</sub>](http://leipert.io)<br /> |
 | [<img src="https://avatars.githubusercontent.com/u/4364107?v=3" width="100px;"/><br /><sub>Paulo</sub>](http://madrov.com)<br /> | [<img src="https://avatars.githubusercontent.com/u/6282473?v=3" width="100px;"/><br /><sub>Tylor Steinberger</sub>](https://github.com/TylorS)<br /> | [<img src="https://avatars.githubusercontent.com/u/1476974?v=3" width="100px;"/><br /><sub>Eric Chan</sub>](https://github.com/kinyat)<br /> | [<img src="https://avatars.githubusercontent.com/u/1476502?v=3" width="100px;"/><br /><sub>Mykolas</sub>](http://www.myk.lt)<br /> | [<img src="https://avatars.githubusercontent.com/u/5993909?v=3" width="100px;"/><br /><sub>Jon Wallsten</sub>](https://github.com/JonWallsten)<br /> | [<img src="https://avatars2.githubusercontent.com/u/6979207?v=3" width="100px;"/><br /><sub>Julien Viala</sub>](https://github.com/mr-wildcard)<br /> | [<img src="https://avatars3.githubusercontent.com/u/2751776?v=3" width="100px;"/><br /><sub>dmerc</sub>](https://github.com/dmerc)<br /> |
+| [<img src="https://avatars1.githubusercontent.com/u/6475033?v=4" width="100px;"/><br /><sub>Millenium</sub>](https://github.com/erikmellum)<br /> |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
