@@ -527,15 +527,7 @@ module.exports = {
 
 ## Timeouts
 
-You can use `setDefaultTimeout` function in support code to set default timeout for steps.
-By default, timeout is 5 seconds. You can find more details in Cucumber.js [docs](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/timeouts.md)
-
-```js
-const {defineSupportCode} = require('cucumber')
-
-defineSupportCode(({setDefaultTimeout}) => {
-  setDefaultTimeout(30 * 1000)
-})
+The Cucumber timeouts are disabled entirely. So for timeouts you can use only Nightwatch [`request_timeout_options`](http://nightwatchjs.org/gettingstarted/#full-list-of-settings).
 ```
 
 ## Language

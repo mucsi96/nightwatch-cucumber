@@ -3,7 +3,7 @@ const phantomjs = require('phantomjs-prebuilt')
 const chromedriver = require('chromedriver')
 
 require('nightwatch-cucumber')({
-  cucumberArgs: ['--require', 'timeout.js', '--require', 'features/step_definitions', '--no-strict', 'features']
+  cucumberArgs: ['--require', 'features/step_definitions', '--no-strict', 'features']
 })
 
 module.exports = {

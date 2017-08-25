@@ -233,7 +233,7 @@ defineSupportCode(({ Given, Then, When }) => {${this.stepDefinitions.join('')}})
     this.options.pageObjects = !!this.pageObjects.length
     this.options.customCommands = !!this.customCommands.length
 
-    let args = ['--require', 'timeout.js', '--require', 'features/step_definitions']
+    let args = ['--require', 'features/step_definitions']
 
     if (this.options.babel) {
       args = ['--compiler', `js:babel-core/register`].concat(args)
@@ -242,8 +242,7 @@ defineSupportCode(({ Given, Then, When }) => {${this.stepDefinitions.join('')}})
     if (this.options.cucumberArgs.length) {
       args = args.concat(this.options.cucumberArgs)
     } else {
-      args = args.concat(['--format', 'summary',
-        '--format', 'json:reports/cucumber.json'])
+      args = args.concat(['--format', 'json:reports/cucumber.json'])
     }
 
     if (this.options.noTests) {
@@ -266,7 +265,6 @@ defineSupportCode(({ Given, Then, When }) => {${this.stepDefinitions.join('')}})
     const nightwatchConf = nightwatchConfTemplate(this.options).replace(/([,{])\n( *\n)+/g, '$1\n')
     fs.writeFileSync(path.join(this.testCasePath, 'nightwatch.conf.js'), nightwatchConf)
 
-    copyFixture('timeout.js', this.testCasePath)
     if (this.options.gulp) {
       copyFixture('gulpfile.js', this.testCasePath)
     } else if (this.options.grunt) {
