@@ -448,49 +448,6 @@ module.exports = {
 
 ![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-parallel-test-output.png)
 
-### Event Handlers
-
-Event handlers can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option.
-[More details](https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/event_handlers.md)
-For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
-
-```js
-// nightwatch.conf.js
-
-require('nightwatch-cucumber')({
-  cucumberArgs: [
-    '--require', 'event-handlers.js'
-    '--require', 'features/step_definitions',
-    '--format', 'pretty',
-    '--format', 'json:reports/cucumber.json',
-    'features'
-  ]
-})
-
-module.exports = {
-  ...
-}
-```
-
-```js
-// event-handlers.js
-const {client} = require('nightwatch-cucumber');
-const {defineSupportCode} = require('cucumber');
-
-defineSupportCode(({registerHandler}) => {
-  registerHandler('BeforeFeatures', function (features) {
-    return client.click('.my-button');
-  });
-
-  registerHandler('BeforeFeatures', function (features, callback) {
-    setTimeout(function() {
-      callback();
-    }, 1000);
-  });
-}
-
-```
-
 ### Hooks
 
 Hooks can be provided using Cucumber.js support files. Support files are specified using `supportFiles` configuration option.
@@ -520,21 +477,21 @@ module.exports = {
 const {defineSupportCode} = require('cucumber');
 
 defineSupportCode(({Before, After}) => {
-  Before((scenario, callback) => {
+  Before(() => new Promise(resolve => {
     console.log('Before start');
     setTimeout(() => {
       console.log('Before end');
-      callback();
+      resolve();
     }, 1000);
-  });
+  }));
 
-  After((scenario, callback) => {
+  After(() => new Promise(resolve => {
     console.log('After start');
     setTimeout(() => {
       console.log('After end');
-      callback();
+      resolve();
     }, 1000);
-  });
+  }));
 })
 ```
 

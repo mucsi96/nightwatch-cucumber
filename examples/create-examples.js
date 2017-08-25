@@ -2,8 +2,6 @@
 const testCaseFactory = require('../test/test-case-factory')
 const examples = {
   background,
-  eventHandlersWithCallback,
-  eventHandlersWithoutCallback,
   group,
   hooks,
   multi,
@@ -39,76 +37,6 @@ function background () {
     .scenario('Division')
     .when('I search for "36/6"')
     .then('the search result should contain "6"')
-}
-
-function eventHandlersWithCallback () {
-  return testCaseFactory
-    .create('event-handlers-with-callback-example', {
-      eventHandlersWithCallback: true
-    })
-    .feature('Google Search')
-    .scenario('Searching Google')
-    .given('I open Google`s search page', () => {
-      return client
-        .url('http://google.com')
-        .waitForElementVisible('body', 1000)
-    })
-    .then('the title is "Google"', (text) => {
-      return client.assert.title(text)
-    })
-    .and('the Google search form exists', () => {
-      return client.assert.visible('input[name="q"]')
-    })
-    .scenario('Searching Google again')
-    .given('I open Google`s search page')
-    .then('the title is "Google"')
-    .and('the Google search form exists')
-    .feature('Yahoo Search')
-    .scenario('Searching Yahoo')
-    .given('I open Yahoo`s search page', () => {
-      return client
-        .url('http://yahoo.com')
-        .waitForElementVisible('body', 1000)
-    })
-    .then('the title is "Yahoo"')
-    .and('the Yahoo search form exists', () => {
-      return client.assert.visible('input[name="p"]')
-    })
-}
-
-function eventHandlersWithoutCallback () {
-  return testCaseFactory
-    .create('event-handlers-without-callback-example', {
-      eventHandlersWithoutCallback: true
-    })
-    .feature('Google Search')
-    .scenario('Searching Google')
-    .given('I open Google`s search page', () => {
-      return client
-        .url('http://google.com')
-        .waitForElementVisible('body', 1000)
-    })
-    .then('the title is "Google"', (text) => {
-      return client.assert.title(text)
-    })
-    .and('the Google search form exists', () => {
-      return client.assert.visible('input[name="q"]')
-    })
-    .scenario('Searching Google again')
-    .given('I open Google`s search page')
-    .then('the title is "Google"')
-    .and('the Google search form exists')
-    .feature('Yahoo Search')
-    .scenario('Searching Yahoo')
-    .given('I open Yahoo`s search page', () => {
-      return client
-        .url('http://yahoo.com')
-        .waitForElementVisible('body', 1000)
-    })
-    .then('the title is "Yahoo"')
-    .and('the Yahoo search form exists', () => {
-      return client.assert.visible('input[name="p"]')
-    })
 }
 
 function group () {
