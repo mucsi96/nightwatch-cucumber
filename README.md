@@ -189,7 +189,6 @@ require('nightwatch-cucumber')({
   cucumberArgs: [
     '--require', 'hooks.js',
     '--require', 'features/step_definitions',
-    '--format', 'progress',
     '--format', 'json:reports/cucumber.json',
     '--format-options', '{"colorsEnabled":false}',
     'features'
