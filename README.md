@@ -17,11 +17,12 @@ This module enables to use a BDD-style approach for cross-browser testing:
 - Map them to browser operations and assertions in [Nightwatch.js](http://nightwatchjs.org/)
 - Run using either real browser, headless browser or cloud based [WebDriver](https://www.w3.org/TR/webdriver/) services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/)
 
-## New Release 8.0.0
+## New Release 8.0.4
 
 #### Breaking Changes
 
-* cucumber 3 (latest) support
+* Cucumber 3 (latest) support
+* Cucumber timeouts are disabled in favour of Nightwatch timeouts
 
 ## Installation
 
@@ -80,7 +81,7 @@ module.exports = {
   ...
 }
 ```
-For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
+For more examples check out the [example repository](https://github.com/mucsi96/nightwatch-cucumber-example) or the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
 ## Demo Test
 
@@ -124,7 +125,7 @@ defineSupportCode(({Given, Then, When}) => {
 });
 ```
 
-For more examples check out the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
+For more examples check out the [example repository](https://github.com/mucsi96/nightwatch-cucumber-example) or the [examples folder](https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples)
 
 ## Running tests
 
