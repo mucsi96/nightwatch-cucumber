@@ -144,8 +144,8 @@ node_modules/.bin/nightwatch
 | Name             | Shortname | Supported          | Default              | Descruption                                                                                                  |
 |:----------------:|:---------:|:------------------:|:--------------------:|:-------------------------------------------------------------------------------------------------------------|
 | `--config`       | 	`-c`     | :white_check_mark: | ./nightwatch.conf.js | The location of the nightwatch.conf.js file - the configuration file which the Nightwatch uses and which also includes the Selenium WebDriver options. |
-| `--output`       |	`-o`     | :no_entry: (use CucumberJS `--format <TYPE[:PATH]>` instead)        |                      |	tests_output	The location where the JUnit XML reports will be saved.                                                                                 |
-| `--reporter`     | `-r`      |	:no_entry: (use CucumberJS `--format <TYPE[:PATH]>` instead)       | junit                |	Name of a predefined reporter (e.g. junit) or path to a custom reporter file to use. |
+| `--output`       |	`-o`     | :no_entry:         |                      |	tests_output	The location where the JUnit XML reports will be saved. Use CucumberJS [`--format <TYPE[:PATH]>`](https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#formats) instead |
+| `--reporter`     | `-r`      |	:no_entry:        | junit                |	Name of a predefined reporter (e.g. junit) or path to a custom reporter file to use. Use CucumberJS [`--format <TYPE[:PATH]>`](https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#formats) instead |
 | `--env`          |	`-e`     | :white_check_mark: |	default              |	Which testing environment to use - defined in nightwatch.conf.js |
 | `--verbose`      |           | :white_check_mark: |                      | Shows extended selenium command logging during the session |
 | `--version`      |	`-v`     | :white_check_mark: |                      |	Shows the version number |
