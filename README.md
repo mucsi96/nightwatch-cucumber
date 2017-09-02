@@ -141,7 +141,7 @@ node_modules/.bin/nightwatch
 
 ### Supported Nightwatch command line options
 
-| Name             | Shortname | Supported          | Default              | Descruption                                                                                                  |
+| Name             | Shortname | Supported          | Default              | Description                                                                                                  |
 |:----------------:|:---------:|:------------------:|:--------------------:|:-------------------------------------------------------------------------------------------------------------|
 | `--config`       | 	`-c`     | :white_check_mark: | ./nightwatch.conf.js | The location of the nightwatch.conf.js file - the configuration file which the Nightwatch uses and which also includes the Selenium WebDriver options. |
 | `--output`       |	`-o`     | :no_entry:         |                      |	tests_output	The location where the JUnit XML reports will be saved. Use CucumberJS [`--format <TYPE[:PATH]>`](https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#formats) instead |
