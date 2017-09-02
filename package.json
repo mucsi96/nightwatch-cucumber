@@ -27,7 +27,8 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "precommit": "npm run code-style",
-    "create-examples": "node examples/create-examples.js"
+    "create-examples": "node examples/create-examples.js",
+    "create-site": "mkdirp site && echo Hello > site/index.html"
   },
   "repository": {
     "type": "git",

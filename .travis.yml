@@ -11,6 +11,7 @@ before_script:
   - npm prune
   - java -version
 after_success:
+  - npm run create-site
   - npm run coveralls
   - npm run semantic-release
 branches:
@@ -21,3 +22,10 @@ addons:
     packages:
       - oracle-java8-installer
       - oracle-java8-set-default
+deploy:
+  local_dir: site
+  provider: pages
+  skip_cleanup: true
+  github_token: $GH_TOKEN
+  on:
+    branch: master
