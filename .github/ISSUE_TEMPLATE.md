@@ -2,7 +2,7 @@
 ```
 [ ] bug report
 [ ] feature request
-[ ] support request => Please do not submit support request here, instead use https://groups.google.com/d/forum/nightwatch-cucumber
+[ ] support request => Please do not submit support request here, instead use [Stack Overflow](https://stackoverflow.com/questions/tagged/nightwatch.js+cucumber)
 ```
 
 **Current behavior**
@@ -12,12 +12,7 @@
 
 
 **Reproduction of the problem**
-If the current behavior is a bug or you can illustrate your feature request better with an example, please provide the steps to reproduce and if possible a minimal demo of the problem via https://c9.io, http://www.koding.com, https://www.nitrous.io or similar.
-
-
-
-**What is the expected behavior?**
-
+Please create a minimal demo application where the issue can be reproduced. You can upload it to your GitHub account or attach it as ZIP archive (please make sure you exclude the `node_modules` folder from the archive). As a base you can use the [nightwatch-example](https://github.com/mucsi96/nightwatch-example) repository.
 
 
 **What is the motivation / use case for changing the behavior?**
@@ -25,5 +20,6 @@ If the current behavior is a bug or you can illustrate your feature request bett
 
 
 **Please tell us about your environment:**
-
+In case of a bug report please provide the following information:
 * output of the following command from your project root `npm ls nightwatch cucumber nightwatch-cucumber && node --version`
+* output of running nightwatch with `--verbose` flag
