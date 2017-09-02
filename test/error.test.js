@@ -230,7 +230,7 @@ describe('Error handling', () => {
       .feature('addition')
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => client.init())
-      .and('User enter 4 in A field', () => { return client.page.calculator().nonExistantElement()})
+      .and('User enter 4 in A field', () => client.page.calculator().nonExistantElement())
       .and('User enter 5 in B field', () => client.setValue('#b', 5))
       .when('User press Add button', () => client.click('#add'))
       .then('The result should contain 9', () => client.assert.containsText('#result', 9))
