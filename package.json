@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "co": "^4.6.0",
+    "combine-errors": "^3.0.3",
     "glob": "^7.1.2",
     "lodash.clonedeep": "^4.5.0",
     "lodash.template": "^4.4.0",
