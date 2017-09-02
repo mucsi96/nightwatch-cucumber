@@ -188,9 +188,9 @@ describe('Error handling', () => {
       .scenario('small numbers')
       .given('User is on the simple calculator page', () => client.init())
       .and('User enter 4 in A field', () => client.testCommand())
-      .and('User enter 5 in B field', () => client.page.calculator().setValue('@numberB', 5))
-      .when('User press Add button', () => client.page.calculator().click('@addButton'))
-      .then('The result should contain 9', () => client.page.calculator().assert.containsText('@result', 9))
+      .and('User enter 5 in B field', () => client.setValue('#b', 5))
+      .when('User press Add button', () => client.click('#add'))
+      .then('The result should contain 9', () => client.assert.containsText('#result', 9))
       .run()
       .then((result) => {
         result.features[0].result.status.should.be.failed
@@ -198,6 +198,49 @@ describe('Error handling', () => {
         result.features[0].scenarios[0].result.status.should.be.failed
         result.features[0].scenarios[0].result.stepCounts.should.deep.equal({skipped: 3, failed: 1, passed: 1})
         result.output.should.contain('Error while running testCommand command: undefinedVar is not defined')
+      })
+  })
+
+  it('should handle errors in page object custom commands', () => {
+    return testCaseFactory
+      .create('page-object-custom-commands-test', {
+        cucumberArgs: [
+          '--format', 'summary',
+          '--format', 'json:reports/cucumber.json',
+          '--format-options', '{"colorsEnabled":false}'
+        ]
+      })
+      .pageObject('calculator', `const commands = {
+        nonExistantElement: function () {
+          return this.api.element('css selector', 'div.nonExistantClass', (result) => {
+              if (result.error) {
+                throw "Element with nonExistantClass not found";
+              }
+          });
+        }
+      }
+      module.exports = {
+        url: 'http://yahoo.com',
+        elements: {
+          body: 'body',
+          searchBar: 'input[name="p"]'
+        },
+        commands: [commands]
+      }`)
+      .feature('addition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', () => client.init())
+      .and('User enter 4 in A field', () => client.page.calculator().nonExistantElement())
+      .and('User enter 5 in B field', () => client.setValue('#b', 5))
+      .when('User press Add button', () => client.click('#add'))
+      .then('The result should contain 9', () => client.assert.containsText('#result', 9))
+      .run()
+      .then((result) => {
+        result.features[0].result.status.should.be.failed
+        result.features[0].result.scenarioCounts.should.deep.equal({failed: 1})
+        result.features[0].scenarios[0].result.status.should.be.failed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({skipped: 3, failed: 1, passed: 1})
+        result.output.should.contain('Element with nonExistantClass not found')
       })
   })
 })
