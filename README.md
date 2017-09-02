@@ -139,6 +139,26 @@ node_modules/.bin/nightwatch
 
 ## Features
 
+### Supported Nightwatch command line options
+
+| Name             | Shortname | Supported          | Default              | Description                                                                                                  |
+|:----------------:|:---------:|:------------------:|:--------------------:|:-------------------------------------------------------------------------------------------------------------|
+| `--config`       | 	`-c`     | :white_check_mark: | ./nightwatch.conf.js | The location of the nightwatch.conf.js file - the configuration file which the Nightwatch uses and which also includes the Selenium WebDriver options. |
+| `--output`       |	`-o`     | :no_entry:         |                      |	tests_output	The location where the JUnit XML reports will be saved. Use CucumberJS [`--format <TYPE[:PATH]>`](https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#formats) instead |
+| `--reporter`     | `-r`      |	:no_entry:        | junit                |	Name of a predefined reporter (e.g. junit) or path to a custom reporter file to use. Use CucumberJS [`--format <TYPE[:PATH]>`](https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#formats) instead |
+| `--env`          |	`-e`     | :white_check_mark: |	default              |	Which testing environment to use - defined in nightwatch.conf.js |
+| `--verbose`      |           | :white_check_mark: |                      | Shows extended selenium command logging during the session |
+| `--version`      |	`-v`     | :white_check_mark: |                      |	Shows the version number |
+| `--test`         |	`-t`     | :construction:     |	                     |	Runs only the specified test suite/module. By default the runner will attempt to run all tests in the src_folders settings folder(s) and their subfolders. |
+| `--testcase`     |           | :construction:     |	                     |	Used only together with --test. Runs the specified testcase from the current suite/module. |
+| `--group`        | `-g`      | :white_check_mark: |                      |	Runs only the specified group of tests (subfolder). Tests are grouped by being placed in the same subfolder. |
+| `--skipgroup`    | `-s`      | :white_check_mark: |                      |	Skip one or several (comma separated) group of tests. |
+| `--filter`       | 	`-f`     | :construction:     |	                     |	Specify a filter (glob expression) as the file name format to use when loading the test files. |
+| `--tag`          | `-a`      | :white_check_mark: |                      |	Filter test modules by tags. Only tests that have the specified tags will be loaded. |
+| `--skiptags`     |           | :white_check_mark: |                      |	Skips tests that have the specified tag or tags (comma separated). |
+| `--retries`      |           | :construction:     |                      | Retries failed or errored testcases up to the specified number of times. Retrying a testcase will also retry the beforeEach and afterEach hooks, if any. |
+| `--suiteRetries` |           | :no_entry:         |                      |	Retries failed or errored testsuites (test modules) up to the specified number of times. Retrying a testsuite will also retry the before and after hooks (in addition to the global beforeEach and afterEach respectively), if any are defined on the testsuite. |
+
 ### Babel support
 
 You can write tests using latest ECMAScript features using [Babel](https://babeljs.io/). Using `async` function is especially useful.
