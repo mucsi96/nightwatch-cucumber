@@ -3,6 +3,7 @@ const path = require('path')
 const assert = require('assert')
 const md = require('markdown-it')()
 const Prism = require('prismjs')
+const twemoji = require('twemoji')
 const PrismLoader = require('prismjs-components-loader')
 const componentIndex = require('prismjs-components-loader/lib/all-components')
 const glob = require('glob')
@@ -28,6 +29,7 @@ const templeteResSrc = path.resolve(templateSrc, 'res')
 const prismSrc = path.resolve(__dirname, '../node_modules/prismjs')
 const dist = path.resolve(__dirname, '../site-dist')
 const distRes = path.resolve(dist, 'res')
+const twemojiSrc = path.resolve(__dirname, '../node_modules/twemoji/2/svg')
 
 function renderContent () {
   const data = fs.readFileSync(path.resolve(__dirname, 'data/index.md'), 'utf8')
@@ -56,9 +58,23 @@ function renderResources () {
   copyFile(path.resolve(prismSrc, 'themes/prism-okaidia.css'), distRes)
 }
 
+function getEmojiSVG (emoji) {
+  return fs
+    .readFileSync(path.resolve(twemojiSrc, `${twemoji.convert.toCodePoint(emoji)}.svg`), 'utf8')
+    .replace('<svg', '<svg class="emoji" ')
+}
+
 function renderIndex () {
+  const ranges = [
+    '[\u2049-\u3299]',
+    '\ud83c[\udf00-\udfff]',
+    '\ud83d[\udc00-\ude4f]',
+    '\ud83d[\ude80-\udeff]'
+  ]
   const template = fs.readFileSync(path.resolve(__dirname, 'template/index.html'), 'utf8')
-  const content = renderContent().replace(/<table>[\s\S]*?<\/table>/gi, '<div class="responsive-table">$&</div>')
+  const content = renderContent()
+    .replace(/<table>[\s\S]*?<\/table>/gi, '<div class="responsive-table">$&</div>')
+    .replace(new RegExp(ranges.join('|'), 'g'), emoji => getEmojiSVG(emoji))
   const html = template.replace('<!-- CONTENT -->', content)
   mkdirp.sync(dist)
   const dest = path.resolve(dist, 'index.html')

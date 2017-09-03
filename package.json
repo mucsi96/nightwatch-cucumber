@@ -89,7 +89,9 @@
     "prismjs-components-loader": "^2.0.0",
     "rimraf": "^2.6.1",
     "selenium-server": "^3.5.0",
-    "semantic-release": "^7.0.2"
+    "semantic-release": "^7.0.2",
+    "svg-social-icons": "^1.1.0",
+    "twemoji": "^2.5.0"
   },
   "config": {
     "commitizen": {

@@ -50,6 +50,11 @@ a img {
   display: inline;
 }
 
+svg {
+  width: 1.5em;
+  height: auto;
+}
+
 /* Main container */
 
 main, header {
@@ -182,4 +187,13 @@ header nav span {
 /* Table */
 .responsive-table {
   overflow: auto;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 1em;
+}
+
+td {
+  vertical-align: top;
 }
