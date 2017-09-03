@@ -9,3 +9,4 @@ tests_output
 .idea
 tmp
 coverage
+site-dist

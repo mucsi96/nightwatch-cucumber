@@ -23,7 +23,7 @@ addons:
       - oracle-java8-installer
       - oracle-java8-set-default
 deploy:
-  local_dir: site
+  local_dir: site-dist
   provider: pages
   skip_cleanup: true
   github_token: $GH_TOKEN

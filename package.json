@@ -14,6 +14,7 @@
     "glob": "^7.1.2",
     "lodash.clonedeep": "^4.5.0",
     "lodash.template": "^4.4.0",
+    "markdown-it": "^8.4.0",
     "mkdirp": "^0.5.1",
     "pify": "^3.0.0",
     "tmp": "^0.0.33"
@@ -28,7 +29,7 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "precommit": "npm run code-style",
     "create-examples": "node examples/create-examples.js",
-    "create-site": "mkdirp site && echo Hello > site/index.html"
+    "create-site": "node site/create-site.js"
   },
   "repository": {
     "type": "git",
@@ -79,9 +80,13 @@
     "gulp-nightwatch": "^0.3.2",
     "istanbul": "^0.4.5",
     "jsdom": "^11.2.0",
+    "markdown-it-anchor": "^4.0.0",
+    "markdown-it-table-of-contents": "^0.3.2",
     "mocha": "^3.5.0",
     "nightwatch": "^0.9.16",
     "phantomjs-prebuilt": "^2.1.15",
+    "prismjs": "^1.6.0",
+    "prismjs-components-loader": "^2.0.0",
     "rimraf": "^2.6.1",
     "selenium-server": "^3.5.0",
     "semantic-release": "^7.0.2"
