@@ -1,9 +1,7 @@
 {
   "projectName": "nightwatch-cucumber",
   "projectOwner": "mucsi96",
-  "files": [
-    "README.md"
-  ],
+  "files": [],
   "imageSize": 100,
   "commit": true,
   "contributors": [

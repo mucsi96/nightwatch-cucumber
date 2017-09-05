@@ -14,6 +14,7 @@ body {
 
 h1 {
   padding: 20px 0;
+  margin-top: 0;
   margin-bottom: 20px;
   border-bottom: 1px solid #7ac35f;
 }
@@ -184,6 +185,22 @@ header nav span {
   margin-left: 15px;
 }
 
+header nav ul {
+  display: flex;
+  list-style: none;
+}
+
+header nav li>a {
+  color: #777;
+  line-height: 40px;
+  padding: 15px;
+}
+
+header nav li>a:focus, header nav li>a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
 /* Table */
 .responsive-table {
   overflow: auto;
@@ -197,3 +214,26 @@ table {
 td {
   vertical-align: top;
 }
+
+/* Contributors */
+.contributors {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-left: 0;
+}
+
+.contributors li {
+  text-align: center;
+  padding: 15px;
+}
+
+.avatar {
+  width: 100px;
+  display: block;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.avatar

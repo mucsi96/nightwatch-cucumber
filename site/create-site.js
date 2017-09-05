@@ -24,17 +24,14 @@ md.use((markdownit) => {
 md.use(require('markdown-it-anchor'))
 md.use(require('markdown-it-table-of-contents'))
 
+const markdownSrc = path.resolve(__dirname, 'data')
 const templateSrc = path.resolve(__dirname, 'template')
 const templeteResSrc = path.resolve(templateSrc, 'res')
 const prismSrc = path.resolve(__dirname, '../node_modules/prismjs')
 const dist = path.resolve(__dirname, '../site-dist')
 const distRes = path.resolve(dist, 'res')
 const twemojiSrc = path.resolve(__dirname, '../node_modules/twemoji/2/svg')
-
-function renderContent () {
-  const data = fs.readFileSync(path.resolve(__dirname, 'data/index.md'), 'utf8')
-  return md.render(data)
-}
+const template = fs.readFileSync(path.resolve(__dirname, 'template/index.html'), 'utf8')
 
 function copyFile (from, to) {
   mkdirp.sync(to)
@@ -64,24 +61,45 @@ function getEmojiSVG (emoji) {
     .replace('<svg', '<svg class="emoji" ')
 }
 
-function renderIndex () {
+function makeTableResponsive (html) {
+  return html.replace(/<table>[\s\S]*?<\/table>/gi, '<div class="responsive-table">$&</div>')
+}
+
+function injectEmoji (html) {
   const ranges = [
     '[\u2049-\u3299]',
     '\ud83c[\udf00-\udfff]',
     '\ud83d[\udc00-\ude4f]',
     '\ud83d[\ude80-\udeff]'
   ]
-  const template = fs.readFileSync(path.resolve(__dirname, 'template/index.html'), 'utf8')
-  const content = renderContent()
-    .replace(/<table>[\s\S]*?<\/table>/gi, '<div class="responsive-table">$&</div>')
-    .replace(new RegExp(ranges.join('|'), 'g'), emoji => getEmojiSVG(emoji))
-  const html = template.replace('<!-- CONTENT -->', content)
+  return html.replace(new RegExp(ranges.join('|'), 'g'), emoji => getEmojiSVG(emoji))
+}
+
+function injectContributors (html) {
+  const contributors = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../.all-contributorsrc'), 'utf8')).contributors
+    .map(contributor => (`
+      <li><a href="${contributor.profile}">
+        <img src="${contributor.avatar_url}" class="avatar">
+        <sub>${contributor.name}</sub>
+      </a></li>
+    `)).join('')
+  return html.replace('<p>[[contributors]]</p>', `<ul class="contributors">${contributors}</ul>`)
+}
+
+function renderMarkdown (fileName) {
+  const markdown = fs.readFileSync(path.resolve(__dirname, 'data', fileName), 'utf8')
+  const html = injectContributors(makeTableResponsive(injectEmoji(template.replace('<!-- CONTENT -->', md.render(markdown)))))
   mkdirp.sync(dist)
-  const dest = path.resolve(dist, 'index.html')
+  const dest = path.resolve(dist, `${path.basename(fileName, '.md')}.html`)
   console.log(`write ${dest}`)
   fs.writeFileSync(dest, html, 'utf8')
 }
 
+function renderAllMarkdowns () {
+  const files = glob.sync(path.resolve(markdownSrc, '**/*.md'))
+  files.forEach(file => renderMarkdown(file))
+}
+
 rimraf.sync(dist)
-renderIndex()
+renderAllMarkdowns()
 renderResources()

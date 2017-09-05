@@ -1,32 +1,6 @@
-[![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
-[![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
-[![All Contributors](https://img.shields.io/badge/all_contributors-23-orange.svg?style=flat-square)](#contributors)
-[![Coverage Status](https://coveralls.io/repos/github/mucsi96/nightwatch-cucumber/badge.svg?branch=master)](https://coveralls.io/github/mucsi96/nightwatch-cucumber?branch=master)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Greenkeeper badge](https://badges.greenkeeper.io/mucsi96/nightwatch-cucumber.svg)](https://greenkeeper.io/)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![Dependency Status](https://dependencyci.com/github/mucsi96/nightwatch-cucumber/badge)](https://dependencyci.com/github/mucsi96/nightwatch-cucumber)
-[![Twitter Follow](https://img.shields.io/twitter/follow/mucsi96.svg?style=social&label=Follow&maxAge=2592000)](https://twitter.com/mucsi96)
-[Ask question](https://stackoverflow.com/questions/tagged/nightwatch.js+cucumber)
+# Getting Started
 
-This module enables to use a BDD-style approach for cross-browser testing:
-- Describe user stories in [Cucumber](https://cucumber.io/) using [Gherkin syntax](https://cucumber.io/docs/reference)
-- Map them to browser operations and assertions in [Nightwatch.js](http://nightwatchjs.org/)
-- Run using either real browser, headless browser or cloud based [WebDriver](https://www.w3.org/TR/webdriver/) services such as [SauceLabs](https://saucelabs.com/) or [BrowserStack](https://www.browserstack.com/)
-
-# New Release 8.0.4
-
-## Breaking Changes
-
-* Cucumber 3 (latest) support
-* Cucumber timeouts are disabled in favour of Nightwatch timeouts
-
-[[toc]]
-
-# Installation
-
-## Step 1
+### Step 1
 
 First you need to have Nightwatch.js and Cucumber.js to be installed locally.
 
@@ -42,7 +16,7 @@ $ npm i -D nightwatch cucumber
 
 If you are new to Nightwatch.js you can read the [developer guide](http://nightwatchjs.org/guide).
 
-## Step 2
+### Step 2
 
 Install `nightwatch-cucumber`
 
@@ -56,7 +30,7 @@ or shorter
 $ npm i -D nightwatch-cucumber
 ```
 
-## Step 3
+### Step 3
 
 In project root create a JavaScript configuration file for Nightwatch.js. Use `nightwatch.conf.js` instead of `nightwatch.json`. [More details](http://nightwatchjs.org/guide#settings-file) You don't need to specify `src_folders`.
 ```javascript
@@ -67,7 +41,7 @@ module.exports = {
 }
 ```
 
-## Step 4
+### Step 4
 
 Require `nightwatch-cucumber` at the top of the configuration file.
 ```javascript
@@ -574,3 +548,27 @@ Cenário: Pesquisando no Google
    Em seguida, o título é "Google"
    E o formulário de busca Google existe
 ```
+
+# Contributors
+
+Contributions of any kind welcome! Thanks goes to these wonderful people:
+
+[[contributors]]
+
+# Change log
+
+See [releases](https://github.com/mucsi96/nightwatch-cucumber/releases)
+
+# License
+
+This software is released under the terms of the
+[MIT license](https://github.com/mucsi96/nightwatch-cucumber/blob/master/LICENSE).
+
+# Related projects
+
+* [NightwatchJS](https://github.com/nightwatchjs/nightwatch)
+* [CucumberJS](https://github.com/cucumber/cucumber-js)
+* [cucumber-html-reporter](https://github.com/gkushang/cucumber-html-reporter)
+* [cucumber-junit](https://github.com/stjohnjohnson/cucumber-junit)
+
+[[toc]]
