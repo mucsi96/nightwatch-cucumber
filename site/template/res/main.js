@@ -3,6 +3,7 @@
   var resizeTimer
   var scrollCache
   var activeElement
+  var activationStartTime
 
   window.addEventListener('load', function () {
     createScrollCache()
@@ -26,6 +27,10 @@
     }, 10)
   })
 
+  Array.prototype.forEach.call(document.querySelectorAll('a'), function (link) {
+    link.addEventListener('click', handleOutboundLinkClicks)
+  })
+
   function createScrollCache () {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
     scrollCache = Array.prototype.map.call(document.querySelectorAll('*[id]'), function (element) {
@@ -44,7 +49,6 @@
       if (index === items.length - 1) return { bottom: document.documentElement.scrollHeight, id: item.id }
       return { bottom: items[index + 1].top - 1, id: item.id }
     })
-    console.log(scrollCache)
   }
 
   function markActiveElement () {
@@ -59,10 +63,28 @@
       if (nextActiveElement === activeElement) return
     }
     activeElement && activeElement.classList.remove('active')
-    activeElement = undefined
     if (nextActiveElement) {
+      if (activationStartTime && activeElement) {
+        ga('send', {
+          hitType: 'event',
+          eventCategory: 'Articles',
+          eventAction: 'finish:read',
+          eventLabel: activeElement.textContent,
+          eventValue: new Date().getTime() - activationStartTime
+        })
+      }
+      activationStartTime = new Date().getTime()
       nextActiveElement.classList.add('active')
       activeElement = nextActiveElement
     }
+  }
+
+  function handleOutboundLinkClicks (event) {
+    ga('send', 'event', {
+      eventCategory: 'Link',
+      eventAction: 'click',
+      eventLabel: event.target.href,
+      transport: 'beacon'
+    })
   }
 }())
