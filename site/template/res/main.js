@@ -55,6 +55,7 @@
     if (!scrollCache) return
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
     var nextActiveElement
+    var readTime
     var item = scrollCache.find(function (item) {
       return item.bottom > scrollTop
     })
@@ -65,13 +66,16 @@
     activeElement && activeElement.classList.remove('active')
     if (nextActiveElement) {
       if (activationStartTime && activeElement) {
-        ga('send', {
-          hitType: 'event',
-          eventCategory: 'Articles',
-          eventAction: 'finish:read',
-          eventLabel: activeElement.textContent,
-          eventValue: new Date().getTime() - activationStartTime
-        })
+        readTime = new Date().getTime() - activationStartTime
+        if (readTime > 3000) {
+          ga('send', {
+            hitType: 'event',
+            eventCategory: 'Articles',
+            eventAction: 'finish:read',
+            eventLabel: activeElement.textContent,
+            eventValue: readTime
+          })
+        }
       }
       activationStartTime = new Date().getTime()
       nextActiveElement.classList.add('active')
