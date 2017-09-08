@@ -33,7 +33,7 @@
 
   function createScrollCache () {
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-    scrollCache = Array.prototype.map.call(document.querySelectorAll('*[id]'), function (element) {
+    scrollCache = Array.prototype.map.call(document.querySelectorAll('h1[id],h2[id]'), function (element) {
       return { top: scrollTop + element.getBoundingClientRect().top, id: element.id }
     })
 

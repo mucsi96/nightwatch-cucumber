@@ -32,6 +32,7 @@ const dist = path.resolve(__dirname, '../site-dist')
 const distRes = path.resolve(dist, 'res')
 const twemojiSrc = path.resolve(__dirname, '../node_modules/twemoji/2/svg')
 const template = fs.readFileSync(path.resolve(__dirname, 'template/index.html'), 'utf8')
+const svgSrc = path.resolve(__dirname, '../node_modules/simple-icons/icons')
 
 function copyFile (from, to) {
   mkdirp.sync(to)
@@ -86,9 +87,21 @@ function injectContributors (html) {
   return html.replace('<p>[[contributors]]</p>', `<ul class="contributors">${contributors}</ul>`)
 }
 
+function injectSvg (html) {
+  return html.replace(/:([^:]*).svg:/g, (match, fileName) => {
+    return fs.readFileSync(path.resolve(svgSrc, `${fileName}.svg`), 'utf8').replace('<svg', `<svg class="icon ${fileName}" `)
+  })
+}
+
 function renderMarkdown (fileName) {
   const markdown = fs.readFileSync(path.resolve(__dirname, 'data', fileName), 'utf8')
-  const html = injectContributors(makeTableResponsive(injectEmoji(template.replace('<!-- CONTENT -->', md.render(markdown)))))
+  let html = template.replace('<!-- CONTENT -->', md.render(markdown))
+  html = [
+    injectContributors,
+    makeTableResponsive,
+    injectSvg,
+    injectEmoji
+  ].reduce((result, processor) => processor(result), html)
   mkdirp.sync(dist)
   const dest = path.resolve(dist, `${path.basename(fileName, '.md')}.html`)
   console.log(`write ${dest}`)
