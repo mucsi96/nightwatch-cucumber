@@ -68,13 +68,20 @@ main, header {
 
 @media (min-width: 768px) {
   main, header {
-      width:750px
+      width:750px;
+  }
+}
+
+@media (max-width: 769px) {
+  main, header {
+    padding-right: 0;
+    padding-left: 0;
   }
 }
 
 @media (min-width: 992px) {
   main, header {
-      width:970px
+      width:970px;
   }
 }
 
@@ -114,6 +121,14 @@ code {
 pre code {
   font-size: inherit;
   color: inherit;
+}
+
+@media (max-width: 769px) {
+  article pre[class*="language-"] {
+    margin-left: -15px;
+    margin-right: -15px;
+    border-radius: 0;
+  }
 }
 
 /* Table of contents */
@@ -260,13 +275,21 @@ td {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   padding-left: 0;
+}
+
+@media (max-width: 769px) {
+  .contributors {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
 }
 
 .contributors li {
   text-align: center;
   padding: 15px;
+  width: 100px;
 }
 
 .avatar {
@@ -291,7 +314,7 @@ td {
     display: block;
     position: relative;
     z-index: 1;
-    top: 20px;
+    top: 4px;
     margin-right: 10px;
     -webkit-user-select: none;
     user-select: none;
