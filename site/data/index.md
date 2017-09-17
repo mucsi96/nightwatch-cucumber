@@ -130,7 +130,7 @@ You can run the tests by executing
 npm test
 ```
 
-### Executing individual feature files
+### Executing individual feature files or scenarios
 
 Single feature file
 
@@ -154,6 +154,12 @@ Single feature file and one folder
 
 ```bash
 npm test -- features/google/google-search features/duckduckgo
+```
+
+Single scenario by its line number
+
+```bash
+npm test -- features/google-search.feature:11
 ```
 
 # Features
