@@ -43,7 +43,7 @@ function copyFile (from, to) {
 }
 
 function copyAllFiles (from, to) {
-  const files = glob.sync(path.resolve(from, '**/*'))
+  const files = glob.sync(path.resolve(from, '**/*.*'))
   files.forEach(file => {
     const relativePath = path.relative(from, file)
     copyFile(file, path.dirname(path.resolve(to, relativePath)))

@@ -1,4 +1,4 @@
-# nightwatch-cucumber [![nightwatch-cucumber](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-logo.png)](https://github.com/mucsi96/nightwatch-cucumber)
+# nightwatch-cucumber [![nightwatch-cucumber](http://mucsi96.github.io/nightwatch-cucumber/res/img/nightwatch-cucumber-logo.png)](https://github.com/mucsi96/nightwatch-cucumber)
 
 [![npm version](https://badge.fury.io/js/nightwatch-cucumber.svg)](https://badge.fury.io/js/nightwatch-cucumber)
 [![Build Status](https://travis-ci.org/mucsi96/nightwatch-cucumber.svg?branch=master)](https://travis-ci.org/mucsi96/nightwatch-cucumber)
