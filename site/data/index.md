@@ -109,7 +109,7 @@ You can run the tests by executing
 node_modules/.bin/nightwatch
 ```
 
-![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-output.png)
+![alt-tag](res/img/nightwatch-cucumber-output.png)
 
 Using NPM scripts its more easy. Let's assume you have following `package.json`.
 
@@ -251,7 +251,7 @@ Step definitons which uses Nightwatch client should return the result of api cal
 
 ## Error handling
 
-![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-error-handling-output.png)
+![alt-tag](res/img/nightwatch-cucumber-error-handling-output.png)
 
 ## Screenshots
 
@@ -503,7 +503,7 @@ module.exports = {
 }
 ```
 
-![alt-tag](https://raw.githubusercontent.com/mucsi96/nightwatch-cucumber/master/img/nightwatch-cucumber-parallel-test-output.png)
+![alt-tag](res/img/nightwatch-cucumber-parallel-test-output.png)
 
 ## Hooks
 
