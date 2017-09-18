@@ -3,29 +3,29 @@
 Single feature file
 
 ```bash
-npm test -- features/google-search.feature
+npm run e2e-test -- features/google-search.feature
 ```
 
 or
 
 ```bash
-npm test -- features/google-search
+npm run e2e-test -- features/google-search
 ```
 
 Multiple feature files
 
 ```bash
-npm test -- features/google-search features/duckduckgo-search
+npm run e2e-test -- features/google-search features/duckduckgo-search
 ```
 
 Single feature file and one folder
 
 ```bash
-npm test -- features/google/google-search features/duckduckgo
+npm run e2e-test -- features/google/google-search features/duckduckgo
 ```
 
 Single scenario by its line number
 
 ```bash
-npm test -- features/google-search.feature:11
+npm run e2e-test -- features/google-search.feature:11
 ```

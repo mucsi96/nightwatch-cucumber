@@ -11,8 +11,6 @@ require('nightwatch-cucumber')({
   cucumberArgs: [
     '--require', 'hooks.js',
     '--require', 'features/step_definitions',
-    '--format', 'pretty',
-    '--format', 'json:reports/cucumber.json',
     'features'
   ]
 })

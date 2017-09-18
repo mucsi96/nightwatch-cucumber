@@ -9,7 +9,6 @@ require('nightwatch-cucumber')({
   cucumberArgs: [
     '--require', 'hooks.js',
     '--require', 'features/step_definitions',
-    '--format', 'json:reports/cucumber.json',
     '--format-options', '{"colorsEnabled":false}',
     'features'
   ]
@@ -25,7 +24,6 @@ The default configuration object is.
 {
   cucumberArgs: [
     '--require', 'features/step_definitions',
-    '--format', 'pretty',
     '--format', 'json:reports/cucumber.json',
     'features'
   ]

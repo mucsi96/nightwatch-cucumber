@@ -15,21 +15,21 @@ Scenario: Searching Google
   And the Google search form exists
 ```
 ```bash
-$ node nightwatch.js --tag google
+npm run e2e-test -- --tag google
 ```
 or for more matches
 ```bash
-$ node nightwatch.js --tag google --tag yahoo
+npm run e2e-test -- --tag google --tag yahoo
 ```
 You can also skip features based on tags
 ```bash
-node nightwatch.js --skiptags google
+npm run e2e-test -- --skiptags google
 ```
 or for skipping multiple tags
 ```bash
-node nightwatch.js --skiptags google,yahoo
+npm run e2e-test -- --skiptags google,yahoo
 ```
 and all together :)
 ```bash
-node nightwatch.js --tag google --tag yahoo --skiptags search,login
+npm run e2e-test -- --tag google --tag yahoo --skiptags search,login
 ```

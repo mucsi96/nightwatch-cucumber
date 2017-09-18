@@ -8,7 +8,7 @@ Using NPM scripts its more easy. Let's assume you have following `package.json`.
 {
   ...
   "scripts": {
-    "test": "nightwatch",
+    "e2e-test": "nightwatch",
     ...
   }
   ...
@@ -18,5 +18,5 @@ Using NPM scripts its more easy. Let's assume you have following `package.json`.
 You can run the tests by executing
 
 ```bash
-npm test
+npm run e2e-test
 ```
