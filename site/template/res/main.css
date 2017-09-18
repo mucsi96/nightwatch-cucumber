@@ -156,6 +156,10 @@ pre code {
   overflow-y: auto;
 }
 
+.table-of-contents > ul > li > ul > li a {
+  padding-left: 25px;
+}
+
 .table-of-contents li {
   list-style: none;
   padding-left: 0;

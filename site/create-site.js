@@ -50,12 +50,6 @@ function copyAllFiles (from, to) {
   })
 }
 
-function renderResources () {
-  copyAllFiles(templeteResSrc, distRes)
-  copyFile(path.resolve(prismSrc, 'prism.js'), distRes)
-  copyFile(path.resolve(prismSrc, 'themes/prism-okaidia.css'), distRes)
-}
-
 function getEmojiSVG (emoji) {
   return fs
     .readFileSync(path.resolve(twemojiSrc, `${twemoji.convert.toCodePoint(emoji)}.svg`), 'utf8')
@@ -78,12 +72,12 @@ function injectEmoji (html) {
 
 function injectContributors (html) {
   const contributors = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../.all-contributorsrc'), 'utf8')).contributors
-    .map(contributor => (`
-      <li><a href="${contributor.profile}">
-        <img src="${contributor.avatar_url}" class="avatar">
-        <sub>${contributor.name}</sub>
-      </a></li>
-    `)).join('')
+  .map(contributor => (`
+  <li><a href="${contributor.profile}">
+  <img src="${contributor.avatar_url}" class="avatar">
+  <sub>${contributor.name}</sub>
+  </a></li>
+  `)).join('')
   return html.replace('<p>[[contributors]]</p>', `<ul class="contributors">${contributors}</ul>`)
 }
 
@@ -93,26 +87,29 @@ function injectSvg (html) {
   })
 }
 
-function renderMarkdown (fileName) {
-  const markdown = fs.readFileSync(path.resolve(__dirname, 'data', fileName), 'utf8')
-  let html = template.replace('<!-- CONTENT -->', md.render(markdown))
-  html = [
+function loadMarkdown (filePath) {
+  console.log('loading', filePath)
+  const content = fs.readFileSync(filePath, 'utf8')
+  return content.replace(/@import '([^']+)'/g, (match, fileName) => {
+    return `${loadMarkdown(path.resolve(path.dirname(filePath), fileName))}\n`
+  })
+}
+
+function renderMarkdown (markdown, targetFileName) {
+  const initialHtml = template.replace('<!-- CONTENT -->', md.render(markdown))
+  const html = [
     injectContributors,
     makeTableResponsive,
     injectSvg,
     injectEmoji
-  ].reduce((result, processor) => processor(result), html)
-  mkdirp.sync(dist)
-  const dest = path.resolve(dist, `${path.basename(fileName, '.md')}.html`)
-  console.log(`write ${dest}`)
-  fs.writeFileSync(dest, html, 'utf8')
-}
-
-function renderAllMarkdowns () {
-  const files = glob.sync(path.resolve(markdownSrc, '**/*.md'))
-  files.forEach(file => renderMarkdown(file))
+  ].reduce((result, processor) => processor(result), initialHtml)
+  mkdirp.sync(path.dirname(targetFileName))
+  console.log(`write ${targetFileName}`)
+  fs.writeFileSync(targetFileName, html, 'utf8')
 }
 
 rimraf.sync(dist)
-renderAllMarkdowns()
-renderResources()
+renderMarkdown(loadMarkdown(path.resolve(markdownSrc, 'index.md')), path.resolve(dist, 'index.html'))
+copyAllFiles(templeteResSrc, distRes)
+copyFile(path.resolve(prismSrc, 'prism.js'), distRes)
+copyFile(path.resolve(prismSrc, 'themes/prism-okaidia.css'), distRes)

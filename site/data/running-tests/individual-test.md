@@ -1,0 +1,31 @@
+## Executing individual feature files or scenarios
+
+Single feature file
+
+```bash
+npm test -- features/google-search.feature
+```
+
+or
+
+```bash
+npm test -- features/google-search
+```
+
+Multiple feature files
+
+```bash
+npm test -- features/google-search features/duckduckgo-search
+```
+
+Single feature file and one folder
+
+```bash
+npm test -- features/google/google-search features/duckduckgo
+```
+
+Single scenario by its line number
+
+```bash
+npm test -- features/google-search.feature:11
+```
