@@ -8,7 +8,7 @@ describe('Config', () => {
   it('should pass cucumberArgs as additional CLI parameters to cucumber', () => {
     return testCaseFactory
       .create('config-cucumber-args-test', {
-        cucumberArgs: ['--format', 'progress', '--format-options', '{"colorsEnabled":false}']
+        cucumberArgs: ['--format-options', '{"colorsEnabled":false}']
       })
       .feature('addition')
       .scenario('small numbers')
@@ -25,7 +25,7 @@ describe('Config', () => {
       .then('The result should contain 9')
       .run()
       .then((result) => {
-        result.output.should.contain('..........')
+        result.output.should.contain('.....')
       })
   })
 

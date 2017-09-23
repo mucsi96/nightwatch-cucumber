@@ -19,6 +19,7 @@
 
 # Configuration
 
+@import './configuration/nightwatch-output.md'
 @import './configuration/passing-cucumber-cli-options.md'
 @import './configuration/timeouts.md'
 @import './configuration/hooks.md'

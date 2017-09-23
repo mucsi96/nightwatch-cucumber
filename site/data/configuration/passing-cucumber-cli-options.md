@@ -26,6 +26,7 @@ The default configuration object is.
     '--require', 'features/step_definitions',
     '--format', 'json:reports/cucumber.json',
     'features'
-  ]
+  ],
+  nightwatchOutput: true
 }
 ```
