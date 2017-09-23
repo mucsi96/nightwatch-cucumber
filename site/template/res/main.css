@@ -517,5 +517,15 @@ footer .icon.npm {
   footer .icon.npm {
     transform: scale(2)
   }
+
+  footer ul {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  footer li {
+    margin: 15px;
+  }
 }
 
