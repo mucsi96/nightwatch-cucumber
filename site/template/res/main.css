@@ -216,12 +216,18 @@ header nav a:first-of-type img {
 header nav ul {
   display: flex;
   list-style: none;
+  align-items: center;
+}
+
+header nav li {
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  align-items: center;
 }
 
 header nav li>a {
   color: #777;
-  line-height: 40px;
-  padding: 15px;
 }
 
 header nav li>a:focus, header nav li>a:hover {
@@ -465,6 +471,10 @@ footer ul {
   width: 100%;
 }
 
+footer ul>li {
+  display: flex;
+  align-items: center;
+}
 
 @media (min-width: 768px) {
   footer ul {
