@@ -1,4 +1,4 @@
-# nightwatch-cucumber [![nightwatch-cucumber](http://mucsi96.github.io/nightwatch-cucumber/res/img/nightwatch-cucumber-logo.png)]
+# nightwatch-cucumber ![nightwatch-cucumber](http://mucsi96.github.io/nightwatch-cucumber/res/img/nightwatch-cucumber-logo.png)
 
 [http://mucsi96.github.io/nightwatch-cucumber](http://mucsi96.github.io/nightwatch-cucumber)
 
