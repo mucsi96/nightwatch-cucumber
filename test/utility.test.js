@@ -305,7 +305,7 @@ describe('Utility features', () => {
       .and('User enter 5 in B field', () => client.page.calculator().setB(5))
       .when('User press Add button', () => client.page.calculator().pressAdd())
       .then('The result should contain 9', () => client.page.calculator().checkResult(9))
-      .run(['--env', 'chrome'])
+      .run()
       .then((result) => {
         result.features[0].result.status.should.be.passed
         result.features[0].result.scenarioCounts.should.deep.equal({passed: 1})
