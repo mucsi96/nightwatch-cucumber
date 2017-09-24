@@ -52,45 +52,6 @@ describe('Utility features', () => {
       })
   })
 
-  it('should handle page objects failure', () => {
-    return testCaseFactory
-      .create('page-object-failure-test')
-      .pageObject('calculator', `module.exports = {
-  elements: {
-    numberA: '#a',
-    numberB: '#b',
-    addButton: '#add',
-    result: '#result'
-  }
-}`)
-      .feature('addition')
-      .scenario('small numbers')
-      .given('User is on the simple calculator page', () => client.init())
-      .and('User enter 4 in A field', () => {
-        const calculator = client.page.calculator()
-        return calculator.setValue('@numberA', 4)
-      })
-      .and('User enter 5 in B field', () => {
-        const calculator = client.page.calculator()
-        return calculator.setValue('@numberB', 5)
-      })
-      .when('User press Add button', () => {
-        const calculator = client.page.calculator()
-        return calculator.click('@addButton')
-      })
-      .then('The result should contain 10', () => {
-        const calculator = client.page.calculator()
-        return calculator.assert.containsText('@result', 10)
-      })
-      .run()
-      .then((result) => {
-        result.features[0].result.status.should.be.failed
-        result.features[0].result.scenarioCounts.should.deep.equal({failed: 1})
-        result.features[0].scenarios[0].result.status.should.be.failed
-        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 4, failed: 1})
-      })
-  })
-
   it('should handle paralell tests', () => {
     return testCaseFactory
       .create('paralell-test', { paralell: true })
@@ -297,6 +258,59 @@ describe('Utility features', () => {
         result.features[0].result.scenarioCounts.should.deep.equal({passed: 1})
         result.features[0].scenarios[0].result.status.should.be.passed
         result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 2})
+      })
+  })
+
+  it('should enable the usage of client in page object custom commands', () => {
+    return testCaseFactory
+      .create('client-in-page-object-custom-commands-test')
+      .pageObject('shared', `module.exports = {
+        url: 'http://yahoo.com',
+        elements: {
+          body: 'body',
+          a: '#a',
+          b: '#b',
+          add: '#add',
+          result: '#result'
+        }
+      }`)
+      .pageObject('calculator', `const { client } = require('../../../lib/index')
+      const shared = client.page.shared()
+      const commands = {
+        setA: function (value) {
+          return shared.setValue('@a', value)
+        },
+        setB: function (value) {
+          return shared.setValue('@b', value)
+        },
+        pressAdd: function () {
+          return shared.click('@add')
+        },
+        checkResult: function (expectedResult) {
+          return shared.assert.containsText('@result', expectedResult)
+        }
+      }
+      module.exports = {
+        url: 'http://yahoo.com',
+        elements: {
+          body: 'body',
+          searchBar: 'input[name="p"]'
+        },
+        commands: [commands]
+      }`)
+      .feature('addition')
+      .scenario('small numbers')
+      .given('User is on the simple calculator page', () => client.init())
+      .and('User enter 4 in A field', () => client.page.calculator().setA(4))
+      .and('User enter 5 in B field', () => client.page.calculator().setB(5))
+      .when('User press Add button', () => client.page.calculator().pressAdd())
+      .then('The result should contain 9', () => client.page.calculator().checkResult(9))
+      .run(['--env', 'chrome'])
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 1})
+        result.features[0].scenarios[0].result.status.should.be.passed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
 })
