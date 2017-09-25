@@ -13,8 +13,6 @@
     "combine-errors": "^3.0.3",
     "glob": "^7.1.2",
     "lodash.clonedeep": "^4.5.0",
-    "lodash.template": "^4.4.0",
-    "markdown-it": "^8.4.0",
     "mkdirp": "^0.5.1",
     "pify": "^3.0.0",
     "tmp": "^0.0.33"
@@ -55,8 +53,8 @@
     "resources"
   ],
   "peerDependencies": {
-    "cucumber": "^3.0.0",
-    "nightwatch": "^0.9.0"
+    "cucumber": "3.0.0 - 3.0.3",
+    "nightwatch": "0.9.0 - 0.9.16"
   },
   "devDependencies": {
     "@jxnblk/simple-icons": "^1.0.0",
@@ -66,8 +64,8 @@
     "chai": "^4.1.2",
     "chromedriver": "^2.32.3",
     "coveralls": "^2.13.1",
-    "cucumber": "^3.0.2",
-    "cucumber-html-reporter": "^3.0.4",
+    "cucumber": "3.0.3",
+    "cucumber-html-reporter": "3.0.4",
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^4.7.2",
     "eslint-config-standard": "^10.2.1",
@@ -81,10 +79,11 @@
     "gulp-nightwatch": "^0.3.2",
     "istanbul": "^0.4.5",
     "jsdom": "^11.2.0",
+    "markdown-it": "^8.4.0",
     "markdown-it-anchor": "^4.0.0",
     "markdown-it-table-of-contents": "^0.3.2",
     "mocha": "^3.5.3",
-    "nightwatch": "^0.9.16",
+    "nightwatch": "0.9.16",
     "phantomjs-prebuilt": "^2.1.15",
     "prismjs": "^1.8.1",
     "prismjs-components-loader": "^2.0.0",
@@ -92,7 +91,7 @@
     "selenium-server": "^3.5.3",
     "semantic-release": "7.0.2",
     "twemoji": "^2.5.0",
-    "simple-icons": "^1.2.1"
+    "simple-icons": "^1.2.2"
   },
   "config": {
     "commitizen": {
