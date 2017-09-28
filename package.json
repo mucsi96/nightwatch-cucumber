@@ -63,7 +63,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "chai": "^4.1.2",
     "chromedriver": "^2.32.3",
-    "coveralls": "^2.13.1",
+    "coveralls": "^3.0.0",
     "cucumber": "3.0.3",
     "cucumber-html-reporter": "3.0.4",
     "cz-conventional-changelog": "^2.0.0",
