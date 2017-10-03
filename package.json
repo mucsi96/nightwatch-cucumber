@@ -82,7 +82,7 @@
     "markdown-it": "^8.4.0",
     "markdown-it-anchor": "^4.0.0",
     "markdown-it-table-of-contents": "^0.3.2",
-    "mocha": "^3.5.3",
+    "mocha": "^4.0.0",
     "nightwatch": "0.9.16",
     "phantomjs-prebuilt": "^2.1.15",
     "prismjs": "^1.8.1",
