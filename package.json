@@ -64,7 +64,7 @@
     "chai": "^4.1.2",
     "chromedriver": "^2.32.3",
     "coveralls": "^3.0.0",
-    "cucumber": "3.0.3",
+    "cucumber": "3.0.4",
     "cucumber-html-reporter": "3.0.4",
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^4.7.2",
