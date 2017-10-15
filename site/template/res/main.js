@@ -80,6 +80,8 @@
       activationStartTime = new Date().getTime()
       nextActiveElement.classList.add('active')
       activeElement = nextActiveElement
+      var toc = document.querySelector('.table-of-contents ul')
+      toc.scrollTop = activeElement.offsetTop - (toc.clientHeight - activeElement.offsetHeight) / 2
     }
   }
 
