@@ -4327,9 +4327,9 @@ select@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/select/-/select-1.1.2.tgz#0e7350acdec80b1108528786ec1d4418d11b396d"
 
-selenium-server@3.5.3:
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/selenium-server/-/selenium-server-3.5.3.tgz#278c0af61ac2961476a59c6ff951216d67f2095c"
+selenium-server@3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/selenium-server/-/selenium-server-3.6.0.tgz#9ce63e8351802876e36cd7ed231e534b09e1842f"
 
 semantic-release@7.0.2:
   version "7.0.2"
