@@ -1,0 +1,23 @@
+{
+  "name": "babel-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "nightwatch.conf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "chromedriver": "^2.33.2",
+    "cucumber": "^3.1.0",
+    "nightwatch": "^0.9.16",
+    "nightwatch-cucumber": "^8.2.8",
+    "phantomjs-prebuilt": "^2.1.15",
+    "selenium-server": "^3.6.0"
+  }
+}
