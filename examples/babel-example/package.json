@@ -1,18 +1,15 @@
 {
   "name": "babel-example",
   "version": "1.0.0",
-  "description": "",
-  "main": "nightwatch.conf.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nightwatch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-preset-env": "^1.6.1",
     "babel-core": "^6.26.0",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "chromedriver": "^2.33.2",
     "cucumber": "^3.1.0",
     "nightwatch": "^0.9.16",
