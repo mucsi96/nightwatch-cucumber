@@ -121,6 +121,7 @@ code {
 pre code {
   font-size: inherit;
   color: inherit;
+  padding: 0;
 }
 
 @media (max-width: 769px) {

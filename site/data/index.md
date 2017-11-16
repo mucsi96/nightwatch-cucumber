@@ -27,6 +27,7 @@
 
 # Patterns
 
+@import './patterns/session-handling.md'
 @import './patterns/feature-background.md'
 @import './patterns/scenario-outlines.md'
 @import './patterns/page-objects.md'
