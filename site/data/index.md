@@ -17,6 +17,11 @@
 @import './running-tests/grunt-support.md'
 @import './running-tests/gulp-support.md'
 
+# Debugging
+
+@import './debugging/debugging-with-chrome.md'
+@import './debugging/debugging-with-vscode.md'
+
 # Configuration
 
 @import './configuration/cucumber-output.md'
