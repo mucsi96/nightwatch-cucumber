@@ -86,6 +86,7 @@
   }
 
   function handleOutboundLinkClicks (event) {
+    document.querySelector('#menuToggle input[type="checkbox"]').checked = false
     ga('send', 'event', {
       eventCategory: 'Link',
       eventAction: 'click',
