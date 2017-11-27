@@ -59,8 +59,27 @@ For more examples check out the [example repository](https://github.com/mucsi96/
 
 ### Step 5
 
+Add an npm script to your `package.json`. This will make the test execution more convenient.
+You can choose any name for it.
+
+```json
+// package.json
+{
+  ...
+  "scripts": {
+    "e2e-test": "nightwatch",
+    ...
+  }
+  ...
+}
+```
+
+### Step 6
+
 Run the tests by executing.
 
 ```bash
-node_modules/.bin/nightwatch
+npm run e2e-test
 ```
+
+![alt-tag](res/img/nightwatch-cucumber-output.png)

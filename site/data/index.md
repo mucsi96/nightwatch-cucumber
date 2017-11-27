@@ -6,7 +6,6 @@
 
 # Running tests
 
-@import './running-tests/running-with-npm-scripts.md'
 @import './running-tests/error-handling.md'
 @import './running-tests/individual-test.md'
 @import './running-tests/feature-groups.md'

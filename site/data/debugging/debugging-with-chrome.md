@@ -9,7 +9,7 @@ Here’s how to set up a debugging sesssion.
 ```json
 "scripts": {
     ...
-    "e2e-debug": "node --inspect node_modules/.bin/nightwatch"
+    "e2e-debug": "node --inspect node_modules/nightwatch/bin/nightwatch"
   },
 ```
 
