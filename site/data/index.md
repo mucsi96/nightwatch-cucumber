@@ -16,6 +16,11 @@
 @import './running-tests/grunt-support.md'
 @import './running-tests/gulp-support.md'
 
+# Example apps
+
+@import 'examples/simple-example-app.md'
+@import 'examples/async-await-example-app.md'
+
 # Debugging
 
 @import './debugging/debugging-with-chrome.md'
