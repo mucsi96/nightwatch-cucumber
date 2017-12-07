@@ -3,6 +3,7 @@
 const chai = require('chai')
 chai.should()
 const testCaseFactory = require('./test-case-factory')
+let calculator
 
 describe('Assertion features', () => {
   it('should enable the usage of client in page object custom commands', () => {
@@ -38,11 +39,12 @@ describe('Assertion features', () => {
       }`)
       .feature('addition')
       .scenario('small numbers')
+      .prependStepDefinition('const calculator = client.page.calculator()')
       .given('User is on the simple calculator page', () => client.init())
-      .and('User enter 4 in A field', () => client.page.calculator().setA(4))
-      .and('User enter 5 in B field', () => client.page.calculator().setB(5))
-      .when('User press Add button', () => client.page.calculator().pressAdd())
-      .then('The result should contain 9', () => client.page.calculator().checkResult(9))
+      .and('User enter 4 in A field', () => calculator.setA(4))
+      .and('User enter 5 in B field', () => calculator.setB(5))
+      .when('User press Add button', () => calculator.pressAdd())
+      .then('The result should contain 9', () => calculator.checkResult(9))
       .run()
       .then((result) => {
         result.features[0].result.status.should.be.passed
@@ -91,11 +93,12 @@ describe('Assertion features', () => {
       }`)
       .feature('addition')
       .scenario('small numbers')
+      .prependStepDefinition('const calculator = client.page.calculator()')
       .given('User is on the simple calculator page', () => client.init())
-      .and('User enter 4 in A field', () => client.page.calculator().setA(4))
-      .and('User enter 5 in B field', () => client.page.calculator().setB(5))
-      .when('User press Add button', () => client.page.calculator().pressAdd())
-      .then('The result should contain 9', () => client.page.calculator().checkResult(9))
+      .and('User enter 4 in A field', () => calculator.setA(4))
+      .and('User enter 5 in B field', () => calculator.setB(5))
+      .when('User press Add button', () => calculator.pressAdd())
+      .then('The result should contain 9', () => calculator.checkResult(9))
       .run()
       .then((result) => {
         result.features[0].result.status.should.be.passed
@@ -144,11 +147,12 @@ describe('Assertion features', () => {
       }`)
       .feature('addition')
       .scenario('small numbers')
+      .prependStepDefinition('const calculator = client.page.calculator()')
       .given('User is on the simple calculator page', () => client.init())
-      .and('User enter 4 in A field', () => client.page.calculator().setA(4))
-      .and('User enter 5 in B field', () => client.page.calculator().setB(5))
-      .when('User press Add button', () => client.page.calculator().pressAdd())
-      .then('The result should contain 9', () => client.page.calculator().checkResult(9))
+      .and('User enter 4 in A field', () => calculator.setA(4))
+      .and('User enter 5 in B field', () => calculator.setB(5))
+      .when('User press Add button', () => calculator.pressAdd())
+      .then('The result should contain 9', () => calculator.checkResult(9))
       .run()
       .then((result) => {
         result.features[0].result.status.should.be.passed
