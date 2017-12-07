@@ -28,7 +28,7 @@ module.exports = {
   <% } %>
 
   selenium: {
-    start_process: !process.ENV.CI ,
+    start_process: !process.env.CI ,
     server_path: seleniumServer.path,
     log_path: '',
     host: '127.0.0.1',
