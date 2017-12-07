@@ -10,8 +10,8 @@ node_js:
   - '6'
 before_script:
   - jdk_switcher use oraclejdk8
-  - "wget https://selenium-release.storage.googleapis.com/3.8/selenium-server-standalone-3.8.1.jar"
-  - "java -jar selenium-server-standalone-3.8.1.jar > /dev/null &"
+  - "wget https://selenium-release.storage.googleapis.com/3.7/selenium-server-standalone-3.7.1.jar"
+  - "java -jar selenium-server-standalone-3.7.1.jar > /dev/null &"
   - sleep 5
 after_success:
   - npm run create-site
