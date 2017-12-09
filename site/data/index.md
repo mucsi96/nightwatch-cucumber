@@ -14,7 +14,6 @@
 @import './running-tests/parallel.md'
 @import './running-tests/programmatical-execution.md'
 @import './running-tests/grunt-support.md'
-@import './running-tests/gulp-support.md'
 
 # Example apps
 

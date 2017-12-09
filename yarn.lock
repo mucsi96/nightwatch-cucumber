@@ -265,9 +265,9 @@ assert-plus@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-0.2.0.tgz#d74e1b87e7affc0db8aadb7021f3fe48101ab234"
 
-assertion-error-formatter@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/assertion-error-formatter/-/assertion-error-formatter-2.0.0.tgz#17a24289cc8440889b54318e6d1187ebee2d5494"
+assertion-error-formatter@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/assertion-error-formatter/-/assertion-error-formatter-2.0.1.tgz#6bbdffaec8e2fa9e2b0eb158bfe353132d7c0a9b"
   dependencies:
     diff "^3.0.0"
     pad-right "^0.2.2"
@@ -987,9 +987,9 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   dependencies:
     cssom "0.3.x"
 
-cucumber-expressions@^5.0.0:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/cucumber-expressions/-/cucumber-expressions-5.0.2.tgz#f4e03c2698bd43e92011a055d9c4ce57718b91b0"
+cucumber-expressions@^5.0.7:
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/cucumber-expressions/-/cucumber-expressions-5.0.7.tgz#67624571178a4c5a07de055c7862025b3f8b0b18"
   dependencies:
     becke-ch--regex--s0-0-v1--base--pl--lib "^1.2.0"
 
@@ -1004,22 +1004,22 @@ cucumber-html-reporter@3.0.4:
     lodash "^4.17.2"
     open "0.0.5"
 
-cucumber-tag-expressions@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/cucumber-tag-expressions/-/cucumber-tag-expressions-1.0.1.tgz#d6d3c43180a03f5fb4fc957fe1382ddce5cb9ac8"
+cucumber-tag-expressions@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/cucumber-tag-expressions/-/cucumber-tag-expressions-1.1.1.tgz#7f5c7b70009bc2b666591bfe64854578bedee85a"
 
-cucumber@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/cucumber/-/cucumber-3.1.0.tgz#13886bce87e9018ecb57999bb00c03a1bfa58d5d"
+cucumber@3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/cucumber/-/cucumber-3.2.0.tgz#5fc4143f9a0c6c3017bb9610a941b2cbc714f493"
   dependencies:
-    assertion-error-formatter "^2.0.0"
+    assertion-error-formatter "^2.0.1"
     babel-runtime "^6.11.6"
     bluebird "^3.4.1"
     cli-table "^0.3.1"
     colors "^1.1.2"
     commander "^2.9.0"
-    cucumber-expressions "^5.0.0"
-    cucumber-tag-expressions "^1.0.0"
+    cucumber-expressions "^5.0.7"
+    cucumber-tag-expressions "^1.1.1"
     duration "^0.2.0"
     escape-string-regexp "^1.0.5"
     figures "2.0.0"
@@ -1413,9 +1413,9 @@ eslint-scope@^3.7.1:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint@^4.12.1:
-  version "4.12.1"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.12.1.tgz#5ec1973822b4a066b353770c3c6d69a2a188e880"
+eslint@^4.13.0:
+  version "4.13.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.13.0.tgz#1991aa359586af83877bde59de9d41f53e20826d"
   dependencies:
     ajv "^5.3.0"
     babel-code-frame "^6.22.0"
@@ -4390,9 +4390,9 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
-simple-icons@^1.2.14:
-  version "1.2.14"
-  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-1.2.14.tgz#31868baa4005f41f1671c9fb3e9198e571dce617"
+simple-icons@^1.2.15:
+  version "1.2.15"
+  resolved "https://registry.yarnpkg.com/simple-icons/-/simple-icons-1.2.15.tgz#9a595ba2d25fc48f538c7b1dd8f728b2c06b7c73"
 
 slash@^1.0.0:
   version "1.0.0"

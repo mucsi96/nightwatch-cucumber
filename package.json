@@ -64,10 +64,10 @@
     "chai": "^4.1.2",
     "chromedriver": "^2.33.0",
     "coveralls": "^3.0.0",
-    "cucumber": "3.1.0",
+    "cucumber": "3.2.0",
     "cucumber-html-reporter": "3.0.4",
     "cz-conventional-changelog": "^2.1.0",
-    "eslint": "^4.12.1",
+    "eslint": "^4.13.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-no-only-tests": "^2.0.0",
@@ -91,7 +91,7 @@
     "selenium-server": "3.8.1",
     "semantic-release": "7.0.2",
     "twemoji": "^2.5.0",
-    "simple-icons": "^1.2.14"
+    "simple-icons": "^1.2.15"
   },
   "config": {
     "commitizen": {
