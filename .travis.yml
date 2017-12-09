@@ -1,3 +1,4 @@
+dist: trusty
 sudo: false
 language: node_js
 cache:
@@ -8,8 +9,7 @@ notifications:
 node_js:
   - '6'
 before_script:
-  - npm prune
-  - java -version
+  - jdk_switcher use oraclejdk8
 after_success:
   - npm run create-site
   - npm run coveralls
@@ -17,11 +17,6 @@ after_success:
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
-addons:
-  apt:
-    packages:
-      - oracle-java8-installer
-      - oracle-java8-set-default
 deploy:
   local_dir: site-dist
   provider: pages
