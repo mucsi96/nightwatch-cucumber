@@ -6,7 +6,7 @@ For that you need install `babel-core`, setup `.babelrc` and add Babel as requir
 // nightwatch.conf.js
 
 require('nightwatch-cucumber')({
-  cucumberArgs: ['--require-module', 'js:babel-core/register', '--require', 'features/step_definitions', 'features']
+  cucumberArgs: ['--require-module', 'babel-core/register', '--require', 'features/step_definitions', 'features']
 })
 ...
 ```

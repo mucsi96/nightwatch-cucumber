@@ -236,7 +236,7 @@ ${this.stepDefinitions.join('')}`
     let args = ['--require', 'features/step_definitions']
 
     if (this.options.babel) {
-      args = ['--require-module', `js:babel-core/register`].concat(args)
+      args = ['--require-module', `babel-core/register`].concat(args)
     }
 
     if (this.options.cucumberArgs.length) {
