@@ -109,8 +109,8 @@ class TestCaseFactory {
         .replace(/<(.*?)>/g, '(.*?)')
         .replace(/"(.*?)"/g, '"(.*?)"')
       const regex = `/^${namePattern}$/`
-      stepDefinition = setIdentation(stepDefinition.toString(), 2)
-      this.stepDefinitions.push(`\n  ${definitionType}(${regex}, ${stepDefinition})\n`)
+      stepDefinition = setIdentation(stepDefinition.toString(), 0)
+      this.stepDefinitions.push(`${definitionType}(${regex}, ${stepDefinition})\n`)
     }
     return this
   }
@@ -194,14 +194,14 @@ class TestCaseFactory {
     let importCode
     if (this.options.babel) {
       importCode = `import { client } from '${main}'
-import { defineSupportCode } from 'cucumber'`
+import { Given, Then, When } from 'cucumber'`
     } else {
       importCode = `const { client } = require('${main}')
-const { defineSupportCode } = require('cucumber')`
+const { Given, Then, When } = require('cucumber')`
     }
     const steps = `${importCode}
 ${this.prependStepDefinitions.join('')}
-defineSupportCode(({ Given, Then, When }) => {${this.stepDefinitions.join('')}})`
+${this.stepDefinitions.join('')}`
     if (this.stepDefinitions.length) {
       fs.writeFileSync(path.join(this.testCasePath, 'features', 'step_definitions', 'steps.js'), steps)
     }
@@ -236,7 +236,7 @@ defineSupportCode(({ Given, Then, When }) => {${this.stepDefinitions.join('')}})
     let args = ['--require', 'features/step_definitions']
 
     if (this.options.babel) {
-      args = ['--compiler', `js:babel-core/register`].concat(args)
+      args = ['--require-module', `babel-core/register`].concat(args)
     }
 
     if (this.options.cucumberArgs.length) {

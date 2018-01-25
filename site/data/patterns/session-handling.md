@@ -9,12 +9,10 @@ As starter you can use the following support code.
 
 ```javascript
 const { client } = require('nightwatch-cucumber');
-const { defineSupportCode } = require('cucumber');
+const { After } = require('cucumber');
 
-defineSupportCode(({ After }) => {
-    After(() => client.execute(`
-      localStorage.clear();
-      sessionStorage.clear();
-    `).deleteCookies().refresh());
-});
+After(() => client.execute(`
+  localStorage.clear();
+  sessionStorage.clear();
+`).deleteCookies().refresh());
 ```

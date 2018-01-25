@@ -19,24 +19,21 @@ Step definitions files are located in `features/step_definitions` folder by defa
 ```javascript
 // features/step_definitions/google.js
 
-const {client} = require('nightwatch-cucumber');
-const {defineSupportCode} = require('cucumber');
+const { client } = require('nightwatch-cucumber');
+const { Given, Then, When } = require('cucumber');
 
-defineSupportCode(({Given, Then, When}) => {
-  Given(/^I open Google's search page$/, () => {
-    return client
-      .url('http://google.com')
-      .waitForElementVisible('body', 1000);
-  });
+Given(/^I open Google's search page$/, () => {
+  return client
+    .url('http://google.com')
+    .waitForElementVisible('body', 1000);
+});
 
-  Then(/^the title is "([^"]*)"$/, (title) => {
-    return client.assert.title(title);
-  });
+Then(/^the title is "([^"]*)"$/, (title) => {
+  return client.assert.title(title);
+});
 
-  Then(/^the Google search form exists$/, () => {
-    return client.assert.visible('input[name="q"]');
-  });
-
+Then(/^the Google search form exists$/, () => {
+  return client.assert.visible('input[name="q"]');
 });
 ```
 
