@@ -1,12 +1,12 @@
 ## Babel support
 
 You can write tests using latest ECMAScript features using [Babel](https://babeljs.io/). Using `async` function is especially useful.
-For that you need install `babel-core`, setup `.babelrc` and add Babel as compiler
+For that you need install `babel-core`, setup `.babelrc` and add Babel as require-module
 ```javascript
 // nightwatch.conf.js
 
 require('nightwatch-cucumber')({
-  cucumberArgs: ['--compiler', 'js:babel-core/register', '--require', 'features/step_definitions', 'features']
+  cucumberArgs: ['--require-module', 'js:babel-core/register', '--require', 'features/step_definitions', 'features']
 })
 ...
 ```
