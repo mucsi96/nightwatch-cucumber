@@ -4,6 +4,7 @@ const chai = require('chai')
 chai.should()
 const testCaseFactory = require('./test-case-factory')
 let calculator
+let dynamicSection
 
 describe('Assertion features', () => {
   it('should enable the usage of client in page object custom commands', () => {
@@ -206,8 +207,8 @@ describe('Assertion features', () => {
       `)
       .given('User is on the simple calculator page', () => client.init())
       .and('User enter values', () => dynamicSection.setA(4)
-                                .then(() => dynamicSection.setB(5))
-                                .then(() => dynamicSection.pressAdd()))
+        .then(() => dynamicSection.setB(5))
+        .then(() => dynamicSection.pressAdd()))
       .then('The result should contain 9', () => dynamicSection.checkResult())
       .then((result) => {
         result.features[0].result.status.should.be.passed
