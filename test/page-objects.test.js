@@ -210,6 +210,7 @@ describe('Assertion features', () => {
         .then(() => dynamicSection.setB(5))
         .then(() => dynamicSection.pressAdd()))
       .then('The result should contain 9', () => dynamicSection.checkResult())
+      .run()
       .then((result) => {
         result.features[0].result.status.should.be.passed
         result.features[0].result.scenarioCounts.should.deep.equal({passed: 1})
