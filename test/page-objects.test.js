@@ -161,4 +161,57 @@ describe('Assertion features', () => {
         result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5})
       })
   })
+
+  it('should enable the usage of sections in page object custom commands', () => {
+    return testCaseFactory
+      .create('client-in-page-object-custom-commands-test')
+      .pageObject('calculator', `
+      const commands = {
+        setA: function (value) {
+          return this.setValue('@a', value)
+        },
+        setB: function (value) {
+          return this.setValue('@b', value)
+        },
+        pressAdd: function () {
+          this.api.pause(1000)
+          return this.click('@add')
+        },
+        checkResult: function (expectedResult) {
+          return this.expect.section('@result').text.to.equal(expectedResult)
+        }
+      }
+      module.exports = {
+        url: 'http://yahoo.com',
+        elements: {
+          body: 'body',
+          a: '#a',
+          b: '#b',
+          add: '#add',
+          searchBar: 'input[name="p"]'
+        },
+        sections: {
+          result: {
+            selector: '#result'
+          }
+        },
+        commands: [commands]
+      }`)
+      .feature('addition')
+      .scenario('small numbers')
+      .prependStepDefinition('const calculator = client.page.calculator()')
+      .given('User is on the simple calculator page', () => client.init())
+      .and('User enter 4 in A field', () => calculator.setA(4))
+      .and('User enter 5 in B field', () => calculator.setB(5))
+      .when('User press Add button', () => calculator.pressAdd())
+      .then('The result should contain 9', () => calculator.checkResult(9))
+      .then('The result should contain -9', () => calculator.checkResult(-9))
+      .run()
+      .then((result) => {
+        result.features[0].result.status.should.be.failed
+        result.features[0].result.scenarioCounts.should.deep.equal({failed: 1})
+        result.features[0].scenarios[0].result.status.should.be.failed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 5, failed: 1})
+      })
+  })
 })
