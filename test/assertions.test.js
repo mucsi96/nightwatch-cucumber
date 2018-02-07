@@ -3,6 +3,7 @@
 const chai = require('chai')
 chai.should()
 const testCaseFactory = require('./test-case-factory')
+let calculator
 
 describe('Assertion features', () => {
   it('should handle nightwatch assert.ok', () => {
