@@ -188,6 +188,20 @@
       "contributions": [
         "question"
       ]
+    },
+    {
+      "login": "amurdock",
+      "name": "Alasdair Murdock",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2389179?v=4",
+      "profile": "https://github.com/amurdock",
+      "contributions": []
+    },
+    {
+      "login": "clayreimann",
+      "name": "Clay Reimann",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/930039?v=4",
+      "profile": "http://clayreimann.me",
+      "contributions": []
     }
   ]
 }

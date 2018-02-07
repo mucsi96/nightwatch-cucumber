@@ -47,6 +47,7 @@
 @import './advanced-features/html-reports.md'
 @import './advanced-features/junit-reports.md'
 @import './advanced-features/languages.md'
+@import './advanced-features/section.md'
 
 # Contributors
 
