@@ -218,4 +218,43 @@ describe('Assertion features', () => {
         result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 3})
       })
   })
+
+  it('should export a section that inherits correctly', () => {
+    return testCaseFactory
+      .create('section-interface-test')
+      .pageObject('calculator', `
+      const { Section } = require('../../../lib/index')
+      const commands = {
+        getDynamicSection() {
+          return new Section({
+            name: 'Dynamic Section',
+            parent: this,
+            selector: 'body'
+          })
+        }
+      }
+      module.exports = {
+        url: 'http://yahoo.com',
+        elements: {
+          body: 'body',
+          searchBar: 'input[name="p"]'
+        },
+        commands: [commands]
+      }`)
+      .feature('Section')
+      .scenario('toString')
+      .prependStepDefinition(`
+          const calculator = client.page.calculator();
+          const dynamicSection = calculator.getDynamicSection();
+      `)
+      .then('toString works', () => dynamicSection.assert.equal(dynamicSection.toString(), 'Section[name=Dynamic Section]'))
+      .then('parent is set', () => dynamicSection.assert.equal(dynamicSection.parent, calculator))
+      .run()
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 1})
+        result.features[0].scenarios[0].result.status.should.be.passed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 2})
+      })
+  })
 })
