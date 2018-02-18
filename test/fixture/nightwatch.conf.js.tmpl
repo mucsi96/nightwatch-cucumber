@@ -49,10 +49,17 @@ module.exports = {
       },
       <% } %>
       desiredCapabilities: {
-        browserName: 'phantomjs',
+        browserName: 'chrome',
         javascriptEnabled: true,
         acceptSslCerts: true,
-        'phantomjs.binary.path': phantomjs.path
+        chromeOptions: {
+          args: ['incognito', 'headless', 'no-sandbox', 'disable-gpu']
+        }
+      },
+      selenium: {
+        cli_args: {
+          'webdriver.chrome.driver': chromedriver.path
+        }
       }
     },
 
