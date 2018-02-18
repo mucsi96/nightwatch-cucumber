@@ -1,5 +1,5 @@
 {
-  "name": "babel-example",
+  "name": "page-object-example",
   "version": "1.0.0",
   "scripts": {
     "test": "nightwatch"
