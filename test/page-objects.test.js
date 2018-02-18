@@ -257,4 +257,37 @@ describe('Assertion features', () => {
         result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 2})
       })
   })
+
+  it('should make custom commands chainable', () => {
+    return testCaseFactory
+      .create('section-interface-test')
+      .pageObject('calculator', `
+      const commands = {
+        log () {
+          return this.api.perform(() => {});
+        }
+      }
+      module.exports = {
+        url: 'http://yahoo.com',
+        elements: {
+          body: 'body',
+          searchBar: 'input[name="p"]'
+        },
+        commands: [commands]
+      }`)
+      .feature('Page objects')
+      .scenario('Nightwatch API chainability')
+      .prependStepDefinition(`
+          const calculator = client.page.calculator();
+      `)
+      .given('User is on the simple calculator page', () => client.init())
+      .then('Nightwatch API is accessible', () => calculator.log().waitForElementVisible('@body', 1000))
+      .run()
+      .then((result) => {
+        result.features[0].result.status.should.be.passed
+        result.features[0].result.scenarioCounts.should.deep.equal({passed: 1})
+        result.features[0].scenarios[0].result.status.should.be.passed
+        result.features[0].scenarios[0].result.stepCounts.should.deep.equal({passed: 2})
+      })
+  })
 })
