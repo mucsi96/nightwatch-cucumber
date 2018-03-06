@@ -54,7 +54,7 @@
   ],
   "peerDependencies": {
     "cucumber": "4.0.0 - 4.0.0",
-    "nightwatch": "0.9.0 - 0.9.19"
+    "nightwatch": "0.9.0 - 0.9.20"
   },
   "devDependencies": {
     "@jxnblk/simple-icons": "^1.0.0",
