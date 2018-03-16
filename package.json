@@ -89,7 +89,7 @@
     "prismjs-components-loader": "^2.0.0",
     "rimraf": "^2.6.2",
     "selenium-server": "3.7.1",
-    "semantic-release": "7.0.2",
+    "semantic-release": "15.1.2",
     "twemoji": "^2.5.0",
     "simple-icons": "^1.2.19"
   },
