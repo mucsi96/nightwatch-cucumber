@@ -83,7 +83,7 @@
     "markdown-it-anchor": "^4.0.0",
     "markdown-it-table-of-contents": "^0.3.3",
     "mocha": "^5.0.0",
-    "nightwatch": "0.9.20",
+    "nightwatch": "1.0.1",
     "phantomjs-prebuilt": "^2.1.16",
     "prismjs": "^1.10.0",
     "prismjs-components-loader": "^2.0.0",
