@@ -166,7 +166,7 @@ describe('Error handling', () => {
       .then('The result should contain 9', () => client.assert.containsText('#result', 9))
       .run()
       .then((result) => {
-        result.output.should.contain('Error: (1:1):')
+        result.output.should.contain('Parse error in \'features/addition.feature\': (1:1)')
         result.exitCode.should.equal(1)
       })
   })
