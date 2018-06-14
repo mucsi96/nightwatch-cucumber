@@ -80,7 +80,7 @@
     "istanbul": "^0.4.5",
     "jsdom": "11.9.0",
     "markdown-it": "^8.4.1",
-    "markdown-it-anchor": "^4.0.0",
+    "markdown-it-anchor": "^5.0.1",
     "markdown-it-table-of-contents": "^0.3.3",
     "mocha": "^5.1.1",
     "nightwatch": "0.9.21",
