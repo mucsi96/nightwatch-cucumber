@@ -24,7 +24,8 @@
     "e2e-test": "mocha --no-timeouts",
     "test": "npm run code-style && npm run e2e-test && istanbul report",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release":
+      "semantic-release pre && npm publish && semantic-release post",
     "precommit": "npm run code-style",
     "create-examples": "node examples/create-examples.js",
     "create-site": "node site/create-site.js"
@@ -48,13 +49,10 @@
     "url": "https://github.com/mucsi96/nightwatch-cucumber/issues"
   },
   "homepage": "https://github.com/mucsi96/nightwatch-cucumber#readme",
-  "files": [
-    "lib",
-    "resources"
-  ],
+  "files": ["lib", "resources"],
   "peerDependencies": {
     "cucumber": "4.0.0 - 4.2.1",
-    "nightwatch": "0.9.0 - 0.9.21"
+    "nightwatch": "0.9.0 - 1.0.6"
   },
   "devDependencies": {
     "@jxnblk/simple-icons": "^1.0.0",
@@ -83,7 +81,7 @@
     "markdown-it-anchor": "^4.0.0",
     "markdown-it-table-of-contents": "^0.3.3",
     "mocha": "^5.1.1",
-    "nightwatch": "0.9.21",
+    "nightwatch": "1.0.6",
     "phantomjs-prebuilt": "^2.1.16",
     "prismjs": "^1.14.0",
     "prismjs-components-loader": "^2.0.0",
