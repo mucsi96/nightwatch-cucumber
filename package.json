@@ -76,7 +76,7 @@
     "eslint-plugin-standard": "^3.1.0",
     "grunt": "^1.0.2",
     "gulp": "^3.9.1",
-    "gulp-nightwatch": "^0.3.2",
+    "gulp-nightwatch": "^1.0.0",
     "istanbul": "^0.4.5",
     "jsdom": "11.9.0",
     "markdown-it": "^8.4.1",
