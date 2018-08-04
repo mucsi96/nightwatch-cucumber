@@ -90,7 +90,7 @@
     "rimraf": "^2.6.2",
     "selenium-server": "3.7.1",
     "semantic-release": "7.0.2",
-    "twemoji": "^2.5.1",
+    "twemoji": "^11.0.1",
     "simple-icons": "^1.5.0"
   },
   "config": {
