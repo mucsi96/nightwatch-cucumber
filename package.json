@@ -81,7 +81,7 @@
     "jsdom": "11.9.0",
     "markdown-it": "^8.4.1",
     "markdown-it-anchor": "^4.0.0",
-    "markdown-it-table-of-contents": "^0.3.3",
+    "markdown-it-table-of-contents": "^0.4.2",
     "mocha": "^5.1.1",
     "nightwatch": "0.9.21",
     "phantomjs-prebuilt": "^2.1.16",
