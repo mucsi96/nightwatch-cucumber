@@ -1,0 +1,532 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Headers */
+
+h1 {
+  padding: 20px 0;
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #7ac35f;
+}
+
+/* Links */
+
+a {
+  color: #337ab7;
+  text-decoration: none
+}
+
+a:focus,a:hover {
+  color: #23527c;
+  text-decoration: underline
+}
+
+a:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px
+}
+
+/* Images */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+a img {
+  display: inline;
+}
+
+svg {
+  width: 1.5em;
+  height: auto;
+}
+
+/* Main container */
+
+main, header {
+  box-sizing: border-box;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  main, header {
+      width:750px;
+  }
+}
+
+@media (max-width: 769px) {
+  main, header {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  main, header {
+      width:970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  main, header {
+      width:1170px
+  }
+}
+
+article {
+  box-sizing: border-box;
+  padding-right: calc(15px + 25%);
+  padding-left: 15px;
+  padding-bottom: 100px;
+  position: relative;
+}
+
+@media (max-width:991px) {
+  article {
+    padding-right: 15px;
+  }
+}
+
+/* Code */
+
+code {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace
+}
+
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  background-color: #f9f2f4;
+  border-radius: 4px
+}
+
+pre code {
+  font-size: inherit;
+  color: inherit;
+  padding: 0;
+}
+
+@media (max-width: 769px) {
+  article pre[class*="language-"] {
+    margin-left: -15px;
+    margin-right: -15px;
+    border-radius: 0;
+  }
+}
+
+/* Table of contents */
+
+.table-of-contents {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media (max-width:991px) {
+  .table-of-contents {
+    display:none;
+  }
+}
+
+.table-of-contents > ul {
+  position: fixed;
+  top: 70px;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+.table-of-contents > ul > li > ul > li a {
+  padding-left: 25px;
+}
+
+.table-of-contents li {
+  list-style: none;
+  padding-left: 0;
+}
+
+.table-of-contents li a {
+  color: #777;
+  font-size: 90%;
+  padding: 5px 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.table-of-contents li a:hover {
+  background-color: #f1ffe6;
+}
+
+.table-of-contents li a.active {
+  border-left: 3px solid #38932c;
+  font-weight: 700;
+}
+
+.table-of-contents ul {
+  padding-left: 0;
+}
+
+/* Header */
+
+header {
+  padding: 10px;
+}
+
+#home {
+  display: flex;
+  align-items: center;
+}
+
+#home > span {
+  margin-left: 15px;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+header nav a:first-of-type img {
+  height: 50px;
+}
+
+
+header nav ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+header nav li {
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+header nav li>a {
+  color: #777;
+}
+
+header nav li>a:focus, header nav li>a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+header .navbar-toggle {
+  display: none;
+  background-color: transparent;
+  position: relative;
+  padding: 9px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+header .navbar-toggle .icon-bar {
+  background-color: #888;
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+header .navbar-toggle .icon-bar+.icon-bar {
+  margin-top: 4px;
+}
+
+@media(max-width:991px) {
+  header .navbar-toggle {
+    display: block;
+  }
+
+  header nav {
+    justify-content: space-between;
+  }
+}
+
+/* Table */
+.responsive-table {
+  overflow: auto;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 1em;
+}
+
+td {
+  vertical-align: top;
+}
+
+/* Contributors */
+.contributors {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-left: 0;
+}
+
+@media (max-width: 769px) {
+  .contributors {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+}
+
+.contributors li {
+  text-align: center;
+  padding: 15px;
+  width: 100px;
+}
+
+.avatar {
+  width: 100px;
+  display: block;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+/* Hamburger */
+
+#menuToggle input {
+  display: none;
+}
+
+#menuToggle span {
+  display: none;
+}
+
+@media(max-width:991px) {
+  #menuToggle {
+    display: block;
+    position: relative;
+    z-index: 1;
+    top: 4px;
+    margin-right: 10px;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  #menuToggle input
+  {
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+
+    cursor: pointer;
+
+    opacity: 0; /* hide this */
+    z-index: 2; /* and place it over the hamburger */
+
+    -webkit-touch-callout: none;
+  }
+  /*
+   * Just a quick hamburger
+   */
+  #menuToggle span
+  {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+
+    background: #232323;
+    border-radius: 3px;
+
+    z-index: 1;
+
+    transform-origin: 4px 0px;
+
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                opacity 0.55s ease;
+  }
+
+  #menuToggle span:first-child
+  {
+    transform-origin: 0% 0%;
+  }
+
+  #menuToggle span:nth-last-child(2)
+  {
+    transform-origin: 0% 100%;
+  }
+
+  /*
+   * Transform all the slices of hamburger
+   * into a crossmark.
+   */
+  #menuToggle input:checked ~ span
+  {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: #232323;
+  }
+
+  /*
+   * But let's hide the middle one.
+   */
+  #menuToggle input:checked ~ span:nth-last-child(3)
+  {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+  }
+  /*
+   * Ohyeah and the last one should go the other direction
+   */
+  #menuToggle input:checked ~ span:nth-last-child(2)
+  {
+    opacity: 1;
+    transform: rotate(-45deg) translate(0, -1px);
+  }
+
+  #menu
+  {
+    flex-direction: column;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+    opacity: .98;
+    border-bottom: 3px solid #7ac35f;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 50px;
+    background: white;
+    position: fixed;
+    transform-origin: 0% 0%;
+    transform: translate(0, -100%);
+
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+  }
+
+  #menu li
+  {
+    padding: 8px 0;
+    font-size: 16px;
+  }
+  /*
+   * And let's fade it in from the left
+   */
+  #menuToggle input:checked ~ ul
+  {
+    transform: scale(1.0, 1.0);
+  }
+}
+
+/* Footer */
+
+footer {
+  background-color: #7ac35f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+footer nav {
+  width: 100%;
+}
+
+footer span {
+  margin-top: 50px;
+}
+
+footer ul {
+  padding: 0;
+  margin: 50px 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+footer ul>li {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  footer ul {
+    width:750px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  footer ul {
+    width:970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  footer ul {
+    width:1170px;
+  }
+}
+
+footer .icon {
+  width: 35px;
+  fill: white;
+}
+
+footer .icon.npm {
+  transform: scale(3)
+}
+
+@media (max-width: 768px) {
+  footer {
+    padding: 0 20px;
+  }
+
+  footer .icon {
+    width: 25px;
+  }
+
+  footer .icon.npm {
+    transform: scale(2)
+  }
+
+  footer ul {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  footer li {
+    margin: 15px;
+  }
+}
+

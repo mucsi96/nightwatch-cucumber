@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Nightwatch-Cucumber</title>
+        <meta name="description" content="Cucumber.js plugin for Nightwatch.js.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:title" content="Nightwatch-Cucumber">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="http://mucsi96.github.io/nightwatch-cucumber/">
+        <meta property="og:image" content="http://mucsi96.github.io/nightwatch-cucumber/res/img/opengraph.png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:description" content="Cucumber.js plugin for Nightwatch.js.">
+        <meta property="fb:app_id" content="966242223397117">
+        <meta name="theme-color" content="#7ac35f">
+        <link rel="stylesheet" href="res/main.css">
+        <link rel="stylesheet" href="res/prism-okaidia.css">
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-51256585-2', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div id="home">
+                    <a href="index.html">
+                        <img src="res/img/nightwatch-cucumber-logo.svg" alt="nightwatch-cucumber">
+                    </a>
+                    <span>Nightwatch-Cucumber</span>
+                </div>
+                <div id="menuToggle">
+                    <input type="checkbox" />
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <ul id="menu">
+                        <li><a href="https://github.com/mucsi96/nightwatch-cucumber">Github</a></li>
+                        <li><a href="https://www.npmjs.com/package/nightwatch-cucumber">NPM</a></li>
+                        <li><a href="https://gitter.im/mucsi96/nightwatch-cucumber">Gitter</a></li>
+                        <li><a href="#example-apps">Example app</a></li>
+                        <li><a href="https://stackoverflow.com/questions/tagged/nightwatch.js+cucumber">Ask questions</a></li>
+                        <li><a href="https://github.com/mucsi96/nightwatch-cucumber" class="github-button" data-icon="octicon-star" data-show-count="true" aria-label="Star mucsi96/nightwatch-cucumber on GitHub">Star</a></li>
+                        <li><a href="https://twitter.com/mucsi96" class="twitter-follow-button" data-show-screen-name="false" data-show-count="true">Follow @mucsi96</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <article>
+                <h1 id="this-package-is-deprecated"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#FFCC4D" d="M2.653 35C.811 35-.001 33.662.847 32.027L16.456 1.972c.849-1.635 2.238-1.635 3.087 0l15.609 30.056c.85 1.634.037 2.972-1.805 2.972H2.653z"/><path fill="#231F20" d="M15.583 28.953c0-1.333 1.085-2.418 2.419-2.418 1.333 0 2.418 1.085 2.418 2.418 0 1.334-1.086 2.419-2.418 2.419-1.334 0-2.419-1.085-2.419-2.419zm.186-18.293c0-1.302.961-2.108 2.232-2.108 1.241 0 2.233.837 2.233 2.108v11.938c0 1.271-.992 2.108-2.233 2.108-1.271 0-2.232-.807-2.232-2.108V10.66z"/></svg>️ THIS PACKAGE IS DEPRECATED</h1>
+<p>This package is deprecated in favour of my newer packages <a href="https://nightwatch-api.netlify.com/">nightwatch-api</a> and <a href="https://github.com/mucsi96/w3c-webdriver">w3c-webdriver</a></p>
+<h1 id="intro">Intro</h1>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="step-1">Step 1</h3>
+<p>First you need to have Nightwatch.js and Cucumber.js to be installed locally.</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> --save-dev nightwatch cucumber
+</code></pre>
+<p>or shorter</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">npm</span> i -D nightwatch cucumber
+</code></pre>
+<p>If you are new to Nightwatch.js you can read the <a href="http://nightwatchjs.org/guide">developer guide</a>.</p>
+<h3 id="step-2">Step 2</h3>
+<p>Install <code>nightwatch-cucumber</code></p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">npm</span> <span class="token function">install</span> --save-dev nightwatch-cucumber
+</code></pre>
+<p>or shorter</p>
+<pre class="language-bash"><code class="language-bash">$ <span class="token function">npm</span> i -D nightwatch-cucumber
+</code></pre>
+<h3 id="step-3">Step 3</h3>
+<p>In project root create a JavaScript configuration file for Nightwatch.js. Use <code>nightwatch.conf.js</code> instead of <code>nightwatch.json</code>. <a href="http://nightwatchjs.org/guide#settings-file">More details</a> You don't need to specify <code>src_folders</code>.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// nightwatch.conf.js</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="step-4">Step 4</h3>
+<p>Require <code>nightwatch-cucumber</code> at the top of the configuration file.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// nightwatch.conf.js</span>
+
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">/* other configuration options */</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>For more examples check out the <a href="https://github.com/mucsi96/nightwatch-cucumber-example">example repository</a> or the <a href="https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples">examples folder</a></p>
+<h3 id="step-5">Step 5</h3>
+<p>Add an npm script to your <code>package.json</code>. This will make the test execution more convenient.
+You can choose any name for it.</p>
+<pre class="language-json"><code class="language-json">// package.json
+<span class="token punctuation">{</span>
+  ...
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"e2e-test"</span><span class="token operator">:</span> <span class="token string">"nightwatch"</span><span class="token punctuation">,</span>
+    ...
+  <span class="token punctuation">}</span>
+  ...
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="step-6">Step 6</h3>
+<p>Run the tests by executing.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-test
+</code></pre>
+<p><img src="res/img/nightwatch-cucumber-output.png" alt="alt-tag"></p>
+<h2 id="demo-test">Demo Test</h2>
+<p>By default feature files are located in <code>features</code> folder. You can change this using configuration object.</p>
+<pre class="language-gherkin"><code class="language-gherkin"><span class="token comment"># features/google.feature</span>
+
+<span class="token feature"><span class="token keyword">Feature:</span><span class="token important"> Google Search</span>
+
+</span><span class="token scenario"><span class="token keyword">Scenario:</span><span class="token important"> Searching Google</span></span>
+
+  <span class="token atrule">Given</span> I open Google's search page
+  <span class="token atrule">Then</span> the title is <span class="token string">"Google"</span>
+  <span class="token atrule">And</span> the Google search form exists
+</code></pre>
+<p>Step definitions files are located in <code>features/step_definitions</code> folder by default.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// features/step_definitions/google.js</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span> client <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> Given<span class="token punctuation">,</span> Then<span class="token punctuation">,</span> When <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">Given</span><span class="token punctuation">(</span><span class="token regex">/^I open Google's search page$/</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> client
+    <span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span><span class="token string">'http://google.com'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">waitForElementVisible</span><span class="token punctuation">(</span><span class="token string">'body'</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">Then</span><span class="token punctuation">(</span><span class="token regex">/^the title is "([^"]*)"$/</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>title<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> client<span class="token punctuation">.</span>assert<span class="token punctuation">.</span><span class="token function">title</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">Then</span><span class="token punctuation">(</span><span class="token regex">/^the Google search form exists$/</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> client<span class="token punctuation">.</span>assert<span class="token punctuation">.</span><span class="token function">visible</span><span class="token punctuation">(</span><span class="token string">'input[name="q"]'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>For more examples check out the <a href="https://github.com/mucsi96/nightwatch-cucumber-example">example repository</a> or the <a href="https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples">examples folder</a></p>
+<h2 id="step-definition-handling">Step definition handling</h2>
+<p>Step definitons which uses Nightwatch client should return the result of api call as it returns a Promise. Please note that this behaviour is different from plain Nightwatch client API.</p>
+<h1 id="running-tests">Running tests</h1>
+<h2 id="error-handling">Error handling</h2>
+<p><img src="res/img/nightwatch-cucumber-error-handling-output.png" alt="alt-tag"></p>
+<h2 id="executing-individual-feature-files-or-scenarios">Executing individual feature files or scenarios</h2>
+<p>Single feature file</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-test -- features/google-search.feature
+</code></pre>
+<p>or</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-test -- features/google-search
+</code></pre>
+<p>Multiple feature files</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-test -- features/google-search features/duckduckgo-search
+</code></pre>
+<p>Single feature file and one folder</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-test -- features/google/google-search features/duckduckgo
+</code></pre>
+<p>Single scenario by its line number</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-test -- features/google-search.feature:11
+</code></pre>
+<h2 id="feature-groups">Feature Groups</h2>
+<p>You can selectively run features based on groups. To group features together just place them in the same sub-folder. The folder name is the name of the group.
+You can use Nightwatch CLI <code>--group</code>, <code>--skipgroup</code> flags. <a href="http://nightwatchjs.org/guide#test-groups">More details </a></p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-test -- --group google
+</code></pre>
+<h2 id="feature-and-scenario-tags">Feature and Scenario Tags</h2>
+<p>You can selectively run features and scenarios based on tags. <a href="http://nightwatchjs.org/guide#test-tags">More details </a></p>
+<pre class="language-gherkin"><code class="language-gherkin"><span class="token comment"># google.feature</span>
+
+<span class="token tag">@google</span>
+<span class="token feature"><span class="token keyword">Feature:</span><span class="token important"> Google Search</span>
+
+</span><span class="token tag">@search</span>
+<span class="token scenario"><span class="token keyword">Scenario:</span><span class="token important"> Searching Google</span></span>
+
+  <span class="token atrule">Given</span> I open Google's search page
+  <span class="token atrule">Then</span> the title is <span class="token string">"Google"</span>
+  <span class="token atrule">And</span> the Google search form exists
+</code></pre>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-test -- --tag google
+</code></pre>
+<p>or for more matches</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-test -- --tag google --tag yahoo
+</code></pre>
+<p>You can also skip features based on tags</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-test -- --skiptags google
+</code></pre>
+<p>or for skipping multiple tags</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-test -- --skiptags google,yahoo
+</code></pre>
+<p>and all together :)</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-test -- --tag google --tag yahoo --skiptags search,login
+</code></pre>
+<h2 id="supported-nightwatch-command-line-options">Supported Nightwatch command line options</h2>
+<div class="responsive-table"><table>
+<thead>
+<tr>
+<th style="text-align:center">Name</th>
+<th style="text-align:center">Shortname</th>
+<th style="text-align:center">Supported</th>
+<th style="text-align:center">Default</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>--config</code></td>
+<td style="text-align:center"><code>-c</code></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#77B255" d="M36 32c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V4c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v28z"/><path fill="#FFF" d="M29.28 6.362c-1.156-.751-2.704-.422-3.458.736L14.936 23.877l-5.029-4.65c-1.014-.938-2.596-.875-3.533.138-.937 1.014-.875 2.596.139 3.533l7.209 6.666c.48.445 1.09.665 1.696.665.673 0 1.534-.282 2.099-1.139.332-.506 12.5-19.27 12.5-19.27.751-1.159.421-2.707-.737-3.458z"/></svg></td>
+<td style="text-align:center">./nightwatch.conf.js</td>
+<td style="text-align:left">The location of the nightwatch.conf.js file - the configuration file which the Nightwatch uses and which also includes the Selenium WebDriver options.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--output</code></td>
+<td style="text-align:center"><code>-o</code></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#BE1931" d="M36 18c0 9.941-8.059 18-18 18S0 27.941 0 18 8.059 0 18 0s18 8.059 18 18z"/><path fill="#FFF" d="M32 20c0 1.104-.896 2-2 2H6c-1.104 0-2-.896-2-2v-4c0-1.104.896-2 2-2h24c1.104 0 2 .896 2 2v4z"/></svg></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">tests_output	The location where the JUnit XML reports will be saved. Use CucumberJS <a href="https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#formats"><code>--format &lt;TYPE[:PATH]&gt;</code></a> instead</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--reporter</code></td>
+<td style="text-align:center"><code>-r</code></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#BE1931" d="M36 18c0 9.941-8.059 18-18 18S0 27.941 0 18 8.059 0 18 0s18 8.059 18 18z"/><path fill="#FFF" d="M32 20c0 1.104-.896 2-2 2H6c-1.104 0-2-.896-2-2v-4c0-1.104.896-2 2-2h24c1.104 0 2 .896 2 2v4z"/></svg></td>
+<td style="text-align:center">junit</td>
+<td style="text-align:left">Name of a predefined reporter (e.g. junit) or path to a custom reporter file to use. Use CucumberJS <a href="https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#formats"><code>--format &lt;TYPE[:PATH]&gt;</code></a> instead</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--env</code></td>
+<td style="text-align:center"><code>-e</code></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#77B255" d="M36 32c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V4c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v28z"/><path fill="#FFF" d="M29.28 6.362c-1.156-.751-2.704-.422-3.458.736L14.936 23.877l-5.029-4.65c-1.014-.938-2.596-.875-3.533.138-.937 1.014-.875 2.596.139 3.533l7.209 6.666c.48.445 1.09.665 1.696.665.673 0 1.534-.282 2.099-1.139.332-.506 12.5-19.27 12.5-19.27.751-1.159.421-2.707-.737-3.458z"/></svg></td>
+<td style="text-align:center">default</td>
+<td style="text-align:left">Which testing environment to use - defined in nightwatch.conf.js</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--verbose</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#77B255" d="M36 32c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V4c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v28z"/><path fill="#FFF" d="M29.28 6.362c-1.156-.751-2.704-.422-3.458.736L14.936 23.877l-5.029-4.65c-1.014-.938-2.596-.875-3.533.138-.937 1.014-.875 2.596.139 3.533l7.209 6.666c.48.445 1.09.665 1.696.665.673 0 1.534-.282 2.099-1.139.332-.506 12.5-19.27 12.5-19.27.751-1.159.421-2.707-.737-3.458z"/></svg></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Shows extended selenium command logging during the session</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--version</code></td>
+<td style="text-align:center"><code>-v</code></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#77B255" d="M36 32c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V4c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v28z"/><path fill="#FFF" d="M29.28 6.362c-1.156-.751-2.704-.422-3.458.736L14.936 23.877l-5.029-4.65c-1.014-.938-2.596-.875-3.533.138-.937 1.014-.875 2.596.139 3.533l7.209 6.666c.48.445 1.09.665 1.696.665.673 0 1.534-.282 2.099-1.139.332-.506 12.5-19.27 12.5-19.27.751-1.159.421-2.707-.737-3.458z"/></svg></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Shows the version number</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--test</code></td>
+<td style="text-align:center"><code>-t</code></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#77B255" d="M36 32c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V4c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v28z"/><path fill="#FFF" d="M29.28 6.362c-1.156-.751-2.704-.422-3.458.736L14.936 23.877l-5.029-4.65c-1.014-.938-2.596-.875-3.533.138-.937 1.014-.875 2.596.139 3.533l7.209 6.666c.48.445 1.09.665 1.696.665.673 0 1.534-.282 2.099-1.139.332-.506 12.5-19.27 12.5-19.27.751-1.159.421-2.707-.737-3.458z"/></svg></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Runs only the specified feature file. By default the runner will attempt to run all feature files.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--testcase</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#BE1931" d="M36 18c0 9.941-8.059 18-18 18S0 27.941 0 18 8.059 0 18 0s18 8.059 18 18z"/><path fill="#FFF" d="M32 20c0 1.104-.896 2-2 2H6c-1.104 0-2-.896-2-2v-4c0-1.104.896-2 2-2h24c1.104 0 2 .896 2 2v4z"/></svg></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Used only together with --test. Runs the specified testcase from the current suite/module.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--group</code></td>
+<td style="text-align:center"><code>-g</code></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#77B255" d="M36 32c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V4c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v28z"/><path fill="#FFF" d="M29.28 6.362c-1.156-.751-2.704-.422-3.458.736L14.936 23.877l-5.029-4.65c-1.014-.938-2.596-.875-3.533.138-.937 1.014-.875 2.596.139 3.533l7.209 6.666c.48.445 1.09.665 1.696.665.673 0 1.534-.282 2.099-1.139.332-.506 12.5-19.27 12.5-19.27.751-1.159.421-2.707-.737-3.458z"/></svg></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Runs only the specified group of tests (subfolder). Tests are grouped by being placed in the same subfolder.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--skipgroup</code></td>
+<td style="text-align:center"><code>-s</code></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#77B255" d="M36 32c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V4c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v28z"/><path fill="#FFF" d="M29.28 6.362c-1.156-.751-2.704-.422-3.458.736L14.936 23.877l-5.029-4.65c-1.014-.938-2.596-.875-3.533.138-.937 1.014-.875 2.596.139 3.533l7.209 6.666c.48.445 1.09.665 1.696.665.673 0 1.534-.282 2.099-1.139.332-.506 12.5-19.27 12.5-19.27.751-1.159.421-2.707-.737-3.458z"/></svg></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Skip one or several (comma separated) group of tests.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--filter</code></td>
+<td style="text-align:center"><code>-f</code></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#FFCC4D" d="M36 15c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V7c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v8z"/><path d="M6 3H4C1.791 3 0 4.791 0 7v2l6-6zm6 0L0 15c0 1.36.682 2.558 1.72 3.28L17 3h-5zM7 19h5L28 3h-5zm16 0L35.892 6.108c-.281-1.23-1.126-2.24-2.252-2.748L18 19h5zm13-4v-3l-7 7h3c2.209 0 4-1.791 4-4z" fill="#292F33"/><path fill="#99AAB5" d="M4 19h5v14H4zm23 0h5v14h-5z"/></svg></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Specify a filter (glob expression) as the file name format to use when loading the test files.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--tag</code></td>
+<td style="text-align:center"><code>-a</code></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#77B255" d="M36 32c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V4c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v28z"/><path fill="#FFF" d="M29.28 6.362c-1.156-.751-2.704-.422-3.458.736L14.936 23.877l-5.029-4.65c-1.014-.938-2.596-.875-3.533.138-.937 1.014-.875 2.596.139 3.533l7.209 6.666c.48.445 1.09.665 1.696.665.673 0 1.534-.282 2.099-1.139.332-.506 12.5-19.27 12.5-19.27.751-1.159.421-2.707-.737-3.458z"/></svg></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Filter test modules by tags. Only tests that have the specified tags will be loaded.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--skiptags</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#77B255" d="M36 32c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V4c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v28z"/><path fill="#FFF" d="M29.28 6.362c-1.156-.751-2.704-.422-3.458.736L14.936 23.877l-5.029-4.65c-1.014-.938-2.596-.875-3.533.138-.937 1.014-.875 2.596.139 3.533l7.209 6.666c.48.445 1.09.665 1.696.665.673 0 1.534-.282 2.099-1.139.332-.506 12.5-19.27 12.5-19.27.751-1.159.421-2.707-.737-3.458z"/></svg></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Skips tests that have the specified tag or tags (comma separated).</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--retries</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#FFCC4D" d="M36 15c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V7c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v8z"/><path d="M6 3H4C1.791 3 0 4.791 0 7v2l6-6zm6 0L0 15c0 1.36.682 2.558 1.72 3.28L17 3h-5zM7 19h5L28 3h-5zm16 0L35.892 6.108c-.281-1.23-1.126-2.24-2.252-2.748L18 19h5zm13-4v-3l-7 7h3c2.209 0 4-1.791 4-4z" fill="#292F33"/><path fill="#99AAB5" d="M4 19h5v14H4zm23 0h5v14h-5z"/></svg></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Retries failed or errored testcases up to the specified number of times. Retrying a testcase will also retry the beforeEach and afterEach hooks, if any.</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>--suiteRetries</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#BE1931" d="M36 18c0 9.941-8.059 18-18 18S0 27.941 0 18 8.059 0 18 0s18 8.059 18 18z"/><path fill="#FFF" d="M32 20c0 1.104-.896 2-2 2H6c-1.104 0-2-.896-2-2v-4c0-1.104.896-2 2-2h24c1.104 0 2 .896 2 2v4z"/></svg></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Retries failed or errored testsuites (test modules) up to the specified number of times. Retrying a testsuite will also retry the before and after hooks (in addition to the global beforeEach and afterEach respectively), if any are defined on the testsuite.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="parallel-execution">Parallel execution</h2>
+<p>For speeding up the execution of tests you can run them parallely. Here is an example Nightwatch configuration file. <a href="http://nightwatchjs.org/guide#via-workers">More details</a>.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// nightwatch.conf.js</span>
+
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token string">"test_workers"</span><span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="res/img/nightwatch-cucumber-parallel-test-output.png" alt="alt-tag"></p>
+<h2 id="programmatical-execution">Programmatical execution</h2>
+<p>You can execute tests using the following programmatical API</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> nightwatch <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch'</span><span class="token punctuation">)</span>
+
+nightwatch<span class="token punctuation">.</span><span class="token function">runner</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  _<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// Run single feature file</span>
+  config<span class="token punctuation">:</span> <span class="token string">'nightwatch.conf.js'</span><span class="token punctuation">,</span>
+  env<span class="token punctuation">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
+  filter<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+  tag<span class="token punctuation">:</span> <span class="token string">''</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'done'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="grunt-support">Grunt support</h2>
+<p>For running test using <a href="http://gruntjs.com/">Grunt</a> task runner you can use the following <code>Gruntfile.js</code> as template. <a href="http://nightwatchjs.org/guide#using-grunt">More details</a></p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// Gruntfile.js</span>
+<span class="token keyword">const</span> nightwatch <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch'</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span>grunt<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  grunt<span class="token punctuation">.</span><span class="token function">initConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    nightwatch<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">'default'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        argv<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+  nightwatch<span class="token punctuation">.</span><span class="token function">initGrunt</span><span class="token punctuation">(</span>grunt<span class="token punctuation">)</span>
+
+  grunt<span class="token punctuation">.</span><span class="token function">registerTask</span><span class="token punctuation">(</span><span class="token string">'default'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'nightwatch'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h1 id="example-apps">Example apps</h1>
+<h2 id="simple-example-application">Simple example application</h2>
+<p>This example repository demonstrates a simple project which is using Nightwatch-Cucumber for E2E testing.</p>
+<p><a href="https://github.com/mucsi96/nightwatch-cucumber-example"><img src="res/img/nightwatch-cucumber-example.png" alt="alt-tag"></a></p>
+<h2 id="async-await-example-application">Async await example application</h2>
+<p>This example repository demonstrates a project which is using Nightwatch-Cucumber for E2E testing.
+It is using async await, Babel and ES6 imports.</p>
+<p><a href="https://github.com/mucsi96/nightwatch-cucumber-async-await-example"><img src="res/img/nightwatch-cucumber-async-await-example.png" alt="alt-tag"></a></p>
+<h1 id="debugging">Debugging</h1>
+<h2 id="debugging-with-chrome-devtools">Debugging with Chrome DevTools</h2>
+<p>Chrome DevTools has a very good integration with latest Node.js versions (8-9)</p>
+<p>Here’s how to set up a debugging sesssion.</p>
+<h3 id="1-add-a-new-npm-script-to-you-project">1. Add a new npm script to you project</h3>
+<pre class="language-json"><code class="language-json"><span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    ...
+    <span class="token property">"e2e-debug"</span><span class="token operator">:</span> <span class="token string">"node --inspect node_modules/nightwatch/bin/nightwatch"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre>
+<h3 id="2-set-a-breakpoint-in-you-step-definitions-or-support-code-using-debugger-statement">2. Set a breakpoint in you step definitions or support code (Using <code>debugger</code> statement)</h3>
+<pre class="language-javascript"><code class="language-javascript">  <span class="token function">Then</span><span class="token punctuation">(</span><span class="token regex">/^the title is "(.*?)"$/</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>text<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">debugger</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> client<span class="token punctuation">.</span>assert<span class="token punctuation">.</span><span class="token function">title</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="3-open-aboutinspect-in-chrome">3. Open <code>about:inspect</code> in Chrome</h3>
+<p><img src="res/img/chrome-devtools-inspect.png" alt="alt-tag"></p>
+<h3 id="4-click-the-open-dedicated-devtools-for-node-link">4. Click the <code>Open dedicated DevTools for Node</code> link.</h3>
+<p><img src="res/img/chrome-devtools-nodejs.png" alt="alt-tag"></p>
+<h3 id="5-run-the-e2e-debug-npm-script">5. Run the <code>e2e-debug</code> npm script</h3>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> run e2e-debug
+</code></pre>
+<pre class="language-bash"><code class="language-bash">yarn e2e-debug
+</code></pre>
+<p>The debugging session should stop the execution on the <code>debugger</code> statement you set.</p>
+<p><img src="res/img/chrome-devtools-breakpoint.png" alt="alt-tag"></p>
+<h3 id="6-close-the-dedicated-devtools-for-node-to-stop-debugging-session">6. Close the dedicated DevTools for Node to stop debugging session.</h3>
+<h2 id="debugging-with-visual-studio-code">Debugging with Visual Studio Code</h2>
+<p>Visual Studio Code provides good debugging capabilities for Node.js</p>
+<p>Here’s how to set up a debugging sesssion.</p>
+<h3 id="1-add-the-following-configuration-to-your-project-launchjson">1. Add the following configuration to your project launch.json</h3>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  ...
+  <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    ...
+    <span class="token punctuation">{</span>
+      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"node"</span><span class="token punctuation">,</span>
+      <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span>
+      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Nightwtach"</span><span class="token punctuation">,</span>
+      <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceRoot}/node_modules/nightwatch/bin/nightwatch"</span><span class="token punctuation">,</span>
+      <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="2-set-a-breakpoint-in-your-step-definitions-or-support-code">2. Set a breakpoint in your step definitions or support code</h3>
+<h3 id="3-start-debugging-using-the-newly-created-launch-configuration">3. Start debugging using the newly created launch configuration</h3>
+<p><img src="res/img/vscode-breakpoint.png" alt="alt-tag"></p>
+<p>For more details read the <a href="https://code.visualstudio.com/docs/editor/debugging">VSCode documentation</a></p>
+<h1 id="configuration">Configuration</h1>
+<h2 id="cucumber-output">Cucumber output</h2>
+<p>From version 3.0.0 of Cucumber.js the pretty formatter has been removed. The default formatter is the dot fromatter.
+To get back the original output you can use the <a href="https://github.com/kozhevnikov/cucumber-pretty">cucumber-pretty</a> package.</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> cucumber-pretty --save-dev
+</code></pre>
+<p>Include the <code>--format node_modules/cucumber-pretty</code> command line arguments in <code>nightwatch.conf.js</code></p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// nightwatch.conf.js</span>
+
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  cucumberArgs<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token string">'--format'</span><span class="token punctuation">,</span> <span class="token string">'node_modules/cucumber-pretty'</span><span class="token punctuation">,</span>
+    <span class="token string">'features'</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><img src="res/img/nightwatch-cucumber-pretty-output.png" alt="alt-tag"></p>
+<h2 id="nightwatch-output">Nightwatch output</h2>
+<p>By default every passed Nightwatch assertion fill log a message on output. To disable that set <code>nightwatchOutput: false</code> in configuration object.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// nightwatch.conf.js</span>
+
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+  nightwatchOutput<span class="token punctuation">:</span> <span class="token boolean">false</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="passing-additional-cli-options-for-cucumberjs">Passing additional CLI options for Cucumber.js.</h2>
+<p>For that you can use the <code>cucumberArgs</code> configuration property. For available Cucumber.js CLI options see the <a href="https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md">Cucumber.js docs</a></p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// nightwatch.conf.js</span>
+
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  cucumberArgs<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token string">'--require'</span><span class="token punctuation">,</span> <span class="token string">'hooks.js'</span><span class="token punctuation">,</span>
+    <span class="token string">'--require'</span><span class="token punctuation">,</span> <span class="token string">'features/step_definitions'</span><span class="token punctuation">,</span>
+    <span class="token string">'--format-options'</span><span class="token punctuation">,</span> <span class="token string">'{"colorsEnabled":false}'</span><span class="token punctuation">,</span>
+    <span class="token string">'features'</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>The default configuration object is.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token punctuation">{</span>
+  cucumberArgs<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token string">'--require'</span><span class="token punctuation">,</span> <span class="token string">'features/step_definitions'</span><span class="token punctuation">,</span>
+    <span class="token string">'--format'</span><span class="token punctuation">,</span> <span class="token string">'json:reports/cucumber.json'</span><span class="token punctuation">,</span>
+    <span class="token string">'features'</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  nightwatchOutput<span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="timeouts">Timeouts</h2>
+<p>The Cucumber timeouts are disabled entirely. So for timeouts you can use only Nightwatch <a href="http://nightwatchjs.org/gettingstarted/#full-list-of-settings"><code>request_timeout_options</code></a>.</p>
+<h2 id="hooks">Hooks</h2>
+<p>Hooks can be provided using Cucumber.js support files. Support files are specified using <code>supportFiles</code> configuration option.
+<a href="https://github.com/cucumber/cucumber-js/blob/master/docs/support_files/hooks.md">More details</a>
+For more examples check out the <a href="https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples">examples folder</a></p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// nightwatch.conf.js</span>
+
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  cucumberArgs<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token string">'--require'</span><span class="token punctuation">,</span> <span class="token string">'hooks.js'</span><span class="token punctuation">,</span>
+    <span class="token string">'--require'</span><span class="token punctuation">,</span> <span class="token string">'features/step_definitions'</span><span class="token punctuation">,</span>
+    <span class="token string">'features'</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// hooks.js</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> Before<span class="token punctuation">,</span> After <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">Before</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>resolve <span class="token operator">=></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Before start'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Before end'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">After</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>resolve <span class="token operator">=></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'After start'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'After end'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h1 id="patterns">Patterns</h1>
+<h2 id="session-handling">Session handling</h2>
+<p>If you test a site which uses cookies, localStorage or sessionStorage its a good practise to clear them after each test case.
+Not doing so will make the test cases not isolated.
+Which can lead to not reliable, failing test where would be very hard to find the root cause of the issue.
+Creating a new webdriver session for every test case is not necessary.
+A proper cleanup and page refresh should be sufficient in most cases.
+As starter you can use the following support code.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token punctuation">{</span> client <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> After <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">After</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> client<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`
+  localStorage.clear();
+  sessionStorage.clear();
+`</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">deleteCookies</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">refresh</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="feature-background">Feature background</h2>
+<p>You can use feature background to avoid copying and pasting of steps. The background runs before each scenario after beforeScenario hooks.</p>
+<pre class="language-gherkin"><code class="language-gherkin"><span class="token feature"><span class="token keyword">Feature:</span><span class="token important"> Feature background example</span>
+
+</span><span class="token scenario"><span class="token keyword">Background:</span><span class="token important"></span></span>
+  <span class="token atrule">Given</span> there are 10 cucumbers
+
+<span class="token scenario"><span class="token keyword">Scenario:</span><span class="token important"> eating</span></span>
+
+  <span class="token atrule">When</span> I eat 3 cucumbers
+  <span class="token atrule">Then</span> I should have 7 cucumbers
+
+<span class="token scenario"><span class="token keyword">Scenario:</span><span class="token important"> adding</span></span>
+
+  <span class="token atrule">When</span> I add 1 cucumbers
+  <span class="token atrule">Then</span> I should have 11 cucumbers
+</code></pre>
+<h2 id="scenario-outlines">Scenario Outlines</h2>
+<p>You can use scenario outlines to avoid copying and pasting of scenarios.</p>
+<pre class="language-gherkin"><code class="language-gherkin"><span class="token scenario"><span class="token keyword">Scenario Outline:</span><span class="token important"> eating</span></span>
+  <span class="token atrule">Given</span> there are <span class="token outline variable">&lt;start></span> cucumbers
+  <span class="token atrule">When</span> I eat <span class="token outline variable">&lt;eat></span> cucumbers
+  <span class="token atrule">Then</span> I should have <span class="token outline variable">&lt;left></span> cucumbers
+
+  <span class="token scenario"><span class="token keyword">Examples:</span><span class="token important"></span></span><span class="token table-head">
+  <span class="token punctuation">|</span><span class="token th variable"> start </span><span class="token punctuation">|</span><span class="token th variable"> eat </span><span class="token punctuation">|</span><span class="token th variable"> left </span><span class="token punctuation">|</span></span><span class="token table-body">
+  <span class="token punctuation">|</span><span class="token td string">  12   </span><span class="token punctuation">|</span><span class="token td string">  5  </span><span class="token punctuation">|</span><span class="token td string">  7   </span><span class="token punctuation">|</span>
+  <span class="token punctuation">|</span><span class="token td string">  20   </span><span class="token punctuation">|</span><span class="token td string">  5  </span><span class="token punctuation">|</span><span class="token td string">  15  </span><span class="token punctuation">|</span></span>
+</code></pre>
+<h2 id="page-objects">Page Objects</h2>
+<p>For making your tests more readable and maintainable you can use the Page Object pattern. Nightwatch reads the page objects from the folder (or folders) specified in the <code>page_objects_path</code> configuration property. <a href="http://nightwatchjs.org/guide#page-objects">More details</a>. Add the following line to Nightwatch.js configuration file.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// nightwatch.conf.js</span>
+
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">/* configuration */</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  page_objects_path<span class="token punctuation">:</span> <span class="token string">'page-objects'</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">//page-objects/yahoo.js</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  url<span class="token punctuation">:</span> <span class="token string">'http://yahoo.com'</span><span class="token punctuation">,</span>
+  elements<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    body<span class="token punctuation">:</span> <span class="token string">'body'</span><span class="token punctuation">,</span>
+    searchBar<span class="token punctuation">:</span> <span class="token string">'input[name="p"]'</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Now we can use page objects from step definitions</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">//step-definitions/yahoo.js</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span> client <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> Given<span class="token punctuation">,</span> Then<span class="token punctuation">,</span> When <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">Given</span><span class="token punctuation">(</span><span class="token regex">/^I open Yahoo's search page$/</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> yahoo <span class="token operator">=</span> client<span class="token punctuation">.</span>page<span class="token punctuation">.</span><span class="token function">yahoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> yahoo
+    <span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">waitForElementVisible</span><span class="token punctuation">(</span><span class="token string">'@body'</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">Then</span><span class="token punctuation">(</span><span class="token regex">/^the Yahoo search form exists$/</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> yahoo <span class="token operator">=</span> client<span class="token punctuation">.</span>page<span class="token punctuation">.</span><span class="token function">yahoo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> yahoo<span class="token punctuation">.</span>assert<span class="token punctuation">.</span><span class="token function">visible</span><span class="token punctuation">(</span><span class="token string">'@searchBar'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h1 id="advanced-features">Advanced features</h1>
+<h2 id="babel-support">Babel support</h2>
+<p>You can write tests using latest ECMAScript features using <a href="https://babeljs.io/">Babel</a>. Using <code>async</code> function is especially useful.
+For that you need install <code>babel-core</code>, setup <code>.babelrc</code> and add Babel as require-module</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// nightwatch.conf.js</span>
+
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  cucumberArgs<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'--require-module'</span><span class="token punctuation">,</span> <span class="token string">'babel-core/register'</span><span class="token punctuation">,</span> <span class="token string">'--require'</span><span class="token punctuation">,</span> <span class="token string">'features/step_definitions'</span><span class="token punctuation">,</span> <span class="token string">'features'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token operator">...</span>
+</code></pre>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">// features/step_definitions/google.js</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> client <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Given<span class="token punctuation">,</span> Then<span class="token punctuation">,</span> When <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'cucumber'</span><span class="token punctuation">;</span>
+
+<span class="token function">Given</span><span class="token punctuation">(</span><span class="token regex">/^I open Google's search page$/</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">await</span> client<span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span><span class="token string">'http://google.com'</span><span class="token punctuation">)</span>
+  <span class="token keyword">await</span> client<span class="token punctuation">.</span><span class="token function">waitForElementVisible</span><span class="token punctuation">(</span><span class="token string">'body'</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">Then</span><span class="token punctuation">(</span><span class="token regex">/^the title is "([^"]*)"$/</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>title<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">await</span> client<span class="token punctuation">.</span>assert<span class="token punctuation">.</span><span class="token function">title</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">Then</span><span class="token punctuation">(</span><span class="token regex">/^the Google search form exists$/</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">await</span> client<span class="token punctuation">.</span>assert<span class="token punctuation">.</span><span class="token function">visible</span><span class="token punctuation">(</span><span class="token string">'input[name="q"]'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>For complete working example check out the <a href="https://github.com/mucsi96/nightwatch-cucumber/tree/master/examples/babel-example">examples folder</a></p>
+<h2 id="screenshots">Screenshots</h2>
+<p>You can enable screenshot generation on step failure using following Nightwatch configuration</p>
+<pre class="language-javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  test_settings<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">default</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      screenshots <span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        enabled <span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        on_failure <span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        path<span class="token punctuation">:</span> <span class="token string">'screenshots/default'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token operator">...</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="html-reports">HTML reports</h2>
+<p>You can create HTML reports using <a href="https://www.npmjs.com/package/cucumber-html-reporter">cucumber-html-reporter</a>
+As input you need to provide a Cucumber JSON report generated by this package. You have to run the report generation in a separate NodeJs process. An example <code>package.json</code> could be the following.</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  ...
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"e2e"</span><span class="token operator">:</span> <span class="token string">"npm-run-all e2e-test e2e-report --continue-on-error"</span><span class="token punctuation">,</span>
+    <span class="token property">"e2e-test"</span><span class="token operator">:</span> <span class="token string">"nightwatch"</span><span class="token punctuation">,</span>
+    <span class="token property">"e2e-report"</span><span class="token operator">:</span> <span class="token string">"node create-html-report.js"</span><span class="token punctuation">,</span>
+    ...
+  <span class="token punctuation">}</span>
+  ...
+<span class="token punctuation">}</span>
+</code></pre>
+<p>This example is using the <a href="https://www.npmjs.com/package/npm-run-all">npm-run-all</a> package which is capable to run multiple npm-scripts sequential and works cross platform.</p>
+<p><img src="https://raw.githubusercontent.com/gkushang/cucumber-html-reporter/master/samples/html_report_snapshots/cucumber_report_bootstrap_snapshot.png" alt="alt-tag"></p>
+<h2 id="junit-xml-reports">JUnit XML reports</h2>
+<p>You can create JUnit XML reports using <a href="https://github.com/stjohnjohnson/cucumber-junit">cucumber-junit</a>
+As input you need to provide a Cucumber JSON report generated by this package.</p>
+<h2 id="languages">Languages</h2>
+<p>You can use different language in feature files. For setting the language you need to add language comment at the top of the feature file.</p>
+<pre class="language-gherkin"><code class="language-gherkin"><span class="token comment">#language: pt</span>
+
+<span class="token feature"><span class="token keyword">Funcionalidade:</span><span class="token important"> Pesquisa Google</span>
+
+</span><span class="token scenario"><span class="token keyword">Cenário:</span><span class="token important"> Pesquisando no Google</span></span>
+
+   Dado que eu abrir a página de pesquisa do Google
+   Em seguida, o título é <span class="token string">"Google"</span>
+   E o formulário de busca Google existe
+</code></pre>
+<h2 id="creating-dynamic-sections">Creating dynamic sections</h2>
+<p>You can create sections dynamically by using the modified Nightwatch <code>Section</code>
+constructor exported by Nightwatch Cucumber.  Consider the following example
+using nightwatch to test Wikipedia.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">//page-objects/wikipedia.js</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> Section <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  url<span class="token punctuation">:</span> <span class="token string">'https://en.wikipedia.org/wiki/Cucumber_(software)'</span><span class="token punctuation">,</span>
+  elements<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    toc<span class="token punctuation">:</span> <span class="token string">'div#toc'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  commands<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    getHeading<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>heading<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> props <span class="token operator">=</span> <span class="token punctuation">{</span>
+        parent<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">,</span>
+        selector<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`//h2/*[text()="</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>heading<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">"]/..`</span></span><span class="token punctuation">,</span>
+        using<span class="token punctuation">:</span> <span class="token string">'xpath'</span><span class="token punctuation">,</span>
+        elements<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          editLink<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            selector<span class="token punctuation">:</span> <span class="token string">'//*[@class="mw-editsection"]//a[text()="edit"]'</span><span class="token punctuation">,</span>
+            locateStrategy<span class="token punctuation">:</span> <span class="token string">'xpath'</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        commands<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+          verifyEditSection<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Section</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    getSectionTitles<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">/</span><span class="token operator">*</span> <span class="token constant">MAGIC</span><span class="token operator">!</span> <span class="token operator">*</span><span class="token operator">/</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Now we can use the <code>getHeading</code> command to test each of the edit links to ensure
+that they edit the appropriate section.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token comment">//step-definitions/yahoo.js</span>
+
+<span class="token keyword">const</span> <span class="token punctuation">{</span> client <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'nightwatch-cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> Given<span class="token punctuation">,</span> Then<span class="token punctuation">,</span> When <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cucumber'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> wikipedia <span class="token operator">=</span> client<span class="token punctuation">.</span>page<span class="token punctuation">.</span><span class="token function">wikipedia</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">Given</span><span class="token punctuation">(</span><span class="token regex">/^I open each section's edit link$/</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  wikipedia<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span>
+    wikipedia<span class="token punctuation">.</span><span class="token function">getSectionTitles</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span> <span class="token operator">=></span>  wikipedia<span class="token punctuation">.</span><span class="token function">getHeading</span><span class="token punctuation">(</span>title<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">verifyEditSection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The advantage of creating sections of the fly like this that your page object
+code can be much DRYer, especially when there are many similar objects on the
+page that you want to test.</p>
+<h1 id="contributors">Contributors</h1>
+<p>Contributions of any kind welcome! Thanks goes to these wonderful people:</p>
+<ul class="contributors">
+  <li><a href="https://twitter.com/mucsi96">
+  <img src="https://avatars.githubusercontent.com/u/3163392?v=3" class="avatar">
+  <sub>Igor Muchychka</sub>
+  </a></li>
+  
+  <li><a href="izalutski.consulting">
+  <img src="https://avatars.githubusercontent.com/u/1280498?v=3" class="avatar">
+  <sub>Igor Zalutski</sub>
+  </a></li>
+  
+  <li><a href="http://danielecampogiani.com">
+  <img src="https://avatars.githubusercontent.com/u/1054526?v=3" class="avatar">
+  <sub>Daniele Campogiani</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/RSsimranjeetsingh">
+  <img src="https://avatars.githubusercontent.com/u/15341713?v=3" class="avatar">
+  <sub>Simranjeet Singh</sub>
+  </a></li>
+  
+  <li><a href="http://blog.singhshashi.in">
+  <img src="https://avatars.githubusercontent.com/u/371601?v=3" class="avatar">
+  <sub>Shashi Shekhar Singh</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/jbblanchet">
+  <img src="https://avatars.githubusercontent.com/u/2847338?v=3" class="avatar">
+  <sub>jbblanchet</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/vspiewak">
+  <img src="https://avatars.githubusercontent.com/u/2108652?v=3" class="avatar">
+  <sub>Vincent Spiewak</sub>
+  </a></li>
+  
+  <li><a href="http://fabioquinzi.com">
+  <img src="https://avatars.githubusercontent.com/u/7160445?v=3" class="avatar">
+  <sub>Fabio Quinzi</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/jeffrey-effendy">
+  <img src="https://avatars.githubusercontent.com/u/7831710?v=3" class="avatar">
+  <sub>Jeffrey Effendy</sub>
+  </a></li>
+  
+  <li><a href="http://ldabiralai.me">
+  <img src="https://avatars.githubusercontent.com/u/1711610?v=3" class="avatar">
+  <sub>Lawrence</sub>
+  </a></li>
+  
+  <li><a href="http://domenicogemoli.com">
+  <img src="https://avatars.githubusercontent.com/u/1260402?v=3" class="avatar">
+  <sub>Domenico Gemoli</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/klokovas">
+  <img src="https://avatars.githubusercontent.com/u/8973021?v=3" class="avatar">
+  <sub>Klokov Anton</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/arnogues">
+  <img src="https://avatars.githubusercontent.com/u/2287663?v=3" class="avatar">
+  <sub>Arnaud gueras</sub>
+  </a></li>
+  
+  <li><a href="http://leipert.io">
+  <img src="https://avatars.githubusercontent.com/u/2906107?v=3" class="avatar">
+  <sub>Lukas Eipert</sub>
+  </a></li>
+  
+  <li><a href="http://madrov.com">
+  <img src="https://avatars.githubusercontent.com/u/4364107?v=3" class="avatar">
+  <sub>Paulo</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/TylorS">
+  <img src="https://avatars.githubusercontent.com/u/6282473?v=3" class="avatar">
+  <sub>Tylor Steinberger</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/kinyat">
+  <img src="https://avatars.githubusercontent.com/u/1476974?v=3" class="avatar">
+  <sub>Eric Chan</sub>
+  </a></li>
+  
+  <li><a href="http://www.myk.lt">
+  <img src="https://avatars.githubusercontent.com/u/1476502?v=3" class="avatar">
+  <sub>Mykolas</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/JonWallsten">
+  <img src="https://avatars.githubusercontent.com/u/5993909?v=3" class="avatar">
+  <sub>Jon Wallsten</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/mr-wildcard">
+  <img src="https://avatars2.githubusercontent.com/u/6979207?v=3" class="avatar">
+  <sub>Julien Viala</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/dmerc">
+  <img src="https://avatars3.githubusercontent.com/u/2751776?v=3" class="avatar">
+  <sub>dmerc</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/erikmellum">
+  <img src="https://avatars1.githubusercontent.com/u/6475033?v=4" class="avatar">
+  <sub>Millenium</sub>
+  </a></li>
+  
+  <li><a href="http://www.goshine-dev.co.uk/">
+  <img src="https://avatars3.githubusercontent.com/u/689118?v=4" class="avatar">
+  <sub>Aaron Goshine</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/marikaner">
+  <img src="https://avatars1.githubusercontent.com/u/868536?v=4" class="avatar">
+  <sub>marikaner</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/kerimovaa">
+  <img src="https://avatars1.githubusercontent.com/u/9860858?v=4" class="avatar">
+  <sub>kerimov asif</sub>
+  </a></li>
+  
+  <li><a href="http://www.avtobiografia.com">
+  <img src="https://avatars2.githubusercontent.com/u/328067?v=4" class="avatar">
+  <sub>Evgeniy Vasilev</sub>
+  </a></li>
+  
+  <li><a href="https://github.com/amurdock">
+  <img src="https://avatars3.githubusercontent.com/u/2389179?v=4" class="avatar">
+  <sub>Alasdair Murdock</sub>
+  </a></li>
+  
+  <li><a href="http://clayreimann.me">
+  <img src="https://avatars3.githubusercontent.com/u/930039?v=4" class="avatar">
+  <sub>Clay Reimann</sub>
+  </a></li>
+  </ul>
+<h1 id="change-log">Change log</h1>
+<p>See <a href="https://github.com/mucsi96/nightwatch-cucumber/releases">releases</a></p>
+<h1 id="license">License</h1>
+<p>This software is released under the terms of the
+<a href="https://github.com/mucsi96/nightwatch-cucumber/blob/master/LICENSE">MIT license</a>.</p>
+<h1 id="related-projects">Related projects</h1>
+<ul>
+<li><a href="https://github.com/mucsi96/w3c-webdriver">W3C WebDriver</a></li>
+<li><a href="https://github.com/nightwatchjs/nightwatch">NightwatchJS</a></li>
+<li><a href="https://github.com/cucumber/cucumber-js">CucumberJS</a></li>
+<li><a href="https://github.com/gkushang/cucumber-html-reporter">cucumber-html-reporter</a></li>
+<li><a href="https://github.com/stjohnjohnson/cucumber-junit">cucumber-junit</a></li>
+</ul>
+<p><div class="table-of-contents"><ul><li><a href="#this-package-is-deprecated"><svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#FFCC4D" d="M2.653 35C.811 35-.001 33.662.847 32.027L16.456 1.972c.849-1.635 2.238-1.635 3.087 0l15.609 30.056c.85 1.634.037 2.972-1.805 2.972H2.653z"/><path fill="#231F20" d="M15.583 28.953c0-1.333 1.085-2.418 2.419-2.418 1.333 0 2.418 1.085 2.418 2.418 0 1.334-1.086 2.419-2.418 2.419-1.334 0-2.419-1.085-2.419-2.419zm.186-18.293c0-1.302.961-2.108 2.232-2.108 1.241 0 2.233.837 2.233 2.108v11.938c0 1.271-.992 2.108-2.233 2.108-1.271 0-2.232-.807-2.232-2.108V10.66z"/></svg>️ THIS PACKAGE IS DEPRECATED</a></li><li><a href="#intro">Intro</a><ul><li><a href="#getting-started">Getting Started</a></li><li><a href="#demo-test">Demo Test</a></li><li><a href="#step-definition-handling">Step definition handling</a></li></ul></li><li><a href="#running-tests">Running tests</a><ul><li><a href="#error-handling">Error handling</a></li><li><a href="#executing-individual-feature-files-or-scenarios">Executing individual feature files or scenarios</a></li><li><a href="#feature-groups">Feature Groups</a></li><li><a href="#feature-and-scenario-tags">Feature and Scenario Tags</a></li><li><a href="#supported-nightwatch-command-line-options">Supported Nightwatch command line options</a></li><li><a href="#parallel-execution">Parallel execution</a></li><li><a href="#programmatical-execution">Programmatical execution</a></li><li><a href="#grunt-support">Grunt support</a></li></ul></li><li><a href="#example-apps">Example apps</a><ul><li><a href="#simple-example-application">Simple example application</a></li><li><a href="#async-await-example-application">Async await example application</a></li></ul></li><li><a href="#debugging">Debugging</a><ul><li><a href="#debugging-with-chrome-devtools">Debugging with Chrome DevTools</a></li><li><a href="#debugging-with-visual-studio-code">Debugging with Visual Studio Code</a></li></ul></li><li><a href="#configuration">Configuration</a><ul><li><a href="#cucumber-output">Cucumber output</a></li><li><a href="#nightwatch-output">Nightwatch output</a></li><li><a href="#passing-additional-cli-options-for-cucumberjs">Passing additional CLI options for Cucumber.js.</a></li><li><a href="#timeouts">Timeouts</a></li><li><a href="#hooks">Hooks</a></li></ul></li><li><a href="#patterns">Patterns</a><ul><li><a href="#session-handling">Session handling</a></li><li><a href="#feature-background">Feature background</a></li><li><a href="#scenario-outlines">Scenario Outlines</a></li><li><a href="#page-objects">Page Objects</a></li></ul></li><li><a href="#advanced-features">Advanced features</a><ul><li><a href="#babel-support">Babel support</a></li><li><a href="#screenshots">Screenshots</a></li><li><a href="#html-reports">HTML reports</a></li><li><a href="#junit-xml-reports">JUnit XML reports</a></li><li><a href="#languages">Languages</a></li><li><a href="#creating-dynamic-sections">Creating dynamic sections</a></li></ul></li><li><a href="#contributors">Contributors</a></li><li><a href="#change-log">Change log</a></li><li><a href="#license">License</a></li><li><a href="#related-projects">Related projects</a></li></ul></div></p>
+
+            </article>
+        </main>
+        <footer>
+            <span>Created with <svg class="emoji"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><path fill="#BE1931" d="M35.885 11.833c0-5.45-4.418-9.868-9.867-9.868-3.308 0-6.227 1.633-8.018 4.129-1.791-2.496-4.71-4.129-8.017-4.129-5.45 0-9.868 4.417-9.868 9.868 0 .772.098 1.52.266 2.241C1.751 22.587 11.216 31.568 18 34.034c6.783-2.466 16.249-11.447 17.617-19.959.17-.721.268-1.469.268-2.242z"/></svg>️ in Hungary</span>
+            <nav>
+                <ul>
+                    <li><a href="https://github.com/mucsi96/nightwatch-cucumber"><svg class="icon github"  aria-labelledby="simpleicons-github-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title id="simpleicons-github-icon">GitHub icon</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></li>
+                    <li><a href="https://www.npmjs.com/package/nightwatch-cucumber"><svg class="icon npm"  aria-labelledby="simpleicons-npm-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title id="simpleicons-npm-icon">NPM icon</title><path d="M0 7.334v8h6.666v1.332H12v-1.332h12v-8H0zm6.666 6.664H5.334v-4H3.999v4H1.335V8.667h5.331v5.331zm4 0v1.336H8.001V8.667h5.334v5.332h-2.669v-.001zm12.001 0h-1.33v-4h-1.336v4h-1.335v-4h-1.33v4h-2.671V8.667h8.002v5.331z"/><path d="M10.665 10H12v2.667h-1.335V10z"/></svg></a></li>
+                    <li><a href="https://gitter.im/mucsi96/nightwatch-cucumber"><svg class="icon gitter"  aria-labelledby="simpleicons-gitter-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title id="simpleicons-gitter-icon">Gitter icon</title><path d="M8.501 4.001H10.5V24H8.501V4.001zm6.999 0V24h-2V4.001h2zM3.5 0h2.001v15H3.5V0zm15 4.001h2V15h-2V4.001z"/></svg></a></li>
+                    <li><a href="https://stackoverflow.com/questions/tagged/nightwatch.js+cucumber"><svg class="icon stackoverflow"  aria-labelledby="simpleicons-stackoverflow-icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title id="simpleicons-stackoverflow-icon">Stack Overflow icon</title><path d="M18.986 21.865v-6.404h2.134V24H1.844v-8.539h2.13v6.404h15.012zM6.111 19.731H16.85v-2.137H6.111v2.137zm.259-4.852l10.48 2.189.451-2.07-10.478-2.187-.453 2.068zm1.359-5.056l9.705 4.53.903-1.95-9.706-4.53-.902 1.936v.014zm2.715-4.785l8.217 6.855 1.359-1.62-8.216-6.853-1.35 1.617-.01.001zM15.751 0l-1.746 1.294 6.405 8.604 1.746-1.294L15.749 0h.002z"/></svg></a></li>
+                    <li><a href="https://github.com/mucsi96/nightwatch-cucumber" class="github-button" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star mucsi96/nightwatch-cucumber on GitHub">Star</a></li>
+                    <li><a href="https://twitter.com/mucsi96" class="twitter-follow-button" data-size="large" data-show-screen-name="false" data-show-count="true">Follow @mucsi96</a></li>
+                </ul>
+            </nav>
+        </footer>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script async defer src="https://platform.twitter.com/widgets.js"></script>
+        <script src="res/main.js"></script>
+    </body>
+</html>
