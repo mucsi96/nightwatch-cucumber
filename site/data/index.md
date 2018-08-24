@@ -1,3 +1,7 @@
+# ⚠️ THIS PACKAGE IS DEPRECATED
+
+This package is deprecated in favour of my newer packages [nightwatch-api](https://nightwatch-api.netlify.com/) and [w3c-webdriver](https://github.com/mucsi96/w3c-webdriver)
+
 # Intro
 
 @import './intro/getting-started.md'
