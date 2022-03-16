@@ -1,4 +1,4 @@
-# :warning: WARNING! This package is deprecated in favour of my newer packages [nightwatch-api](https://nightwatch-api.netlify.com/) and [w3c-webdriver](https://github.com/mucsi96/w3c-webdriver)
+# :warning: WARNING! This package is deprecated in favour of Nightwatch v2 as it supports Cucumber out of the box.
 
 # [nightwatch-cucumber](http://mucsi96.github.io/nightwatch-cucumber) ![nightwatch-cucumber](http://mucsi96.github.io/nightwatch-cucumber/res/img/nightwatch-cucumber-logo.png)
 
